@@ -1,6 +1,8 @@
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.FormatFlagsConversionMismatchException;
 
-class Teenager extends Criterion{
+class Teenager{
 
     private int id;
     private String name;
@@ -32,6 +34,12 @@ class Teenager extends Criterion{
 
     public Date getBirthDate() {
         return birthDate;
+    }
+
+    public Period getAge() {
+        LocalDate dateNow = LocalDate.now();
+        Period p = Period.between(this.birthDate, dateNow);
+        return p;
     }
 
     public Criterion[] getRequirements() {
