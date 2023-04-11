@@ -7,7 +7,7 @@ class Teenager extends Criterion{
     private String forname; 
     private String gender;
     private String countryName;
-    private Date birthDate;
+    private LocalDate birthDate;
     private Criterion[] requirements;
 
     public boolean compatibleWithGuest(Teenager guest){}
