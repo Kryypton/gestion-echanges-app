@@ -32,7 +32,7 @@ class Teenager{
         return countryName;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
