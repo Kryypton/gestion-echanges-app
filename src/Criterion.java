@@ -10,15 +10,29 @@ public class Criterion{
         this.label = label;
     }
 
+
     public boolean isValid(){
 
-        if(label.getType().equals() ){
-            return true;
-        }
-        
-        return false;
+        if(this.label.getType() == 'B'){
+
+            return this.value.equals("yes") || this.value.equals("no");
+
+           }
+               return true;
+            }
+
+
+    public CriterionName getLabel() {
+        return label;
     }
 
+    public String getvalue(){
+        return value;
+    }
+
+    
+                
+        
 
 }
 

@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.FormatFlagsConversionMismatchException;
 
-class Teenager{
+public class Teenager{
 
     private int id;
     private String name;
@@ -12,29 +12,55 @@ class Teenager{
     private LocalDate birthDate;
     private Criterion[] requirements;
 
-    public boolean compatibleWithGuest(Teenager guest){}
 
-    public void purgeInvalidRequirement(){}
+    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Criterion[] requirements){
+        this.id = id ;
+        this.name = name;
+        this.forname = forname;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.requirements = requirements;
+
+
+    }
+
+    public boolean compatibleWithGuest(Teenager guest){
+
+    }
+
+    public void purgeInvalidRequirement(){
+
+    }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getForname() {
-        return forname;
+        return this.forname;
     }
+
 
     public String getCountryName() {
-        return countryName;
+        return this.countryName;
     }
 
+
     public LocalDate getBirthDate() {
-        return birthDate;
+        return this.birthDate;
     }
+
+
+
+    public String getGender(){
+        return this.gender;
+    }
+
+
 
     public Period getAge() {
         LocalDate dateNow = LocalDate.now();
