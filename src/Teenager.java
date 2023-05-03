@@ -1,8 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
-//import java.util.FormatFlagsConversionMismatchException;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Teenager{
 
@@ -12,10 +11,10 @@ public class Teenager{
     private String gender;
     private String countryName;
     private LocalDate birthDate;
-    private Criterion[] requirements;
+    private Map<String, Criterion> requirements;
 
 
-    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Criterion[] requirements){
+    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Map<String, Criterion> requirements){
         this.id = id ;
         this.name = name;
         this.forname = forname;
@@ -29,26 +28,25 @@ public class Teenager{
             return false;
         }
 
-        for (Criterion requirement : requirements) {
-            for (Criterion guestCriterion : guest.getRequirements()) {
-                if (requirement.getLabel().equals(guestCriterion.getLabel()) && !requirement.equals(guestCriterion)) {
-                    return false;
-                }
+        for (Criterion requirement : requirements.values()) {
+            Criterion guestCriterion = guest.getRequirements().get(requirement.getLabel().name());
+            if (guestCriterion != null && !requirement.equals(guestCriterion)) {
+                return false;
             }
         }
         return true;
     }
 
     public void purgeInvalidRequirement(){
-        List<Criterion> validRequirements = new ArrayList<Criterion>();
+        Map<String, Criterion> validRequirements = new HashMap<>();
 
-        for (Criterion requirement : requirements) {
-            if (requirement.isValid()) {
-                validRequirements.add(requirement);
+        for (Map.Entry<String, Criterion> entry : requirements.entrySet()) {
+            if (entry.getValue().isValid()) {
+                validRequirements.put(entry.getKey(), entry.getValue());
             }
         }
 
-        requirements = validRequirements.toArray(new Criterion[validRequirements.size()]);
+        requirements = validRequirements;
     }
 
     public int getId() {
@@ -81,7 +79,7 @@ public class Teenager{
         return p;
     }
 
-    public Criterion[] getRequirements() {
+    public Map<String, Criterion> getRequirements() {
         return requirements;
     }
 }
