@@ -1,4 +1,4 @@
-import org.w3c.dom.css.CSSValueList;
+//import org.w3c.dom.css.CSSValueList;
 
 public class Criterion{
 
@@ -15,13 +15,18 @@ public class Criterion{
 
         if(this.label.getType() == 'B'){
             return this.value.equals("yes") || this.value.equals("no");
-        }else if(this.label.getType() == 'T'){
-            return //faire equals avec obj string
-        }else if(this.label.getType() == 'N'){
-            return //faire equals avec obj string
-        }else if(this.label.getType() == 'D'){
-            return //faire equals avec obj string
         }
+        else {
+            return false;
+        }
+            
+        /*else if(this.label.getType() == 'T'){
+            return this.value.equals(label) 
+        }else if(this.label.getType() == 'N'){
+            return
+        }else if(this.label.getType() == 'D'){
+            return this.value.equals(label) 
+        }*/
     }
 
 

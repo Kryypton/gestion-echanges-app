@@ -51,7 +51,6 @@ public class Teenager{
         requirements = validRequirements.toArray(new Criterion[validRequirements.size()]);
     }
 
-
     public int getId() {
         return this.id;
     }
