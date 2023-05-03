@@ -10,16 +10,17 @@ public class Criterion{
         this.label = label;
     }
 
-
     public boolean isValid(){
 
         if(this.label.getType() == 'B'){
             return this.value.equals("yes") || this.value.equals("no");
         }
-        else {
+        else if (this.label.getType() == 'T'){
+            // avec un instanceof
+            return this.value instanceof String;
+        } else {
             return false;
         }
-            
         /*else if(this.label.getType() == 'T'){
             return this.value.equals(label) 
         }else if(this.label.getType() == 'N'){

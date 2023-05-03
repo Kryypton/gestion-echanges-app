@@ -7,7 +7,8 @@ public class Test {
         Criterion criterion1 = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion criterion2 = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion criterion3 = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
-        Criterion criterion4 = new Criterion("yes", CriterionName.HOST_FOOD);
+        Criterion criterion4 = new Criterion("végétarien", CriterionName.HOST_FOOD);
+
 
         Map<String, Criterion> requirements1 = new HashMap<>();
         requirements1.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), criterion1);
