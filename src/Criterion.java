@@ -38,7 +38,6 @@ public class Criterion{
         return value;
     }
 
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -56,5 +55,10 @@ public class Criterion{
         if (label != other.label)
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Criterion [value=" + value + ", label=" + label + "]";
     }
 }

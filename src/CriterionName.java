@@ -18,4 +18,6 @@ public enum CriterionName {
     public char getType() {
         return TYPE;
     }
+
+    
 }

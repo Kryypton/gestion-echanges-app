@@ -79,7 +79,12 @@ public class Teenager{
         return p;
     }
 
+    public Criterion getCriterion(String criterionName) {
+        return requirements.get(criterionName);
+    }
+
     public Map<String, Criterion> getRequirements() {
         return requirements;
     }
+
 }

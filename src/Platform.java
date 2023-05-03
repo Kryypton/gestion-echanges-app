@@ -1,0 +1,7 @@
+/**
+ * Platform
+ */
+public class Platform {
+
+    
+}
