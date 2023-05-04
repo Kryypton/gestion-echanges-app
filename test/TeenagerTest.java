@@ -1,4 +1,6 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -20,26 +22,21 @@ public class TeenagerTest {
 
     @BeforeEach
     void initialization() {
-        id1 = 1111;
-        id2 = 2222;
-        id3 = 3333;
-
+        id1 = 1;
+        id2 = 2;
+        id3 = 3;
         name1 = "Alice";
         name2 = "Bruno";
         name3 = "Clément";
-
         forname1 = "Brown";
         forname2 = "Dumont";
         forname3 = "Garnier";
-
         gender1 = "F";
         gender2 = "M";
         gender3 = "M";
-
         countryName1 = Country.FRANCE;
         countryName2 = Country.ALLEMAGNE;
         countryName3 = Country.ESPAGNE;
-
         birthDate1 = LocalDate.parse("2000-01-01");
         birthDate2 = LocalDate.parse("2002-08-04");
         birthDate3 = LocalDate.parse("2001-11-21");
@@ -73,16 +70,19 @@ public class TeenagerTest {
         requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
         requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
         
-        Teenager t1 = new Teenager(id1, name1, forname1, gender1, birthDate1, countryName1, requirements1);
-        Teenager t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
-        Teenager t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
+        t1 = new Teenager(id1, name1, forname1, gender1, birthDate1, countryName1, requirements1);
+        t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
+        t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
     }
 
     @Test
     void testCompatibleAnimal() {
-        
-        
-        assertTrue()
+        assertTrue(t1.compatibleAnimal(t2));
+        assertTrue(t1.compatibleAnimal(t3));
+        assertTrue(t2.compatibleAnimal(t1));
+        assertFalse(t2.compatibleAnimal(t3));
+        assertTrue(t3.compatibleAnimal(t2));
+        assertTrue(t3.compatibleAnimal(t1));
     }
 
     @Test
