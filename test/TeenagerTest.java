@@ -87,61 +87,36 @@ public class TeenagerTest {
 
     @Test
     void testCompatibleFood() {
-
+        assertTrue(t1.compatibleFood(t2));
+        assertTrue(t1.compatibleFood(t3));
+        assertTrue(t2.compatibleFood(t1));
+        assertFalse(t2.compatibleFood(t3));
+        assertFalse(t3.compatibleFood(t2));
+        assertTrue(t3.compatibleFood(t1));
     }
 
     @Test
     void testEquals() {
-
-    }
-
-    @Test
-    void testGetAge() {
-
-    }
-
-    @Test
-    void testGetBirthDate() {
-
-    }
-
-    @Test
-    void testGetCountryName() {
-
-    }
-
-    @Test
-    void testGetCriterion() {
-
-    }
-
-    @Test
-    void testGetForname() {
-
-    }
-
-    @Test
-    void testGetGender() {
-
-    }
-
-    @Test
-    void testGetId() {
-
-    }
-
-    @Test
-    void testGetName() {
-
-    }
-
-    @Test
-    void testGetRequirements() {
+        assertTrue(t1.equals(t1));
+        assertFalse(t1.equals(t2));
+        assertFalse(t1.equals(t3));
+        assertFalse(t2.equals(t1));
+        assertTrue(t2.equals(t2));
+        assertFalse(t2.equals(t3));
+        assertFalse(t3.equals(t1));
+        assertFalse(t3.equals(t2));
+        assertTrue(t3.equals(t3));
 
     }
 
     @Test
     void testPurgeInvalidRequirement() {
-
+        t1.purgeInvalidRequirement();
+        assertEquals(t1.getRequirements().size(), 2);
+        t2.purgeInvalidRequirement();
+        assertEquals(t2.getRequirements().size(), 4);
+        t3.purgeInvalidRequirement();
+        assertEquals(t3.getRequirements().size(), 4);
     }
+
 }
