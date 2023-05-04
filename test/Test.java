@@ -1,25 +1,12 @@
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Test {
     public static void main(String[] args) {
-        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
-        Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
-
-        Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
-        Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
-
-
-        Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
-        Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
-        Criterion posseDeNonuts = new Criterion("nonuts", CriterionName.HOST_FOOD);
-        Criterion posseDeTout = null;
-
-        Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
-        Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD);
-        Criterion mangeNotnuts = new Criterion("nonuts", CriterionName.GUEST_FOOD);
-        Criterion mangeTout = null;
+        
 
         
         Map<String, Criterion> reqMrBouffeTout = new HashMap<>();
@@ -56,10 +43,11 @@ public class Test {
         platform.addTeenager(teenager2);
         platform.addTeenager(teenager3);
         platform.addTeenager(teenager4);
-        
+
         platform.purgeInvalidRequirements();
         platform.findCompatibleTeenagers();
         platform.printCompatibleTeenagers();
 
     }
+
 }

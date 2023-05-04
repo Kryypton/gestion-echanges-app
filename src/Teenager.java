@@ -66,14 +66,9 @@ public class Teenager{
     }
 
     /* Regarde si un hote est compatible avec un invité donné */
-    public boolean compatibleWithGuest(Teenager guest){
-        if (guest == null) {
-            return false;
-        }
+    /*public boolean compatibleWithGuest(Teenager guest) {
 
-        return compatibleFood(guest);
-           
-    }
+    }*/
 
     public boolean compatibleAnimal(Teenager guest){
         if (guest == null) return false;
@@ -101,15 +96,20 @@ public class Teenager{
         Criterion foodRequirement = this.requirements.get(CriterionName.HOST_FOOD.name());
         Criterion guestFoodRequirement = guest.getRequirements().get(CriterionName.GUEST_FOOD.name());
     
-        // Check if both food requirements are not null before comparing their values
         if (foodRequirement != null && guestFoodRequirement != null) {
             if (foodRequirement.getvalue().equals(guestFoodRequirement.getvalue())) {
-                return true; // Compatible because the host has the same food preference as the guest.
+                return true;
             }
         } else if (foodRequirement == null || guestFoodRequirement == null) {
-            return true; // If either food requirement is missing, assume compatibility.
+            return true;
         }
         return false;
+    }
+    
+    public boolean compatibleWithGuest(Teenager guest) {
+        if (guest == null) return false;
+        
+        return compatibleAnimal(guest) && compatibleFood(guest);
     }
     
 
