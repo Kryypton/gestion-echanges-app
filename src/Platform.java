@@ -56,6 +56,22 @@ public class Platform {
         }
     }
 
+    public List<Teenager> getTeenagerList() {
+        return teenagerList;
+    }
+
+    public void setTeenagerList(List<Teenager> teenagerList) {
+        this.teenagerList = teenagerList;
+    }
+
+    public Map<Teenager, Teenager> getCompatibleTeenagers() {
+        return compatibleTeenagers;
+    }
+
+    public void setCompatibleTeenagers(Map<Teenager, Teenager> compatibleTeenagers) {
+        this.compatibleTeenagers = compatibleTeenagers;
+    }
+
 
     /* A FAIRE  
      * - Classe de Test compléte (Je ne sais pas si elle est complete mais je précise)
