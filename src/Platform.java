@@ -29,6 +29,7 @@ public class Platform {
     public void findCompatibleTeenagers(){
         for (Teenager teenager : teenagerList) {
             for (Teenager guest : teenagerList) {
+                System.out.println("Comparaison de " + teenager.getName() + " avec " + guest.getName());
                 if (!teenager.equals(guest)) {
                     if (teenager.compatibleWithGuest(guest)) {
                         compatibleTeenagers.put(teenager, guest);
@@ -49,8 +50,9 @@ public class Platform {
 
     /* Affiche la Map compatibleTeenagers */
     public void printCompatibleTeenagers(){
+        System.out.println("->>>> final : ");
         for (Map.Entry<Teenager, Teenager> entry : compatibleTeenagers.entrySet()) {
-            System.out.println(entry.getKey().getName() + " peut aller chez " + entry.getValue().getName());
+            System.out.println("[" + entry.getKey().getName() + "] peut aller chez " + entry.getValue().getName());
         }
     }
 

@@ -71,28 +71,47 @@ public class Teenager{
             return false;
         }
 
-        for (Criterion requirement : requirements.values()) {
-            Criterion guestCriterion = guest.getRequirements().get(requirement.getLabel().name());
-            if (guestCriterion != null && !requirement.equals(guestCriterion)) {
-                return false;
-            }
-        }
-        return true;
+        return compatibleFood(guest);
+           
     }
 
     public boolean compatibleAnimal(Teenager guest){
-        if (guest == null) {
-            return false;
-        }
-
-        for (Criterion requirement : requirements.values()) {
-            Criterion guestCriterion = guest.getRequirements().get(requirement.getLabel().name());
-            if (guestCriterion != null && !requirement.equals(guestCriterion)) {
-                return false;
-            }
-        }
+        if (guest == null) return false;
+        Criterion animalRequirement = requirements.get(CriterionName.HOST_HAS_ANIMAL.name());
+        Criterion guestAnimalRequirement = guest.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name());
+        if (animalRequirement.getvalue().equals("yes") && guestAnimalRequirement.getvalue().equals("yes")) {
+            return false; // Incompatible car l'invité a une allergie et l'hote a un animal.
+        } 
         return true;
+        /*code innutile mais je garde au cas ou...
+        Criterion animalRequirement = requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY.name());
+        if (animalRequirement == null) {
+            return true; // Si aucun critére de compatibilité animal n'existe, on suppose qu'ils sont compatible.
+        }
+    
+        Criterion guestAnimalRequirement = guest.getRequirements().get(CriterionName.HOST_HAS_ANIMAL.name());
+        if (guestAnimalRequirement == null) {
+            return true; // Si l'invité n'a pas de critére de compatibilité animal, on suppose qu'ils sont compatible.
+        }*/
     }
+    
+    public boolean compatibleFood(Teenager guest) {
+        if (guest == null) return false;
+    
+        Criterion foodRequirement = this.requirements.get(CriterionName.HOST_FOOD.name());
+        Criterion guestFoodRequirement = guest.getRequirements().get(CriterionName.GUEST_FOOD.name());
+    
+        // Check if both food requirements are not null before comparing their values
+        if (foodRequirement != null && guestFoodRequirement != null) {
+            if (foodRequirement.getvalue().equals(guestFoodRequirement.getvalue())) {
+                return true; // Compatible because the host has the same food preference as the guest.
+            }
+        } else if (foodRequirement == null || guestFoodRequirement == null) {
+            return true; // If either food requirement is missing, assume compatibility.
+        }
+        return false;
+    }
+    
 
     /* Supprime les critéres invalide de la Map requirements */
     public void purgeInvalidRequirement(){
@@ -105,7 +124,6 @@ public class Teenager{
                 }
             }
         }
-
         requirements = validRequirements;
     }
 
