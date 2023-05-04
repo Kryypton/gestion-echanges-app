@@ -24,6 +24,47 @@ public class Teenager{
         this.countryName = countryName;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Teenager other = (Teenager) obj;
+        if (id != other.id)
+            return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (forname == null) {
+            if (other.forname != null)
+                return false;
+        } else if (!forname.equals(other.forname))
+            return false;
+        if (gender == null) {
+            if (other.gender != null)
+                return false;
+        } else if (!gender.equals(other.gender))
+            return false;
+        if (countryName != other.countryName)
+            return false;
+        if (birthDate == null) {
+            if (other.birthDate != null)
+                return false;
+        } else if (!birthDate.equals(other.birthDate))
+            return false;
+        if (requirements == null) {
+            if (other.requirements != null)
+                return false;
+        } else if (!requirements.equals(other.requirements))
+            return false;
+        return true;
+    }
+
     /* Regarde si un hote est compatible avec un invité donné */
     public boolean compatibleWithGuest(Teenager guest){
         if (guest == null) {

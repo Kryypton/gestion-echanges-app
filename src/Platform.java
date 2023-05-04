@@ -19,14 +19,22 @@ public class Platform {
         teenagerList.add(teenager);
     }
 
+    public void removeTeenager(Teenager teenager){
+        teenagerList.remove(teenager);
+    }
+
     /* Regarde si 2 adolescent sont compatible entre eux (Allergie, alimentation...) 
      * et les ajoute à la Map compatibleTeenagers
     */
     public void findCompatibleTeenagers(){
         for (Teenager teenager : teenagerList) {
             for (Teenager guest : teenagerList) {
-                if (teenager.compatibleWithGuest(guest)) {
-                    compatibleTeenagers.put(teenager, guest);
+                if (!teenager.equals(guest)) {
+                    if (teenager.compatibleWithGuest(guest)) {
+                        compatibleTeenagers.put(teenager, guest);
+                    }
+                } else {
+                    System.out.println("Les deux adolescents sont identiques - (findCompatibleTeenagers method)");
                 }
             }
         }
