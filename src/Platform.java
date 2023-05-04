@@ -14,10 +14,14 @@ public class Platform {
         this.compatibleTeenagers = new HashMap<>();
     }
 
+    /* Ajoute des adolescent à la liste */
     public void addTeenager(Teenager teenager){
         teenagerList.add(teenager);
     }
 
+    /* Regarde si 2 adolescent sont compatible entre eux (Allergie, alimentation...) 
+     * et les ajoute à la Map compatibleTeenagers
+    */
     public void findCompatibleTeenagers(){
         for (Teenager teenager : teenagerList) {
             for (Teenager guest : teenagerList) {
@@ -28,17 +32,28 @@ public class Platform {
         }
     }
 
+    /* Purge tous les critéres non valides des adolescent */
     public void purgeInvalidRequirements(){
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidRequirement();
         }
     }
 
+    /* Affiche la Map compatibleTeenagers */
     public void printCompatibleTeenagers(){
         for (Map.Entry<Teenager, Teenager> entry : compatibleTeenagers.entrySet()) {
             System.out.println(entry.getKey().getName() + " compatible " + entry.getValue().getName());
         }
     }
+
+
+    /* A FAIRE  
+     * - Classe de Test compléte (Je ne sais pas si elle est complete mais je précise)
+     * - calcul des affinités (apparament compatibleWithGuest se concentre sur l'allergie des animaux)
+     * - la suppression des adolescent
+     * - Je crois que nous devions faire une classe country.
+     * - gestion des régles spécifique par pays
+     */
 
     public static void main(String[] args) {
 

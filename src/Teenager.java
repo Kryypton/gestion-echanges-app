@@ -23,6 +23,7 @@ public class Teenager{
         this.requirements = requirements;
     }
 
+    /* Regarde si un hote est compatible avec un invité donné */
     public boolean compatibleWithGuest(Teenager guest){
         if (guest == null) {
             return false;
@@ -37,6 +38,7 @@ public class Teenager{
         return true;
     }
 
+    /* Supprime les critéres invalide de la Map requirements */
     public void purgeInvalidRequirement(){
         Map<String, Criterion> validRequirements = new HashMap<>();
 

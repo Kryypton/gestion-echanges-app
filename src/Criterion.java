@@ -10,6 +10,7 @@ public class Criterion{
         this.label = label;
     }
 
+    /* Regarde si des critéres donné sont valides ou non */
     public boolean isValid(){
 
         if(this.label.getType() == 'B'){
