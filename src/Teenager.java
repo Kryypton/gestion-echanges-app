@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Teenager{
@@ -54,17 +53,16 @@ public class Teenager{
         }*/
     }
     
-    public boolean compatibleFood(Teenager guest) {
-        if (guest == null) return false;
-        Criterion foodRequirement = this.requirements.get(CriterionName.HOST_FOOD.name());
-        Criterion guestFoodRequirement = guest.getRequirements().get(CriterionName.GUEST_FOOD.name());
-        if (foodRequirement != null && guestFoodRequirement != null) {
-            if (foodRequirement.getvalue().equals(guestFoodRequirement.getvalue())) {
-                return true;
-            }
-        } else if (foodRequirement == null || guestFoodRequirement == null) {
-            return true;
-        }
+    public boolean compatibleFood(Teenager other) {
+        Criterion hostFood = this.getRequirements().get(CriterionName.HOST_FOOD.name());
+        Criterion guestFood = other.getRequirements().get(CriterionName.GUEST_FOOD.name());
+    
+        boolean hostNone = hostFood.getvalue().equals("none");
+        boolean guestNone = guestFood.getvalue().equals("none");
+
+        if (hostNone && guestNone) return true;
+        if (hostNone || guestNone) return true;
+        if (hostFood.getvalue().equals(guestFood.getvalue())) return true;
         return false;
     }
     
@@ -94,7 +92,9 @@ public class Teenager{
                 }
             }
         }
-        requirements = validRequirements;
+        this.requirements = validRequirements;
+
+
     }
 
     public int getId() {

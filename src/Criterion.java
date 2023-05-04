@@ -14,39 +14,39 @@ public class Criterion{
     }
 
     /* Regarde si des critéres donné sont valides ou non */
-    public boolean isValid(){
-
-        if(this.label.getType() == 'B'){
-            return this.value.equals("yes") || this.value.equals("no");
+    public boolean isValid() {
+        if (label == null) {
+            return false;
         }
-        else if (this.label.getType() == 'N') {
+    
+        if (label.getType() == 'B') {
+            return value.equals("yes") || value.equals("no");
+        } else if (label.getType() == 'N') {
             try {
-                Integer.parseInt(this.value);
+                Integer.parseInt(value);
                 return true;
             } catch (NumberFormatException e) {
                 return false;
             }
-        }
-        else if (this.label.getType() == 'D') {
+        } else if (label.getType() == 'D') {
             try {
-                LocalDate.parse(this.value);
+                LocalDate.parse(value);
                 return true;
             } catch (DateTimeParseException e) {
                 return false;
             }
+        } else if (label.getType() == 'T') {
+            if (label.name().equals("GUEST_FOOD") || label.name().equals("HOST_FOOD")) {
+                return (value.equals("végétarien") || value.equals("sport") || value.equals("nonuts") || value.equals("none"));
+            } else if (label.name().equals("GENDER")) {
+                return (value.equals("M") || value.equals("F") || value.equals("O"));
+            } else {
+                return false;
+            }
         }
-        else if (this.label.getType() == 'T') {
-            return true;
-        }
-        return true;
-        /*else if(this.label.getType() == 'T'){
-            return this.value.equals(label) 
-        }else if(this.label.getType() == 'N'){
-            return
-        }else if(this.label.getType() == 'D'){
-            return this.value.equals(label) 
-        }*/
+        return false;
     }
+    
 
 
     public CriterionName getLabel() {
