@@ -9,18 +9,19 @@ public class Teenager{
     private String name;
     private String forname; 
     private String gender;
-    private String countryName;
+    private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
 
 
-    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Map<String, Criterion> requirements){
+    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
         this.id = id ;
         this.name = name;
         this.forname = forname;
         this.gender = gender;
         this.birthDate = birthDate;
         this.requirements = requirements;
+        this.countryName = countryName;
     }
 
     /* Regarde si un hote est compatible avec un invité donné */
@@ -64,7 +65,7 @@ public class Teenager{
     }
 
     public String getCountryName() {
-        return this.countryName;
+        return this.countryName.getCOUNTRY_NAME();
     }
 
     public LocalDate getBirthDate() {

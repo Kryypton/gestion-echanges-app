@@ -7,27 +7,58 @@ public class Test {
         Criterion criterion1 = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion criterion2 = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion criterion3 = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
-        Criterion criterion4 = new Criterion("végétarien", CriterionName.HOST_FOOD);
-
-
+        Criterion criterion4 = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
+        Criterion criterion5 = new Criterion("végétarien", CriterionName.HOST_FOOD);
+        Criterion criterion6 = new Criterion("sport", CriterionName.HOST_FOOD);
+        Criterion criterion7 = new Criterion("nonuts", CriterionName.HOST_FOOD);
+        Criterion criterion8 = new Criterion("yes", CriterionName.HOBBIES);
+        
         Map<String, Criterion> requirements1 = new HashMap<>();
         requirements1.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), criterion1);
         requirements1.put(CriterionName.HOST_HAS_ANIMAL.name(), criterion3);
+        requirements1.put(CriterionName.HOST_FOOD.name(), criterion5);
+        requirements1.put(CriterionName.HOBBIES.name(), criterion8);
 
         Map<String, Criterion> requirements2 = new HashMap<>();
         requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), criterion2);
-        requirements2.put(CriterionName.HOST_FOOD.name(), criterion4);
+        requirements2.put(CriterionName.HOST_HAS_ANIMAL.name(), criterion4);
+        requirements2.put(CriterionName.HOST_FOOD.name(), criterion6);
+        requirements2.put(CriterionName.HOBBIES.name(), criterion8);
 
-        Teenager teenager1 = new Teenager(1, "Alice", "Martin", "F", LocalDate.of(2005, 6, 20), requirements1);
-        Teenager teenager2 = new Teenager(2, "Bob", "Smith", "M", LocalDate.of(2005, 1, 15), requirements2);
+        Map<String, Criterion> requirements3 = new HashMap<>();
+        requirements3.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), criterion2);
+        requirements3.put(CriterionName.HOST_HAS_ANIMAL.name(), criterion4);
+        requirements3.put(CriterionName.HOST_FOOD.name(), criterion7);
+        requirements3.put(CriterionName.HOBBIES.name(), criterion8);
 
-        System.out.println("Teenager 1 compatible with Teenager 2: " + teenager1.compatibleWithGuest(teenager2));
-        System.out.println("Teenager 2 compatible with Teenager 1: " + teenager2.compatibleWithGuest(teenager1));
+        Map<String, Criterion> requirements4 = new HashMap<>();
+        requirements4.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), criterion1);
+        requirements4.put(CriterionName.HOST_HAS_ANIMAL.name(), criterion3);
+        requirements4.put(CriterionName.HOST_FOOD.name(), criterion5);
+        requirements4.put(CriterionName.HOBBIES.name(), criterion8);
 
-        teenager1.purgeInvalidRequirement();
-        teenager2.purgeInvalidRequirement();
+        Teenager teenager1 = new Teenager(1, "Alice", "Martin", "F", LocalDate.of(2005, 6, 20), Country.FRANCE , requirements1);
+        Teenager teenager2 = new Teenager(2, "Bob", "Smith", "M", LocalDate.of(2005, 1, 15), Country.FRANCE,  requirements2);
+        Teenager teenager3 = new Teenager(3, "Charlie", "Brown", "M", LocalDate.of(2005, 8, 3), Country.ALLEMAGNE , requirements3);
+        Teenager teenager4 = new Teenager(4, "Diane", "Garcia", "F", LocalDate.of(2005, 2, 10), Country.ITALIE ,  requirements4);
+        Teenager teenager5 = new Teenager(5, "Eve", "Wilson", "F", LocalDate.of(2005, 4, 30), Country.ALLEMAGNE , requirements1);
+        Teenager teenager6 = new Teenager(6, "Frank", "Anderson", "M", LocalDate.of(2005, 7, 25), Country.ESPAGNE,requirements2);
+        Teenager teenager7 = new Teenager(7, "Grace", "Taylor", "F", LocalDate.of(2005, 3, 5), Country.FRANCE, requirements3);
+        Teenager teenager8 = new Teenager(8, "Henry", "Thomas", "M", LocalDate.of(2005, 9, 1), Country.ITALIE,requirements4); 
+
+        Platform platform = new Platform();
+        platform.addTeenager(teenager1);
+        platform.addTeenager(teenager2);
+        platform.addTeenager(teenager3);
+        platform.addTeenager(teenager4);
+        platform.addTeenager(teenager5);
+        platform.addTeenager(teenager6);
+        platform.addTeenager(teenager7);
+        platform.addTeenager(teenager8);
         
-        System.out.println("Purged requirements for Teenager 1: " + teenager1.getRequirements());
-        System.out.println("Purged requirements for Teenager 2: " + teenager2.getRequirements());
+        platform.purgeInvalidRequirements();
+        platform.findCompatibleTeenagers();
+        platform.printCompatibleTeenagers();
+
     }
 }
