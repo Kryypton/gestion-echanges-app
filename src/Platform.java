@@ -50,7 +50,7 @@ public class Platform {
     /* Affiche la Map compatibleTeenagers */
     public void printCompatibleTeenagers(){
         for (Map.Entry<Teenager, Teenager> entry : compatibleTeenagers.entrySet()) {
-            System.out.println(entry.getKey().getName() + " compatible " + entry.getValue().getName());
+            System.out.println(entry.getKey().getName() + " peut aller chez " + entry.getValue().getName());
         }
     }
 

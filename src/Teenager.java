@@ -80,13 +80,29 @@ public class Teenager{
         return true;
     }
 
+    public boolean compatibleAnimal(Teenager guest){
+        if (guest == null) {
+            return false;
+        }
+
+        for (Criterion requirement : requirements.values()) {
+            Criterion guestCriterion = guest.getRequirements().get(requirement.getLabel().name());
+            if (guestCriterion != null && !requirement.equals(guestCriterion)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /* Supprime les critéres invalide de la Map requirements */
     public void purgeInvalidRequirement(){
         Map<String, Criterion> validRequirements = new HashMap<>();
 
         for (Map.Entry<String, Criterion> entry : requirements.entrySet()) {
-            if (entry.getValue().isValid()) {
-                validRequirements.put(entry.getKey(), entry.getValue());
+            if (entry.getValue()!=null){
+                if (entry.getValue().isValid()) {
+                    validRequirements.put(entry.getKey(), entry.getValue());
+                }
             }
         }
 
