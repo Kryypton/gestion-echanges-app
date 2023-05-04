@@ -69,8 +69,21 @@ public class PlatformTest {
     }
 
     @Test
-    public void purgeInvalidRequirements(){}
+    public void purgeInvalidRequirements(){
+        Platform p = new Platform();
+        p.addTeenager(ten());
+        assertTrue(p.getTeenagerList().contains(ten()));
+        p.purgeInvalidRequirements();
+        assertFalse(p.getTeenagerList().contains(ten()));   
+
+    }
 
     @Test
-    public void printCompatibleTeenagers(){}
+    public void printCompatibleTeenagers(){
+        Platform p = new Platform();
+        p.addTeenager(ten());
+        assertTrue(p.getTeenagerList().contains(ten()));
+        p.printCompatibleTeenagers();
+        assertTrue(p.getTeenagerList().contains(ten()));   
+    }
 }
