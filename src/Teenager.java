@@ -142,6 +142,14 @@ public class Teenager{
         return requirements.get(criterionName);
     }
 
+    public void addCriterion(String criterionName, Criterion criterion) {
+        requirements.put(criterionName, criterion);
+    }
+
+    public void editCriterion(String criterionName, Criterion criterion) {
+        requirements.replace(criterionName, criterion);
+    }
+
     public Map<String, Criterion> getRequirements() {
         return requirements;
     }
