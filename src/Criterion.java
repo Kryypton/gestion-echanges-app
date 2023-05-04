@@ -18,7 +18,11 @@ public class Criterion{
         }
         else if (this.label.getType() == 'T'){
             // avec un instanceof
-            return this.value instanceof String;
+            if (this.value instanceof String) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
