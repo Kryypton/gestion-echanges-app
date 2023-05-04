@@ -133,6 +133,15 @@ public class TeenagerTest {
         assertEquals(t4.getRequirements().size(), 2);
     }
 
+    @Test
+    void testCompatibleWithGuest(){
+        assertTrue(t1.compatibleWithGuest(t2));
+        assertTrue(t1.compatibleWithGuest(t3));
+        assertTrue(t2.compatibleWithGuest(t1));
+        assertFalse(t2.compatibleWithGuest(t3));
+        assertFalse(t3.compatibleWithGuest(t2));
+        assertTrue(t3.compatibleWithGuest(t1));
+    }
     
 
 }
