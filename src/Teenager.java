@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Teenager{
@@ -20,6 +21,16 @@ public class Teenager{
         this.gender = gender;
         this.birthDate = birthDate;
         this.requirements = requirements;
+        this.countryName = countryName;
+    }
+
+    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Country countryName){
+        this.id = id ;
+        this.name = name;
+        this.forname = forname;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.requirements = new HashMap<String, Criterion>();
         this.countryName = countryName;
     }
 
@@ -149,7 +160,7 @@ public class Teenager{
     public void editCriterion(String criterionName, Criterion criterion) {
         requirements.replace(criterionName, criterion);
     }
-
+    
     public Map<String, Criterion> getRequirements() {
         return requirements;
     }

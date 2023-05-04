@@ -52,11 +52,6 @@ public class TeenagerTest {
         Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
         Criterion mangeTout = null;
 
-        requirements1 = new HashMap<String, Criterion>();
-        requirements1.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        requirements1.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        requirements1.put(CriterionName.HOST_FOOD.name(), posseDeTout);
-        requirements1.put(CriterionName.GUEST_FOOD.name(), mangeTout);
 
         requirements2 = new HashMap<String, Criterion>();
         requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
@@ -70,9 +65,14 @@ public class TeenagerTest {
         requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
         requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
         
-        t1 = new Teenager(id1, name1, forname1, gender1, birthDate1, countryName1, requirements1);
+        t1 = new Teenager(id1, name1, forname1, gender1, birthDate1, countryName1);
         t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
         t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
+        
+        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
+        t1.addCriterion(CriterionName.GUEST_FOOD.name(), mangeTout);
     }
 
     @Test

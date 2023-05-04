@@ -1,5 +1,8 @@
 //import org.w3c.dom.css.CSSValueList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Criterion{
 
     private String value;
@@ -16,16 +19,26 @@ public class Criterion{
         if(this.label.getType() == 'B'){
             return this.value.equals("yes") || this.value.equals("no");
         }
-        else if (this.label.getType() == 'T'){
-            // avec un instanceof
-            if (this.value instanceof String) {
+        else if (this.label.getType() == 'N') {
+            try {
+                Integer.parseInt(this.value);
                 return true;
-            } else {
+            } catch (NumberFormatException e) {
                 return false;
             }
-        } else {
-            return false;
         }
+        else if (this.label.getType() == 'D') {
+            try {
+                LocalDate.parse(this.value);
+                return true;
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        }
+        else if (this.label.getType() == 'T') {
+            return true;
+        }
+        return true;
         /*else if(this.label.getType() == 'T'){
             return this.value.equals(label) 
         }else if(this.label.getType() == 'N'){
