@@ -7,8 +7,6 @@ public enum Country {
 
     private final String COUNTRY_NAME;
 
-    
-
     private Country(String country_name) {
         COUNTRY_NAME = country_name;
     }

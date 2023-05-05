@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Platform {
 
-    private List<Teenager> teenagerList;
+    private ArrayList<Teenager> teenagerList;
     private Map<Teenager, Teenager> compatibleTeenagers;
 
     public Platform() {
@@ -60,7 +60,7 @@ public class Platform {
         return teenagerList;
     }
 
-    public void setTeenagerList(List<Teenager> teenagerList) {
+    public void setTeenagerList(ArrayList<Teenager> teenagerList) {
         this.teenagerList = teenagerList;
     }
 

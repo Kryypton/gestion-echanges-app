@@ -46,8 +46,6 @@ public class Criterion{
         }
         return false;
     }
-    
-
 
     public CriterionName getLabel() {
         return label;

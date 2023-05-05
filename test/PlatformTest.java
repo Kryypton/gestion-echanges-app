@@ -11,31 +11,26 @@ import java.util.HashMap;
 
 public class PlatformTest {
 
-    /*public static void main(String[] args){
-
-        Platform p = new Platform();
-        List<Teenager> l = new ArrayList<Teenager>();
-        l.add(teenager1);
-        AssertEquals(l, p.addTeenager(teenager1));
-    }*/
-
+    /**
+     * Test de la méthode addTeenager
+     * @return un teenager
+     */
     @BeforeEach
     public Teenager ten(){
-        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
+        //Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
 
-        Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
+        //Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
         Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
-
-
-        Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
-        Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
-        Criterion posseDeNonuts = new Criterion("nonuts", CriterionName.HOST_FOOD);
+        
+        //Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
+        //Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
+        //Criterion posseDeNonuts = new Criterion("nonuts", CriterionName.HOST_FOOD);
         Criterion posseDeTout = null;
 
-        Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
-        Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD);
-        Criterion mangeNotnuts = new Criterion("nonuts", CriterionName.GUEST_FOOD);
+        //Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
+        //Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD);
+        //Criterion mangeNotnuts = new Criterion("nonuts", CriterionName.GUEST_FOOD);
         Criterion mangeTout = null;
 
         Map<String, Criterion> reqMrBouffeTout = new HashMap<>();
@@ -48,6 +43,7 @@ public class PlatformTest {
         return teenager1;
     }
 
+    /* Test de la méthode addTeenager */
     @Test
     public void addTeenagerTest(){
         Platform p = new Platform();
@@ -55,6 +51,7 @@ public class PlatformTest {
         assertTrue(p.getTeenagerList().contains(ten()));
     }
 
+    /* Test de la méthode removeTeenager */
     @Test
     public void removeTeenagerTest(){
         Platform p = new Platform();
@@ -64,16 +61,18 @@ public class PlatformTest {
         assertFalse(p.getTeenagerList().contains(ten()));
     }
 
+    /* Test de la méthode getTeenagerList */
     @Test
     public void purgeInvalidRequirements(){
         Platform p = new Platform();
         p.addTeenager(ten());
         assertTrue(p.getTeenagerList().contains(ten()));
         p.purgeInvalidRequirements();
-        assertFalse(p.getTeenagerList().contains(ten()));   
-
+        assertFalse(p.getTeenagerList().contains(ten()));
     }
 
+
+    /* Test de la méthode printCompatibleTeenagers */
     @Test
     public void printCompatibleTeenagers(){
         Platform p = new Platform();

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 public class CriterionTest {
     Criterion criterion1, criterion2, criterion3, criterion4, criterion5;
 
-
     @BeforeEach
     void initialization() {
         criterion1 = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);

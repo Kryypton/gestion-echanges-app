@@ -3,8 +3,16 @@ import java.time.Period;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Cette classe permet de gérer les informations relatives à un adolescent et de déterminer sa compatibilité avec d'autres adolescents en fonction de différents critères.
+ * @author Dorny Nathan
+ * @author Berrakane Adham 
+ * @author Quentin Mouette
+ * @since 1.0
+ * @version 1.0
+ */
 public class Teenager{
-
+    
     private int id;
     private String name;
     private String forname; 
@@ -13,6 +21,17 @@ public class Teenager{
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
 
+
+    /**
+     * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
+     * @param id l'identifiant unique d'un adolescent
+     * @param name le nom d'un adolescent
+     * @param forname le prénom d'un adolescent
+     * @param gender le genre d'un adolescent
+     * @param birthDate la date de naissance d'un adolescent
+     * @param countryName le pays d'un adolescent
+     * @param requirements les critères de compatibilité d'un adolescent
+     */
     public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
         this.id = id ;
         this.name = name;
@@ -23,6 +42,15 @@ public class Teenager{
         this.countryName = countryName;
     }
 
+    /**
+     * Constructeur de la classe Teenager sans le paramètre (requirements) qui est un Map de (Criterion) Critères
+     * @param id l'identifiant unique d'un adolescent
+     * @param name le nom d'un adolescent
+     * @param forname le prénom d'un adolescent
+     * @param gender le genre d'un adolescent
+     * @param birthDate la date de naissance d'un adolescent
+     * @param countryName le pays d'un adolescent
+     */
     public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Country countryName){
         this.id = id ;
         this.name = name;
@@ -33,6 +61,11 @@ public class Teenager{
         this.countryName = countryName;
     }
 
+    /**
+     * Méthode qui permet de savoir si un adolescent est compatible avec un autre adolescent en terme de critères animal
+     * @param guest l'invité à comparer avec l'adolescent courant
+     * @return [true] si l'adolescent est compatible avec l'invité, [false] sinon
+     */
     public boolean compatibleAnimal(Teenager guest){
         if (guest == null) return false;
         Criterion animalRequirement = requirements.get(CriterionName.HOST_HAS_ANIMAL.name());
@@ -53,9 +86,14 @@ public class Teenager{
         }*/
     }
     
-    public boolean compatibleFood(Teenager other) {
+    /**
+     * Méthode qui permet de savoir si un adolescent est compatible avec un autre adolescent en terme de critères nourriture
+     * @param guest l'invité à comparer avec l'adolescent courant
+     * @return [true] si l'adolescent est compatible avec l'invité, [false] sinon
+     */
+    public boolean compatibleFood(Teenager guest) {
         Criterion hostFood = this.getRequirements().get(CriterionName.HOST_FOOD.name());
-        Criterion guestFood = other.getRequirements().get(CriterionName.GUEST_FOOD.name());
+        Criterion guestFood = guest.getRequirements().get(CriterionName.GUEST_FOOD.name());
     
         boolean hostNone = hostFood.getvalue().equals("none");
         boolean guestNone = guestFood.getvalue().equals("none");
@@ -66,18 +104,31 @@ public class Teenager{
         return false;
     }
     
+    /**
+     * Méthode qui permet de savoir si un adolescent est compatible avec un autre adolescent combinant tout les critères
+     * @param guest l'invité à comparer avec l'adolescent courant
+     * @return [true] si l'adolescent est compatible avec l'invité, [false] sinon
+     */
     public boolean compatibleWithGuest(Teenager guest) {
         if (guest == null) return false;
         
         return compatibleAnimal(guest) && compatibleFood(guest);
     }
 
+    /**
+     * Méthode qui permet de connaitre l'age d'un adolescent de type Period
+     * @return l'age d'un adolescent
+     */
     public Period getAge() {
         LocalDate dateNow = LocalDate.now();
         Period p = Period.between(this.birthDate, dateNow);
         return p;
     }
 
+    /**
+     * Méthode qui permet de connaitre l'age d'un adolescent en année
+     * @return l'age d'un adolescent en année
+     */
     public int getAgeYear(){
         return getAge().getYears();
     }
@@ -97,70 +148,141 @@ public class Teenager{
 
     }
 
+    /**
+     * Getter qui permet retourne l'identifiant d'un adolescent
+     * @return l'identifiant d'un adolescent
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * Getter qui permet retourne le nom d'un adolescent
+     * @return le nom d'un adolescent
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Getter qui permet retourne le prénom d'un adolescent
+     * @return le prénom d'un adolescent
+     */
     public String getForname() {
         return this.forname;
     }
 
+    /**
+     * Getter qui permet retourne le pays d'un adolescent
+     * @return le pays d'un adolescent
+     */
     public String getCountryName() {
         return this.countryName.getCOUNTRY_NAME();
     }
 
+    /**
+     * Getter qui permet retourne la date de naissance d'un adolescent
+     * @return la date de naissance d'un adolescent
+     */
     public LocalDate getBirthDate() {
         return this.birthDate;
     }
 
+    /**
+     * Getter qui permet retourne le genre d'un adolescent
+     * @return le genre de l'adolescent [M] pour male [F] pour femme [O] pour autre
+     */
     public String getGender(){
         return this.gender;
     }
 
+    /**
+     * Setter qui permet de modifier l'identifiant d'un adolescent
+     * @param id le nouvel identifiant de l'adolescent
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Setter qui permet de modifier le nom d'un adolescent
+     * @param name le nouveau nom de l'adolescent
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Setter qui permet de modifier le prénom d'un adolescent
+     * @param forname le nouveau prénom de l'adolescent
+     */
     public void setForname(String forname) {
         this.forname = forname;
     }
 
+    /**
+     * Setter qui permet de modifier le genre d'un adolescent
+     * @param gender le nouveau genre de l'adolescent
+     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    /**
+     * Setter qui permet de modifier le pays d'un adolescent
+     * @param countryName le nouveau pays de l'adolescent
+     */
     public void setCountryName(Country countryName) {
         this.countryName = countryName;
     }
 
+    /**
+     * Setter qui permet de modifier la date de naissance d'un adolescent
+     * @param birthDate la nouvelle date de naissance de l'adolescent
+     */
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
+    /**
+     * Setter qui permet de modifier les critères d'un adolescent
+     * @param requirements les nouveaux critères de l'adolescent
+     */
     public void setRequirements(Map<String, Criterion> requirements) {
         this.requirements = requirements;
     }
 
+    /**
+     * Méthode qui permet de retourner un critère d'un adolescent
+     * @param criterionName le nom du critère à retourner
+     * @return le critère de l'adolescent
+     */
     public Criterion getCriterion(String criterionName) {
         return requirements.get(criterionName);
     }
 
+    /**
+     * Méthode qui permet d'ajouter un critère à un adolescent
+     * @param criterionName le nom du critère à ajouter
+     * @param criterion le critère à ajouter
+     */
     public void addCriterion(String criterionName, Criterion criterion) {
         requirements.put(criterionName, criterion);
     }
 
+    /**
+     * Méthode qui permet de modifier un critère d'un adolescent
+     * @param criterionName le nom du critère à modifier
+     * @param criterion le nouveau critère
+     */
     public void editCriterion(String criterionName, Criterion criterion) {
         requirements.replace(criterionName, criterion);
     }
     
+    /**
+     * Méthode qui permet d'obtenir la liste des critères d'un adolescent
+     * @return la liste des critères de l'adolescent
+     */
     public Map<String, Criterion> getRequirements() {
         return requirements;
     }
@@ -173,35 +295,35 @@ public class Teenager{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Teenager other = (Teenager) obj;
-        if (id != other.id)
+        Teenager guest = (Teenager) obj;
+        if (id != guest.id)
             return false;
         if (name == null) {
-            if (other.name != null)
+            if (guest.name != null)
                 return false;
-        } else if (!name.equals(other.name))
+        } else if (!name.equals(guest.name))
             return false;
         if (forname == null) {
-            if (other.forname != null)
+            if (guest.forname != null)
                 return false;
-        } else if (!forname.equals(other.forname))
+        } else if (!forname.equals(guest.forname))
             return false;
         if (gender == null) {
-            if (other.gender != null)
+            if (guest.gender != null)
                 return false;
-        } else if (!gender.equals(other.gender))
+        } else if (!gender.equals(guest.gender))
             return false;
-        if (countryName != other.countryName)
+        if (countryName != guest.countryName)
             return false;
         if (birthDate == null) {
-            if (other.birthDate != null)
+            if (guest.birthDate != null)
                 return false;
-        } else if (!birthDate.equals(other.birthDate))
+        } else if (!birthDate.equals(guest.birthDate))
             return false;
         if (requirements == null) {
-            if (other.requirements != null)
+            if (guest.requirements != null)
                 return false;
-        } else if (!requirements.equals(other.requirements))
+        } else if (!requirements.equals(guest.requirements))
             return false;
         return true;
     }
