@@ -4,5 +4,14 @@
         "test",
         "src",
         ""
-    ]
+    ],
+    "apexPMD.commandBufferSize": 5000,
+    "apexPMD.pmdBinPath": "./rules/pmd/bin",
+    "apexPMD.runOnFileChange": true,
+    "apexPMD.runOnFileOpen": true,
+    "apexPMD.showStdOut": true,
+    "apexPMD.rulesets": [
+        "./rules/pmd/pmd-rules_r203.xml"
+    ],
+    "apexPMD.jrePath": ""
 }

@@ -1,0 +1,229 @@
+./src/Country.java:2:	CommentSize:	Comment is too large: Line too long
+./src/Country.java:9:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./src/Country.java:29:	CommentRequired:	Field comments are required
+./src/Country.java:29:	FieldNamingConventions:	The final field name 'COUNTRY_NAME' doesn't match '[a-z][a-zA-Z0-9]*'
+./src/Criterion.java:15:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./src/Criterion.java:17:	CommentRequired:	Field comments are required
+./src/Criterion.java:18:	CommentRequired:	Field comments are required
+./src/Criterion.java:33:	CognitiveComplexity:	The method 'isValid()' has a cognitive complexity of 20, current threshold is 15
+./src/Criterion.java:33:	CyclomaticComplexity:	The method 'isValid()' has a cyclomatic complexity of 11.
+./src/Criterion.java:35:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:39:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:39:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:39:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:43:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:45:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:50:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:52:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:55:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:55:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:56:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:56:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:56:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:56:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:56:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:57:	SimplifyBooleanReturns:	This if statement can be replaced by `return {condition} && {thenBranch};`
+./src/Criterion.java:57:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:58:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:58:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:58:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:58:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Criterion.java:60:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:85:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:85:	ControlStatementBraces:	This statement should have braces
+./src/Criterion.java:87:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:87:	ControlStatementBraces:	This statement should have braces
+./src/Criterion.java:89:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:89:	ControlStatementBraces:	This statement should have braces
+./src/Criterion.java:90:	LocalVariableCouldBeFinal:	Local variable 'other' could be declared final
+./src/Criterion.java:93:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:93:	ControlStatementBraces:	This statement should have braces
+./src/Criterion.java:95:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:95:	ControlStatementBraces:	This statement should have braces
+./src/Criterion.java:96:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition};`
+./src/Criterion.java:97:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Criterion.java:97:	ControlStatementBraces:	This statement should have braces
+./src/CriterionName.java:2:	CommentSize:	Comment is too large: Line too long
+./src/CriterionName.java:6:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./src/CriterionName.java:41:	CommentRequired:	Field comments are required
+./src/CriterionName.java:41:	FieldNamingConventions:	The final field name 'TYPE' doesn't match '[a-z][a-zA-Z0-9]*'
+./src/Platform.java:7:	CommentSize:	Comment is too large: Line too long
+./src/Platform.java:14:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./src/Platform.java:16:	CommentRequired:	Field comments are required
+./src/Platform.java:17:	CommentRequired:	Field comments are required
+./src/Platform.java:33:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition} || {elseBranch};`
+./src/Platform.java:34:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Platform.java:40:	CommentSize:	Comment is too large: Line too long
+./src/Platform.java:49:	CommentSize:	Comment is too large: Line too long
+./src/Platform.java:52:	LocalVariableCouldBeFinal:	Local variable 'teenager' could be declared final
+./src/Platform.java:53:	LocalVariableCouldBeFinal:	Local variable 'guest' could be declared final
+./src/Platform.java:55:	ConfusingTernary:	Avoid if (x != y) ..; else ..;
+./src/Platform.java:70:	LocalVariableCouldBeFinal:	Local variable 'teenager' could be declared final
+./src/Platform.java:80:	LocalVariableCouldBeFinal:	Local variable 'entry' could be declared final
+./src/Platform.java:120:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:7:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:14:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./src/Teenager.java:14:	GodClass:	Possible God Class (WMC=60, ATFD=16, TCC=17.754%)
+./src/Teenager.java:14:	CyclomaticComplexity:	The class 'Teenager' has a total cyclomatic complexity of 60 (highest 21).
+./src/Teenager.java:16:	CommentRequired:	Field comments are required
+./src/Teenager.java:17:	CommentRequired:	Field comments are required
+./src/Teenager.java:18:	CommentRequired:	Field comments are required
+./src/Teenager.java:19:	CommentRequired:	Field comments are required
+./src/Teenager.java:20:	CommentRequired:	Field comments are required
+./src/Teenager.java:21:	CommentRequired:	Field comments are required
+./src/Teenager.java:22:	CommentRequired:	Field comments are required
+./src/Teenager.java:24:	CommentSize:	Comment is too large: Too many lines
+./src/Teenager.java:25:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:44:	CommentSize:	Comment is too large: Too many lines
+./src/Teenager.java:45:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:64:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:69:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:69:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:70:	LocalVariableCouldBeFinal:	Local variable 'animalRequirement' could be declared final
+./src/Teenager.java:71:	LocalVariableCouldBeFinal:	Local variable 'guestAnimalRequirement' could be declared final
+./src/Teenager.java:72:	SimplifyBooleanReturns:	This if statement can be replaced by `return !{condition};`
+./src/Teenager.java:72:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Teenager.java:72:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Teenager.java:73:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:76:	CommentSize:	Comment is too large: Too many lines
+./src/Teenager.java:77:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:79:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:82:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:84:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:89:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:94:	LocalVariableCouldBeFinal:	Local variable 'hostFood' could be declared final
+./src/Teenager.java:95:	LocalVariableCouldBeFinal:	Local variable 'guestFood' could be declared final
+./src/Teenager.java:97:	LocalVariableCouldBeFinal:	Local variable 'hostNone' could be declared final
+./src/Teenager.java:97:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Teenager.java:98:	LocalVariableCouldBeFinal:	Local variable 'guestNone' could be declared final
+./src/Teenager.java:98:	LiteralsFirstInComparisons:	Position literals first in String comparisons
+./src/Teenager.java:100:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:100:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:101:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:101:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:102:	SimplifyBooleanReturns:	This if statement can be replaced by `return {condition};`
+./src/Teenager.java:102:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:102:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:107:	CommentSize:	Comment is too large: Line too long
+./src/Teenager.java:112:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:112:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:122:	LocalVariableCouldBeFinal:	Local variable 'dateNow' could be declared final
+./src/Teenager.java:123:	LocalVariableCouldBeFinal:	Local variable 'p' could be declared final
+./src/Teenager.java:138:	LocalVariableCouldBeFinal:	Local variable 'validRequirements' could be declared final
+./src/Teenager.java:140:	LocalVariableCouldBeFinal:	Local variable 'entry' could be declared final
+./src/Teenager.java:142:	AvoidDeeplyNestedIfStmts:	Deeply nested if..then statements are hard to read
+./src/Teenager.java:142:	CollapsibleIfStatements:	This if statement could be combined with its parent
+./src/Teenager.java:154:	ShortMethodName:	Avoid using short method names
+./src/Teenager.java:202:	ShortMethodName:	Avoid using short method names
+./src/Teenager.java:273:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:275:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:299:	CognitiveComplexity:	The method 'equals(Object)' has a cognitive complexity of 25, current threshold is 15
+./src/Teenager.java:299:	CyclomaticComplexity:	The method 'equals(Object)' has a cyclomatic complexity of 21.
+./src/Teenager.java:301:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:301:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:303:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:303:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:305:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:305:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:306:	LocalVariableCouldBeFinal:	Local variable 'guest' could be declared final
+./src/Teenager.java:308:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:308:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:311:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:311:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:313:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:313:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:316:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:316:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:318:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:318:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:321:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:321:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:323:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:323:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:325:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:325:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:328:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:328:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:330:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:330:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:333:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:333:	ControlStatementBraces:	This statement should have braces
+./src/Teenager.java:335:	OnlyOneReturn:	A method should have only one exit point, and that should be the last statement in the method
+./src/Teenager.java:335:	ControlStatementBraces:	This statement should have braces
+./test/CriterionTest.java:1:	UnnecessaryImport:	Unused static import 'org.junit.Assert.assertFalse'
+./test/CriterionTest.java:2:	UnnecessaryImport:	Unused static import 'org.junit.Assert.assertTrue'
+./test/CriterionTest.java:7:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./test/CriterionTest.java:7:	CommentRequired:	Class comments are required
+./test/CriterionTest.java:7:	AtLeastOneConstructor:	Each class should declare at least one constructor
+./test/CriterionTest.java:8:	CommentRequired:	Field comments are required
+./test/CriterionTest.java:8:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/PlatformTest.java:1:	UnnecessaryImport:	Unused static import 'org.junit.jupiter.api.Assertions.assertFalse'
+./test/PlatformTest.java:2:	UnnecessaryImport:	Unused static import 'org.junit.jupiter.api.Assertions.assertTrue'
+./test/PlatformTest.java:12:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./test/PlatformTest.java:12:	CommentRequired:	Class comments are required
+./test/PlatformTest.java:12:	AtLeastOneConstructor:	Each class should declare at least one constructor
+./test/PlatformTest.java:19:	ShortMethodName:	Avoid using short method names
+./test/PlatformTest.java:20:	CommentSize:	Comment is too large: Line too long
+./test/PlatformTest.java:21:	LocalVariableCouldBeFinal:	Local variable 'estPasAlergique' could be declared final
+./test/PlatformTest.java:24:	LocalVariableCouldBeFinal:	Local variable 'aPasAnimal' could be declared final
+./test/PlatformTest.java:29:	LocalVariableCouldBeFinal:	Local variable 'posseDeTout' could be declared final
+./test/PlatformTest.java:34:	LocalVariableCouldBeFinal:	Local variable 'mangeTout' could be declared final
+./test/PlatformTest.java:36:	LocalVariableCouldBeFinal:	Local variable 'reqMrBouffeTout' could be declared final
+./test/PlatformTest.java:42:	LocalVariableCouldBeFinal:	Local variable 'teenager1' could be declared final
+./test/PlatformTest.java:48:	CommentRequired:	Public method and constructor comments are required
+./test/PlatformTest.java:49:	LocalVariableCouldBeFinal:	Local variable 'p' could be declared final
+./test/PlatformTest.java:58:	CommentRequired:	Public method and constructor comments are required
+./test/PlatformTest.java:59:	LocalVariableCouldBeFinal:	Local variable 'p' could be declared final
+./test/PlatformTest.java:69:	CommentRequired:	Public method and constructor comments are required
+./test/PlatformTest.java:70:	LocalVariableCouldBeFinal:	Local variable 'p' could be declared final
+./test/PlatformTest.java:80:	CommentRequired:	Public method and constructor comments are required
+./test/PlatformTest.java:81:	LocalVariableCouldBeFinal:	Local variable 'p' could be declared final
+./test/TeenagerTest.java:1:	UnnecessaryImport:	Unused static import 'org.junit.Assert.assertEquals'
+./test/TeenagerTest.java:2:	UnnecessaryImport:	Unused static import 'org.junit.Assert.assertFalse'
+./test/TeenagerTest.java:3:	UnnecessaryImport:	Unused static import 'org.junit.Assert.assertTrue'
+./test/TeenagerTest.java:12:	NoPackage:	All classes, interfaces, enums and annotations must belong to a named package
+./test/TeenagerTest.java:12:	CommentRequired:	Class comments are required
+./test/TeenagerTest.java:12:	AtLeastOneConstructor:	Each class should declare at least one constructor
+./test/TeenagerTest.java:13:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:13:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:14:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:14:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:15:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:15:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:16:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:16:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:17:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:17:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:18:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:18:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:19:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:19:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:20:	CommentRequired:	Field comments are required
+./test/TeenagerTest.java:20:	OneDeclarationPerLine:	Use one line for each declaration, it enhances code readability.
+./test/TeenagerTest.java:40:	LawOfDemeter:	Access to field `FRANCE` on foreign value `` (degree 1)
+./test/TeenagerTest.java:41:	LawOfDemeter:	Access to field `ALLEMAGNE` on foreign value `` (degree 1)
+./test/TeenagerTest.java:42:	LawOfDemeter:	Access to field `ESPAGNE` on foreign value `` (degree 1)
+./test/TeenagerTest.java:43:	LawOfDemeter:	Access to field `ITALIE` on foreign value `` (degree 1)
+./test/TeenagerTest.java:49:	LocalVariableCouldBeFinal:	Local variable 'estAlergique' could be declared final
+./test/TeenagerTest.java:50:	LocalVariableCouldBeFinal:	Local variable 'estPasAlergique' could be declared final
+./test/TeenagerTest.java:51:	LocalVariableCouldBeFinal:	Local variable 'aUnAnimal' could be declared final
+./test/TeenagerTest.java:52:	LocalVariableCouldBeFinal:	Local variable 'aPasAnimal' could be declared final
+./test/TeenagerTest.java:53:	LocalVariableCouldBeFinal:	Local variable 'possedeVege' could be declared final
+./test/TeenagerTest.java:54:	LocalVariableCouldBeFinal:	Local variable 'possedeSport' could be declared final
+./test/TeenagerTest.java:55:	LocalVariableCouldBeFinal:	Local variable 'posseDeTout' could be declared final
+./test/TeenagerTest.java:56:	LocalVariableCouldBeFinal:	Local variable 'mangeTout' could be declared final
+./test/TeenagerTest.java:57:	LocalVariableCouldBeFinal:	Local variable 'mangeVege' could be declared final
+./test/TeenagerTest.java:58:	LocalVariableCouldBeFinal:	Local variable 'mangeSport' could be declared final
+./test/TeenagerTest.java:59:	LocalVariableCouldBeFinal:	Local variable 'saisieIncorrect' could be declared final
+./test/TeenagerTest.java:91:	JUnitTestContainsTooManyAsserts:	Unit tests should not contain more than 5 assert(s).
+./test/TeenagerTest.java:101:	JUnitTestContainsTooManyAsserts:	Unit tests should not contain more than 5 assert(s).
+./test/TeenagerTest.java:111:	JUnitTestContainsTooManyAsserts:	Unit tests should not contain more than 5 assert(s).
+./test/TeenagerTest.java:137:	JUnitTestContainsTooManyAsserts:	Unit tests should not contain more than 5 assert(s).
+./test/TeenagerTest.java:155:	JUnitTestContainsTooManyAsserts:	Unit tests should not contain more than 5 assert(s).
+./test/TeenagerTest.java:156:	LocalVariableCouldBeFinal:	Local variable 'estPasAlergique' could be declared final
+./test/TeenagerTest.java:157:	LocalVariableCouldBeFinal:	Local variable 't5' could be declared final
+./test/TeenagerTest.java:160:	LocalVariableCouldBeFinal:	Local variable 't6' could be declared final
+./test/TeenagerTest.java:162:	LocalVariableCouldBeFinal:	Local variable 'estAlergique' could be declared final
+./test/TeenagerTest.java:171:	LocalVariableCouldBeFinal:	Local variable 'estPasAlergique' could be declared final
+./test/TeenagerTest.java:172:	LocalVariableCouldBeFinal:	Local variable 't5' could be declared final
+./test/TeenagerTest.java:174:	LocalVariableCouldBeFinal:	Local variable 'estAlergique' could be declared final
