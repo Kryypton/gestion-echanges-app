@@ -15,10 +15,18 @@ public enum Country {
 
     private final String COUNTRY_NAME;
 
+    /***
+     * Constructeur de Country
+     * @param country_name le nom du pays
+     */
     private Country(String country_name) {
         COUNTRY_NAME = country_name;
     }
 
+    /**
+     * Cette méthode permet de récupérer le nom d'un pays
+     * @return le nom du pays
+     */
     public String getCOUNTRY_NAME() {
         return COUNTRY_NAME;
     }
