@@ -75,7 +75,7 @@ public class TeenagerTest {
         t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
         t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
         t4 = new Teenager(id4, forname4, forname4, gender4, birthDate4, countryName4);
-
+        
         t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
         t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
         t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
@@ -142,6 +142,38 @@ public class TeenagerTest {
         assertFalse(t3.compatibleWithGuest(t2));
         assertTrue(t3.compatibleWithGuest(t1));
     }
-    
 
+    @Test
+    void testGetAgeYear(){
+        assertEquals(t1.getAgeYear(), 23);
+        assertEquals(t2.getAgeYear(), 20);
+        assertEquals(t3.getAgeYear(), 21);
+        assertEquals(t4.getAgeYear(), 20);
+    }
+
+    @Test
+    void testAddCriterion(){
+        Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
+        Teenager t5 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
+        t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        assertEquals(t5.getRequirements().size(), 1);
+        Teenager t6 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
+        t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
+        t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        // on ne peut pas ajouter deux fois le même critère
+        assertEquals(t6.getRequirements().size(), 1);
+        assertEquals(t6.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name()).getValue(), "no");
+    }
+
+    @Test
+    void testEditCriterion(){
+        Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
+        Teenager t5 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
+        t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
+        t5.editCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        assertEquals(t5.getRequirements().size(), 1);
+        assertEquals(t5.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name()).getValue(), "yes");
+    }
 }

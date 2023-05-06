@@ -5,11 +5,9 @@ import java.util.HashMap;
 
 /**
  * Cette classe permet de gérer les informations relatives à un adolescent et de déterminer sa compatibilité avec d'autres adolescents en fonction de différents critères.
- * @author Dorny Nathan
- * @author Berrakane Adham 
- * @author Quentin Mouette
  * @since 1.0
  * @version 1.0
+ * @authors Dorny Nathan, Berrakane Adham, Moutté Quentin
  */
 public class Teenager{
     
@@ -20,7 +18,6 @@ public class Teenager{
     private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
-
 
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
@@ -70,7 +67,7 @@ public class Teenager{
         if (guest == null) return false;
         Criterion animalRequirement = requirements.get(CriterionName.HOST_HAS_ANIMAL.name());
         Criterion guestAnimalRequirement = guest.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name());
-        if (animalRequirement.getvalue().equals("yes") && guestAnimalRequirement.getvalue().equals("yes")) {
+        if (animalRequirement.getValue().equals("yes") && guestAnimalRequirement.getValue().equals("yes")) {
             return false; // Incompatible car l'invité a une allergie et l'hote a un animal.
         } 
         return true;
@@ -95,12 +92,12 @@ public class Teenager{
         Criterion hostFood = this.getRequirements().get(CriterionName.HOST_FOOD.name());
         Criterion guestFood = guest.getRequirements().get(CriterionName.GUEST_FOOD.name());
     
-        boolean hostNone = hostFood.getvalue().equals("none");
-        boolean guestNone = guestFood.getvalue().equals("none");
+        boolean hostNone = hostFood.getValue().equals("none");
+        boolean guestNone = guestFood.getValue().equals("none");
 
         if (hostNone && guestNone) return true;
         if (hostNone || guestNone) return true;
-        if (hostFood.getvalue().equals(guestFood.getvalue())) return true;
+        if (hostFood.getValue().equals(guestFood.getValue())) return true;
         return false;
     }
     
@@ -144,8 +141,6 @@ public class Teenager{
             }
         }
         this.requirements = validRequirements;
-
-
     }
 
     /**
@@ -266,8 +261,10 @@ public class Teenager{
      * @param criterionName le nom du critère à ajouter
      * @param criterion le critère à ajouter
      */
-    public void addCriterion(String criterionName, Criterion criterion) {
-        requirements.put(criterionName, criterion);
+    public void addCriterion(String key, Criterion criterion) {
+        if (!requirements.containsKey(key)) {
+            requirements.put(key, criterion);
+        }
     }
 
     /**

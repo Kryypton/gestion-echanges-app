@@ -3,7 +3,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-
+/**
+ * Classe Platform
+ * @authors
+ */
 public class Platform {
 
     private ArrayList<Teenager> teenagerList;

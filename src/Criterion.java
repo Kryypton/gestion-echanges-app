@@ -3,17 +3,31 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Cette classe représente un critére, elle est composé d'une valeur et d'un label
+ * @since 1.0
+ * @version 1.0
+ * @authors Dorny Nathan, Berrakane Adham, Moutté Quentin
+ */
 public class Criterion{
 
     private String value;
     private CriterionName label;
-    
+    /**
+     * Constructeur de la classe Criterion
+     * @param value la valeur du critére
+     * @param label le label du critére / le nom du critére
+     */
     public Criterion(String value , CriterionName label){
         this.value = value;
         this.label = label;
     }
 
-    /* Regarde si des critéres donné sont valides ou non */
+    /**
+     * Cette méthode permet de savoir si un critére est valide ou non
+     * @return true si le critére est valide, false sinon
+     */
     public boolean isValid() {
         if (label == null) {
             return false;
@@ -47,11 +61,19 @@ public class Criterion{
         return false;
     }
 
+    /**
+     * Cette méthode permet de récupérer le label du critére
+     * @return le label du critére
+     */
     public CriterionName getLabel() {
         return label;
     }
 
-    public String getvalue(){
+    /**
+     * Cette méthode permet de récupérer la valeur du critére
+     * @return la valeur du critére
+     */
+    public String getValue(){
         return value;
     }
 
