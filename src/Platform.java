@@ -122,5 +122,4 @@ public class Platform {
      * - Je crois que nous devions faire une classe country.
      * - gestion des régles spécifique par pays
      */
-
 }
