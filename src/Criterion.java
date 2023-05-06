@@ -8,7 +8,9 @@ import java.time.format.DateTimeParseException;
  * Cette classe représente un critére, elle est composé d'une valeur et d'un label
  * @since 1.0
  * @version 1.0
- * @authors Dorny Nathan, Berrakane Adham, Moutté Quentin
+ * @author Dorny Nathan
+ * @author Berrakane Adham
+ * @author Moutté Quentin
  */
 public class Criterion{
 

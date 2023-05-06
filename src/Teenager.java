@@ -7,7 +7,9 @@ import java.util.HashMap;
  * Cette classe permet de gérer les informations relatives à un adolescent et de déterminer sa compatibilité avec d'autres adolescents en fonction de différents critères.
  * @since 1.0
  * @version 1.0
- * @authors Dorny Nathan, Berrakane Adham, Moutté Quentin
+ * @author Dorny Nathan
+ * @author Berrakane Adham
+ * @author Moutté Quentin
  */
 public class Teenager{
     

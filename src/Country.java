@@ -1,3 +1,11 @@
+/**
+ * Enumère les différents pays pouvant être utilisés pour faire correspondre un invité et un hôte.
+ * @version 1.0
+ * @since 2023-05-01
+ * @author Dorny Nathan
+ * @author Berrakane Adham
+ * @author Moutté Quentin
+ */
 public enum Country {
 
     ITALIE("Italie"),

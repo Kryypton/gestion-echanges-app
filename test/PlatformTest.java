@@ -47,18 +47,21 @@ public class PlatformTest {
     @Test
     public void addTeenagerTest(){
         Platform p = new Platform();
-        p.addTeenager(ten());
+        assertTrue(p.addTeenager(ten()));
         assertTrue(p.getTeenagerList().contains(ten()));
+        // on ne peut pas ajouter 2 fois le même teenager
+        assertFalse(p.addTeenager(ten()));
     }
 
     /* Test de la méthode removeTeenager */
     @Test
     public void removeTeenagerTest(){
         Platform p = new Platform();
-        p.addTeenager(ten());
+        assertTrue(p.addTeenager(ten()));
         assertTrue(p.getTeenagerList().contains(ten()));
-        p.removeTeenager(ten());
+        assertTrue(p.removeTeenager(ten()));
         assertFalse(p.getTeenagerList().contains(ten()));
+        assertFalse(p.removeTeenager(ten()));
     }
 
     /* Test de la méthode getTeenagerList */
