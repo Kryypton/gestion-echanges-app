@@ -131,7 +131,9 @@ public class Teenager{
     public int getAgeYear(){
         return getAge().getYears();
     }
-
+    /**
+     * retire les critères invalides de la liste des critères
+     */
     public void purgeInvalidRequirement(){
         Map<String, Criterion> validRequirements = new HashMap<>();
 
@@ -260,12 +262,19 @@ public class Teenager{
 
     /**
      * Méthode qui permet d'ajouter un critère à un adolescent
-     * @param criterionName le nom du critère à ajouter
+     * @param key la clé du critère à ajouter
      * @param criterion le critère à ajouter
+     * @return [true] si le critère a été ajouté, [false] sinon
      */
-    public void addCriterion(String key, Criterion criterion) {
-        if (!requirements.containsKey(key)) {
-            requirements.put(key, criterion);
+    public boolean addCriterion(String key, Criterion criterion) {
+        try {
+            if (!requirements.containsKey(key)) {
+                requirements.put(key, criterion);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 

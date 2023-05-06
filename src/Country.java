@@ -8,9 +8,22 @@
  */
 public enum Country {
 
+    // les pays
+    /**
+     * Italie [Italie]
+     */
     ITALIE("Italie"),
+    /**
+     *  Espagne [Espagne]
+     */
     ESPAGNE("Espagne"),
+    /**
+     * France [France]
+     */
     FRANCE("France"),
+    /**
+     * Allemagne [Allemagne]  
+     */ 
     ALLEMAGNE("Allemagne");
 
     private final String COUNTRY_NAME;

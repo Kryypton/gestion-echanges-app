@@ -45,9 +45,9 @@ public class Platform {
         return teenagerList.remove(teenager);
     }
 
-    /* Methode qui regarde si 2 adolescent sont compatible entre eux (Allergie, alimentation...) 
-     * et les ajoute à la Map compatibleTeenagers
-    */
+    /**
+     * Methode qui regarde si 2 adolescent sont compatible entre eux (Allergie, alimentation...) et les ajoute dans une map
+     */
     public void findCompatibleTeenagers(){
         for (Teenager teenager : teenagerList) {
             for (Teenager guest : teenagerList) {

@@ -155,12 +155,12 @@ public class TeenagerTest {
     void testAddCriterion(){
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Teenager t5 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
-        t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        assertTrue(t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique));
         assertEquals(t5.getRequirements().size(), 1);
         Teenager t6 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
-        t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        assertTrue(t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique));
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
-        t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        assertFalse(t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique));
         // on ne peut pas ajouter deux fois le même critère
         assertEquals(t6.getRequirements().size(), 1);
         assertEquals(t6.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name()).getValue(), "no");

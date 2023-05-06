@@ -5,15 +5,38 @@
  */
 public enum CriterionName {
     
-    // Les différents types de critères sont :
+    /**
+     * est allergique aux annimaux [true, false]
+     */
     GUEST_ANIMAL_ALLERGY('B'),
-    HOST_HAS_ANIMAL('B'),
-    GUEST_FOOD('T'),
-    HOST_FOOD('T'),
+    /**
+     * héberge un animal [true, false]
+     */
+    HOST_HAS_ANIMAL('B'), 
+    /**
+     * nourriture de l'invité[végétarien, sportif, no nuts, tout]
+     */
+    GUEST_FOOD('T'), 
+    /**
+     * les hobbies de l'hôte [sport, musique, lecture, tout]
+     */
+    HOST_FOOD('T'), 
+    /**
+     * les hobbies de l'adolescent [sport, musique, lecture, tout]
+     */
     HOBBIES('T'),
+    /**
+     * le genre de l'adolescent [F, M, T]
+     */
     GENDER('T'),
+    /**
+     * le genre de l'hôte [F, M, T]
+     */
     PAIR_GENDER('T'),
-    HISTORY('T');
+    /**
+     * historique de l'adolescent
+     */
+    HISTORY('T'); 
 
     private final char TYPE;
 
