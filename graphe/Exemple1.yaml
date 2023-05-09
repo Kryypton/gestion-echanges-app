@@ -1,0 +1,11 @@
+name: Exemple
+type: wugraph
+nodes: [A,B,C,X,Y,Z]
+wedges:
+  #alpha: {A: 0, B: 0, C: 0}
+  A: {X: 1,Y: 0,Z: 1}
+  B: {X: 1,Y: -9,Z: 0}
+  C: {X: 0,Y: 2,Z: 0}
+  X: {}
+  Y: {}
+  Z: {}
