@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -110,8 +111,14 @@ public class Teenager{
      */
     public boolean compatibleWithGuest(Teenager guest) {
         if (guest == null) return false;
-        
-        return compatibleAnimal(guest) && compatibleFood(guest);
+        if (compatibleAnimal(guest) && compatibleFood(guest)){
+            return true;
+        } else if(this.countryName == Country.FRANCE || guest.getCountryName() == Country.FRANCE){
+                if(this.nbLoisirCommun(guest) == 0){
+            return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -147,6 +154,42 @@ public class Teenager{
         this.requirements = validRequirements;
     }
 
+
+
+    /**
+    * Renvoie le nombre de loisirs communs entre les 2 Teenager.
+    * @param teen un Teenager
+    * @return int nombre de loisirs communs
+    */
+
+    public int nbLoisirCommun(Teenager teen){
+        if(!teen.requirements.containsKey("HOBBIES") || !this.requirements.containsKey("HOBBIES")){
+            return 0;
+        }
+
+        ArrayList<String> ask = new ArrayList<>();
+        ArrayList<String> give = new ArrayList<>();
+
+        if(!teen.requirements.get("HOBBIES").equals("")){
+            for (String s : teen.requirements.get("HOBBIES").getValue().split(",")) {
+            ask.add(s);
+            }
+        }
+        if(!this.requirements.get("HOBBIES").equals("")){
+            for (String s : this.requirements.get("HOBBIES").getValue().split(",")) {
+                give.add(s);
+            }
+        }
+        int nombreLoisirs = 0;
+        for (String s : ask) {
+            if (give.indexOf(s) >= 0) {
+            nombreLoisirs = nombreLoisirs ++ ;
+            }
+        }
+        return nombreLoisirs;
+    }
+    
+
     /**
      * Getter qui permet retourne l'identifiant d'un adolescent
      * @return l'identifiant d'un adolescent
@@ -175,10 +218,13 @@ public class Teenager{
      * Getter qui permet retourne le pays d'un adolescent
      * @return le pays d'un adolescent
      */
-    public String getCountryName() {
+    public String getCountryNameString() {
         return this.countryName.getCOUNTRY_NAME();
     }
 
+    public Country getCountryName(){
+        return this.countryName;
+    }
     /**
      * Getter qui permet retourne la date de naissance d'un adolescent
      * @return la date de naissance d'un adolescent

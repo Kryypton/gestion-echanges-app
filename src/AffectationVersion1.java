@@ -5,6 +5,17 @@ import java.util.*;
 
 public class AffectationVersion1{
 
+
+
+    // Methode qui permettrai de calculer le poids de l'arete entre le visitor et l'host.
+    // plus le resultat trouver sera bas plus les 2 personne seront compatible logiquement
+    // 
+
+    /*public static double weight (Teenager host, Teenager visitor) {
+        
+        }*/
+       
+
     public static void main(String[] args){
 
         GrapheNonOrienteValue<String> graph= new GrapheNonOrienteValue<String>();
