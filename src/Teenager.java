@@ -172,7 +172,7 @@ public class Teenager{
 
         if(!teen.requirements.get("HOBBIES").equals("")){
             for (String s : teen.requirements.get("HOBBIES").getValue().split(",")) {
-            ask.add(s);
+                ask.add(s);
             }
         }
         if(!this.requirements.get("HOBBIES").equals("")){
@@ -183,7 +183,7 @@ public class Teenager{
         int nombreLoisirs = 0;
         for (String s : ask) {
             if (give.indexOf(s) >= 0) {
-            nombreLoisirs = nombreLoisirs ++ ;
+                nombreLoisirs = nombreLoisirs ++ ;
             }
         }
         return nombreLoisirs;

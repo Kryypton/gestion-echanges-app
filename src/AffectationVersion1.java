@@ -74,25 +74,46 @@ public class AffectationVersion1{
         Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
         Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
 
+        Criterion sports = new Criterion("sports", CriterionName.HOBBIES);
+        Criterion reading = new Criterion("reading", CriterionName.HOBBIES);
+        Criterion technology = new Criterion("technology", CriterionName.HOBBIES);
+        Criterion culture = new Criterion("culture", CriterionName.HOBBIES);
+        Criterion science = new Criterion("science", CriterionName.HOBBIES);
+
         
 
         //Création des requirements a l'aide des critérion précedent
-        Map<String, Criterion> guestNoAlergie = new HashMap<>();
-        guestNoAlergie.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        Map<String, Criterion> guestAlergie = new HashMap<>();
-        guestAlergie.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
-        Map<String, Criterion> hostNoAlergie = new HashMap<>();
-        hostNoAlergie.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        Map<String, Criterion> hostAlergie = new HashMap<>();
-        hostAlergie.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+        Map<String, Criterion> TenA = new HashMap<>();
+        TenA.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        TenA.put(CriterionName.HOBBIES.name(), sports);
+        TenA.put(CriterionName.HOBBIES.name(), technology);
+        Map<String, Criterion> TenB = new HashMap<>();
+        TenB.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        TenB.put(CriterionName.HOBBIES.name(), culture);
+        TenB.put(CriterionName.HOBBIES.name(), science);
+        Map<String, Criterion> TenC = new HashMap<>();
+        TenC.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        TenC.put(CriterionName.HOBBIES.name(), science);
+        TenC.put(CriterionName.HOBBIES.name(), reading);
+        Map<String, Criterion> TenX = new HashMap<>();
+        TenX.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        TenX.put(CriterionName.HOBBIES.name(), culture);
+        TenX.put(CriterionName.HOBBIES.name(), technology);
+        Map<String, Criterion> TenY = new HashMap<>();
+        TenY.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+        TenY.put(CriterionName.HOBBIES.name(), science);
+        TenY.put(CriterionName.HOBBIES.name(), reading);
+        Map<String, Criterion> TenZ = new HashMap<>();
+        TenZ.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        TenZ.put(CriterionName.HOBBIES.name(), technology);
         
         //Création des Teenager a l'aide des requirement précedent
-        Teenager A = new Teenager(1, "A", "Adonia", null, null, Country.FRANCE , guestNoAlergie);
-        Teenager B = new Teenager(1, "B", "Bellatrix", null, null, Country.FRANCE , guestAlergie);
-        Teenager C = new Teenager(1, "C", "Callistra", null, null, Country.FRANCE , guestNoAlergie);
-        Teenager X = new Teenager(1, "X", "Xolag", null, null, Country.ITALIE , hostNoAlergie);
-        Teenager Y = new Teenager(1, "Y", "Yak", null, null, Country.ITALIE , hostAlergie);
-        Teenager Z = new Teenager(1, "Z", "Zander", null, null, Country.ITALIE , hostNoAlergie);
+        Teenager A = new Teenager(1, "A", "Adonia", null, null, Country.FRANCE , TenA);
+        Teenager B = new Teenager(1, "B", "Bellatrix", null, null, Country.FRANCE , TenB);
+        Teenager C = new Teenager(1, "C", "Callistra", null, null, Country.FRANCE , TenC);
+        Teenager X = new Teenager(1, "X", "Xolag", null, null, Country.ITALIE , TenX);
+        Teenager Y = new Teenager(1, "Y", "Yak", null, null, Country.ITALIE , TenY);
+        Teenager Z = new Teenager(1, "Z", "Zander", null, null, Country.ITALIE , TenZ);
 
         //Création de liste des étudiants hôtes et invités
         List<Teenager> guest = new ArrayList<Teenager>();
@@ -115,8 +136,6 @@ public class AffectationVersion1{
         System.out.println(listToString(graph.sommets()));
         
         //envoie de la solution
-        //System.out.println(graph.toString());
         System.out.println(listAreteToString(calcul.calculerAffectation()));
-        //System.out.println(calcul.getCout());
     }
 }
