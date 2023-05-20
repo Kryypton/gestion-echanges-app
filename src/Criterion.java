@@ -28,40 +28,27 @@ public class Criterion{
 
     /**
      * Cette méthode permet de savoir si un critére est valide ou non
-     * @return true si le critére est valide, false sinon
+     * @return Si le critere n'est pas valide renvoie une exception
      */
-    public boolean isValid() {
+
+    public void isValid() throws CriterionTypeException {
+
         if (label == null) {
-            return false;
+            throw new CriterionTypeException("Le label du critère est null");
         }
-    
-        if (label.getType() == 'B') {
-            return value.equals("yes") || value.equals("no");
-        } else if (label.getType() == 'N') {
-            try {
-                Integer.parseInt(value);
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
+        if (label.getType() == 'B' && !this.equals("yes") && !this.equals("no")) {
+            return new CriterionTypeException("Le critère qui représente un booléen doit être égal à yes ou no");
+        } else if (label.getType() == 'N' && !isNumeric(value)) {
+                return new CriterionTypeException("Le critère qui représente un nombre doit être un nombre");
         } else if (label.getType() == 'D') {
-            try {
-                LocalDate.parse(value);
-                return true;
-            } catch (DateTimeParseException e) {
-                return false;
-            }
-        } else if (label.getType() == 'T') {
-            if (label.name().equals("GUEST_FOOD") || label.name().equals("HOST_FOOD")) {
-                return (value.equals("végétarien") || value.equals("sport") || value.equals("nonuts") || value.equals("none"));
-            } else if (label.name().equals("GENDER")) {
-                return (value.equals("M") || value.equals("F") || value.equals("O"));
-            } else {
-                return false;
+                String[] date = this.value.split("/");
+                if(!Criterion.isNumeric(date[0]) || !Criterion.isNumeric(date[1]) || !Criterion.isNumeric(date[2])){
+                    return new CriterionTypeException("Le critère qui représente une date doit être une date");
+                }
+        } else if (label.getType() == 'T' && !isText(value)) {
+                return new CriterionTypeException("Le critère qui représente du texte doit être du texte");
             }
         }
-        return false;
-    }
 
     /**
      * Cette méthode permet de récupérer le label du critére
