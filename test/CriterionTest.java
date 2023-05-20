@@ -16,7 +16,7 @@ public class CriterionTest {
         criterion5 = new Criterion(null, CriterionName.HOST_HAS_ANIMAL);
         criterion6 = new Criterion("pasBien", CriterionName.NUMERIC);
         criterion7 = new Criterion("1", CriterionName.NUMERIC);
-        criterion8 = new Criterion("1/1/2020", CriterionName.HISTORY);
+        criterion8 = new Criterion("01/01/2020", CriterionName.HISTORY);
         criterion9 = new Criterion("1/1", CriterionName.HISTORY);
 
     }

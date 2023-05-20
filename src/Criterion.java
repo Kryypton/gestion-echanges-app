@@ -1,6 +1,7 @@
 //import org.w3c.dom.css.CSSValueList;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
@@ -43,14 +44,8 @@ public class Criterion{
             throw new CriterionTypeException("Le critère qui représente un booléen doit être égal à yes ou no");
         } else if (label.getType() == 'N' && !isNumeric(value)) {
             throw new CriterionTypeException("Le critère qui représente un nombre doit être un nombre");
-        } else if (label.getType() == 'D') {
-                String[] date = this.value.split("/");
-                if (date.length != 3) {
-                    throw new CriterionTypeException("Le critère qui représente une date doit être de la forme dd/mm/yyyy");
-                }
-                if(!Criterion.isNumeric(date[0]) || !Criterion.isNumeric(date[1]) || !Criterion.isNumeric(date[2])){
-                    throw new CriterionTypeException("Le critère qui représente une date doit être une date");
-                }
+        } else if (label.getType() == 'D' && !isDate(value)) {
+            throw new CriterionTypeException("Le critère qui représente une date doit être de la forme dd/mm/yyyy");
         } else if (label.getType() == 'T' && !isText(value)) {
             throw new CriterionTypeException("Le critère qui représente du texte doit être du texte");
             }
@@ -72,6 +67,15 @@ public class Criterion{
             return false;
         } catch (NumberFormatException e) {
             return true;
+        }
+    }
+
+    private static boolean isDate(String string){
+        try {
+            LocalDate.parse(string, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 
