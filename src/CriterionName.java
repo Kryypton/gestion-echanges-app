@@ -36,7 +36,12 @@ public enum CriterionName {
     /**
      * historique de l'adolescent
      */
-    HISTORY('T'); 
+    HISTORY('D'),
+
+    /**
+     * le type du critére
+     */
+    NUMERIC('N');
 
     private final char TYPE;
 

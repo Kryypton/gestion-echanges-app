@@ -31,26 +31,29 @@ public class Criterion{
      * @return Si le critere n'est pas valide renvoie une exception
      */
 
-    public boolean isValid() throws CriterionTypeException {
+    public void isValid() throws CriterionTypeException {
 
         if (label == null) {
             throw new CriterionTypeException("Le label du critère est null");
         }
-        if (label.getType() == 'B' && !this.equals("yes") && !this.equals("no")) {
+        if (value == null) {
+            throw new CriterionTypeException("La valeur du critère est null");
+        }
+        if (label.getType() == 'B' && !this.value.equals("yes") && !this.value.equals("no")) {
             throw new CriterionTypeException("Le critère qui représente un booléen doit être égal à yes ou no");
         } else if (label.getType() == 'N' && !isNumeric(value)) {
             throw new CriterionTypeException("Le critère qui représente un nombre doit être un nombre");
         } else if (label.getType() == 'D') {
                 String[] date = this.value.split("/");
+                if (date.length != 3) {
+                    throw new CriterionTypeException("Le critère qui représente une date doit être de la forme dd/mm/yyyy");
+                }
                 if(!Criterion.isNumeric(date[0]) || !Criterion.isNumeric(date[1]) || !Criterion.isNumeric(date[2])){
                     throw new CriterionTypeException("Le critère qui représente une date doit être une date");
                 }
         } else if (label.getType() == 'T' && !isText(value)) {
             throw new CriterionTypeException("Le critère qui représente du texte doit être du texte");
-            } else {
-            return true;
             }
-        return false;
         }
 
     
