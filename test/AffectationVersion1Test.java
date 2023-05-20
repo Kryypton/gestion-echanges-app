@@ -1,68 +1,11 @@
 import fr.ulille.but.sae2_02.graphes.*;
 import java.util.*;
 
-public class AffectationVersion1{
+public class AffectationVersion1Test {
 
-    /**
-     * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 10 point, et plus ils seront compatible, plus leurs scores diminueras
-     * @param host l'adolescent hôte
-     * @param visitor l'adolescent invité
-     * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
-     */
-    public static double weight (Teenager host, Teenager visitor) {
-        double base = 0;
-        base -= host.nbLoisirCommun(visitor);
-        if(!host.compatibleWithGuest(visitor)){
-            base += 100;
-        }
-        return base;
-    }
-
-    /**
-     * Méthode qui permet de crée les sommets formé par les étudiants pour le graph
-     * @param list La liste des étudiants a ajouter
-     * @param graph Le graph dans lequel on ajoute les sommets
-     */
-    public static void addSummit(List<Teenager> list, GrapheNonOrienteValue<Teenager> graph){
-        for (Teenager teenager : list) {
-            graph.ajouterSommet(teenager);
-        }
-    }
-
-    /**
-     * Méthode qui permet de crée les aretes composant le graph
-     * @param guest La liste des étudiants invités a ajouter
-     * @param host La liste des étudiants hôtes a ajouter
-     * @param graph Le graph dans lequel on ajoute les aretes
-     */
-    public static void addArete(List<Teenager> guest,List<Teenager> host, GrapheNonOrienteValue<Teenager> graph){
-        for (Teenager teenager1 : host) {
-            for (Teenager teenager2 : guest){
-                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2));
-                //System.out.println(teenager1.getName() +" avec " + teenager2.getName() +" vaut " + weight(teenager1,teenager2));
-            }
-        }
-    }
-
-    public static String listToString(List<Teenager> list){
-        String ten = "";
-        for (Teenager teenager : list){
-            ten += teenager.getName() + "\n";
-        }
-        return ten;
-    }
-
-    public static String listAreteToString(List<Arete<Teenager>> list){
-        String ten = "";
-        for (Arete<Teenager> teenager : list){
-            ten += teenager.getExtremite1().getName() + " and " + teenager.getExtremite2().getName()+ ": " +teenager.getPoids() + "\n";
-        }
-        return ten;
-    }
-       
-/* 
     public static void main(String[] args){
 
+        //AffectationVersion1 test = new AffectationVersion1();
 
         //Création du graph
         GrapheNonOrienteValue<Teenager> graph= new GrapheNonOrienteValue<Teenager>();
@@ -145,9 +88,9 @@ public class AffectationVersion1{
         
 
         //Ajout de sommet et aretes au graphe
-        addSummit(guest,graph);
-        addSummit(host,graph);
-        addArete(guest,host,graph);
+        AffectationVersion1.addSummit(guest,graph);
+        AffectationVersion1.addSummit(host,graph);
+        AffectationVersion1.addArete(guest,host,graph);
 
         // for(Teenager list : guest){
         //     for (String s : list.getCriterion("HOBBIES").getValue().split(",")) {
@@ -161,8 +104,8 @@ public class AffectationVersion1{
         // }
 
         //System.out.println(listToString(graph.sommets()));
-        // System.out.println("Nous somme censé trouvé : \n B--X, A--Z, et C--Y");
+         System.out.println("Nous somme censé trouvé : \n B--X, A--Z, et C--Y");
         // // //envoie de la solution
-        // System.out.println(listAreteToString(calcul.calculerAffectation()));
-    }*/
+         System.out.println(AffectationVersion1.listAreteToString(calcul.calculerAffectation()));
+    }
 }

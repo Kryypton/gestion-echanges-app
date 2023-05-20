@@ -169,7 +169,6 @@ public class Teenager{
 
         ArrayList<String> ask = new ArrayList<>();
         ArrayList<String> give = new ArrayList<>();
-
         if(!teen.requirements.get("HOBBIES").equals("")){
             for (String s : teen.requirements.get("HOBBIES").getValue().split(",")) {
                 ask.add(s);
@@ -182,11 +181,20 @@ public class Teenager{
         }
         int nombreLoisirs = 0;
         for (String s : ask) {
-            if (give.indexOf(s) >= 0) {
-                nombreLoisirs = nombreLoisirs ++ ;
+            // if (give.indexOf(s) >= 0) {
+            //     nombreLoisirs = nombreLoisirs ++ ;
+            // }
+            for(String t : give){
+                if (loisirCommun(s, t)) {
+                    nombreLoisirs++ ;
+                }
             }
         }
         return nombreLoisirs;
+    }
+
+    public boolean loisirCommun(String first, String other){
+        return first.equals(other);
     }
     
 
