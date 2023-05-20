@@ -11,12 +11,11 @@ public class AffectationVersion1{
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
      */
     public static double weight (Teenager host, Teenager visitor) {
-        double base = 10;
+        double base = 0;
         base -= host.nbLoisirCommun(visitor);
-        if(!host.compatibleAnimal(visitor));{
-            base += 10;
+        if(!host.compatibleWithGuest(visitor)){
+            base += 100;
         }
-
         return base;
     }
 
@@ -41,6 +40,7 @@ public class AffectationVersion1{
         for (Teenager teenager1 : host) {
             for (Teenager teenager2 : guest){
                 graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2));
+                System.out.println(teenager1.getName() +" avec " + teenager2.getName() +" vaut " + weight(teenager1,teenager2));
             }
         }
     }
@@ -73,39 +73,54 @@ public class AffectationVersion1{
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
         Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
+        Criterion posseDeTout = new Criterion("none", CriterionName.HOST_FOOD);
+        Criterion mangeTout = new Criterion("none", CriterionName.GUEST_FOOD); 
 
-        Criterion sports = new Criterion("sports", CriterionName.HOBBIES);
-        Criterion reading = new Criterion("reading", CriterionName.HOBBIES);
-        Criterion technology = new Criterion("technology", CriterionName.HOBBIES);
-        Criterion culture = new Criterion("culture", CriterionName.HOBBIES);
-        Criterion science = new Criterion("science", CriterionName.HOBBIES);
+        Criterion CA = new Criterion("sports,technology", CriterionName.HOBBIES);
+        Criterion CB = new Criterion("culture,science", CriterionName.HOBBIES);
+        Criterion CC = new Criterion("science,reading", CriterionName.HOBBIES);
+        Criterion CX = new Criterion("culture,technology,", CriterionName.HOBBIES);
+        Criterion CY = new Criterion("science,reading", CriterionName.HOBBIES);
+        Criterion CZ = new Criterion("technology", CriterionName.HOBBIES);
 
         
 
         //Création des requirements a l'aide des critérion précedent
         Map<String, Criterion> TenA = new HashMap<>();
+        TenA.put(CriterionName.HOST_FOOD.name(), posseDeTout);
+        TenA.put(CriterionName.GUEST_FOOD.name(), mangeTout);
         TenA.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        TenA.put(CriterionName.HOBBIES.name(), sports);
-        TenA.put(CriterionName.HOBBIES.name(), technology);
+        TenA.put(CriterionName.HOBBIES.name(), CA);
+
         Map<String, Criterion> TenB = new HashMap<>();
+        TenB.put(CriterionName.HOST_FOOD.name(), posseDeTout);
+        TenB.put(CriterionName.GUEST_FOOD.name(), mangeTout);
         TenB.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
-        TenB.put(CriterionName.HOBBIES.name(), culture);
-        TenB.put(CriterionName.HOBBIES.name(), science);
+        TenB.put(CriterionName.HOBBIES.name(), CB);
+
         Map<String, Criterion> TenC = new HashMap<>();
+        TenC.put(CriterionName.HOST_FOOD.name(), posseDeTout);
+        TenC.put(CriterionName.GUEST_FOOD.name(), mangeTout);
         TenC.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        TenC.put(CriterionName.HOBBIES.name(), science);
-        TenC.put(CriterionName.HOBBIES.name(), reading);
+        TenC.put(CriterionName.HOBBIES.name(), CC);
+
         Map<String, Criterion> TenX = new HashMap<>();
+        TenX.put(CriterionName.HOST_FOOD.name(), posseDeTout);
+        TenX.put(CriterionName.GUEST_FOOD.name(), mangeTout);
         TenX.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        TenX.put(CriterionName.HOBBIES.name(), culture);
-        TenX.put(CriterionName.HOBBIES.name(), technology);
+        TenX.put(CriterionName.HOBBIES.name(),CX);
+
         Map<String, Criterion> TenY = new HashMap<>();
+        TenY.put(CriterionName.HOST_FOOD.name(), posseDeTout);
+        TenY.put(CriterionName.GUEST_FOOD.name(), mangeTout);
         TenY.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
-        TenY.put(CriterionName.HOBBIES.name(), science);
-        TenY.put(CriterionName.HOBBIES.name(), reading);
+        TenY.put(CriterionName.HOBBIES.name(), CY);
+
         Map<String, Criterion> TenZ = new HashMap<>();
+        TenZ.put(CriterionName.HOST_FOOD.name(), posseDeTout);
+        TenZ.put(CriterionName.GUEST_FOOD.name(), mangeTout);
         TenZ.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        TenZ.put(CriterionName.HOBBIES.name(), technology);
+        TenZ.put(CriterionName.HOBBIES.name(), CZ);
         
         //Création des Teenager a l'aide des requirement précedent
         Teenager A = new Teenager(1, "A", "Adonia", null, null, Country.FRANCE , TenA);
@@ -128,14 +143,27 @@ public class AffectationVersion1{
         //Création d'une nouvelle affectation
         CalculAffectation<Teenager> calcul = new CalculAffectation<Teenager>(graph,guest,host);
 
+        
+
         //Ajout de sommet et aretes au graphe
         addSummit(guest,graph);
         addSummit(host,graph);
         addArete(guest,host,graph);
 
-        System.out.println(listToString(graph.sommets()));
-        
-        //envoie de la solution
-        System.out.println(listAreteToString(calcul.calculerAffectation()));
+        for(Teenager list : guest){
+            for (String s : list.getCriterion("HOBBIES").getValue().split(",")) {
+                System.out.println(list.getName() + " : " +s);
+            }
+        }
+        for(Teenager list : host){
+            for (String s : list.getCriterion("HOBBIES").getValue().split(",")) {
+                System.out.println(list.getName() + " : " +s);
+            }
+        }
+
+        //System.out.println(listToString(graph.sommets()));
+        // System.out.println("Nous somme censé trouvé : \n B--X, A--Z, et C--Y");
+        // // //envoie de la solution
+        // System.out.println(listAreteToString(calcul.calculerAffectation()));
     }
 }
