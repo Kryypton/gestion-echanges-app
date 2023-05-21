@@ -110,15 +110,17 @@ public class Teenager{
      * @return [true] si l'adolescent est compatible avec l'invité, [false] sinon
      */
     public boolean compatibleWithGuest(Teenager guest) {
+        if (this == guest) return false; // Incompatible car c'est la même personne.
         if (guest == null) return false;
-        if (compatibleAnimal(guest) && compatibleFood(guest)){
-            return true;
-        } else if(this.countryName == Country.FRANCE || guest.getCountryName() == Country.FRANCE){
-                if(this.nbLoisirCommun(guest) == 0){
-            return false;
+        if (!compatibleAnimal(guest)) return false;
+        if (!compatibleFood(guest)) return false;
+        if(this.countryName == guest.getCountryName()){
+            if(this.nbLoisirCommun(guest) == 0){
+                return false;
             }
         }
         return true;
+        
     }
 
     /**
