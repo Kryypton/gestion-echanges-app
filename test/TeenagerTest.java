@@ -56,7 +56,7 @@ public class TeenagerTest {
         Criterion mangeTout = new Criterion("none", CriterionName.GUEST_FOOD);  
         Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
         Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
-        Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.HOST_FOOD);
+        Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.NUMERIC);
 
 
         requirements2 = new HashMap<String, Criterion>();
