@@ -33,20 +33,27 @@ public class Criterion{
      */
 
     public void isValid() throws CriterionTypeException {
-
+        if (this.equals(null)) {
+            throw new CriterionTypeException("Le critère est null");
+        }
         if (label == null) {
             throw new CriterionTypeException("Le label du critère est null");
         }
         if (value == null) {
+
             throw new CriterionTypeException("La valeur du critère est null");
         }
         if (label.getType() == 'B' && !this.value.equals("yes") && !this.value.equals("no")) {
+
             throw new CriterionTypeException("Le critère qui représente un booléen doit être égal à yes ou no");
         } else if (label.getType() == 'N' && !isNumeric(value)) {
+
             throw new CriterionTypeException("Le critère qui représente un nombre doit être un nombre");
         } else if (label.getType() == 'D' && !isDate(value)) {
+
             throw new CriterionTypeException("Le critère qui représente une date doit être de la forme dd/mm/yyyy");
         } else if (label.getType() == 'T' && !isText(value)) {
+
             throw new CriterionTypeException("Le critère qui représente du texte doit être du texte");
             }
         }

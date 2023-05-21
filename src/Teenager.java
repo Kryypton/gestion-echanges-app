@@ -145,10 +145,11 @@ public class Teenager{
         Map<String, Criterion> validRequirements = new HashMap<>();
 
         for (Map.Entry<String, Criterion> entry : requirements.entrySet()) {
-            if (entry.getValue()!=null){
-                if (entry.getValue().isValid()) {
-                    validRequirements.put(entry.getKey(), entry.getValue());
-                }
+            try {
+                entry.getValue().isValid();
+                validRequirements.put(entry.getKey(), entry.getValue());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         this.requirements = validRequirements;
