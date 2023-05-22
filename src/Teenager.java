@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -59,6 +60,35 @@ public class Teenager{
         this.birthDate = birthDate;
         this.requirements = new HashMap<String, Criterion>();
         this.countryName = countryName;
+    }
+
+    public Teenager(String CSV, int id){
+        Scanner scan = new Scanner(CSV);
+        scan = scan.useDelimiter(";");
+
+        this.id = id;//stringToInt(scan.next());
+        this.forname = scan.next();
+        this.name = scan.next();
+        Country country = isContry(scan.next());
+        this.countryName = country;
+        //this.birthDate = LocalDate.parse(scan.next(),LocalDate.ISO_LOCAL_DATE);
+
+        Criterion hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
+        Criterion guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
+        Criterion host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
+        Criterion guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD); 
+        Criterion host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
+
+        Map<String, Criterion> requirements = new HashMap<>();
+        requirements.put(CriterionName.HOST_FOOD.name(), host_food);
+        requirements.put(CriterionName.GUEST_FOOD.name(), guest_food);
+        requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), host_as_animal);
+        requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), guest_animal_allergy);
+        requirements.put(CriterionName.HOBBIES.name(), hobbie);
+        this.requirements = requirements;
+
+        this.gender = scan.next();
+        scan.close();
     }
 
     /**
@@ -391,5 +421,28 @@ public class Teenager{
         } else if (!requirements.equals(guest.requirements))
             return false;
         return true;
+    }
+
+    public int stringToInt(String text){
+        int number = 0;
+        for(int i=0;i<text.length();i++){
+            number += (text.charAt(i) -'0')+(10^i);
+        }
+        return number;
+    }
+
+    public Country isContry(String countryName){
+        if(countryName.equals("FRANCE")){
+            return Country.FRANCE;
+        }
+        if(countryName.equals("ITALY")){
+            return Country.ITALY;
+        }
+        if(countryName.equals("SPAIN")){
+            return Country.SPAIN;
+        }
+        //if(countryName.equals("GERMANY")){
+        return Country.GERMANY;
+        //}
     }
 }

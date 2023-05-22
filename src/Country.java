@@ -12,11 +12,11 @@ public enum Country {
     /**
      * Italie [Italie]
      */
-    ITALIE("Italie"),
+    ITALY("Italie"),
     /**
      *  Espagne [Espagne]
      */
-    ESPAGNE("Espagne"),
+    SPAIN("Spain"),
     /**
      * France [France]
      */
@@ -24,7 +24,7 @@ public enum Country {
     /**
      * Allemagne [Allemagne]  
      */ 
-    ALLEMAGNE("Allemagne");
+    GERMANY("Germany");
 
     private final String COUNTRY_NAME;
 

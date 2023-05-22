@@ -1,6 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.HashMap;
 
 /**
@@ -115,11 +118,29 @@ public class Platform {
     }
 
 
-    /* A FAIRE  
-     * - Classe de Test compléte (Je ne sais pas si elle est complete mais je précise)
-     * - calcul des affinités (apparament compatibleWithGuest se concentre sur l'allergie des animaux)
-     * - la suppression des adolescent
-     * - Je crois que nous devions faire une classe country.
-     * - gestion des régles spécifique par pays
-     */
+    public static ArrayList<Teenager> importTeenagers(File CSV) throws FileNotFoundException{
+        Scanner scan = new Scanner(CSV);
+        scan = scan.useDelimiter("\n");
+        ArrayList<Teenager> list = new ArrayList<Teenager>();
+        int i=1;
+        while(scan.hasNextLine()){
+            list.add(new Teenager(scan.next(),i));
+            scan.nextLine();
+            i++;
+        }
+        scan.close();
+        return list;
+    }
+
+    //public String listToString(ArrayList<Teenager> teen){
+     //   return teen
+   // }
+
+    public static void main(String[] args) throws FileNotFoundException{
+        File CSV = new File("res/adosAleatoires.csv");
+        ArrayList<Teenager> list = importTeenagers(CSV);
+        for(Teenager a: list){
+            System.out.println(a.getName()+" " + a.getForname() + a.getGender());
+        }
+    }
 }
