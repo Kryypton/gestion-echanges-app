@@ -9,6 +9,7 @@ public class AffectationVersion1{
      * @param visitor l'adolescent invité
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
      */
+    
     public static double weight (Teenager host, Teenager visitor) {
         double base = 0;
         base -= host.nbLoisirCommun(visitor);
