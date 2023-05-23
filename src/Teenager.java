@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -69,9 +70,10 @@ public class Teenager{
         this.id = id;//stringToInt(scan.next());
         this.forname = scan.next();
         this.name = scan.next();
-        Country country = isContry(scan.next());
-        this.countryName = country;
-        //this.birthDate = LocalDate.parse(scan.next(),LocalDate.ISO_LOCAL_DATE);
+        this.countryName = isContry(scan.next());
+
+        DateTimeFormatter formatters = DateTimeFormatter.ISO_LOCAL_DATE;
+        this.birthDate = LocalDate.parse(scan.next(),formatters);
 
         Criterion hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
         Criterion guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
@@ -423,14 +425,6 @@ public class Teenager{
         return true;
     }
 
-    public int stringToInt(String text){
-        int number = 0;
-        for(int i=0;i<text.length();i++){
-            number += (text.charAt(i) -'0')+(10^i);
-        }
-        return number;
-    }
-
     public Country isContry(String countryName){
         if(countryName.equals("FRANCE")){
             return Country.FRANCE;
@@ -444,5 +438,16 @@ public class Teenager{
         //if(countryName.equals("GERMANY")){
         return Country.GERMANY;
         //}
+    }
+
+    public String teenagerToString(){
+        return this.forname+";"+this.name+";"+this.countryName+";"+this.birthDate.toString()+";"+this.requirements.get(CriterionName.HOBBIES.name())+
+        ";"+this.requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY.name())+";"+this.requirements.get(CriterionName.HOST_HAS_ANIMAL.name())+";"+
+        this.requirements.get(CriterionName.GUEST_FOOD.name())+";"+this.requirements.get(CriterionName.HOST_FOOD.name())+
+        ";"+this.gender+";";//+this.PAIR_GENDER+";"+this.HISTORY;
+    }
+
+    public String hobbiesToString(){
+        return ""+this.requirements.get(CriterionName.HOBBIES.name());
     }
 }

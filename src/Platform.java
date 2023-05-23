@@ -123,6 +123,7 @@ public class Platform {
         scan = scan.useDelimiter("\n");
         ArrayList<Teenager> list = new ArrayList<Teenager>();
         int i=1;
+        scan.next();
         while(scan.hasNextLine()){
             list.add(new Teenager(scan.next(),i));
             scan.nextLine();
@@ -132,6 +133,16 @@ public class Platform {
         return list;
     }
 
+    // public static ArrayList<Teenager> exportTeenagers(ArrayList<Teenager> CSV){
+    //     ArrayList<String> teenager = new ArrayList<String>();
+    //     for(Teenager a: CSV){
+    //        teenager.add(a.teenagerToString());
+    //     }
+    //     // A FAIRE exporte les donnée 
+    // }
+
+
+
     //public String listToString(ArrayList<Teenager> teen){
      //   return teen
    // }
@@ -140,7 +151,7 @@ public class Platform {
         File CSV = new File("res/adosAleatoires.csv");
         ArrayList<Teenager> list = importTeenagers(CSV);
         for(Teenager a: list){
-            System.out.println(a.getName()+" " + a.getForname() + a.getGender());
+            System.out.println(a.getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate());
         }
     }
 }
