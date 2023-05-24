@@ -38,9 +38,9 @@ public class TeenagerTest {
         gender3 = "M";
         gender4 = "M";
         countryName1 = Country.FRANCE;
-        countryName2 = Country.ALLEMAGNE;
-        countryName3 = Country.ESPAGNE;
-        countryName4 = Country.ITALIE;
+        countryName2 = Country.GERMANY;
+        countryName3 = Country.SPAIN;
+        countryName4 = Country.ITALY;
         birthDate1 = LocalDate.parse("2000-01-01");
         birthDate2 = LocalDate.parse("2002-08-04");
         birthDate3 = LocalDate.parse("2001-11-21");

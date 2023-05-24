@@ -68,9 +68,9 @@ public class AffectationVersion1Test {
         Teenager A = new Teenager(1, "A", "Adonia", null, null, Country.FRANCE , TenA);
         Teenager B = new Teenager(1, "B", "Bellatrix", null, null, Country.FRANCE , TenB);
         Teenager C = new Teenager(1, "C", "Callistra", null, null, Country.FRANCE , TenC);
-        Teenager X = new Teenager(1, "X", "Xolag", null, null, Country.ITALIE , TenX);
-        Teenager Y = new Teenager(1, "Y", "Yak", null, null, Country.ITALIE , TenY);
-        Teenager Z = new Teenager(1, "Z", "Zander", null, null, Country.ITALIE , TenZ);
+        Teenager X = new Teenager(1, "X", "Xolag", null, null, Country.ITALY , TenX);
+        Teenager Y = new Teenager(1, "Y", "Yak", null, null, Country.ITALY , TenY);
+        Teenager Z = new Teenager(1, "Z", "Zander", null, null, Country.ITALY , TenZ);
 
         //Création de liste des étudiants hôtes et invités
         List<Teenager> guest = new ArrayList<Teenager>();
