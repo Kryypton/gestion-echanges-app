@@ -63,23 +63,30 @@ public class Teenager{
         this.countryName = countryName;
     }
 
+    /**
+     * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier 
+     * @param CSV le nom d'un adolescent
+     * @param id l'identifiant unique d'un adolescent
+     */
     public Teenager(String CSV, int id){
         Scanner scan = new Scanner(CSV);
-        scan = scan.useDelimiter(";");
+        scan.useDelimiter(";");
 
         this.id = id;//stringToInt(scan.next());
         this.forname = scan.next();
         this.name = scan.next();
         this.countryName = isContry(scan.next());
 
-        DateTimeFormatter formatters = DateTimeFormatter.ISO_LOCAL_DATE;
-        this.birthDate = LocalDate.parse(scan.next(),formatters);
+        this.birthDate = LocalDate.parse(scan.next());
 
         Criterion hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
         Criterion guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
         Criterion guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD); 
         Criterion host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
+        Criterion gender = new Criterion(scan.next(), CriterionName.GENDER);
+        Criterion pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
+        Criterion history = new Criterion(scan.next(), CriterionName.HISTORY);
 
         Map<String, Criterion> requirements = new HashMap<>();
         requirements.put(CriterionName.HOST_FOOD.name(), host_food);
@@ -87,9 +94,12 @@ public class Teenager{
         requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), host_as_animal);
         requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), guest_animal_allergy);
         requirements.put(CriterionName.HOBBIES.name(), hobbie);
+        requirements.put(CriterionName.GENDER.name(), gender);
+        requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
+        requirements.put(CriterionName.HISTORY.name(), history);
         this.requirements = requirements;
 
-        this.gender = scan.next();
+        this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
         scan.close();
     }
 
@@ -425,6 +435,11 @@ public class Teenager{
         return true;
     }
 
+    /**
+     * Méthode qui permet de retrouver l'enumération du pays grace à un String dyu pays. Utiliser lors de l'importation
+     * @param countryName Le nom du pays de l'étudiant
+     * @return l'enum correspondant aux pays en paramètre
+     */
     public Country isContry(String countryName){
         if(countryName.equals("FRANCE")){
             return Country.FRANCE;
@@ -440,14 +455,15 @@ public class Teenager{
         //}
     }
 
+    /**
+     * Méthode qui permet d'avoir un adolescent en chaine de caractére, pour un format en CSV
+     * @return un String avec les informations de l'adolescent
+     */
     public String teenagerToString(){
         return this.forname+";"+this.name+";"+this.countryName+";"+this.birthDate.toString()+";"+this.requirements.get(CriterionName.HOBBIES.name())+
         ";"+this.requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY.name())+";"+this.requirements.get(CriterionName.HOST_HAS_ANIMAL.name())+";"+
         this.requirements.get(CriterionName.GUEST_FOOD.name())+";"+this.requirements.get(CriterionName.HOST_FOOD.name())+
-        ";"+this.gender+";";//+this.PAIR_GENDER+";"+this.HISTORY;
+        ";"+this.gender+";" +this.requirements.get(CriterionName.PAIR_GENDER.name())+";"+this.requirements.get(CriterionName.HISTORY.name());
     }
 
-    public String hobbiesToString(){
-        return ""+this.requirements.get(CriterionName.HOBBIES.name());
-    }
 }

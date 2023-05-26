@@ -1,5 +1,8 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -117,10 +120,14 @@ public class Platform {
         this.compatibleTeenagers = compatibleTeenagers;
     }
 
-
+    /**
+     * Méthode qui permet d'importer des adolescents
+     * @param CSV le fichier CSV contenant les adolescents
+     * @return une liste de tous les adolescents
+     */
     public static ArrayList<Teenager> importTeenagers(File CSV) throws FileNotFoundException{
         Scanner scan = new Scanner(CSV);
-        scan = scan.useDelimiter("\n");
+        scan.useDelimiter("\n");
         ArrayList<Teenager> list = new ArrayList<Teenager>();
         int i=1;
         scan.next();
@@ -133,13 +140,23 @@ public class Platform {
         return list;
     }
 
-    // public static ArrayList<Teenager> exportTeenagers(ArrayList<Teenager> CSV){
-    //     ArrayList<String> teenager = new ArrayList<String>();
-    //     for(Teenager a: CSV){
-    //        teenager.add(a.teenagerToString());
-    //     }
-    //     // A FAIRE exporte les donnée 
-    // }
+    /**
+     * Méthode qui permet d'exporter des adolescents
+     * @param CSV la liste des adolescents
+     * @param fichier le chemin du fichier où stockée les étudiants
+     */
+    public static void exportTeenagers(ArrayList<Teenager> CSV, String fichier) throws IOException{
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
+            for(Teenager a: CSV){
+                bw.write(a.teenagerToString());
+            }
+        }catch(IOException e) {
+                System.out.println("Writing error: " + e.getMessage());
+                e.printStackTrace();
+        }
+        
+        // A FAIRE exporte les donnée 
+    }
 
 
 
@@ -147,11 +164,12 @@ public class Platform {
      //   return teen
    // }
 
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws IOException{
         File CSV = new File("res/adosAleatoires.csv");
         ArrayList<Teenager> list = importTeenagers(CSV);
         for(Teenager a: list){
-            System.out.println(a.getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate());
+            System.out.println(a.teenagerToString() + "\n"/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
         }
+        exportTeenagers(list,"res/donnéeExporter.csv");
     }
 }

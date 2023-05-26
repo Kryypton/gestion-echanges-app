@@ -13,5 +13,8 @@
     "apexPMD.rulesets": [
         "./rules/pmd/pmd-rules_r203.xml"
     ],
-    "apexPMD.jrePath": ""
+    "apexPMD.jrePath": "",
+    "java.test.config": {
+        "workingDirectory": "${workspaceFolder}"
+    }
 }
