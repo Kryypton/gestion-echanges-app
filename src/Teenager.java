@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * @author Berrakane Adham
  * @author Moutté Quentin
  */
-public class Teenager{
+public class Teenager implements Serializable{
     
     private int id;
     private String name;

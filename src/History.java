@@ -1,12 +1,3 @@
-package src;
-
-import fr.ulille.but.sae2_02.graphes.Arete;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.time.LocalDate;
-
 
 /*Rappel de Adham : Cette classe doit permettre par rapport a l'historique des anciennes liaison de 
 Teenager de créer une nouvelle regle de calcule du poids d'un arrete.*/ 
@@ -28,123 +19,87 @@ Pour moi******
 
 // si vous avez des ammelioration mettez les.
 
+import java.io.*;
+import java.time.LocalDate;
+import java.util.*;
 
-public class History {
-    private Map<Teenager , Teenager> affectationsHistory;
-    // private Map<Integer, List<String>> history;
+public class History implements Serializable {
+    private List<Association> associations;
 
-
-
-    public History() { // Création de la hashmap de Teenagers
-        this.history = new HashMap<Teenager , Teenager>();
+    public History() {
+        associations = new ArrayList<>();
     }
 
-    // Création de la hashmap de Teenagers et les arretes qui vont avec entre les Teenager.
-    public History(List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> aretes){
-        this();
-        for(Arete<Teenager> arete : aretes){
-            this.affectations(arete.getExtremite1() , arete.getExtremite2());
-        }
-    }
-
-
-    // Enleve le teenager courant qui est avec un autre.
-    public void desaffectations(Teenager t){
-        this.affectationsHistory.remove(t);
-    }
-
-    // Affecte 2 Teenagers
-    public void affectations(Teenager t1 , Teenager t2){
-        this.affectationsHistory.put(t1 , t2);
-    }
-
-    // Retourne le Teenager associer au Teenager courant.
-    public Teenager get( Teenager t){
-        return this.affectation.get(t);
-    }
-
-    // renvoie true si un teenager est affecter a un teenager.
-    public boolean estAffecter(Teenager t){
-        if(this.affectation.containsKey(t)){
-            return true;
-        }
-        return false;
-    }
-
-    /* 
-    public String hasBeenWith(Teenager teen, int year) {
-        List<String> historyForYear = history.get(year);
-        if (historyForYear != null) {
-            String teenagerName = teen.getName() + " " + teen.getForname();
-            if (historyForYear.contains(teenagerName)) {
-                return teenagerName;
-            }
-        }
-        return "";
-    }
-
-    public boolean wantTheSame(Teenager teen) {
-        Criterion historyCriterion = teen.getHistory();
-        if (historyCriterion != null) {
-            return historyCriterion.getValue().equals("same");
-        }
-        return false;
-    }
-
-    public Map<Integer, List<String>> getHistory() {
-        return this.history;
-    }
-
-    public List<String> getList(int year) {
-        return history.get(year);
-    }
-
-    public void addToHistory(int year, List<String> teenagers) {
-        history.put(year, teenagers);
-    }
-
-    public void addToHistoryWithTeenager(int year, List<Teenager> teenagers) {
-        List<String> historyForYear = history.get(year);
-        if (historyForYear == null) {
-            historyForYear = new ArrayList<>();
-            history.put(year, historyForYear);
-        }
-        
-        for (Teenager teen : teenagers) {
-            String teenagerName = teen.getName() + " " + teen.getForname();
-            historyForYear.add(teenagerName);
-        }
-    }
+    /**
+     * Ajoute une association à l'historique
+     * @param association L'association à ajouter
      */
+    public void addAssociation(Association association) {
+        associations.add(association);
+    }
+
+    /**
+     * Sauvegarde l'historique dans un fichier en utilisant la sérialisation binaire
+     * @param filename Le nom du fichier de sauvegarde
+     */
+    public void saveHistory(String filename) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(associations);
+            objectOutputStream.close();
+            fileOutputStream.close();
+            System.out.println("Historique sauvegardé ");
+        } catch (IOException e) {
+            System.out.println("erreur lors de la sauvegarde de l'historiqu" + e.getMessage());
+        }
+    }
+    
+
+    /**
+     * Charge l'historique à partir d'un fichier de sauvegarde en utilisant la désérialisation binaire
+     * @param filename Le nom du fichier de sauvegarde
+     */
+    public void loadHistory(String filename) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            associations = (List<Association>) objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
+            System.out.println("historique chargé");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("erreur lordu chargement de l'historique :" + e.getMessage());
+        }
+    }
+    
+
+    public List<Association> getAssociations() {
+        return associations;
+    }
 
     public static void main(String[] args) {
-        // Création de deux objets Teenager
-        Teenager teen1 = new Teenager(1, "teen1prenom", "teen1nom", "M", LocalDate.of(2000, 1, 1), Country.FRANCE);
-        Teenager teen2 = new Teenager(2, "teen2prenom", "teen2nom", "F", LocalDate.of(2001, 2, 2), Country.ITALY);
-        
-        // Création d'un historique vide
-        History historyObject = new History();
-    
-        // Ajout des deux Teenagers à l'historique pour l'année 2019
-        List<Teenager> history2019 = new ArrayList<>();
-        history2019.add(teen1);
-        history2019.add(teen2);
-        historyObject.addToHistoryWithTeenager(2019, history2019);
-        
-        // Obtention de l'historique pour l'année 2019
-        List<String> historyForYear = historyObject.getList(2019);
-        System.out.println("Historique pour l'année 2019 : " + historyForYear);
-    
-        // Vérification si teen1 a été avec quelqu'un en 2019
-        String hasBeenWith = historyObject.hasBeenWith(teen1, 2019);
-        System.out.println("teen1 a été avec : " + hasBeenWith);
-    
-        // Vérification si teen1 veut se remettre avec la même personne
-        boolean wantTheSame = historyObject.wantTheSame(teen1);
-        System.out.println("teen1 veut se remettre avec la même personne : " + wantTheSame);
+        Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
+        Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
+        Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
+
+        History history = new History();
+
+        Association association = new Association(teenager1, teenager2);
+        history.addAssociation(association);
+
+        // sauvegarde de l'historique dans un fichier
+        String filename = "historique.ser";
+        history.saveHistory(filename);
+
+        // Chargement de l'historique à partir d'un fichier
+        History loadedHistory = new History();
+        loadedHistory.loadHistory(filename);
+
+        // Affichage 
+        System.out.println("historique chargé :");
+        for (Association assoc : loadedHistory.getAssociations()) {
+            System.out.println(assoc.getTeenager1().getName() + " - " + assoc.getTeenager2().getName());
+        }
     }
-    
-    
-    
-    
 }
