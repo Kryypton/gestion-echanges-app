@@ -36,7 +36,7 @@ public enum CriterionName {
     /**
      * historique de l'adolescent
      */
-    HISTORY('D'),
+    HISTORY('T'),
 
     /**
      * le type du critére

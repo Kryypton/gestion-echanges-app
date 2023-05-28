@@ -466,4 +466,7 @@ public class Teenager{
         ";"+this.gender+";" +this.requirements.get(CriterionName.PAIR_GENDER.name())+";"+this.requirements.get(CriterionName.HISTORY.name());
     }
 
+    public Criterion getHistory() {
+        return requirements.get(CriterionName.HISTORY.name());
+    }
 }

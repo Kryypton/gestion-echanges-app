@@ -27,11 +27,11 @@ public class History {
 
     /* a faire: sert a determiner si un étudiant veut se remettre avec quelqu'un avec qui il a déjà été */
     public boolean wantTheSame(Teenager teen){
-        return teen.getHistory().equals("same");
+        return teen.getHistory().getValue().equals("same");
     }
 
     public Map<Integer, List<String>> getHistory() {
-        return history;
+        return this.history;
     }
 
     public List<String> getList(int year) {
