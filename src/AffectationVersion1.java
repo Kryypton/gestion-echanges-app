@@ -10,13 +10,17 @@ public class AffectationVersion1{
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
      */
     
-    public static double weight (Teenager host, Teenager visitor) {
-        double base = 0;
-        base -= host.nbLoisirCommun(visitor);
-        if(!host.compatibleWithGuest(visitor)){
-            base += 100;
+     public static double weight (Teenager host, Teenager guest) {
+        double poid = 10;
+        poid -= host.nbLoisirCommun(guest);
+        if(!host.compatibleWithGuest(guest)){
+            poid += 100;
         }
-        return base;
+        //Pays différent ?
+        if (!host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) {
+            poid += 10;
+        }
+        return poid;
     }
 
     /**
