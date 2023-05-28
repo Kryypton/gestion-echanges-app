@@ -1,32 +1,77 @@
+package src;
+
+import fr.ulille.but.sae2_02.graphes.Arete;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.time.LocalDate;
 
+
+/*Rappel de Adham : Cette classe doit permettre par rapport a l'historique des anciennes liaison de 
+Teenager de créer une nouvelle regle de calcule du poids d'un arrete.*/ 
+
+// Ce qu'il manque : 
+
+// Une methode qui importe une liste de Teenager qui ont deja été correspondant.
+// Une methode qui exporte une liste de Teenager qui ont deja été correspondant.
+
+/* Et enfin une methode que l'on ajoutera a AffectationVersion1.java dans la methode weight.
+Cette methode devra retourner un int , elle permttra de voir si un Teenager a des preferences ou 
+contrainte par rapport a l'historique de l'autre Teenager 
+
+Pour moi******
+2 Teenager qui ont deja été ensemble mais que essemble  = -100 
+2 Teenager n'ont jamais été ensemble = 0 
+2 Teenager qui ont deja été ensemble mais aussi avec d'autre = -50
+*/ 
+
+// si vous avez des ammelioration mettez les.
+
+
 public class History {
-    
-    private Map<Integer, List<String>> history;
+    private Map<Teenager , Teenager> affectationsHistory;
+    // private Map<Integer, List<String>> history;
 
-    public History(Map<Integer, List<String>> history) {
-        this.history = history;
-    }
-    /**
-     * Constructeur de la classe History
-     * @param history l'historique des adolescents
-     * @since 1.0
-     * @version 1.0
-     */
-    public History() {
-        this.history = new HashMap<>();
+
+
+    public History() { // Création de la hashmap de Teenagers
+        this.history = new HashMap<Teenager , Teenager>();
     }
 
-    /**
-     * Méthode qui regarde si un adolescent a déjà été avec un autre adolescent
-     * @param teen l'adolescent à regarder
-     * @param year l'année à regarder
-     * @return le nom de l'adolescent avec qui il a été, ou "" si il n'a pas été avec quelqu'un
-     */
+    // Création de la hashmap de Teenagers et les arretes qui vont avec entre les Teenager.
+    public History(List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> aretes){
+        this();
+        for(Arete<Teenager> arete : aretes){
+            this.affectations(arete.getExtremite1() , arete.getExtremite2());
+        }
+    }
+
+
+    // Enleve le teenager courant qui est avec un autre.
+    public void desaffectations(Teenager t){
+        this.affectationsHistory.remove(t);
+    }
+
+    // Affecte 2 Teenagers
+    public void affectations(Teenager t1 , Teenager t2){
+        this.affectationsHistory.put(t1 , t2);
+    }
+
+    // Retourne le Teenager associer au Teenager courant.
+    public Teenager get( Teenager t){
+        return this.affectation.get(t);
+    }
+
+    // renvoie true si un teenager est affecter a un teenager.
+    public boolean estAffecter(Teenager t){
+        if(this.affectation.containsKey(t)){
+            return true;
+        }
+        return false;
+    }
+
+    /* 
     public String hasBeenWith(Teenager teen, int year) {
         List<String> historyForYear = history.get(year);
         if (historyForYear != null) {
@@ -38,11 +83,6 @@ public class History {
         return "";
     }
 
-    /**
-     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
-     * @param teen l'adolescent à regarder
-     * @return true si il veut la même chose, false sinon
-     */
     public boolean wantTheSame(Teenager teen) {
         Criterion historyCriterion = teen.getHistory();
         if (historyCriterion != null) {
@@ -51,37 +91,18 @@ public class History {
         return false;
     }
 
-    /**
-     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
-     * @return l'historique des adolescents
-     */
     public Map<Integer, List<String>> getHistory() {
         return this.history;
     }
 
-/**
- * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
- * @param year l'année à regarder
- * @return l'historique des adolescents pour l'année donnée
- */
     public List<String> getList(int year) {
         return history.get(year);
     }
 
-    /**
-     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
-     * @param year l'année à regarder
-     * @param teenagers la liste des adolescents à regarder
-     */
     public void addToHistory(int year, List<String> teenagers) {
         history.put(year, teenagers);
     }
 
-    /**
-     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
-     * @param year l'année à regarder
-     * @param teenagers la liste des adolescents à regarder
-     */
     public void addToHistoryWithTeenager(int year, List<Teenager> teenagers) {
         List<String> historyForYear = history.get(year);
         if (historyForYear == null) {
@@ -94,7 +115,7 @@ public class History {
             historyForYear.add(teenagerName);
         }
     }
-    
+     */
 
     public static void main(String[] args) {
         // Création de deux objets Teenager
