@@ -2,7 +2,6 @@ import fr.ulille.but.sae2_02.graphes.*;
 import java.util.*;
 
 public class AffectationVersion1Test {
-
     public static void main(String[] args){
 
         //AffectationVersion1 test = new AffectationVersion1();
@@ -115,6 +114,5 @@ public class AffectationVersion1Test {
             assertEquals(200, AffectationVersion1.compatibilityVsHobbies(A, Z));
             assertEquals(100, AffectationVersion1.compatibilityVsHobbies(B, X));
         }
-
     }
 }

@@ -11,11 +11,22 @@ public class History {
     public History(Map<Integer, List<String>> history) {
         this.history = history;
     }
-
+    /**
+     * Constructeur de la classe History
+     * @param history l'historique des adolescents
+     * @since 1.0
+     * @version 1.0
+     */
     public History() {
         this.history = new HashMap<>();
     }
 
+    /**
+     * Méthode qui regarde si un adolescent a déjà été avec un autre adolescent
+     * @param teen l'adolescent à regarder
+     * @param year l'année à regarder
+     * @return le nom de l'adolescent avec qui il a été, ou "" si il n'a pas été avec quelqu'un
+     */
     public String hasBeenWith(Teenager teen, int year) {
         List<String> historyForYear = history.get(year);
         if (historyForYear != null) {
@@ -27,6 +38,11 @@ public class History {
         return "";
     }
 
+    /**
+     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
+     * @param teen l'adolescent à regarder
+     * @return true si il veut la même chose, false sinon
+     */
     public boolean wantTheSame(Teenager teen) {
         Criterion historyCriterion = teen.getHistory();
         if (historyCriterion != null) {
@@ -35,18 +51,37 @@ public class History {
         return false;
     }
 
+    /**
+     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
+     * @return l'historique des adolescents
+     */
     public Map<Integer, List<String>> getHistory() {
         return this.history;
     }
 
+/**
+ * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
+ * @param year l'année à regarder
+ * @return l'historique des adolescents pour l'année donnée
+ */
     public List<String> getList(int year) {
         return history.get(year);
     }
 
+    /**
+     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
+     * @param year l'année à regarder
+     * @param teenagers la liste des adolescents à regarder
+     */
     public void addToHistory(int year, List<String> teenagers) {
         history.put(year, teenagers);
     }
 
+    /**
+     * Méthode qui regarde si un adolescent veut la même chose qu'un autre adolescent
+     * @param year l'année à regarder
+     * @param teenagers la liste des adolescents à regarder
+     */
     public void addToHistoryWithTeenager(int year, List<Teenager> teenagers) {
         List<String> historyForYear = history.get(year);
         if (historyForYear == null) {

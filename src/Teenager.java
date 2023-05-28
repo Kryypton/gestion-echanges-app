@@ -184,6 +184,7 @@ public class Teenager{
     public int getAgeYear(){
         return getAge().getYears();
     }
+    
     /**
      * retire les critères invalides de la liste des critères
      */
@@ -200,8 +201,6 @@ public class Teenager{
         }
         this.requirements = validRequirements;
     }
-
-
 
     /**
     * Renvoie le nombre de loisirs communs entre les 2 Teenager.
@@ -487,6 +486,4 @@ public class Teenager{
     public Criterion getHistory() {
         return requirements.get(CriterionName.HISTORY.name());
     }
-
-    
 }
