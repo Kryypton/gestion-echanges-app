@@ -64,6 +64,14 @@ public History() { // Création de la hashmap de Teenagers
         return false;
     }
 
+    public boolean estAffecter(Teenager t1 , Teenager t2){
+        if(this.affectationsHistory.containsKey(t1) && this.affectationsHistory.get(t1) == t2){
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * Sauvegarde l'historique dans un fichier en utilisant la sérialisation binaire
      * @param filename Le nom du fichier de sauvegarde
@@ -90,7 +98,7 @@ public History() { // Création de la hashmap de Teenagers
         try {
             FileInputStream fileInputStream = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            affectationsHistory = (Map<Teenager , Teenager>) objectInputStream.readObject();
+            affectationsHistory = (Map<Teenager,Teenager>) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
             System.out.println("historique chargé");
@@ -98,7 +106,6 @@ public History() { // Création de la hashmap de Teenagers
             System.out.println("erreur lordu chargement de l'historique :" + e.getMessage());
         }
     }
-    
 
     public Map<Teenager, Teenager> getAssociations() {
         return this.affectationsHistory ;
@@ -108,10 +115,11 @@ public History() { // Création de la hashmap de Teenagers
         Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
+        Teenager teenager4 = new Teenager(4, "teen4", "C", "F", LocalDate.of(2002, 10, 20), Country.SPAIN);
 
         History history = new History();
         history.affectations(teenager1 , teenager2);
-
+        history.affectations(teenager3 , teenager4);
         // sauvegarde de l'historique dans un fichier
         String filename = "./res/historique.ser";
         history.saveHistory(filename);
@@ -122,8 +130,8 @@ public History() { // Création de la hashmap de Teenagers
 
         // Affichage 
         System.out.println("historique chargé :");
-        for (History historie : loadedHistory.getAssociations()) {
-            System.out.println(assoc.getTeenager1().getName() + " - " + assoc.getTeenager2().getName());
+        for (Teenager t : loadedHistory.getAssociations().keySet()) {
+            System.out.println(t.getName() + " -> " + loadedHistory.getAssociations().get(t).getName());
         }
     }
 }
