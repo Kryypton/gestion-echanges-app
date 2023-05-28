@@ -4,7 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Cette classe permet de gérer les informations relatives à un adolescent et de déterminer sa compatibilité avec d'autres adolescents en fonction de différents critères.
@@ -211,6 +213,22 @@ public class Teenager{
         if(!teen.requirements.containsKey("HOBBIES") || !this.requirements.containsKey("HOBBIES")){
             return 0;
         }
+    
+        List<String> teenHobbies = Arrays.asList(teen.requirements.get("HOBBIES").getValue().split(","));
+        List<String> thisHobbies = Arrays.asList(this.requirements.get("HOBBIES").getValue().split(","));
+        int nbLoisir = 0;
+        for (String hobby : teenHobbies) {
+            if (thisHobbies.contains(hobby)) {
+                nbLoisir++;
+            }
+        }
+        return nbLoisir;
+    }
+/*
+    public int nbLoisirCommun(Teenager teen){
+        if(!teen.requirements.containsKey("HOBBIES") || !this.requirements.containsKey("HOBBIES")){
+            return 0;
+        }
 
         ArrayList<String> ask = new ArrayList<>();
         ArrayList<String> give = new ArrayList<>();
@@ -236,7 +254,7 @@ public class Teenager{
             }
         }
         return nombreLoisirs;
-    }
+    }*/
 
     public boolean loisirCommun(String first, String other){
         return first.equals(other);
