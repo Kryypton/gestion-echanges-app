@@ -171,5 +171,9 @@ public class Platform {
             System.out.println(a.teenagerToString() + "\n"/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
         }
         exportTeenagers(list,"res/donnéeExporter.csv");
+
+        
     }
+
+
 }
