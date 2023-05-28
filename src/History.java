@@ -23,19 +23,45 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
-public class History implements Serializable {
-    private List<Association> associations;
+import fr.ulille.but.sae2_02.graphes.Arete;
 
-    public History() {
-        associations = new ArrayList<>();
+public class History implements Serializable {
+private Map<Teenager , Teenager> affectationsHistory;
+
+public History() { // Création de la hashmap de Teenagers
+    this.affectationsHistory = new HashMap<Teenager , Teenager>();
+}
+
+    // Création de la hashmap de Teenagers et les arretes qui vont avec entre les Teenager.
+    public History(List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> aretes){
+        this();
+        for(Arete<Teenager> arete : aretes){
+            this.affectations(arete.getExtremite1() , arete.getExtremite2());
+        }
     }
 
-    /**
-     * Ajoute une association à l'historique
-     * @param association L'association à ajouter
-     */
-    public void addAssociation(Association association) {
-        associations.add(association);
+
+    // Enleve le teenager courant qui est avec un autre.
+    public void desaffectations(Teenager t){
+        this.affectationsHistory.remove(t);
+    }
+
+    // Affecte 2 Teenagers
+    public void affectations(Teenager t1 , Teenager t2){
+        this.affectationsHistory.put(t1 , t2);
+    }
+
+    // Retourne le Teenager associer au Teenager courant.
+    public Teenager get( Teenager t){
+        return this.affectationsHistory.get(t);
+    }
+
+    // renvoie true si un teenager est affecter a un teenager.
+    public boolean estAffecter(Teenager t){
+        if(this.affectationsHistory.containsKey(t)){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -46,7 +72,7 @@ public class History implements Serializable {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(filename);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(associations);
+            objectOutputStream.writeObject(affectationsHistory);
             objectOutputStream.close();
             fileOutputStream.close();
             System.out.println("Historique sauvegardé ");
@@ -64,7 +90,7 @@ public class History implements Serializable {
         try {
             FileInputStream fileInputStream = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            associations = (List<Association>) objectInputStream.readObject();
+            affectationsHistory = (Map<Teenager , Teenager>) objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
             System.out.println("historique chargé");
@@ -74,8 +100,8 @@ public class History implements Serializable {
     }
     
 
-    public List<Association> getAssociations() {
-        return associations;
+    public Map<Teenager, Teenager> getAssociations() {
+        return this.affectationsHistory ;
     }
 
     public static void main(String[] args) {
@@ -84,12 +110,10 @@ public class History implements Serializable {
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
 
         History history = new History();
-
-        Association association = new Association(teenager1, teenager2);
-        history.addAssociation(association);
+        history.affectations(teenager1 , teenager2);
 
         // sauvegarde de l'historique dans un fichier
-        String filename = "historique.ser";
+        String filename = "./res/historique.ser";
         history.saveHistory(filename);
 
         // Chargement de l'historique à partir d'un fichier
@@ -98,7 +122,7 @@ public class History implements Serializable {
 
         // Affichage 
         System.out.println("historique chargé :");
-        for (Association assoc : loadedHistory.getAssociations()) {
+        for (History historie : loadedHistory.getAssociations()) {
             System.out.println(assoc.getTeenager1().getName() + " - " + assoc.getTeenager2().getName());
         }
     }
