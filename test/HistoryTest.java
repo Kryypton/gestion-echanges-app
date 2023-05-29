@@ -1,3 +1,4 @@
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -99,7 +100,7 @@ public class HistoryTest{
         history.affectations(t3, t4);
     }
 
-
+    @Test
     public void TestHistory() {
         assertEquals(0 , Affectation.weight(t2, t1, history));
         assertEquals(0 , Affectation.weight(t3, t1, history));
