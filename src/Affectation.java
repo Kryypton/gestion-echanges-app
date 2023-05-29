@@ -1,7 +1,10 @@
 import fr.ulille.but.sae2_02.graphes.*;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class AffectationVersion1{
+
+public class Affectation implements Serializable{
 
     /**
      * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 10 point, et plus ils seront compatible, plus leurs scores diminueras
@@ -51,6 +54,45 @@ public class AffectationVersion1{
             }
         }
     }
+
+    
+
+    public static List<Teenager> selectPays(List<Teenager> list, Country country){
+        List<Teenager> listCountry = new ArrayList<Teenager>();
+        for (Teenager teenager : list){
+            if (teenager.getCountryName().equals(country)){
+                listCountry.add(teenager);
+            }
+        }
+        return listCountry;
+    }
+
+    /**
+     * Méthode qui permet de crée les aretes composant le graph
+     * @param guest La liste des étudiants invités a ajouter
+     * @param host La liste des étudiants hôtes a ajouter
+     * @param graph Le graph dans lequel on ajoute les aretes
+     */
+    public static List<Arete<Teenager>> affectation(List<Teenager> groupe , Country guest , Country host){
+        List<Teenager> hostList = Affectation.selectPays(groupe, host);    
+        List<Teenager> guestList = Affectation.selectPays(groupe, guest);
+        GrapheNonOrienteValue<Teenager> graph = new GrapheNonOrienteValue<Teenager>();
+        for (Teenager teenager1 : hostList) {
+            graph.ajouterSommet(teenager1);
+        }
+        for (Teenager teenager2 : guestList) {
+            graph.ajouterSommet(teenager2);
+        }
+        for(Teenager teenager1 : hostList){
+            for (Teenager teenager2 : guestList){
+                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new History() ));
+            }
+        }
+        CalculAffectation<Teenager> calcul = new CalculAffectation<Teenager>(graph , hostList , guestList);
+        return calcul.calculerAffectation();
+    }
+
+
 
     public static String listToString(List<Teenager> list){
         String ten = "";
