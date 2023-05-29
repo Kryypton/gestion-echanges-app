@@ -158,6 +158,19 @@ public class Platform {
         // A FAIRE exporte les donnée 
     }
 
+    public static void exportTeenagersString(List<String> CSV, String fichier) throws IOException{
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
+            for(String a: CSV){
+                bw.write(a+"\n");
+            }
+        }catch(IOException e) {
+                System.out.println("Writing error: " + e.getMessage());
+                e.printStackTrace();
+        }
+        
+        // A FAIRE exporte les donnée 
+    }
+
 
 
     //public String listToString(ArrayList<Teenager> teen){

@@ -109,6 +109,14 @@ public class Affectation implements Serializable{
         }
         return ten;
     }
+
+    public static List<String> listAreteToListTeen(List<Arete<Teenager>> list){
+        List<String> newList = new ArrayList<String>();
+        for (Arete<Teenager> teenager : list){
+            newList.add(teenager.getExtremite1().getName() + " and " + teenager.getExtremite2().getName());
+        }
+        return newList;
+    }
        
 /* 
     public static void main(String[] args){

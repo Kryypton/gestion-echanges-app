@@ -1,8 +1,14 @@
 import fr.ulille.but.sae2_02.graphes.*;
+
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class AffectationVersion1Test {
-    public static void main(String[] args){
+    /*public static void main(String[] args){
 
         //AffectationVersion1 test = new AffectationVersion1();
 
@@ -107,5 +113,46 @@ public class AffectationVersion1Test {
         // // //envoie de la solution
          System.out.println(Affectation.listAreteToString(calcul.calculerAffectation()));
 
+
+        public void testCompatibilityVsHobbies(){
+            assertEquals(200, Affectation.compatibilityVsHobbies(A, X));
+            assertEquals(200, Affectation.compatibilityVsHobbies(A, Y));
+            assertEquals(200, Affectation.compatibilityVsHobbies(A, Z));
+            assertEquals(100, Affectation.compatibilityVsHobbies(B, X));
+        }
+    }*/
+
+    public void testAffectation() throws IOException{
+        Platform p = new Platform();
+        // import un fichier 
+        File csv = new File("res/affectationTest.csv");
+        p.setTeenagerList(Platform.importTeenagers(csv));
+        // faire machin
+
+        //Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY);
+
+        //exporter fichier
+
+        List<String> ex = Affectation.listAreteToListTeen(Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY));
+
+        Platform.exportTeenagersString(ex, "res/affectationReponse.csv");
+        // comparer 2 fichier
+
+        File csvA = new File("res/affectationReponse.csv");
+        File csvB = new File("res/affectationReponseVerifier.csv");
+
+        assertTrue(sameCSV(csvA,csvB));
+    }
+
+    public boolean sameCSV(File a, File b) throws FileNotFoundException{
+        boolean same = true;
+        Scanner scanA = new Scanner(a);
+        Scanner scanB = new Scanner(b);
+        while(scanA.hasNextLine() && scanB.hasNextLine() && same){
+            same = scanA.next().equals(scanB.next());
+        }
+        scanA.close();
+        scanB.close();
+        return same;
     }
 }
