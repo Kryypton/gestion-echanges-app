@@ -410,6 +410,7 @@ public class Teenager implements Serializable{
         }
     }
 
+
     /**
      * Méthode qui permet de modifier un critère d'un adolescent
      * @param criterionName le nom du critère à modifier

@@ -87,9 +87,9 @@ public class AffectationVersion1Test {
         
 
         //Ajout de sommet et aretes au graphe
-        AffectationVersion1.addSummit(guest,graph);
-        AffectationVersion1.addSummit(host,graph);
-        AffectationVersion1.addArete(guest,host,graph);
+        Affectation.addSummit(guest,graph);
+        Affectation.addSummit(host,graph);
+        Affectation.addArete(guest,host,graph);
 
         // for(Teenager list : guest){
         //     for (String s : list.getCriterion("HOBBIES").getValue().split(",")) {
@@ -105,14 +105,7 @@ public class AffectationVersion1Test {
         //System.out.println(listToString(graph.sommets()));
          System.out.println("Nous somme censé trouvé : \n B--X, A--Z, et C--Y");
         // // //envoie de la solution
-         System.out.println(AffectationVersion1.listAreteToString(calcul.calculerAffectation()));
+         System.out.println(Affectation.listAreteToString(calcul.calculerAffectation()));
 
-
-        public void testCompatibilityVsHobbies(){
-            assertEquals(200, AffectationVersion1.compatibilityVsHobbies(A, X));
-            assertEquals(200, AffectationVersion1.compatibilityVsHobbies(A, Y));
-            assertEquals(200, AffectationVersion1.compatibilityVsHobbies(A, Z));
-            assertEquals(100, AffectationVersion1.compatibilityVsHobbies(B, X));
-        }
     }
 }

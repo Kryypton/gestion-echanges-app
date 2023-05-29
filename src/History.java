@@ -64,7 +64,7 @@ public History() { // Création de la hashmap de Teenagers
         return false;
     }
 
-
+    
     public boolean estAffecter(Teenager t1 , Teenager t2){
         if(this.affectationsHistory.containsKey(t1) && this.affectationsHistory.get(t1) == t2){
             return true;

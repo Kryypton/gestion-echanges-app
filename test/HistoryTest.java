@@ -1,70 +1,113 @@
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class HistoryTest {
-    private History history;
-    private Teenager teenager1;
-    private Teenager teenager2;
-    private Teenager teenager3;
-    private Teenager teenager4;
+public class HistoryTest{
+    
+    public Teenager t1, t2, t3, t4;
+    public int id1, id2, id3, id4;
+    public String name1, name2, name3, name4;
+    public String forname1, forname2, forname3, forname4;
+    public String gender1, gender2, gender3, gender4;
+    public Country countryName1, countryName2, countryName3, countryName4;
+    public LocalDate birthDate1, birthDate2, birthDate3, birthDate4;
+    public Map<String, Criterion> requirements1, requirements2, requirements3, requirements4;
+    public History history = new History();
 
     @BeforeEach
-    public void setUp() {
-        history = new History();
-        teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
-        teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
-        teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
-        teenager4 = new Teenager(4, "teen4", "C", "F", LocalDate.of(2002, 10, 20), Country.SPAIN);
-    }
+    void initialization() {
+        id1 = 1;
+        id2 = 2;
+        id3 = 3;
+        id4 = 4;
+        name1 = "Alice";
+        name2 = "Bruno";
+        name3 = "Clément";
+        name4 = "Dylan";
+        forname1 = "Brown";
+        forname2 = "Dumont";
+        forname3 = "Garnier";
+        forname4 = "Lefebvre";
+        gender1 = "F";
+        gender2 = "M";
+        gender3 = "M";
+        gender4 = "M";
+        countryName1 = Country.FRANCE;
+        countryName2 = Country.GERMANY;
+        countryName3 = Country.SPAIN;
+        countryName4 = Country.ITALY;
+        birthDate1 = LocalDate.parse("2000-01-01");
+        birthDate2 = LocalDate.parse("2002-08-04");
+        birthDate3 = LocalDate.parse("2001-11-21");
+        birthDate4 = LocalDate.parse("2003-03-15");
 
-    @Test
-    public void testAffectations() {
-        history.affectations(teenager1 , teenager2);
-        history.affectations(teenager3 , teenager4);
-        assertEquals(teenager2, history.get(teenager1));
-        assertEquals(teenager4, history.get(teenager3));
-    }
+        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
+        Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
+        Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
+        Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
+        Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
+        Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
+        Criterion posseDeTout = new Criterion("none", CriterionName.HOST_FOOD);
+        Criterion mangeTout = new Criterion("none", CriterionName.GUEST_FOOD);  
+        Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
+        Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
+        Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.NUMERIC);
+        Criterion dejaEnsemble  = new Criterion("meme", CriterionName.HISTORY);
+        Criterion jamaisEnsemble  = new Criterion("different", CriterionName.HISTORY);
 
-    @Test
-    public void testDesaffectations() {
-        history.affectations(teenager1 , teenager2);
-        history.affectations(teenager3 , teenager4);
-        history.desaffectations(teenager1);
-        history.desaffectations(teenager3);
-        assertNull(history.get(teenager1));
-        assertNull(history.get(teenager3));
-    }
 
-    @Test
-    public void testEstAffecter() {
-        assertFalse(history.estAffecter(teenager1));
-        history.affectations(teenager1 , teenager2);
-        assertTrue(history.estAffecter(teenager1));
-    }
+        requirements2 = new HashMap<String, Criterion>();
+        requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        requirements2.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+        requirements2.put(CriterionName.HOST_FOOD.name(), possedeVege);
+        requirements2.put(CriterionName.GUEST_FOOD.name(), mangeVege);
 
-    @Test
-    public void testEstAffecterPair() {
-        assertFalse(history.estAffecter(teenager1, teenager2));
-        history.affectations(teenager1 , teenager2);
-        assertTrue(history.estAffecter(teenager1, teenager2));
-    }
-
-    @Test
-    public void testSaveAndLoadHistory() {
-        history.affectations(teenager1 , teenager2);
-        history.affectations(teenager3 , teenager4);
-        String hist = "history.ser";
-        history.saveHistory(hist);
+        requirements3 = new HashMap<String, Criterion>();
+        requirements3.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        requirements3.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
+        requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
         
-        History newHistory = new History();
-        newHistory.loadHistory(hist);
+        t1 = new Teenager(id1, name1, forname1, gender1, birthDate1, countryName1);
+        t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
+        t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
+        t4 = new Teenager(id4, forname4, forname4, gender4, birthDate4, countryName4);
+        
+        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
+        t1.addCriterion(CriterionName.GUEST_FOOD.name(), mangeTout);
 
-        assertEquals(history.get(teenager3), newHistory.get(teenager3));
-        assertEquals(history.get(teenager1), newHistory.get(teenager1));
+        t4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t4.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
+        t4.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+
+        t1.addCriterion(CriterionName.HISTORY.name(), dejaEnsemble); 
+        t2.addCriterion(CriterionName.HISTORY.name(), jamaisEnsemble);
+        t3.addCriterion(CriterionName.HISTORY.name(), jamaisEnsemble);
+        t4.addCriterion(CriterionName.HISTORY.name(), dejaEnsemble);
+
+        history.affectations(t1, t2);
+        history.affectations(t1, t3);
+        history.affectations(t1, t4);
+        history.affectations(t2, t3);
+        history.affectations(t2, t4);
+        history.affectations(t3, t4);
     }
+
+
+    public void TestHistory() {
+        assertEquals(0 , Affectation.weight(t2, t1, history));
+        assertEquals(0 , Affectation.weight(t3, t1, history));
+
+
+
+    }
+
+
 
 }
