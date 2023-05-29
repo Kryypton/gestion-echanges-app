@@ -429,6 +429,21 @@ public class Teenager implements Serializable{
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((forname == null) ? 0 : forname.hashCode());
+        result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+        result = prime * result + ((countryName == null) ? 0 : countryName.hashCode());
+        result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
+        result = prime * result + ((requirements == null) ? 0 : requirements.hashCode());
+        result = prime * result + ((criterions == null) ? 0 : criterions.hashCode());
+        return result;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -436,35 +451,40 @@ public class Teenager implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Teenager guest = (Teenager) obj;
-        if (id != guest.id)
+        Teenager other = (Teenager) obj;
+        if (id != other.id)
             return false;
         if (name == null) {
-            if (guest.name != null)
+            if (other.name != null)
                 return false;
-        } else if (!name.equals(guest.name))
+        } else if (!name.equals(other.name))
             return false;
         if (forname == null) {
-            if (guest.forname != null)
+            if (other.forname != null)
                 return false;
-        } else if (!forname.equals(guest.forname))
+        } else if (!forname.equals(other.forname))
             return false;
         if (gender == null) {
-            if (guest.gender != null)
+            if (other.gender != null)
                 return false;
-        } else if (!gender.equals(guest.gender))
+        } else if (!gender.equals(other.gender))
             return false;
-        if (countryName != guest.countryName)
+        if (countryName != other.countryName)
             return false;
         if (birthDate == null) {
-            if (guest.birthDate != null)
+            if (other.birthDate != null)
                 return false;
-        } else if (!birthDate.equals(guest.birthDate))
+        } else if (!birthDate.equals(other.birthDate))
             return false;
         if (requirements == null) {
-            if (guest.requirements != null)
+            if (other.requirements != null)
                 return false;
-        } else if (!requirements.equals(guest.requirements))
+        } else if (!requirements.equals(other.requirements))
+            return false;
+        if (criterions == null) {
+            if (other.criterions != null)
+                return false;
+        } else if (!criterions.equals(other.criterions))
             return false;
         return true;
     }

@@ -40,7 +40,6 @@ public History() { // Création de la hashmap de Teenagers
         }
     }
 
-
     // Enleve le teenager courant qui est avec un autre.
     public void desaffectations(Teenager t){
         this.affectationsHistory.remove(t);
@@ -165,5 +164,7 @@ public History() { // Création de la hashmap de Teenagers
         for (Teenager t : loadedHistory.getAssociations().keySet()) {
             System.out.println(t.getName() + " -> " + loadedHistory.getAssociations().get(t).getName());
         }
+
+
     }
 }
