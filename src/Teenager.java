@@ -26,6 +26,8 @@ public class Teenager implements Serializable{
     private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
+    Map<String, Criterion> criterions = new HashMap<String, Criterion>();
+    static Map<Teenager , Teenager > history = new HashMap<>();
 
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
@@ -370,11 +372,24 @@ public class Teenager implements Serializable{
 
     /**
      * Méthode qui permet de retourner un critère d'un adolescent
+     * @param string le nom du critère à retourner
+     * @return le critère de l'adolescent
+     */
+    public Criterion getCriterion(String string) {
+        return requirements.get(string);
+    }
+
+    /**
+     * Méthode qui permet de retourner un critère d'un adolescent
      * @param criterionName le nom du critère à retourner
      * @return le critère de l'adolescent
      */
-    public Criterion getCriterion(String criterionName) {
-        return requirements.get(criterionName);
+    public String getCriterion(CriterionName criterionName) {
+        Criterion c = requirements.get(criterionName.name());
+        if(c != null){
+            return c.getValue();
+        }
+        return null;
     }
 
     /**
@@ -487,4 +502,6 @@ public class Teenager implements Serializable{
     public Criterion getHistory() {
         return requirements.get(CriterionName.HISTORY.name());
     }
+
+
 }

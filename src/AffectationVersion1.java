@@ -10,16 +10,19 @@ public class AffectationVersion1{
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
      */
     
-     public static double weight (Teenager host, Teenager guest) {
+     public static double weight (Teenager host, Teenager guest , History history) {
         double poid = 10;
-        poid -= host.nbLoisirCommun(guest);
+        double poids = 0;
+        poids -= host.nbLoisirCommun(guest);
         if(!host.compatibleWithGuest(guest)){
-            poid += 100;
+            poids += 100;
         }
         //Pays différent ?
         if (!host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) {
-            poid += 10;
+            poids += 10;
         }
+        poid = poids;
+        poid = poid + history.historyTeenager(host, guest);
         return poid;
     }
 
@@ -43,7 +46,7 @@ public class AffectationVersion1{
     public static void addArete(List<Teenager> guest,List<Teenager> host, GrapheNonOrienteValue<Teenager> graph){
         for (Teenager teenager1 : host) {
             for (Teenager teenager2 : guest){
-                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2));
+                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new History() ));
                 //System.out.println(teenager1.getName() +" avec " + teenager2.getName() +" vaut " + weight(teenager1,teenager2));
             }
         }

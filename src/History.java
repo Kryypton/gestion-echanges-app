@@ -64,11 +64,18 @@ public History() { // Création de la hashmap de Teenagers
         return false;
     }
 
+
     public boolean estAffecter(Teenager t1 , Teenager t2){
         if(this.affectationsHistory.containsKey(t1) && this.affectationsHistory.get(t1) == t2){
             return true;
         }
         return false;
+    }
+
+
+    // retourne tout les associations 
+    public Map<Teenager, Teenager> getAssociations() {
+        return this.affectationsHistory ;
     }
 
 
@@ -94,22 +101,47 @@ public History() { // Création de la hashmap de Teenagers
      * Charge l'historique à partir d'un fichier de sauvegarde en utilisant la désérialisation binaire
      * @param filename Le nom du fichier de sauvegarde
      */
+
     public void loadHistory(String filename) {
         try {
             FileInputStream fileInputStream = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            affectationsHistory = (Map<Teenager,Teenager>) objectInputStream.readObject();
+            Map<Teenager, Teenager> history = (Map<Teenager, Teenager>) objectInputStream.readObject();
+            affectationsHistory.putAll(history); // Utiliser putAll pour copier les éléments dans affectationsHistory
             objectInputStream.close();
             fileInputStream.close();
             System.out.println("historique chargé");
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("erreur lordu chargement de l'historique :" + e.getMessage());
+            System.out.println("erreur lors du chargement de l'historique: " + e.getMessage());
         }
     }
 
-    public Map<Teenager, Teenager> getAssociations() {
-        return this.affectationsHistory ;
+
+    // Methode qui permet de réevaluer le poids d'un arrete en fonction de l'historique des Teenagers.
+    public int historyTeenager(Teenager host , Teenager visitor){
+        if(estAffecter(host)){
+            if(this.get(host).equals(visitor)){
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme")){
+                    return -100;
+                }
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different")){
+                    return 50;
+                }
+            }
+        }else if(estAffecter(visitor)){
+            if(this.get(visitor).equals(host)){
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme")){
+                    return -100;
+                }
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different")){
+                    return 50;
+                }
+            }
+        }
+        return 0;
     }
+
+
 
     public static void main(String[] args) {
         Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
