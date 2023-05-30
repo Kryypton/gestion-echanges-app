@@ -21,7 +21,7 @@ public class Affectation implements Serializable{
             poids += 100;
         }
         //Pays différent ?
-        if (!host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) {
+        if (host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) {
             poids += 10;
         }
         poid = poids;

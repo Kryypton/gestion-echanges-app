@@ -149,6 +149,7 @@ public class Platform {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
             for(Teenager a: CSV){
                 bw.write(a.teenagerToString());
+                bw.newLine();
             }
         }catch(IOException e) {
                 System.out.println("Writing error: " + e.getMessage());
@@ -162,6 +163,7 @@ public class Platform {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
             for(String a: CSV){
                 bw.write(a+"\n");
+                bw.newLine();
             }
         }catch(IOException e) {
                 System.out.println("Writing error: " + e.getMessage());
@@ -178,10 +180,10 @@ public class Platform {
    // }
 
     public static void main(String[] args) throws IOException{
-        File CSV = new File("./res/adosAleatoires.csv");
+        File CSV = new File("res/adosAleatoires.csv");
         ArrayList<Teenager> list = importTeenagers(CSV);
         for(Teenager a: list){
-            System.out.println(a.teenagerToString() + "\n"/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
+            System.out.println(a.teenagerToString()/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
         }
         exportTeenagers(list,"res/donnéeExporter.csv");
 

@@ -129,7 +129,7 @@ public class AffectationVersion1Test {
     public static void testAffectation() throws IOException{
         Platform p = new Platform();
         // import un fichier 
-        File csv = new File("/Users/qmout/OneDrive/Documents/dev/A5 remplaçant/A5/res/affectationTest.csv");
+        File csv = new File("res/AffectationTest.csv");
         p.setTeenagerList(Platform.importTeenagers(csv));
         // faire machin
 
@@ -139,7 +139,7 @@ public class AffectationVersion1Test {
 
         List<String> ex = Affectation.listAreteToListTeen(Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY));
 
-        Platform.exportTeenagersString(ex, "/Users/qmout/OneDrive/Documents/de/A5 remplaçant/A5/res/affectationReponse.csv");
+        Platform.exportTeenagersString(ex, "res/affectationReponse.csv");
         // comparer 2 fichier
 
         // File csvA = new File("res/affectationReponse.csv");

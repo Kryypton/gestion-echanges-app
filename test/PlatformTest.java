@@ -84,4 +84,7 @@ public class PlatformTest {
         p.printCompatibleTeenagers();
         assertTrue(p.getTeenagerList().contains(ten()));   
     }
+
+    //a faire
+    // classe test import et export
 }

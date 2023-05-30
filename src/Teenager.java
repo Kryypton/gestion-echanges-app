@@ -91,7 +91,7 @@ public class Teenager implements Serializable{
         Criterion host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
         Criterion gender = new Criterion(scan.next(), CriterionName.GENDER);
         Criterion pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
-        Criterion history = new Criterion(scan.next(), CriterionName.HISTORY);
+        //Criterion history = new Criterion(scan.next(), CriterionName.HISTORY);
 
         Map<String, Criterion> requirements = new HashMap<>();
         requirements.put(CriterionName.HOST_FOOD.name(), host_food);
@@ -101,7 +101,7 @@ public class Teenager implements Serializable{
         requirements.put(CriterionName.HOBBIES.name(), hobbie);
         requirements.put(CriterionName.GENDER.name(), gender);
         requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
-        requirements.put(CriterionName.HISTORY.name(), history);
+        //requirements.put(CriterionName.HISTORY.name(), history);
         this.requirements = requirements;
 
         this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
@@ -161,7 +161,7 @@ public class Teenager implements Serializable{
         if (guest == null) return false;
         if (!compatibleAnimal(guest)) return false;
         if (!compatibleFood(guest)) return false;
-        if(this.countryName == guest.getCountryName()){
+        if(this.countryName == Country.FRANCE || guest.getCountryName() == Country.FRANCE){
             if(this.nbLoisirCommun(guest) == 0){
                 return false;
             }
@@ -445,6 +445,7 @@ public class Teenager implements Serializable{
 
     @Override
     public boolean equals(Object obj) {
+        //faire un truc si obj est null
         if (this == obj)
             return true;
         if (obj == null)
