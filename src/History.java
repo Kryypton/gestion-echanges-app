@@ -164,7 +164,5 @@ public History() { // Création de la hashmap de Teenagers
         for (Teenager t : loadedHistory.getAssociations().keySet()) {
             System.out.println(t.getName() + " -> " + loadedHistory.getAssociations().get(t).getName());
         }
-
-
     }
 }
