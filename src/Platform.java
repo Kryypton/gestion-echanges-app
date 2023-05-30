@@ -178,7 +178,7 @@ public class Platform {
    // }
 
     public static void main(String[] args) throws IOException{
-        File CSV = new File("res/adosAleatoires.csv");
+        File CSV = new File("./res/adosAleatoires.csv");
         ArrayList<Teenager> list = importTeenagers(CSV);
         for(Teenager a: list){
             System.out.println(a.teenagerToString() + "\n"/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
