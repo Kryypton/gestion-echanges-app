@@ -149,7 +149,7 @@ public class Platform {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
             for(Teenager a: CSV){
                 bw.write(a.teenagerToString());
-                bw.newLine();
+                bw.newLine(); 
             }
         }catch(IOException e) {
                 System.out.println("Writing error: " + e.getMessage());
@@ -173,22 +173,26 @@ public class Platform {
         // A FAIRE exporte les donnée 
     }
 
-
-
-    //public String listToString(ArrayList<Teenager> teen){
-     //   return teen
-   // }
-
-    public static void main(String[] args) throws IOException{
-        File CSV = new File("res/adosAleatoires.csv");
-        ArrayList<Teenager> list = importTeenagers(CSV);
-        for(Teenager a: list){
-            System.out.println(a.teenagerToString()/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
+    public static void exportCompatibleTeenager(Map<Teenager,Teenager> CSV, String fichier) throws IOException{
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
+            for(Map<Teenager,Teenager> a: CSV){
+                bw.write(a.getKey().teenagerToString()+";"+a.getKey().teenagerToString()+"\n");
+                bw.newLine();
+            }
+        }catch(IOException e) {
+                System.out.println("Writing error: " + e.getMessage());
+                e.printStackTrace();
         }
-        exportTeenagers(list,"res/donnéeExporter.csv");
-
-        
     }
 
+    // public static void main(String[] args) throws IOException{
+    //     File CSV = new File("res/adosAleatoires.csv");
+    //     ArrayList<Teenager> list = importTeenagers(CSV);
+    //     for(Teenager a: list){
+    //         System.out.println(a.teenagerToString()/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
+    //     }
+    //     exportTeenagers(list,"res/donnéeExporter.csv");
 
+        
+    // }
 }

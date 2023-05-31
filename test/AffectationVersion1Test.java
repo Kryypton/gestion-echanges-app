@@ -122,9 +122,9 @@ public class AffectationVersion1Test {
         }
     }*/
 
-    public static void main(String[] args) throws IOException{
-        AffectationVersion1Test.testAffectation();
-    }
+    // public static void main(String[] args) throws IOException{
+    //     AffectationVersion1Test.testAffectation();
+    // }
 
     public static void testAffectation() throws IOException{
         Platform p = new Platform();
@@ -133,7 +133,7 @@ public class AffectationVersion1Test {
         p.setTeenagerList(Platform.importTeenagers(csv));
         // faire machin
 
-        //Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY);
+        Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY);
 
         //exporter fichier
 
@@ -142,10 +142,10 @@ public class AffectationVersion1Test {
         Platform.exportTeenagersString(ex, "res/affectationReponse.csv");
         // comparer 2 fichier
 
-        // File csvA = new File("res/affectationReponse.csv");
-        // File csvB = new File("res/affectationReponseVerifier.csv");
+        File csvA = new File("res/affectationReponse.csv");
+        File csvB = new File("res/affectationReponseVerifier.csv");
 
-        //assertTrue(sameCSV(csvA,csvB));
+        assertTrue(sameCSV(csvA,csvB));
     }
 
     public boolean sameCSV(File a, File b) throws FileNotFoundException{
