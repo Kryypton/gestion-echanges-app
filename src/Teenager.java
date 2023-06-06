@@ -68,30 +68,93 @@ public class Teenager implements Serializable{
         this.countryName = countryName;
     }
 
+    // /**
+    //  * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier 
+    //  * @param CSV le nom d'un adolescent
+    //  * @param id l'identifiant unique d'un adolescent
+    //  */
+    // public Teenager(String CSV, int id){
+    //     Scanner scan = new Scanner(CSV);
+    //     scan.useDelimiter(";");
+
+    //     this.id = id;//stringToInt(scan.next());
+    //     this.forname = scan.next();
+    //     this.name = scan.next();
+    //     this.countryName = isContry(scan.next());
+
+    //     this.birthDate = LocalDate.parse(scan.next());
+
+    //     Criterion hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
+    //     Criterion guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
+    //     Criterion host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
+    //     Criterion guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD); 
+    //     Criterion host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
+    //     Criterion gender = new Criterion(scan.next(), CriterionName.GENDER);
+    //     Criterion pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
+    //     //Criterion history = new Criterion(scan.next(), CriterionName.HISTORY);
+
+    //     Map<String, Criterion> requirements = new HashMap<>();
+    //     requirements.put(CriterionName.HOST_FOOD.name(), host_food);
+    //     requirements.put(CriterionName.GUEST_FOOD.name(), guest_food);
+    //     requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), host_as_animal);
+    //     requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), guest_animal_allergy);
+    //     requirements.put(CriterionName.HOBBIES.name(), hobbie);
+    //     requirements.put(CriterionName.GENDER.name(), gender);
+    //     requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
+    //     //requirements.put(CriterionName.HISTORY.name(), history);
+    //     this.requirements = requirements;
+
+    //     this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
+    //     scan.close();
+    // }
+
     /**
-     * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier 
+     * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier, charger en fonction du pattern
      * @param CSV le nom d'un adolescent
      * @param id l'identifiant unique d'un adolescent
+     * @param pattern l'ordre des paramétre
      */
-    public Teenager(String CSV, int id){
+    public Teenager(String CSV, int id, String pattern){
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter(";");
+        Scanner scanPattern = new Scanner(pattern);
 
-        this.id = id;//stringToInt(scan.next());
-        this.forname = scan.next();
-        this.name = scan.next();
-        this.countryName = isContry(scan.next());
+        Criterion guest_animal_allergy = new Criterion(null, CriterionName.GUEST_ANIMAL_ALLERGY);
+        Criterion host_as_animal = new Criterion(null, CriterionName.HOST_HAS_ANIMAL);
+        Criterion guest_food = new Criterion(null, CriterionName.GUEST_FOOD); 
+        Criterion host_food = new Criterion(null, CriterionName.HOST_FOOD);
+        Criterion hobbie = new Criterion(null, CriterionName.HOBBIES);
+        Criterion gender = new Criterion(null, CriterionName.GENDER);
+        Criterion pair_gender = new Criterion(null, CriterionName.PAIR_GENDER);
+        Criterion history = new Criterion(null, CriterionName.HISTORY);
 
-        this.birthDate = LocalDate.parse(scan.next());
-
-        Criterion hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
-        Criterion guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
-        Criterion host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
-        Criterion guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD); 
-        Criterion host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
-        Criterion gender = new Criterion(scan.next(), CriterionName.GENDER);
-        Criterion pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
-        //Criterion history = new Criterion(scan.next(), CriterionName.HISTORY);
+        while(scan.hasNext()){
+            if(scanPattern.next().equals("NAME")){
+                this.name = scan.next();
+            }else if(scanPattern.next().equals("FORENAME")){
+                this.forname = scan.next();
+            }else if(scanPattern.next().equals("COUNTRY")){
+                this.countryName = isContry(scan.next());
+            }else if(scanPattern.next().equals("BIRTH_DATE")){
+                this.birthDate = LocalDate.parse(scan.next());
+            }else if(scanPattern.next().equals("GUEST_ANIMAL_ALLERGY")){
+                guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
+            }else if(scanPattern.next().equals("HOST_HAS_ANIMAL")){
+                host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
+            }else if(scanPattern.next().equals("GUEST_FOOD_CONSTRAINT")){
+                guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD);
+            }else if(scanPattern.next().equals("HOST_FOOD")){
+                host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
+            }else if(scanPattern.next().equals("HOBBIES")){
+                hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
+            }else if(scanPattern.next().equals("GENDER")){
+                gender = new Criterion(scan.next(), CriterionName.GENDER);
+            }else if(scanPattern.next().equals("PAIR_GENDER")){
+                pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
+            }else if(scanPattern.next().equals("HISTORY")){
+                history = new Criterion(scan.next(), CriterionName.HISTORY);
+            }
+        }
 
         Map<String, Criterion> requirements = new HashMap<>();
         requirements.put(CriterionName.HOST_FOOD.name(), host_food);
@@ -101,11 +164,13 @@ public class Teenager implements Serializable{
         requirements.put(CriterionName.HOBBIES.name(), hobbie);
         requirements.put(CriterionName.GENDER.name(), gender);
         requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
-        //requirements.put(CriterionName.HISTORY.name(), history);
+        requirements.put(CriterionName.HISTORY.name(), history);
         this.requirements = requirements;
 
         this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
+
         scan.close();
+        scanPattern.close();
     }
 
     /**

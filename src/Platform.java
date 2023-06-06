@@ -125,19 +125,47 @@ public class Platform {
      * @param CSV le fichier CSV contenant les adolescents
      * @return une liste de tous les adolescents
      */
-    public static ArrayList<Teenager> importTeenagers(File CSV) throws FileNotFoundException{
+    public static ArrayList<Teenager> importListTeenagers(File CSV) throws FileNotFoundException{
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter("\n");
         ArrayList<Teenager> list = new ArrayList<Teenager>();
         int i=1;
-        scan.next();
+        String pattern =scan.next();
         while(scan.hasNextLine()){
-            list.add(new Teenager(scan.next(),i));
+            list.add(new Teenager(scan.next(),i,pattern));
             scan.nextLine();
             i++;
         }
         scan.close();
         return list;
+    }
+
+    /**
+     * Méthode qui permet d'importer des couples adolescents
+     * @param CSV le fichier CSV contenant les adolescents
+     * @return une liste de tous les adolescents
+     */
+    public static  Map<Teenager,Teenager> importCompatibleTeenagers(File CSV) throws FileNotFoundException{
+        Scanner scan = new Scanner(CSV);
+        scan.useDelimiter("\n");
+        Map<Teenager,Teenager> compatible = new HashMap<Teenager,Teenager>();
+        int i=1;
+        Teenager ten1;
+        Teenager ten2;
+        String ten1String;
+        String ten2String;
+        String pattern =scan.next();
+        while(scan.hasNextLine()){
+            ten1String = "" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";";
+            ten2String = "" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";" + scan.next() + ";";
+            ten1 = new Teenager(ten1String,i,pattern);
+            ten2 = new Teenager(ten2String,i,pattern);
+            compatible.put(ten1, ten2);
+            scan.nextLine();
+            i++;
+        }
+        scan.close();
+        return compatible;
     }
 
     /**
@@ -155,8 +183,6 @@ public class Platform {
                 System.out.println("Writing error: " + e.getMessage());
                 e.printStackTrace();
         }
-        
-        // A FAIRE exporte les donnée 
     }
 
     public static void exportTeenagersString(List<String> CSV, String fichier) throws IOException{
@@ -169,14 +195,12 @@ public class Platform {
                 System.out.println("Writing error: " + e.getMessage());
                 e.printStackTrace();
         }
-        
-        // A FAIRE exporte les donnée 
     }
 
     public static void exportCompatibleTeenager(Map<Teenager,Teenager> CSV, String fichier) throws IOException{
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
-            for(Map<Teenager,Teenager> a: CSV){
-                bw.write(a.getKey().teenagerToString()+";"+a.getKey().teenagerToString()+"\n");
+            for(Teenager a: CSV.keySet()){
+                bw.write(a.teenagerToString()+";"+CSV.get(a).teenagerToString()+"\n");
                 bw.newLine();
             }
         }catch(IOException e) {
