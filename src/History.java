@@ -1,24 +1,3 @@
-
-/*Rappel de Adham : Cette classe doit permettre par rapport a l'historique des anciennes liaison de 
-Teenager de créer une nouvelle regle de calcule du poids d'un arrete.*/ 
-
-// Ce qu'il manque : 
-
-// Une methode qui importe une liste de Teenager qui ont deja été correspondant.
-// Une methode qui exporte une liste de Teenager qui ont deja été correspondant.
-
-/* Et enfin une methode que l'on ajoutera a AffectationVersion1.java dans la methode weight.
-Cette methode devra retourner un int , elle permttra de voir si un Teenager a des preferences ou 
-contrainte par rapport a l'historique de l'autre Teenager 
-
-Pour moi******
-2 Teenager qui ont deja été ensemble mais que essemble  = -100 
-2 Teenager n'ont jamais été ensemble = 0 
-2 Teenager qui ont deja été ensemble mais aussi avec d'autre = -50
-*/ 
-
-// si vous avez des ammelioration mettez les.
-
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -26,11 +5,11 @@ import java.util.*;
 import fr.ulille.but.sae2_02.graphes.Arete;
 
 public class History implements Serializable {
-private Map<Teenager , Teenager> affectationsHistory;
+    private Map<Integer, Map<Teenager , Teenager>> affectationsHistory ;
 
-public History() { // Création de la hashmap de Teenagers
-    this.affectationsHistory = new HashMap<Teenager , Teenager>();
-}
+    public History() {
+        this.affectationsHistory = new HashMap<Integer, Map<Teenager , Teenager>>();
+    }
 
     // Création de la hashmap de Teenagers et les arretes qui vont avec entre les Teenager.
     public History(List<fr.ulille.but.sae2_02.graphes.Arete<Teenager>> aretes){
@@ -52,7 +31,7 @@ public History() { // Création de la hashmap de Teenagers
 
     // Retourne le Teenager associer au Teenager courant.
     public Teenager get( Teenager t){
-        return this.affectationsHistory.get(t);
+        return this.affectationsHistory.get();
     }
 
     // renvoie true si un teenager est affecter a un teenager.

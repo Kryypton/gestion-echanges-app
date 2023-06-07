@@ -208,15 +208,4 @@ public class Platform {
                 e.printStackTrace();
         }
     }
-
-    // public static void main(String[] args) throws IOException{
-    //     File CSV = new File("res/adosAleatoires.csv");
-    //     ArrayList<Teenager> list = importTeenagers(CSV);
-    //     for(Teenager a: list){
-    //         System.out.println(a.teenagerToString()/*getName()+" " + a.getForname() +" " + a.getGender() + " " + a.getBirthDate()*/);
-    //     }
-    //     exportTeenagers(list,"res/donnéeExporter.csv");
-
-        
-    // }
 }

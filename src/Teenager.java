@@ -291,38 +291,13 @@ public class Teenager implements Serializable{
         }
         return nbLoisir;
     }
-/*
-    public int nbLoisirCommun(Teenager teen){
-        if(!teen.requirements.containsKey("HOBBIES") || !this.requirements.containsKey("HOBBIES")){
-            return 0;
-        }
 
-        ArrayList<String> ask = new ArrayList<>();
-        ArrayList<String> give = new ArrayList<>();
-        if(!teen.requirements.get("HOBBIES").equals("")){
-            for (String s : teen.requirements.get("HOBBIES").getValue().split(",")) {
-                ask.add(s);
-            }
-        }
-        if(!this.requirements.get("HOBBIES").equals("")){
-            for (String s : this.requirements.get("HOBBIES").getValue().split(",")) {
-                give.add(s);
-            }
-        }
-        int nombreLoisirs = 0;
-        for (String s : ask) {
-            // if (give.indexOf(s) >= 0) {
-            //     nombreLoisirs = nombreLoisirs ++ ;
-            // }
-            for(String t : give){
-                if (loisirCommun(s, t)) {
-                    nombreLoisirs++ ;
-                }
-            }
-        }
-        return nombreLoisirs;
-    }*/
-
+    /**
+     * Renvoie true si les 2 Teenager ont au moins un loisir en commun.
+     * @param first un Teenager 
+     * @param other un Teenager 
+     * @return
+     */
     public boolean loisirCommun(String first, String other){
         return first.equals(other);
     }
