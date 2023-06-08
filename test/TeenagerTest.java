@@ -10,14 +10,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TeenagerTest {
-    public Teenager t1, t2, t3, t4;
-    public int id1, id2, id3, id4;
-    public String name1, name2, name3, name4;
-    public String forname1, forname2, forname3, forname4;
-    public String gender1, gender2, gender3, gender4;
-    public Country countryName1, countryName2, countryName3, countryName4;
-    public LocalDate birthDate1, birthDate2, birthDate3, birthDate4;
-    public Map<String, Criterion> requirements1, requirements2, requirements3, requirements4;
+    public Teenager t1, t2, t3, t4, t5;
+    public int id1, id2, id3, id4 ,id5;
+    public String name1, name2, name3, name4 ,name5;
+    public String forname1, forname2, forname3, forname4, forname5;
+    public String gender1, gender2, gender3, gender4, gender5;
+    public Country countryName1, countryName2, countryName3, countryName4, countryName5;
+    public LocalDate birthDate1, birthDate2, birthDate3, birthDate4, birthDate5;
+    public Map<String, Criterion> requirements1, requirements2, requirements3, requirements4, requirements5;
 
     @BeforeEach
     void initialization() {
@@ -25,26 +25,32 @@ public class TeenagerTest {
         id2 = 2;
         id3 = 3;
         id4 = 4;
+        id5 = 5;
         name1 = "Alice";
         name2 = "Bruno";
         name3 = "Clément";
         name4 = "Dylan";
+        name5 = "Eva";
         forname1 = "Brown";
         forname2 = "Dumont";
         forname3 = "Garnier";
         forname4 = "Lefebvre";
+        forname5 = "Martin";
         gender1 = "F";
         gender2 = "M";
         gender3 = "M";
         gender4 = "M";
+        gender5 = "F";
         countryName1 = Country.FRANCE;
         countryName2 = Country.GERMANY;
         countryName3 = Country.SPAIN;
         countryName4 = Country.ITALY;
+        countryName5 = Country.FRANCE;
         birthDate1 = LocalDate.parse("2000-01-01");
         birthDate2 = LocalDate.parse("2002-08-04");
         birthDate3 = LocalDate.parse("2001-11-21");
         birthDate4 = LocalDate.parse("2003-03-15");
+        birthDate5 = LocalDate.parse("2001-12-03");
 
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
@@ -57,7 +63,7 @@ public class TeenagerTest {
         Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
         Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
         Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.NUMERIC);
-
+        Criterion biologie = new Criterion("biologie", CriterionName.HOBBIES);
 
         requirements2 = new HashMap<String, Criterion>();
         requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
@@ -75,16 +81,24 @@ public class TeenagerTest {
         t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
         t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
         t4 = new Teenager(id4, forname4, forname4, gender4, birthDate4, countryName4);
-        
+        t5 = new Teenager(id5, name5, forname5, gender5, birthDate5, countryName5);
+
         t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
         t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
         t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
         t1.addCriterion(CriterionName.GUEST_FOOD.name(), mangeTout);
+        t1.addCriterion(CriterionName.GUEST_FOOD.name(), biologie);
 
         t4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
         t4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
         t4.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
         t4.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+
+        t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t5.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t5.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
+        t5.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+        t5.addCriterion(CriterionName.HOBBIES.name(), biologie);
     }
 
     @Test
@@ -141,6 +155,7 @@ public class TeenagerTest {
         assertFalse(t2.compatibleWithGuest(t3));
         assertFalse(t3.compatibleWithGuest(t2));
         assertTrue(t3.compatibleWithGuest(t1));
+        assertTrue(t1.compatibleWithGuest(t5));
     }
 
     @Test
@@ -175,5 +190,10 @@ public class TeenagerTest {
         t5.editCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
         assertEquals(t5.getRequirements().size(), 1);
         assertEquals(t5.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name()).getValue(), "yes");
+    }
+
+    @Test
+    void testNbLoisirCommun() {
+        assertEquals(t1.nbLoisirCommun(t5), 1);
     }
 }
