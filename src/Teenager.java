@@ -1,10 +1,8 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-
 import java.util.Map;
 import java.util.Scanner;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -67,46 +65,6 @@ public class Teenager implements Serializable{
         this.requirements = new HashMap<String, Criterion>();
         this.countryName = countryName;
     }
-
-    // /**
-    //  * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier 
-    //  * @param CSV le nom d'un adolescent
-    //  * @param id l'identifiant unique d'un adolescent
-    //  */
-    // public Teenager(String CSV, int id){
-    //     Scanner scan = new Scanner(CSV);
-    //     scan.useDelimiter(";");
-
-    //     this.id = id;//stringToInt(scan.next());
-    //     this.forname = scan.next();
-    //     this.name = scan.next();
-    //     this.countryName = isCountry(scan.next());
-
-    //     this.birthDate = LocalDate.parse(scan.next());
-
-    //     Criterion hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
-    //     Criterion guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
-    //     Criterion host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
-    //     Criterion guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD); 
-    //     Criterion host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
-    //     Criterion gender = new Criterion(scan.next(), CriterionName.GENDER);
-    //     Criterion pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
-    //     //Criterion history = new Criterion(scan.next(), CriterionName.HISTORY);
-
-    //     Map<String, Criterion> requirements = new HashMap<>();
-    //     requirements.put(CriterionName.HOST_FOOD.name(), host_food);
-    //     requirements.put(CriterionName.GUEST_FOOD.name(), guest_food);
-    //     requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), host_as_animal);
-    //     requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), guest_animal_allergy);
-    //     requirements.put(CriterionName.HOBBIES.name(), hobbie);
-    //     requirements.put(CriterionName.GENDER.name(), gender);
-    //     requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
-    //     //requirements.put(CriterionName.HISTORY.name(), history);
-    //     this.requirements = requirements;
-
-    //     this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
-    //     scan.close();
-    // }
 
     /**
      * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier, charger en fonction du patern
@@ -186,16 +144,6 @@ public class Teenager implements Serializable{
             return false; // Incompatible car l'invité a une allergie et l'hote a un animal.
         } 
         return true;
-        /*code innutile mais je garde au cas ou...
-        Criterion animalRequirement = requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY.name());
-        if (animalRequirement == null) {
-            return true; // Si aucun critére de compatibilité animal n'existe, on suppose qu'ils sont compatible.
-        }
-    
-        Criterion guestAnimalRequirement = guest.getRequirements().get(CriterionName.HOST_HAS_ANIMAL.name());
-        if (guestAnimalRequirement == null) {
-            return true; // Si l'invité n'a pas de critére de compatibilité animal, on suppose qu'ils sont compatible.
-        }*/
     }
     
     /**
@@ -452,7 +400,6 @@ public class Teenager implements Serializable{
         }
     }
 
-
     /**
      * Méthode qui permet de modifier un critère d'un adolescent
      * @param criterionName le nom du critère à modifier
@@ -566,6 +513,4 @@ public class Teenager implements Serializable{
     public Criterion getHistory() {
         return requirements.get(CriterionName.HISTORY.name());
     }
-
-
 }

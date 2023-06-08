@@ -1,8 +1,6 @@
 import fr.ulille.but.sae2_02.graphes.*;
-
 import java.io.Serializable;
 import java.util.*;
-
 
 public class Affectation implements Serializable{
 
