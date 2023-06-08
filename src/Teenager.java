@@ -243,7 +243,7 @@ public class Teenager implements Serializable{
         if(!teen.requirements.containsKey("HOBBIES") || !this.requirements.containsKey("HOBBIES")){
             return 0;
         }
-    
+        
         List<String> teenHobbies = Arrays.asList(teen.requirements.get("HOBBIES").getValue().split(","));
         List<String> thisHobbies = Arrays.asList(this.requirements.get("HOBBIES").getValue().split(","));
         int nbLoisir = 0;
@@ -483,6 +483,10 @@ public class Teenager implements Serializable{
         } else if (!requirements.equals(other.requirements))
             return false;
         return true;
+    }
+
+    public String toString() {
+        return this.getForname() + " " +  this.getName();
     }
 
     /**

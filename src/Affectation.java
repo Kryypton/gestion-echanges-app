@@ -131,7 +131,7 @@ public class Affectation implements Serializable {
         if(estAffecter(host)){
             if(this.getLast(host).equals(visitor)){
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
-                    return -100;
+                    return -50;
                 }
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other")){
                     return 50;
@@ -140,7 +140,7 @@ public class Affectation implements Serializable {
         }else if(estAffecter(visitor)){
             if(this.getLast(visitor).equals(host)){
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
-                    return -100;
+                    return -50;
                 }
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other")){
                     return 50;

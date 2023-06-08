@@ -13,7 +13,7 @@ public class AffectationUtil implements Serializable {
      */
     
      public static int weight (Teenager host, Teenager guest , Affectation history) {
-        int poid = 10;
+        int poid = 100;
         int poids = 0;
         poids -= host.nbLoisirCommun(guest);
         if(!host.compatibleWithGuest(guest)) poids += 100;
@@ -21,10 +21,13 @@ public class AffectationUtil implements Serializable {
         if (host.getCountryName().getCOUNTRY_NAME().equals(guest.getCountryName().getCOUNTRY_NAME())) poids += 10;
         //Age différent ?
         if (host.getDiffAge(guest).toTotalMonths()>18) poids -= 25;
-        if (host.getGender().equals(guest.getGender()))
+        
 
-        poid = poids;
+        poid = poid + poids;
         poid = poid + history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest);
+        if (poid < 0) {
+            poid = 0;
+        }
         return poid;
     }
 
@@ -379,7 +382,7 @@ public class AffectationUtil implements Serializable {
 
         for (Teenager t1 : fr) {
             for (Teenager t2 : it) {
-                graphFRChezIT.ajouterArete(t2, t1, AffectationUtil.weight(t1, t2, history));
+                graphFRChezIT.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history));
             }
         }
 
