@@ -10,7 +10,7 @@ public class AffectationUtil implements Serializable {
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
      */
     
-     public static double weight (Teenager host, Teenager guest , History history) {
+     public static double weight (Teenager host, Teenager guest , Affectation history) {
         double poid = 10;
         double poids = 0;
         poids -= host.nbLoisirCommun(guest);
@@ -46,7 +46,7 @@ public class AffectationUtil implements Serializable {
     public static void addArete(List<Teenager> guest,List<Teenager> host, GrapheNonOrienteValue<Teenager> graph){
         for (Teenager teenager1 : host) {
             for (Teenager teenager2 : guest){
-                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new History() ));
+                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new Affectation() ));
                 //System.out.println(teenager1.getName() +" avec " + teenager2.getName() +" vaut " + weight(teenager1,teenager2));
             }
         }
@@ -87,7 +87,7 @@ public class AffectationUtil implements Serializable {
         }
         for(Teenager teenager1 : hostList){
             for (Teenager teenager2 : guestList){
-                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new History() ));
+                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new Affectation() ));
             }
         }
         CalculAffectation<Teenager> calcul = new CalculAffectation<Teenager>(graph , hostList , guestList);

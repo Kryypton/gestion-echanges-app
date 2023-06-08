@@ -1,82 +1,79 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.IntBinaryOperator;
 
 import fr.ulille.but.sae2_02.graphes.Arete;
 
 public class Affectation implements Serializable {
-    private Map<Integer, Map<Teenager , Teenager>> affectationsHistory;
+    private Map<Teenager , Teenager> affectationsHistory;
+    private Country Host;
+    private Country Visitor;
 
-    public Affectation() {
-        this.affectationsHistory = new HashMap<Integer, Map<Teenager , Teenager>>();
+    public Affectation() { // Création de la hashmap de Teenagers
+        this.affectationsHistory = new HashMap<Teenager , Teenager>();
     }
 
     // Création de la hashmap de Teenagers et les arretes qui vont avec entre les Teenager.
-    public Affectation(Map<Integer, Arete<Teenager>> aretes){
-        this.affectationsHistory = new HashMap<Integer, Map<Teenager , Teenager>>();
-        for(Map.Entry<Integer, Arete<Teenager>> entry : aretes.entrySet()){
-            this.affectationsHistory.put(entry.getKey() , new HashMap<Teenager, Teenager>());
-        }
+    public Affectation(List<Arete<Teenager>> aretes){
+        this(aretes , null, null);
+
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer, Map<Teenager , Teenager>> entry : affectationsHistory.entrySet()) {
-            int year = entry.getKey();
-            Map<Teenager, Teenager> affectations = entry.getValue();
-            StringBuilder yearStringBuilder = new StringBuilder();
-            yearStringBuilder.append("Année : ").append(year).append("\n");
-            for (Map.Entry<Teenager, Teenager> affectationEntry : affectations.entrySet()) {
-                Teenager teenager1 = affectationEntry.getKey();
-                Teenager teenager2 = affectationEntry.getValue();
-                yearStringBuilder.append("\t").append(teenager1.getName()).append(" est chez ").append(teenager2.getName()).append("\n");
-            }
-            sb.append(yearStringBuilder);
+    public Affectation(List<Arete<Teenager>> aretes, Country Host, Country Visitor){
+        this();
+        for(Arete<Teenager> arete : aretes){
+            this.affectations(arete.getExtremite1() , arete.getExtremite2());
         }
-        return sb.toString();
-    }
-    
+        this.Host = Host;
+        this.Visitor = Visitor;
 
-    /*
+    }
+
+
+    public Country getHost(){
+        return this.Host;
+    }
+
+    public Country getVisitor(){
+        return this.Visitor;
+    }
+
     // Enleve le teenager courant qui est avec un autre.
     public void desaffectations(Teenager t){
         this.affectationsHistory.remove(t);
-    }*/
+    }
 
     // Affecte 2 Teenagers
-    public void affectations(Teenager t1, Teenager t2, int year) {
-        Map<Teenager, Teenager> affectation;
-        if (affectationsHistory.containsKey(year)) {
-            affectation = affectationsHistory.get(year);
-        } else {
-            affectation = new HashMap<Teenager, Teenager>();
-            affectationsHistory.put(year, affectation);
-        }
-        affectation.put(t1, t2);
+    public void affectations(Teenager t1 , Teenager t2){
+        this.affectationsHistory.put(t1 , t2);
     }
-    
 
     // Retourne le Teenager associer au Teenager courant.
-    public Teenager get(Teenager t, int year){
-        if (estAffecter(t, year)) {
-            return this.affectationsHistory.get(year).get(t);
-        }
-        return null;
+    public Teenager get( Teenager t){
+        return this.affectationsHistory.get(t);
     }
 
     // renvoie true si un teenager est affecter a un teenager.
-    public boolean estAffecter(Teenager t, int year){
-        if(this.affectationsHistory.containsKey(year) && this.affectationsHistory.get(year).containsKey(t)){
+    public boolean estAffecter(Teenager t){
+        if(this.affectationsHistory.containsKey(t)){
             return true;
         }
         return false;
     }
+
     
     public boolean estAffecter(Teenager t1 , Teenager t2){
         if(this.affectationsHistory.containsKey(t1) && this.affectationsHistory.get(t1) == t2){
             return true;
         }
         return false;
+    }
+
+
+    // retourne tout les associations 
+    public Map<Teenager, Teenager> getAssociations() {
+        return this.affectationsHistory ;
     }
 
 
@@ -107,7 +104,7 @@ public class Affectation implements Serializable {
         try {
             FileInputStream fileInputStream = new FileInputStream(filename);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            Map<Integer, Map<Teenager , Teenager>>  history = (Map<Integer, Map<Teenager , Teenager>>) objectInputStream.readObject();
+            Map<Teenager, Teenager> history = (Map<Teenager, Teenager>) objectInputStream.readObject();
             affectationsHistory.putAll(history); // Utiliser putAll pour copier les éléments dans affectationsHistory
             objectInputStream.close();
             fileInputStream.close();
@@ -120,8 +117,8 @@ public class Affectation implements Serializable {
 
     // Methode qui permet de réevaluer le poids d'un arrete en fonction de l'historique des Teenagers.
     public int historyTeenager(Teenager host , Teenager visitor){
-        if (estAffecter(host)) {
-            if (this.get(host).equals(visitor)){
+        if(estAffecter(host)){
+            if(this.get(host).equals(visitor)){
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme")){
                     return -100;
                 }
@@ -129,7 +126,7 @@ public class Affectation implements Serializable {
                     return 50;
                 }
             }
-        } else if(estAffecter(visitor)){
+        }else if(estAffecter(visitor)){
             if(this.get(visitor).equals(host)){
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme")){
                     return -100;
@@ -142,41 +139,37 @@ public class Affectation implements Serializable {
         return 0;
     }
 
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (!(this.getHost() == this.getVisitor() && this.getHost()==null)) sb.append(this.getHost() + " - " + this.getVisitor() + "\n");
+        for (Map.Entry<Teenager, Teenager> entry : affectationsHistory.entrySet()) {
+            sb.append(entry.getKey().getName().toString() + " -> " + entry.getValue().getName().toString() + "\n");
+        }
+        return sb.toString();
+    }
 
 
-    
+
     public static void main(String[] args) {
         Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
-        Teenager teenager4 = new Teenager(4, "teen4", "D", "F", LocalDate.of(2002, 10, 14), Country.SPAIN);
-        Teenager teenager5 = new Teenager(4, "teen5", "E", "M", LocalDate.of(2000, 2, 15), Country.SPAIN);
-        Teenager teenager6 = new Teenager(4, "teen6", "F", "M", LocalDate.of(2002, 5, 02), Country.ITALY);
-        Teenager teenager7 = new Teenager(4, "teen7", "G", "M", LocalDate.of(2002, 8, 23), Country.FRANCE);
+        Teenager teenager4 = new Teenager(4, "teen4", "C", "F", LocalDate.of(2002, 10, 20), Country.SPAIN);
 
         Affectation history = new Affectation();
-        history.affectations(teenager1 , teenager2, 0);
-        history.affectations(teenager3 , teenager4, 0);
-        history.affectations(teenager5 , teenager6, 0);
-        history.affectations(teenager7 , teenager1, 2);
-        history.affectations(teenager2 , teenager3, 2);
-        history.affectations(teenager4 , teenager5, 2);
-        history.affectations(teenager6 , teenager7, 2);
-        history.affectations(teenager1 , teenager3, 3);
-        history.affectations(teenager2 , teenager4, 3);
-        
 
-        System.out.println(history);
+        history.affectations(teenager1 , teenager2);
+        history.affectations(teenager3 , teenager4);
         // sauvegarde de l'historique dans un fichier
         String filename = "./res/historique.ser";
-        
         history.saveHistory(filename);
 
         // Chargement de l'historique à partir d'un fichier
-        Affectation loadedHistory = new Affectation();
+        Affectation loadedHistory = new Affectation(Country.FRANCE, Country.GERMANY);
         loadedHistory.loadHistory(filename);
 
         // Affichage 
-        System.out.println(loadedHistory);
+        System.out.println("historique chargé :\n" + loadedHistory.toString());
+        
     }
 }
