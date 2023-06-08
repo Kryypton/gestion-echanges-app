@@ -10,21 +10,23 @@ public class AffectationUtil implements Serializable {
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
      */
     
-     public static double weight (Teenager host, Teenager guest , Affectation history) {
-        double poid = 10;
-        double poids = 0;
+     public static int weight (Teenager host, Teenager guest , Affectation history) {
+        int poid = 10;
+        int poids = 0;
         poids -= host.nbLoisirCommun(guest);
-        if(!host.compatibleWithGuest(guest)){
-            poids += 100;
-        }
+        if(!host.compatibleWithGuest(guest)) poids += 100;
         //Pays différent ?
-        if (host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) {
-            poids += 10;
-        }
+        if (host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) poids += 10;
+        //Age différent ?
+        if (host.getDiffAge(guest).toTotalMonths()>18) poids -= 25;
+        if (host.getGender().equals(guest.getGender()))
+
         poid = poids;
-        poid = poid + history.historyTeenager(host, guest);
+        poid = poid + history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest);
         return poid;
     }
+
+   
 
     /**
      * Méthode qui permet de crée les sommets formé par les étudiants pour le graph

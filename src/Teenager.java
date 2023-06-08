@@ -24,6 +24,7 @@ public class Teenager implements Serializable{
     private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
+    private Teenager lastAffectation;
 
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
@@ -179,6 +180,19 @@ public class Teenager implements Serializable{
         }
         return true;
     }
+
+    /*public boolean compatibleWishGender(Teenager other) {
+        try {
+            if (this.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(other.getGender())) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return true;
+        }
+    }*/
+
 
     /**
      * Méthode qui permet de connaitre l'age d'un adolescent de type Period
@@ -508,8 +522,16 @@ public class Teenager implements Serializable{
 
     public static void main(String[] args) {
         Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
-        Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
+        //Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
         System.out.println(teenager1.getDiffAge(teenager3).toTotalMonths());
+    }
+
+    public void setLastAffectation(Teenager t){
+        this.lastAffectation = t;
+    }
+
+    public Teenager getLastAffectation(){
+        return this.lastAffectation;
     }
 }
