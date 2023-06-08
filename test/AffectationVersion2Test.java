@@ -91,9 +91,9 @@ public class AffectationVersion2Test {
 
     @Test
     public void testWeight(){
-        assertEquals(0, Affectation.weight(t1,t2,history/* A FAIRE History */), 0.1);
-        assertEquals(0, Affectation.weight(t1,t2,history/* A FAIRE History */), 0.1);
-        assertEquals(0, Affectation.weight(t1,t2,history/* A FAIRE History */), 0.1);
+        assertEquals(0, AffectationUtil.weight(t1,t2,history/* A FAIRE History */), 0.1);
+        assertEquals(0, AffectationUtil.weight(t1,t2,history/* A FAIRE History */), 0.1);
+        assertEquals(0, AffectationUtil.weight(t1,t2,history/* A FAIRE History */), 0.1);
     }
 
     @Test

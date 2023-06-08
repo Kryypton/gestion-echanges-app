@@ -133,11 +133,11 @@ public class AffectationVersion1Test {
         p.setTeenagerList(Platform.importTeenagers(csv));
         // faire machin
 
-        Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY);
+        AffectationUtil.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY);
 
         //exporter fichier
 
-        List<String> ex = Affectation.listAreteToListTeen(Affectation.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY));
+        List<String> ex = AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(p.getTeenagerList(),Country.FRANCE,Country.ITALY));
 
         Platform.exportTeenagersString(ex, "res/affectationReponse.csv");
         // comparer 2 fichier

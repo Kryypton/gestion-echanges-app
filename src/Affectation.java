@@ -1,136 +1,182 @@
-import fr.ulille.but.sae2_02.graphes.*;
-import java.io.Serializable;
+import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
+import fr.ulille.but.sae2_02.graphes.Arete;
+
 public class Affectation implements Serializable {
-    /**
-     * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 10 point, et plus ils seront compatible, plus leurs scores diminueras
-     * @param host l'adolescent hôte
-     * @param visitor l'adolescent invité
-     * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
-     */
+    private Map<Integer, Map<Teenager , Teenager>> affectationsHistory;
+
+    public Affectation() {
+        this.affectationsHistory = new HashMap<Integer, Map<Teenager , Teenager>>();
+    }
+
+    // Création de la hashmap de Teenagers et les arretes qui vont avec entre les Teenager.
+    public Affectation(Map<Integer, Arete<Teenager>> aretes){
+        this.affectationsHistory = new HashMap<Integer, Map<Teenager , Teenager>>();
+        for(Map.Entry<Integer, Arete<Teenager>> entry : aretes.entrySet()){
+            this.affectationsHistory.put(entry.getKey() , new HashMap<Teenager, Teenager>());
+        }
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, Map<Teenager , Teenager>> entry : affectationsHistory.entrySet()) {
+            int year = entry.getKey();
+            Map<Teenager, Teenager> affectations = entry.getValue();
+            StringBuilder yearStringBuilder = new StringBuilder();
+            yearStringBuilder.append("Année : ").append(year).append("\n");
+            for (Map.Entry<Teenager, Teenager> affectationEntry : affectations.entrySet()) {
+                Teenager teenager1 = affectationEntry.getKey();
+                Teenager teenager2 = affectationEntry.getValue();
+                yearStringBuilder.append("\t").append(teenager1.getName()).append(" est chez ").append(teenager2.getName()).append("\n");
+            }
+            sb.append(yearStringBuilder);
+        }
+        return sb.toString();
+    }
     
-     public static double weight (Teenager host, Teenager guest , History history) {
-        double poid = 10;
-        double poids = 0;
-        poids -= host.nbLoisirCommun(guest);
-        if(!host.compatibleWithGuest(guest)){
-            poids += 100;
+
+    /*
+    // Enleve le teenager courant qui est avec un autre.
+    public void desaffectations(Teenager t){
+        this.affectationsHistory.remove(t);
+    }*/
+
+    // Affecte 2 Teenagers
+    public void affectations(Teenager t1, Teenager t2, int year) {
+        Map<Teenager, Teenager> affectation;
+        if (affectationsHistory.containsKey(year)) {
+            affectation = affectationsHistory.get(year);
+        } else {
+            affectation = new HashMap<Teenager, Teenager>();
+            affectationsHistory.put(year, affectation);
         }
-        //Pays différent ?
-        if (host.getCriterion("COUNTRY").equals(guest.getCriterion("COUNTRY"))) {
-            poids += 10;
+        affectation.put(t1, t2);
+    }
+    
+
+    // Retourne le Teenager associer au Teenager courant.
+    public Teenager get(Teenager t, int year){
+        if (estAffecter(t, year)) {
+            return this.affectationsHistory.get(year).get(t);
         }
-        poid = poids;
-        poid = poid + history.historyTeenager(host, guest);
-        return poid;
+        return null;
     }
 
+    // renvoie true si un teenager est affecter a un teenager.
+    public boolean estAffecter(Teenager t, int year){
+        if(this.affectationsHistory.containsKey(year) && this.affectationsHistory.get(year).containsKey(t)){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean estAffecter(Teenager t1 , Teenager t2){
+        if(this.affectationsHistory.containsKey(t1) && this.affectationsHistory.get(t1) == t2){
+            return true;
+        }
+        return false;
+    }
+
+
     /**
-     * Méthode qui permet de crée les sommets formé par les étudiants pour le graph
-     * @param list La liste des étudiants a ajouter
-     * @param graph Le graph dans lequel on ajoute les sommets
+     * Sauvegarde l'historique dans un fichier en utilisant la sérialisation binaire
+     * @param filename Le nom du fichier de sauvegarde
      */
-    public static void addSummit(List<Teenager> list, GrapheNonOrienteValue<Teenager> graph){
-        for (Teenager teenager : list) {
-            graph.ajouterSommet(teenager);
+    public void saveHistory(String filename) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(affectationsHistory);
+            objectOutputStream.close();
+            fileOutputStream.close();
+            System.out.println("Historique sauvegardé ");
+        } catch (IOException e) {
+            System.out.println("erreur lors de la sauvegarde de l'historiqu" + e.getMessage());
+        }
+    }
+    
+
+    /**
+     * Charge l'historique à partir d'un fichier de sauvegarde en utilisant la désérialisation binaire
+     * @param filename Le nom du fichier de sauvegarde
+     */
+
+    public void loadHistory(String filename) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(filename);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Map<Integer, Map<Teenager , Teenager>>  history = (Map<Integer, Map<Teenager , Teenager>>) objectInputStream.readObject();
+            affectationsHistory.putAll(history); // Utiliser putAll pour copier les éléments dans affectationsHistory
+            objectInputStream.close();
+            fileInputStream.close();
+            System.out.println("historique chargé");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("erreur lors du chargement de l'historique: " + e.getMessage());
         }
     }
 
-    /**
-     * Méthode qui permet de crée les aretes composant le graph
-     * @param guest La liste des étudiants invités a ajouter
-     * @param host La liste des étudiants hôtes a ajouter
-     * @param graph Le graph dans lequel on ajoute les aretes
-     */
-    public static void addArete(List<Teenager> guest,List<Teenager> host, GrapheNonOrienteValue<Teenager> graph){
-        for (Teenager teenager1 : host) {
-            for (Teenager teenager2 : guest){
-                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new History() ));
-                //System.out.println(teenager1.getName() +" avec " + teenager2.getName() +" vaut " + weight(teenager1,teenager2));
+
+    // Methode qui permet de réevaluer le poids d'un arrete en fonction de l'historique des Teenagers.
+    public int historyTeenager(Teenager host , Teenager visitor){
+        if (estAffecter(host)) {
+            if (this.get(host).equals(visitor)){
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme")){
+                    return -100;
+                }
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different")){
+                    return 50;
+                }
+            }
+        } else if(estAffecter(visitor)){
+            if(this.get(visitor).equals(host)){
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("meme")){
+                    return -100;
+                }
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("different")){
+                    return 50;
+                }
             }
         }
+        return 0;
     }
+
+
 
     
-    /**
-     * Méthode qui permet de recuperer tout les étudiants appartenant a un pays donnée
-     * @param list la liste d'étudiants
-     * @param country le pays sélectionner
-     * @return une liste des étudiants appartenants aux pays country
-     */
-    public static List<Teenager> selectPays(List<Teenager> list, Country country){
-        List<Teenager> listCountry = new ArrayList<Teenager>();
-        for (Teenager teenager : list){
-            if (teenager.getCountryName().equals(country)){
-                listCountry.add(teenager);
-            }
-        }
-        return listCountry;
-    }
+    public static void main(String[] args) {
+        Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
+        Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
+        Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
+        Teenager teenager4 = new Teenager(4, "teen4", "D", "F", LocalDate.of(2002, 10, 14), Country.SPAIN);
+        Teenager teenager5 = new Teenager(4, "teen5", "E", "M", LocalDate.of(2000, 2, 15), Country.SPAIN);
+        Teenager teenager6 = new Teenager(4, "teen6", "F", "M", LocalDate.of(2002, 5, 02), Country.ITALY);
+        Teenager teenager7 = new Teenager(4, "teen7", "G", "M", LocalDate.of(2002, 8, 23), Country.FRANCE);
 
-    /**
-     * Méthode qui permet de crée les aretes composant le graph
-     * @param guest La liste des étudiants invités a ajouter
-     * @param host La liste des étudiants hôtes a ajouter
-     * @param graph Le graph dans lequel on ajoute les aretes
-     */
-    public static List<Arete<Teenager>> affectation(List<Teenager> groupe , Country guest , Country host){
-        List<Teenager> hostList = Affectation.selectPays(groupe, host);    
-        List<Teenager> guestList = Affectation.selectPays(groupe, guest);
-        GrapheNonOrienteValue<Teenager> graph = new GrapheNonOrienteValue<Teenager>();
-        for (Teenager teenager1 : hostList) {
-            graph.ajouterSommet(teenager1);
-        }
-        for (Teenager teenager2 : guestList) {
-            graph.ajouterSommet(teenager2);
-        }
-        for(Teenager teenager1 : hostList){
-            for (Teenager teenager2 : guestList){
-                graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new History() ));
-            }
-        }
-        CalculAffectation<Teenager> calcul = new CalculAffectation<Teenager>(graph , hostList , guestList);
-        return calcul.calculerAffectation();
-    }
+        Affectation history = new Affectation();
+        history.affectations(teenager1 , teenager2, 0);
+        history.affectations(teenager3 , teenager4, 0);
+        history.affectations(teenager5 , teenager6, 0);
+        history.affectations(teenager7 , teenager1, 2);
+        history.affectations(teenager2 , teenager3, 2);
+        history.affectations(teenager4 , teenager5, 2);
+        history.affectations(teenager6 , teenager7, 2);
+        history.affectations(teenager1 , teenager3, 3);
+        history.affectations(teenager2 , teenager4, 3);
+        
 
+        System.out.println(history);
+        // sauvegarde de l'historique dans un fichier
+        String filename = "./res/historique.ser";
+        
+        history.saveHistory(filename);
 
-    /**
-     * Méthode qui permet de retourner sous String une liste du nom des étudiants
-     * @param list
-     * @return Un String listants les nom des étudiants
-     */
-    public static String listToString(List<Teenager> list){
-        String ten = "";
-        for (Teenager teenager : list){
-            ten += teenager.getName() + "\n";
-        }
-        return ten;
-    }
+        // Chargement de l'historique à partir d'un fichier
+        Affectation loadedHistory = new Affectation();
+        loadedHistory.loadHistory(filename);
 
-    /**
-     * Méthode qui permet de retourner sous String le nom de deux adolescent avec le poid de leur compatibilité
-     * @param list la liste d'adolescent
-     * @return Un string avec le nom de deux adolescent avec le poid de leur compatibilité
-     */
-    public static String listAreteToString(List<Arete<Teenager>> list){
-        String ten = "";
-        for (Arete<Teenager> teenager : list){
-            ten += teenager.getExtremite1().getName() + " and " + teenager.getExtremite2().getName()+ ": " +teenager.getPoids() + "\n";
-        }
-        return ten;
-    }
-
-    /**
-     * Méthode qui permet de retourner sous une liste de String 2 adolescent compatible
-     * @param list la liste d'adolescent
-     * @return Une liste de String avec des adolescent compatible
-     */
-    public static Map<Teenager,Teenager> listAreteToListTeen(List<Arete<Teenager>> list){
-        Map<Teenager,Teenager> newMap = new HashMap<Teenager,Teenager>();
-        for (Arete<Teenager> teenager : list){
-            newMap.put(teenager.getExtremite1(),teenager.getExtremite2());
-        }
-        return newMap;
+        // Affichage 
+        System.out.println(loadedHistory);
     }
 }

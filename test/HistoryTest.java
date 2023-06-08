@@ -12,7 +12,7 @@ public class HistoryTest {
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
 
-        History history = new History();
+        Affectation history = new Affectation();
         history.affectations(teenager1, teenager2, 0);
         history.affectations(teenager2, teenager3, 1);
 
@@ -31,7 +31,7 @@ public class HistoryTest {
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
 
-        History history = new History();
+        Affectation history = new Affectation();
         history.affectations(teenager1, teenager2, 0);
         history.affectations(teenager2, teenager3, 1);
 
@@ -47,7 +47,7 @@ public class HistoryTest {
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
 
-        History history = new History();
+        Affectation history = new Affectation();
         history.affectations(teenager1, teenager2, 0);
         history.affectations(teenager2, teenager3, 1);
 
@@ -64,7 +64,7 @@ public class HistoryTest {
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
 
-        History history = new History();
+        Affectation history = new Affectation();
         history.affectations(teenager1, teenager2, 0);
         history.affectations(teenager2, teenager3, 1);
 
@@ -72,7 +72,7 @@ public class HistoryTest {
 
         history.saveHistory(filename);
 
-        History loadedHistory = new History();
+        Affectation loadedHistory = new Affectation();
         loadedHistory.loadHistory(filename);
 
         Map<Integer, Map<Teenager, Teenager>> loadedAffectations = loadedHistory.getAffectationsHistory();
@@ -92,7 +92,7 @@ public class HistoryTest {
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
 
-        History history = new History();
+        Affectation history = new Affectation();
         history.affectations(teenager1, teenager2, 0);
         history.affectations(teenager2, teenager3, 1);
 
