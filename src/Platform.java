@@ -189,7 +189,7 @@ public class Platform {
                 bw.write(a+"\n");
                 bw.newLine();
             }
-        }catch(IOException e) {
+        } catch (IOException e) {
                 System.out.println("Writing error: " + e.getMessage());
                 e.printStackTrace();
         }

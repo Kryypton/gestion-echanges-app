@@ -2,8 +2,7 @@ import fr.ulille.but.sae2_02.graphes.*;
 import java.io.Serializable;
 import java.util.*;
 
-public class Affectation implements Serializable{
-
+public class Affectation implements Serializable {
     /**
      * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 10 point, et plus ils seront compatible, plus leurs scores diminueras
      * @param host l'adolescent hôte

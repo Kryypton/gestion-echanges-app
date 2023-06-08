@@ -24,8 +24,6 @@ public class Teenager implements Serializable{
     private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
-    private Map<String, Criterion> criterions = new HashMap<String, Criterion>();
-    private static Map<Teenager , Teenager > history = new HashMap<>();
 
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
@@ -164,8 +162,6 @@ public class Teenager implements Serializable{
         return false;
     }
 
-
-
     /**
      * Méthode qui permet de savoir si un adolescent est compatible avec un autre adolescent combinant tout les critères
      * @param guest l'invité à comparer avec l'adolescent courant
@@ -182,7 +178,6 @@ public class Teenager implements Serializable{
             }
         }
         return true;
-        
     }
 
     /**
@@ -193,6 +188,10 @@ public class Teenager implements Serializable{
         LocalDate dateNow = LocalDate.now();
         Period p = Period.between(this.birthDate, dateNow);
         return p;
+    }
+
+    public Period getDiffAge(Teenager guest){
+        return Period.between(this.birthDate, guest.getBirthDate());
     }
 
     /**
@@ -428,13 +427,11 @@ public class Teenager implements Serializable{
         result = prime * result + ((countryName == null) ? 0 : countryName.hashCode());
         result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
         result = prime * result + ((requirements == null) ? 0 : requirements.hashCode());
-        result = prime * result + ((criterions == null) ? 0 : criterions.hashCode());
         return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        //faire un truc si obj est null
         if (this == obj)
             return true;
         if (obj == null)
@@ -470,11 +467,6 @@ public class Teenager implements Serializable{
             if (other.requirements != null)
                 return false;
         } else if (!requirements.equals(other.requirements))
-            return false;
-        if (criterions == null) {
-            if (other.criterions != null)
-                return false;
-        } else if (!criterions.equals(other.criterions))
             return false;
         return true;
     }
@@ -512,5 +504,12 @@ public class Teenager implements Serializable{
 
     public Criterion getHistory() {
         return requirements.get(CriterionName.HISTORY.name());
+    }
+
+    public static void main(String[] args) {
+        Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
+        Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
+        Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
+        System.out.println(teenager1.getDiffAge(teenager3).toTotalMonths());
     }
 }
