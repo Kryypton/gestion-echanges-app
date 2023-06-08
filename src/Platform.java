@@ -58,12 +58,10 @@ public class Platform {
         for (Teenager teenager : teenagerList) {
             for (Teenager guest : teenagerList) {
                 System.out.println("Comparaison de " + teenager.getName() + " avec " + guest.getName());
-                if (!teenager.equals(guest)) {
-                    if (teenager.compatibleWithGuest(guest)) {
-                        compatibleTeenagers.put(teenager, guest);
-                    }
+                if (teenager.compatibleWithGuest(guest)) {
+                    compatibleTeenagers.put(teenager, guest);
                 } else {
-                    System.out.println("Les deux adolescents sont identiques - (findCompatibleTeenagers method)");
+                    System.out.println("Les deux adolescents ne sont pas compatibles");
                 }
             }
         }

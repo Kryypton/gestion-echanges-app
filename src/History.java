@@ -22,10 +22,16 @@ public class History implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Integer, Map<Teenager , Teenager>> entry : affectationsHistory.entrySet()) {
-            sb.append("Année : ").append(entry.getKey()).append("\n");
-            for (Map.Entry<Teenager, Teenager> entry2 : entry.getValue().entrySet()) {
-                sb.append("\t").append(entry2.getKey().getName()).append(" est chez ").append(entry2.getValue().getName()).append("\n");
+            int year = entry.getKey();
+            Map<Teenager, Teenager> affectations = entry.getValue();
+            StringBuilder yearStringBuilder = new StringBuilder();
+            yearStringBuilder.append("Année : ").append(year).append("\n");
+            for (Map.Entry<Teenager, Teenager> affectationEntry : affectations.entrySet()) {
+                Teenager teenager1 = affectationEntry.getKey();
+                Teenager teenager2 = affectationEntry.getValue();
+                yearStringBuilder.append("\t").append(teenager1.getName()).append(" est chez ").append(teenager2.getName()).append("\n");
             }
+            sb.append(yearStringBuilder);
         }
         return sb.toString();
     }
@@ -38,11 +44,17 @@ public class History implements Serializable {
     }*/
 
     // Affecte 2 Teenagers
-    public void affectations(Teenager t1 , Teenager t2, int year){
-        Map<Teenager, Teenager> affectation = new HashMap<Teenager, Teenager>();
-        affectation.put(t1 , t2);
-        this.affectationsHistory.put(year, affectation);
+    public void affectations(Teenager t1, Teenager t2, int year) {
+        Map<Teenager, Teenager> affectation;
+        if (affectationsHistory.containsKey(year)) {
+            affectation = affectationsHistory.get(year);
+        } else {
+            affectation = new HashMap<Teenager, Teenager>();
+            affectationsHistory.put(year, affectation);
+        }
+        affectation.put(t1, t2);
     }
+    
 
     // Retourne le Teenager associer au Teenager courant.
     public Teenager get(Teenager t, int year){
@@ -135,12 +147,23 @@ public class History implements Serializable {
         Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
         Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
         Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
-        Teenager teenager4 = new Teenager(4, "teen4", "C", "F", LocalDate.of(2002, 10, 20), Country.SPAIN);
+        Teenager teenager4 = new Teenager(4, "teen4", "D", "F", LocalDate.of(2002, 10, 14), Country.SPAIN);
+        Teenager teenager5 = new Teenager(4, "teen5", "E", "M", LocalDate.of(2000, 2, 15), Country.SPAIN);
+        Teenager teenager6 = new Teenager(4, "teen6", "F", "M", LocalDate.of(2002, 5, 02), Country.ITALY);
+        Teenager teenager7 = new Teenager(4, "teen7", "G", "M", LocalDate.of(2002, 8, 23), Country.FRANCE);
 
         History history = new History();
         history.affectations(teenager1 , teenager2, 0);
         history.affectations(teenager3 , teenager4, 0);
+        history.affectations(teenager5 , teenager6, 0);
+        history.affectations(teenager7 , teenager1, 2);
+        history.affectations(teenager2 , teenager3, 2);
+        history.affectations(teenager4 , teenager5, 2);
+        history.affectations(teenager6 , teenager7, 2);
+        history.affectations(teenager1 , teenager3, 3);
+        history.affectations(teenager2 , teenager4, 3);
         
+
         System.out.println(history);
         // sauvegarde de l'historique dans un fichier
         String filename = "./res/historique.ser";
@@ -152,11 +175,6 @@ public class History implements Serializable {
         loadedHistory.loadHistory(filename);
 
         // Affichage 
-        for (Map.Entry<Integer, Map<Teenager , Teenager>> entry : loadedHistory.affectationsHistory.entrySet()) {
-            System.out.println("year : " + entry.getKey());
-            for (Map.Entry<Teenager , Teenager> entry2 : entry.getValue().entrySet()) {
-                System.out.println("host : " + entry2.getKey().getName() + " visitor : " + entry2.getValue().getName() + "année : " + entry.getKey());
-            }
-        }
+        System.out.println(loadedHistory);
     }
 }

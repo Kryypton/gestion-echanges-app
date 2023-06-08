@@ -215,7 +215,9 @@ public class Teenager implements Serializable{
         if (hostFood.getValue().equals(guestFood.getValue())) return true;
         return false;
     }
-    
+
+
+
     /**
      * Méthode qui permet de savoir si un adolescent est compatible avec un autre adolescent combinant tout les critères
      * @param guest l'invité à comparer avec l'adolescent courant
