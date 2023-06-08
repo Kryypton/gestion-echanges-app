@@ -26,8 +26,8 @@ public class Teenager implements Serializable{
     private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
-    Map<String, Criterion> criterions = new HashMap<String, Criterion>();
-    static Map<Teenager , Teenager > history = new HashMap<>();
+    private Map<String, Criterion> criterions = new HashMap<String, Criterion>();
+    private static Map<Teenager , Teenager > history = new HashMap<>();
 
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
@@ -80,7 +80,7 @@ public class Teenager implements Serializable{
     //     this.id = id;//stringToInt(scan.next());
     //     this.forname = scan.next();
     //     this.name = scan.next();
-    //     this.countryName = isContry(scan.next());
+    //     this.countryName = isCountry(scan.next());
 
     //     this.birthDate = LocalDate.parse(scan.next());
 
@@ -109,15 +109,15 @@ public class Teenager implements Serializable{
     // }
 
     /**
-     * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier, charger en fonction du pattern
+     * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier, charger en fonction du patern
      * @param CSV le nom d'un adolescent
      * @param id l'identifiant unique d'un adolescent
-     * @param pattern l'ordre des paramétre
+     * @param patern l'ordre des paramétre
      */
-    public Teenager(String CSV, int id, String pattern){
+    public Teenager(String CSV, int id, String patern){
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter(";");
-        Scanner scanPattern = new Scanner(pattern);
+        Scanner scanPatern = new Scanner(patern);
 
         Criterion guest_animal_allergy = new Criterion(null, CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion host_as_animal = new Criterion(null, CriterionName.HOST_HAS_ANIMAL);
@@ -129,29 +129,29 @@ public class Teenager implements Serializable{
         Criterion history = new Criterion(null, CriterionName.HISTORY);
 
         while(scan.hasNext()){
-            if(scanPattern.next().equals("NAME")){
+            if(scanPatern.next().equals("NAME")){
                 this.name = scan.next();
-            }else if(scanPattern.next().equals("FORENAME")){
+            }else if(scanPatern.next().equals("FORENAME")){
                 this.forname = scan.next();
-            }else if(scanPattern.next().equals("COUNTRY")){
-                this.countryName = isContry(scan.next());
-            }else if(scanPattern.next().equals("BIRTH_DATE")){
+            }else if(scanPatern.next().equals("COUNTRY")){
+                this.countryName = isCountry(scan.next());
+            }else if(scanPatern.next().equals("BIRTH_DATE")){
                 this.birthDate = LocalDate.parse(scan.next());
-            }else if(scanPattern.next().equals("GUEST_ANIMAL_ALLERGY")){
+            }else if(scanPatern.next().equals("GUEST_ANIMAL_ALLERGY")){
                 guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
-            }else if(scanPattern.next().equals("HOST_HAS_ANIMAL")){
+            }else if(scanPatern.next().equals("HOST_HAS_ANIMAL")){
                 host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
-            }else if(scanPattern.next().equals("GUEST_FOOD_CONSTRAINT")){
+            }else if(scanPatern.next().equals("GUEST_FOOD_CONSTRAINT")){
                 guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD);
-            }else if(scanPattern.next().equals("HOST_FOOD")){
+            }else if(scanPatern.next().equals("HOST_FOOD")){
                 host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
-            }else if(scanPattern.next().equals("HOBBIES")){
+            }else if(scanPatern.next().equals("HOBBIES")){
                 hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
-            }else if(scanPattern.next().equals("GENDER")){
+            }else if(scanPatern.next().equals("GENDER")){
                 gender = new Criterion(scan.next(), CriterionName.GENDER);
-            }else if(scanPattern.next().equals("PAIR_GENDER")){
+            }else if(scanPatern.next().equals("PAIR_GENDER")){
                 pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
-            }else if(scanPattern.next().equals("HISTORY")){
+            }else if(scanPatern.next().equals("HISTORY")){
                 history = new Criterion(scan.next(), CriterionName.HISTORY);
             }
         }
@@ -170,7 +170,7 @@ public class Teenager implements Serializable{
         this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
 
         scan.close();
-        scanPattern.close();
+        scanPatern.close();
     }
 
     /**
@@ -531,11 +531,11 @@ public class Teenager implements Serializable{
     }
 
     /**
-     * Méthode qui permet de retrouver l'enumération du pays grace à un String dyu pays. Utiliser lors de l'importation
+     * Méthode qui permet de retrouver l'enumération du pays grace à un String du pays. Utiliser lors de l'importation
      * @param countryName Le nom du pays de l'étudiant
      * @return l'enum correspondant aux pays en paramètre
      */
-    public Country isContry(String countryName){
+    public Country isCountry(String countryName){
         if(countryName.equals("FRANCE")){
             return Country.FRANCE;
         }

@@ -34,7 +34,7 @@ public enum CriterionName {
      */
     PAIR_GENDER('T'),
     /**
-     * historique de l'adolescent
+     * dernière adolescent
      */
     HISTORY('T'),
 

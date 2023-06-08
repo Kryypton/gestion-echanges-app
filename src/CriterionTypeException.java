@@ -7,7 +7,6 @@ public class CriterionTypeException extends Exception {
 
     }
 
-
     public CriterionTypeException(String message) {
         super(message);
     }
