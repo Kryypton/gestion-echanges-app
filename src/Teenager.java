@@ -239,6 +239,7 @@ public class Teenager implements Serializable{
     * @return int nombre de loisirs communs
     */
 
+
     public int nbLoisirCommun(Teenager teen){
         if(!teen.requirements.containsKey("HOBBIES") || !this.requirements.containsKey("HOBBIES")){
             return 0;
@@ -255,6 +256,7 @@ public class Teenager implements Serializable{
         System.out.println("nbLoisir : " + nbLoisir);
         return nbLoisir;
     }
+
 
     /**
      * Renvoie true si les 2 Teenager ont au moins un loisir en commun.

@@ -35,7 +35,7 @@ L'appariement optimal est Bellatrix--Xolag, Adonia--Zander, et Callista--Yak car
 
 *Donner un graphe qui modélise l'Exemple 1, plus précisément, la matrice d'adjacence de ce graphe. Expliquez comment vous avez choisi le poids pour chacune des arêtes.*
 
-![Texte alternatif](./Img/)
+![Texte alternatif](./img/Exemple1.png)
 
 Pour le choix du poids des arêtes, on les fait tous démarrer à 0. Nous avons fait plus de 100 lorsque les 2 étudiants sont incompatibles et -1 par hobbies communs.
 
@@ -58,7 +58,9 @@ Nous enlevons pour un appariement 1 point par hobbie commun, puis nous ajoutons 
 *Si vous n'êtes pas à l'aise avec les tests unitaires, votre classe TestAffectationVersion1 peut contenir une méthode main à la palce de la méthode de test, dans ce cas vous afficherez dans le terminal l'appariement résultat.*
 
 
-////////////////// a faire
+Pour l'implémentation nous l'avons dans le fichier [AffectationUtil.java](../src/AffectationUtil.java)
+
+Pour le test il se trouve dans le fichier [AffectationVersion1Test.java](../test/AffectationVersion1Test.java)
 
 ### Exemple de vérification de l'incompatibilité 
 

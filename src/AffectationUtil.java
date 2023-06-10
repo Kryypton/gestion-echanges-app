@@ -6,7 +6,7 @@ import fr.ulille.but.sae2_02.graphes.Arete;
 
 public class AffectationUtil implements Serializable {
     /**
-     * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 10 point, et plus ils seront compatible, plus leurs scores diminueras
+     * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 100 point, et plus ils seront compatible, plus leurs scores diminueras
      * @param host l'adolescent hôte
      * @param visitor l'adolescent invité
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
@@ -31,8 +31,15 @@ public class AffectationUtil implements Serializable {
         return poid;
     }
 
-   
 
+    public static int weightVersion1 (Teenager host, Teenager guest , Affectation history) {
+        int poids = 0;
+        poids -= host.nbLoisirCommun(guest);
+        if(!host.compatibleWithGuest(guest)) poids += 100;
+        return poids;
+    }
+
+   
     /**
      * Méthode qui permet de crée les sommets formé par les étudiants pour le graph
      * @param list La liste des étudiants a ajouter
