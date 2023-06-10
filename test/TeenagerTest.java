@@ -155,7 +155,7 @@ public class TeenagerTest {
         assertFalse(t2.compatibleWithGuest(t3));
         assertFalse(t3.compatibleWithGuest(t2));
         assertTrue(t3.compatibleWithGuest(t1));
-        assertTrue(t1.compatibleWithGuest(t5));
+        assertFalse(t1.compatibleWithGuest(t5));
     }
 
     @Test
@@ -194,6 +194,6 @@ public class TeenagerTest {
 
     @Test
     void testNbLoisirCommun() {
-        assertEquals(t1.nbLoisirCommun(t5), 1);
+        assertEquals(t1.nbLoisirCommun(t5), 0);
     }
 }

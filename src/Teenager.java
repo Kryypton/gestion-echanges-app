@@ -144,6 +144,9 @@ public class Teenager implements Serializable{
      */
     public boolean compatibleAnimal(Teenager guest){
         if (guest == null) return false;
+        if(!guest.requirements.containsKey("GUEST_ANIMAL_ALLERGY") || !this.requirements.containsKey("HOST_HAS_ANIMAL")){
+            return true;
+        }
         Criterion animalRequirement = requirements.get(CriterionName.HOST_HAS_ANIMAL.name());
         Criterion guestAnimalRequirement = guest.getRequirements().get(CriterionName.GUEST_ANIMAL_ALLERGY.name());
         if (animalRequirement.getValue().equals("yes") && guestAnimalRequirement.getValue().equals("yes")) {
@@ -158,6 +161,9 @@ public class Teenager implements Serializable{
      * @return [true] si l'adolescent est compatible avec l'invité, [false] sinon
      */
     public boolean compatibleFood(Teenager guest) {
+        if(!guest.requirements.containsKey("GUEST_FOOD") || !this.requirements.containsKey("HOST_FOOD")){
+            return true;
+        }
         Criterion hostFood = this.getRequirements().get(CriterionName.HOST_FOOD.name());
         Criterion guestFood = guest.getRequirements().get(CriterionName.GUEST_FOOD.name());
     
