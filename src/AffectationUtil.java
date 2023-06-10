@@ -32,7 +32,7 @@ public class AffectationUtil implements Serializable {
     }
 
 
-    public static int weightVersion1 (Teenager host, Teenager guest , Affectation history) {
+    public static int weightVersion1 (Teenager host, Teenager guest) {
         int poids = 0;
         poids -= host.nbLoisirCommun(guest);
         if(!host.compatibleWithGuest(guest)) poids += 100;
@@ -155,8 +155,8 @@ public class AffectationUtil implements Serializable {
         Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
         Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
         
-        Criterion sport = new Criterion("sport", CriterionName.HOBBIES);
-        Criterion technologie = new Criterion("technologie", CriterionName.HOBBIES);
+        Criterion sport = new Criterion("sports", CriterionName.HOBBIES);
+        Criterion technologie = new Criterion("technology", CriterionName.HOBBIES);
         Criterion science = new Criterion("science", CriterionName.HOBBIES);
         Criterion reading = new Criterion("reading", CriterionName.HOBBIES);
         Criterion music = new Criterion("music", CriterionName.HOBBIES);

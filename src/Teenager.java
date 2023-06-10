@@ -65,6 +65,13 @@ public class Teenager implements Serializable{
         this.countryName = countryName;
     }
 
+    public Teenager(String forname , String name , Country countryName ){
+        this.name = name;
+        this.forname = forname;
+        this.countryName = countryName;
+        this.requirements = new HashMap<String, Criterion>();
+    }
+
     /**
      * Constructeur de la classe Teenager en paramètre un String, qui correspond à un teengager qui vient de l'importation d'un fichier, charger en fonction du patern
      * @param CSV le nom d'un adolescent
