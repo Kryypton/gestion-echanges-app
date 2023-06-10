@@ -65,6 +65,16 @@ public class Teenager implements Serializable{
         this.countryName = countryName;
     }
 
+    public Teenager(String name , String forname , String gender , LocalDate birthDate , Country countryName){
+        this.name = name;
+        this.forname = forname;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.requirements = new HashMap<String, Criterion>();
+        this.countryName = countryName;
+    }
+
+
     public Teenager(String forname , String name , Country countryName ){
         this.name = name;
         this.forname = forname;

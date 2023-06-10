@@ -2,7 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,7 +52,6 @@ public class AffectationTest {
     @Test
     public void testHistoryTeenager() {
         Criterion critere = new Criterion("same", CriterionName.HISTORY);
-        Criterion critere2 = new Criterion("other", CriterionName.HISTORY);
         
         affectation.affectations(t1, t2);
         t1.addCriterion(CriterionName.HISTORY.name(), critere);

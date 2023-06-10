@@ -35,9 +35,9 @@ L'appariement optimal est Bellatrix--Xolag, Adonia--Zander, et Callista--Yak car
 
 *Donner un graphe qui modélise l'Exemple 1, plus précisément, la matrice d'adjacence de ce graphe. Expliquez comment vous avez choisi le poids pour chacune des arêtes.*
 
-![Texte alternatif](./img/Exemple1.png)
+![Exemple1](./img/Exemple1.png)
 
-Pour le choix du poids des arêtes, on les fait tous démarrer à 0. Nous avons fait plus de 100 lorsque les 2 étudiants sont incompatibles et -1 par hobbies communs.
+Pour le choix du poids des arêtes, on les fait tous démarrer à 100. Nous avons fait plus de 100 lorsque les 2 étudiants sont incompatibles et -1 par hobbies communs.
 
 ### Modélisation pour la Version 1
 
@@ -64,20 +64,29 @@ Pour le test il se trouve dans le fichier [AffectationVersion1Test.java](../test
 
 ### Exemple de vérification de l'incompatibilité 
 
-*Cet exemple va mettre au défi votre modèle vis à vis de la prise en compte de l'incompatibilité entre adolescents 
+*Cet exemple va mettre au défi votre modèle vis à vis de la prise en compte de l'incompatibilité entre adolescents*
 
-Récupérez sur Moodle le fichier de données `compatibilityVsHobbies.csv`. Expliquez quelle est sa particularité de cet exemple. Écrire la méthode de test qui test qui change cet exemple, construit le graphe modèle, calcule l'affectation, et finalement vérifie qu'aucune paire d'adolescents non compatibles n'a été construite par l'algorithme.*
+*Récupérez sur Moodle le fichier de données `compatibilityVsHobbies.csv`. Expliquez quelle est sa particularité de cet exemple. Écrire la méthode de test qui test qui change cet exemple, construit le graphe modèle, calcule l'affectation, et finalement vérifie qu'aucune paire d'adolescents non compatibles n'a été construite par l'algorithme.*
 
     -   2 chose sont remarquable dans ce fichier : 
 
         *   On peut voir dans ce fichier que certains adolescents n'ont aucun loisir alors que contrairement à d'autres adolescents qui eux ont beaucoup de loisirs.
         *   Une incohérence est aussi présente dans ce fichier en effet on peut retrouver l’adolescent A A qui est allergique au animaux alors qu’il en possède un.
 
+En implémentant l'exemple donner pour compatibilityVsHobbies nous avons générer 2 graphe different grace a la regle de calcule de poinds mise en place un peu plus haut.
+
+Nous obtenons ce graphe lorsque se sont les Italiens qui se rendent chez les Allemands : 
 
 ![Texte alternatif](./Img/)
 
 
+Nous obtenons ce graphe lorsque se sont les Allemands qui se rendent chez les Italiens : 
+
 ![Texte alternatif](./Img/)
+
+
+Les tests fait pour obtenir ces graphe se trouve dans [AffectationVersion1Test.java](../test/AffectationVersion1Test.java) 
+Dans la partie : "Exemple 2 du sujet qui implemente IncompatibilityVsHobbies"
 
 
 
@@ -96,6 +105,16 @@ Sera évaluée à partir du tag git `Graphes-v2`
 
 *Puis, donner un appariement optimal qui tient compte des données d'historique, et expliquer pourquoi il est optimal. L'explication ne doit pas parler des graphes, mais uniquement des adolescents et les critères exprimés.*
 
+
+Voici un petit exemple que l'on va utiliser pour tester l'historique : 
+
+![Texte alternatif](./Img/)
+
+
+
+Voici donc le graphe obtenu avec cette exemple : 
+
+![Texte alternatif](./Img/)
 
 
 ### Deuxième exemple pour la gestion d'historique

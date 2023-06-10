@@ -33,10 +33,12 @@ public class AffectationUtil implements Serializable {
 
 
     public static int weightVersion1 (Teenager host, Teenager guest) {
+        int poid = 100;
         int poids = 0;
         poids -= host.nbLoisirCommun(guest);
         if(!host.compatibleWithGuest(guest)) poids += 100;
-        return poids;
+        poid = poid + poids;
+        return poid;
     }
 
    
@@ -150,6 +152,7 @@ public class AffectationUtil implements Serializable {
 
 
     public static void main(String[] args) {
+        
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
@@ -415,20 +418,6 @@ public class AffectationUtil implements Serializable {
         System.out.println(calculit.getCout());
 
 
-        
-
-
-        /*// sauvegarde de l'historique dans un fichier
-        String filename = "./res/historique.ser";
-        history.saveHistory(filename);
-
-        // Chargement de l'historique à partir d'un fichier
-        Affectation loadedHistory = new Affectation();
-        loadedHistory.loadHistory(filename);
-
-        // Affichage 
-        System.out.println("historique chargé :\n" + loadedHistory.toString());
-        System.out.println(history.getLast(teenager1).getName());*/
         
     }
 }
