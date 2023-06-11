@@ -153,6 +153,8 @@ public class AffectationUtil implements Serializable {
 
         // Voici l'exemple 1 du sujet implementé
 
+        System.out.println("////////////////////////// Graphe Version 1 //////////////////////////");
+
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
@@ -316,9 +318,14 @@ public class AffectationUtil implements Serializable {
         ////////////////////////// Graphe Version 2 //////////////////////////
 
 
+        System.out.println("////////////////////////// Graphe Version 2 //////////////////////////");
+        System.out.println("\n");
 
-
+        
         // Premiere version de l'exemple pour l'historique
+
+        System.out.println("Premiere version de l'exemple pour l'historique : ");
+        System.out.println("\n");
 
         Criterion historySame = new Criterion("same", CriterionName.HISTORY);
         Criterion historyOther = new Criterion("other", CriterionName.HISTORY);
@@ -420,6 +427,9 @@ public class AffectationUtil implements Serializable {
 
 
         // Deuxieme version de l'exemple pour l'historique avec les parametre en plus demandés
+
+        System.out.println("Deuxieme version de l'exemple pour l'historique avec les parametre en plus demandés : ");
+        System.out.println("\n");
 
         Criterion science = new Criterion("science", CriterionName.HOBBIES);
         Criterion reading = new Criterion("reading", CriterionName.HOBBIES);
