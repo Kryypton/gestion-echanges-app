@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="762.0" style="-fx-background-color: #071835;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" prefHeight="30.0" prefWidth="600.0" style="-fx-background-color: grey;">
+      <HBox alignment="CENTER" prefHeight="110.0" prefWidth="762.0" style="-fx-background-color: #204382;">
          <children>
-            <Label alignment="CENTER" text="Accueil">
-               <HBox.margin>
-                  <Insets left="250.0" />
-               </HBox.margin>
+            <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Accueil" textFill="WHITE">
+               <font>
+                  <Font name="cocogoose" size="22.0" />
+               </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" text="Déconnexion">
-               <HBox.margin>
-                  <Insets left="190.0" />
-               </HBox.margin>
-            </Button>
+         </children>
+      </HBox>
+      <HBox prefWidth="762.0">
+         <VBox.margin>
+            <Insets top="100.0" />
+         </VBox.margin>
+         <children>
+            <VBox prefHeight="250.0" prefWidth="250.0" />
+            <VBox prefHeight="428.0" prefWidth="342.0">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="55.0" prefWidth="342.0" style="-fx-background-color: #071835; -fx-border-color: #204382; -fx-border-width: 3;" text="Gestion des élèves" textFill="WHITE">
+                     <font>
+                        <Font name="cocogoose" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="342.0" style="-fx-background-color: #071835; -fx-border-color: #204382; -fx-border-width: 4;" text="Gestion des appariements" textFill="WHITE">
+                     <font>
+                        <Font name="cocogoose"  size="15.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="342.0" style="-fx-border-color: #204382; -fx-border-width: 4; -fx-background-color: #204382;" text="Historique de modification" textFill="WHITE" />
+               </children>
+            </VBox>
+            <VBox prefHeight="75.0" prefWidth="250.0">
+               <children>
+                  <VBox prefHeight="444.0" prefWidth="210.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button alignment="BASELINE_CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="164.0" style="-fx-background-color: #071835; -fx-border-color: #ffffff; -fx-border-width: 2;" text="Déconnexion" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="cocogoose"  size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
          </children>
       </HBox>
       <HBox prefHeight="30.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" text="Gestion des élèves">
-               <HBox.margin>
-                  <Insets left="100.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="Gestion des appariements">
-               <HBox.margin>
-                  <Insets left="100.0" />
-               </HBox.margin>
-            </Button>
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="377.0" />
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="377.0" />
          </children>
-         <VBox.margin>
-            <Insets top="100.0" />
-         </VBox.margin>
       </HBox>
-      <Button mnemonicParsing="false" text="Historique de modification">
-         <VBox.margin>
-            <Insets left="200.0" top="50.0" />
-         </VBox.margin>
-      </Button>
    </children>
 </VBox>
