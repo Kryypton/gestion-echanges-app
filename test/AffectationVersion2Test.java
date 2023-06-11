@@ -147,7 +147,10 @@ public class AffectationVersion2Test {
 
     @Test
     public void testExemple2(){
-        
+        assertEquals(115 , AffectationUtil.weight(teenager9, teenager13, history2));
+        assertEquals(115 , AffectationUtil.weight(teenager10, teenager14, history2));
+        assertEquals(65 , AffectationUtil.weight(teenager11, teenager15, history2));
+        assertEquals(14 , AffectationUtil.weight(teenager12, teenager16, history2));
     }
 }
  

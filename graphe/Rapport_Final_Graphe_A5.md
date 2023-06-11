@@ -168,7 +168,7 @@ Cette methode verifie les demandes par rapport au historique :
     -Si les 2 etudiants on mis same la methode retourne -100
     -Si 1 des 2 a mis same cela retourne -50
     -Si 1 des 2 a mis other cela retourn 50
-    -Si 1 des 2 a n'a rien mis cela retourn -100
+    -Si les 2 n'ont rien mis cela retourne -100
 
 Comme vous le voyez cette méthode est très pratique est ici va nous servir à évaluer le poids d’une arête en fonction de l’historique des Teenagers.
 C’est pour cela que dans notre classe `AffectationUtil.java` pour la méthode `weight` nous avons l'objet Affectation en paramètre afin de prendre l'historique en compte lors du calcule du poids.
