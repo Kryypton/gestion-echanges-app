@@ -276,7 +276,6 @@ public class Teenager implements Serializable{
                 nbLoisir++;
             }
         }
-        System.out.println("nbLoisir : " + nbLoisir);
         return nbLoisir;
     }
 
