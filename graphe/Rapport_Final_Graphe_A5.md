@@ -110,6 +110,9 @@ Voici un petit exemple que l'on va utiliser pour tester l'historique :
 
 ![Texte alternatif](./img/ModelVersion1.png)
 
+Pour nous les appariements optimals sont : 
+Ils sont optimals car 
+
 
 Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
 
@@ -122,6 +125,12 @@ Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil
 Voici l'exemple que l'on va utiliser pour tester l'historique avec les ajouts : 
 
 ![Texte alternatif](./img/ModelVersion2.png)
+
+
+Pour nous les appariements optimals sont : 
+
+
+
 
 Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
 
@@ -147,26 +156,57 @@ Pour modéliser l’historique :
     * Nous avons implémenté des méthodes afin de garder une trace dans un fichier texte des historiques.
 
 
+
 ### Implémentation de l'historique de la Version 2
 
 *Quelles fonctions de votre code avez-vous modifié pour prendre en compte le critère historique ? Donnez ici les noms des méthodes (et leur classe), à quoi elles servent, et quelles modifications vous avez apportées. Essayez d'être synthétique.*
 
-Pour implémenter cela nous avons créé une nouvelle class History celle-ci a pour but la création d’une HashMap qui ici nous est indispensable pour l’appariement des Teenager. Cette classe dispose de plusieurs méthodes afin d’ajouter des Teenager dans la HashMap. Celle- ci va donc s’occuper de l’historique mais pas que. En effet dans cette classe nous disposons d’une méthode qui par rapport à l'historique va nous renvoyer une valeur. Ici dans cette méthode si 2 Teenager on déjà été ensemble auparavant la méthode renverra -100 et si 2 Teenager n’ont jamais été ensemble la méthode renverra 100.
+
+
+Pour implémenter cela nous avons créé une nouvelle class Affectation.java celle-ci a pour but la création d’une HashMap qui ici nous est indispensable pour l’appariement des Teenager dans l'historique. Cette classe dispose de plusieurs méthodes afin d’ajouter des Teenager dans la HashMap. Celle- ci va donc s’occuper de l’historique mais pas que. En effet dans cette classe nous disposons d’une méthode qui par rapport à l'historique va nous renvoyer une valeur celle ci se nomme history.
+Cette methode verifie les demandes par rapport au historique : 
+    -Si les 2 etudiants on mis same la methode retourne -100
+    -Si 1 des 2 a mis same cela retourne -50
+    -Si 1 des 2 a mis other cela retourn 50
+    -Si 1 des 2 a n'a rien mis cela retourn -100
 
 Comme vous le voyez cette méthode est très pratique est ici va nous servir à évaluer le poids d’une arête en fonction de l’historique des Teenagers.
-C’est pour cela que dans notre classe affectation pour la méthode weight nous avons ajouté la nouvelle classe History qui va permettre de a la fin de réévaluer le poids de l'arête.
+C’est pour cela que dans notre classe `AffectationUtil.java` pour la méthode `weight` nous avons l'objet Affectation en paramètre afin de prendre l'historique en compte lors du calcule du poids.
+
+
 
 ### Test pour l'historique de la Version 2
 
 *Créer la classe de TestAffectationVersion2 qui contiendra deux méthodes de test, une pour chacun des exemples. Chacune de ces méthodes doit avoir la même structure que pour TestAffectationVersion1, c'est à dire créer les données d'entrée (adolescents, historique), créer le graphe, calculer l'affectation, et tester que le résultat est comme attendu.*
 
+
+Ces tests a été fait dans la class [TestAffectationVersion2.java](../src/TestAffectationVersion2.java)
+
+
 ### Prendre en compte les autres préférences
 
 *Pour chacun des autres critères d'affinité que vous décidez de prendre en compte, décrire comment vous changez la fonction weight de la classe AffectationUtil.*
 
+Dans la methode `weigth` nous avons aussi ajouter de nouveau critère d'affnité : 
+
+La methode `compatibleWishGender` va s'occuper de verifier les conditions ci dessous cette methode se trouve dans la class [Affectation.java](../src/Affectation.java) :
+
+    - Le faite que la demande de genre de la personne : 
+        *Si la demande est satisfaite cela diminue le poids de -10 
+        *Si la demande est satisfaite pour 1 des 2 cela diminue le poids de -5
+        *Si la demande n'est pas satisfaite cela ne change pas le poids de l'arrete
+        *Si aucun des 2 n'a de demande cela diminue de -10 car il serait dans tout les cas satisfait.
+
+Pour ces critères d'affiniter ci dessous cela sera verifier directement dans weight :
+
+    - La difference d'age est un impact sur le poids de l'arrete : 
+        * Si la difference d'age entre les 2 etudiants est de mois de 1ans et demis cela diminue le poids de l'arrete de 25
+        * Sinon le poids de l'arrete de change pas
 
 
 ### L'incompatibilité en tant que malus
 
 *Proposer une formule ou une description précise qui explique comment calculer le poids d'une arête en considérant les incompatibilités comme des malus et les critères satisfaits comme des bonus. Implémenter cette formule dans une seconde méthode appelée `weightAdvanced`, ceci pour éviter de casser votre code. Puis, écrire une méthode de test qui permet d'illustrer le calcul d'affectation basé sur `weightAdvanced`. Vous pouvez égalmente tester l'affectation en utilisant le fichier de données `incompatibilityVsBonus.csv`.*
+
+
 

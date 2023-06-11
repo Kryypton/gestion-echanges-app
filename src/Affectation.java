@@ -129,6 +129,12 @@ public class Affectation implements Serializable {
     public int historyTeenager(Teenager host , Teenager visitor){
         if(estAffecter(host)){
             if(this.getLast(host).equals(visitor)){
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) ){
+                    return -100;
+                }
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") && visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") ){
+                    return -100;
+                }
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
                     return -50;
                 }
@@ -138,6 +144,12 @@ public class Affectation implements Serializable {
             }
         }else if(estAffecter(visitor)){
             if(this.getLast(visitor).equals(host)){
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) ){
+                    return -100;
+                }
+                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") && visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
+                    return -100;
+                }
                 if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
                     return -50;
                 }
