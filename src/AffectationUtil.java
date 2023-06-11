@@ -154,6 +154,9 @@ public class AffectationUtil implements Serializable {
         // Voici l'exemple 1 du sujet implementé
 
         System.out.println("////////////////////////// Graphe Version 1 //////////////////////////");
+        System.out.println("\n");
+        System.out.println("Voici l'exemple 1 du sujet implementé");
+        System.out.println("\n");
 
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
@@ -222,17 +225,18 @@ public class AffectationUtil implements Serializable {
             }
         }
 
-        // CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
-        // List<Arete<Teenager>> list = calculfr.calculerAffectation();
-        // System.out.println("Affectation francais chez les Italiens :");
-        // System.out.println(list);
-        // System.out.println(calculfr.getCout());
+        CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
+        List<Arete<Teenager>> list = calculfr.calculerAffectation();
+        System.out.println("Affectation francais chez les Italiens :");
+        System.out.println(list);
+        System.out.println(calculfr.getCout());
 
-        // System.out.println("\n");
-        // System.out.println("\n");
+        System.out.println("\n");
 
 
         // Voici l'exemple 2 du sujet qui implemente IncompatibilityVsHobbies
+        System.out.println("Voici l'exemple 2 du sujet qui implemente IncompatibilityVsHobbies :");
+        System.out.println("\n");
 
         Criterion hobbiesDeA = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
         Criterion hobbiesDeD = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
@@ -296,19 +300,21 @@ public class AffectationUtil implements Serializable {
         }
 
 
-        // CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
-        // List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
-        // System.out.println("Affectation allemand chez les Italiens :");
-        // System.out.println(listALL);
-        // System.out.println(calculALL.getCout());
+        CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
+        List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
+        System.out.println("Affectation allemand chez les Italiens :");
+        System.out.println(listALL);
+        System.out.println(calculALL.getCout());
 
-        // CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
-        // List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
-        // System.out.println("Affectation italiens chez les Allemands :");
-        // System.out.println(listIT);
-        // System.out.println(calculIT.getCout());
+        System.out.println("\n");
 
-        // System.out.println("\n");
+        CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
+        List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
+        System.out.println("Affectation italiens chez les Allemands :");
+        System.out.println(listIT);
+        System.out.println(calculIT.getCout());
+
+        System.out.println("\n");
 
 
 
@@ -321,7 +327,7 @@ public class AffectationUtil implements Serializable {
         System.out.println("////////////////////////// Graphe Version 2 //////////////////////////");
         System.out.println("\n");
 
-        
+
         // Premiere version de l'exemple pour l'historique
 
         System.out.println("Premiere version de l'exemple pour l'historique : ");
@@ -410,21 +416,8 @@ public class AffectationUtil implements Serializable {
         System.out.println(calculfr1.getCout());
         System.out.println("\n");
 
-        // CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
-        // List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
-        // System.out.println("Affectation allemand chez les Italiens :");
-        // System.out.println(listALL);
-        // System.out.println(calculALL.getCout());
 
-        // CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
-        // List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
-        // System.out.println("Affectation italiens chez les Allemands :");
-        // System.out.println(listIT);
-        // System.out.println(calculIT.getCout());
-
-        // System.out.println("\n");
-
-
+        
 
         // Deuxieme version de l'exemple pour l'historique avec les parametre en plus demandés
 
