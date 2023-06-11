@@ -1,15 +1,21 @@
 import fr.ulille.but.sae2_02.graphes.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.*;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+
 
 public class AffectationVersion2Test {
+    Teenager teenager1 , teenager2 , teenager3 , teenager4 , teenager5 , teenager6 , teenager7 , teenager8 , teenager9 , teenager10 , teenager11 , teenager12 , teenager13 , teenager14 , teenager15, teenager16; 
+    Affectation history = new Affectation();
+    Affectation history2 = new Affectation();
 
-    public static void main(String[] args) {
-
-
+    @BeforeEach
+    public void TestInitialisation() {
 
         // Premiere version de l'exemple pour l'historique
         
@@ -19,17 +25,17 @@ public class AffectationVersion2Test {
         Criterion historyVide = new Criterion("", CriterionName.HISTORY);
 
         
-        Teenager teenager1 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("08/10/2004") , Country.FRANCE);
-        Teenager teenager2 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("12/02/2004") , Country.FRANCE);
-        Teenager teenager3 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("30/12/2004") , Country.FRANCE);
-        Teenager teenager4 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("23/09/2004") , Country.FRANCE);
+        teenager1 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
+        teenager2 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
+        teenager3 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
+        teenager4 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
 
-        Teenager teenager5 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("18/04/2004") , Country.ITALY);     
-        Teenager teenager6 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("29/11/2004") , Country.ITALY);        
-        Teenager teenager7 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("05/08/2004") , Country.ITALY);   
-        Teenager teenager8 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("08/02/2004") , Country.ITALY);    
+        teenager5 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
+        teenager6 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
+        teenager7 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2005-08-05") , Country.ITALY);   
+        teenager8 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2006-02-08") , Country.ITALY);    
 
-        Affectation history = new Affectation();
+
 
 
         teenager1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
@@ -100,6 +106,7 @@ public class AffectationVersion2Test {
 
 
 
+
         // Deuxieme version de l'exemple pour l'historique avec les parametre en plus demandés
 
         Criterion sport = new Criterion("sports", CriterionName.HOBBIES);
@@ -112,17 +119,17 @@ public class AffectationVersion2Test {
 
 
 
-        Teenager teenager9 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("08/10/2004") , Country.FRANCE);
-        Teenager teenager10 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("12/02/2004") , Country.FRANCE);
-        Teenager teenager11 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("30/12/2004") , Country.FRANCE);
-        Teenager teenager12 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("23/09/2004") , Country.FRANCE);
+        teenager9 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
+        teenager10 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
+        teenager11 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
+        teenager12 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
 
-        Teenager teenager13 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("18/04/2004") , Country.ITALY);     
-        Teenager teenager14 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("29/11/2004") , Country.ITALY);        
-        Teenager teenager15 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("05/08/2004") , Country.ITALY);   
-        Teenager teenager16 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("08/02/2004") , Country.ITALY);    
+        teenager13 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
+        teenager14 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
+        teenager15 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2004-08-05") , Country.ITALY);   
+        teenager16 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2004-02-08") , Country.ITALY);    
 
-        Affectation history2 = new Affectation();
+
 
         teenager9.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager9.addCriterion(CriterionName.HISTORY.name(),historySame);
@@ -163,40 +170,33 @@ public class AffectationVersion2Test {
         history2.affectations(teenager12, teenager16);
 
 
-        GrapheNonOrienteValue<Teenager> graphFRChezIT2 = new GrapheNonOrienteValue<Teenager>();
-        List<Teenager> fr2 = new ArrayList<Teenager>();
-        List<Teenager> it2 = new ArrayList<Teenager>();
-
-        fr2.add(teenager9);
-        fr2.add(teenager10);
-        fr2.add(teenager11);
-        fr2.add(teenager12);
-
-        it2.add(teenager13);
-        it2.add(teenager14);
-        it2.add(teenager15);
-        it2.add(teenager16);
-
-        for (Teenager teenager : fr2) {
-            graphFRChezIT2.ajouterSommet(teenager);
-        }
-
-        for (Teenager teenager : it2) {
-            graphFRChezIT2.ajouterSommet(teenager);
-        }
-
-        for (Teenager t1 : fr2) {
-            for (Teenager t2 : it2) {
-                graphFRChezIT2.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history2));
-            }
-        }
-
-        CalculAffectation<Teenager> calculfr2 = new CalculAffectation<Teenager>(graphFRChezIT2, fr2, it2);
-        List<Arete<Teenager>> list2 = calculfr2.calculerAffectation();
-        System.out.println("Affectation FR chez IT :");
-        System.out.println(list2);
-        System.out.println(calculfr2.getCout());
-
-
     }
+
+
+    @Test
+    public void testExemple1(){
+        assertEquals(90 , AffectationUtil.weight(teenager1, teenager5, history));
+        assertEquals(90 , AffectationUtil.weight(teenager2, teenager6, history));
+        assertEquals(90 , AffectationUtil.weight(teenager3, teenager7, history));
+        assertEquals(90 , AffectationUtil.weight(teenager4, teenager7, history));
+    }
+
+
+
+    @Test
+    public void testExemple2(){
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

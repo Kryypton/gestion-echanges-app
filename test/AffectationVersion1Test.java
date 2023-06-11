@@ -1,23 +1,16 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
-
-import fr.ulille.but.sae2_02.graphes.Arete;
-import fr.ulille.but.sae2_02.graphes.CalculAffectation;
-import fr.ulille.but.sae2_02.graphes.GrapheNonOrienteValue;
+import org.junit.jupiter.api.Test;
 
 public class AffectationVersion1Test {
 
+    Teenager teenager1 , teenager2 , teenager3 , teenager4 , teenager5 , teenager6 , teenager7 , teenager8 , teenager9 , teenager10;
+
+
     @BeforeEach
-    void initialization() {
-
-
-        
-    }
-        public static void main(String[] args) {
-                
+    public void TestInitialization()    { 
 
         // Voici l'exemple 1 du sujet implemente
 
@@ -33,12 +26,12 @@ public class AffectationVersion1Test {
         Criterion cultureEtScience = new Criterion("culture,science", CriterionName.HOBBIES);
 
 
-        Teenager teenager1 = new Teenager("A", "Adonia" , Country.FRANCE);
-        Teenager teenager2 = new Teenager("B", "Bellatrix" , Country.FRANCE);
-        Teenager teenager3 = new Teenager("C", "Callista" , Country.FRANCE);
-        Teenager teenager4 = new Teenager("X", "Xolag" , Country.ITALY);
-        Teenager teenager5 = new Teenager("Y", "Yak" , Country.ITALY);
-        Teenager teenager6 = new Teenager("Z", "Zander" , Country.ITALY);
+        teenager1 = new Teenager("A", "Adonia" , Country.FRANCE);
+        teenager2 = new Teenager("B", "Bellatrix" , Country.FRANCE);
+        teenager3 = new Teenager("C", "Callista" , Country.FRANCE);
+        teenager4 = new Teenager("X", "Xolag" , Country.ITALY);
+        teenager5 = new Teenager("Y", "Yak" , Country.ITALY);
+        teenager6 = new Teenager("Z", "Zander" , Country.ITALY);
 
         teenager1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager1.addCriterion(CriterionName.HOBBIES.name(),sportEtTechnologie);
@@ -60,43 +53,6 @@ public class AffectationVersion1Test {
         teenager6.addCriterion(CriterionName.HOBBIES.name(),technologie);
 
 
-        GrapheNonOrienteValue<Teenager> graphFRChezIT = new GrapheNonOrienteValue<Teenager>();
-
-        List<Teenager> fr = new ArrayList<Teenager>();
-        List<Teenager> it = new ArrayList<Teenager>();
-
-        fr.add(teenager1);
-        fr.add(teenager2);
-        fr.add(teenager3);
-
-        it.add(teenager4);
-        it.add(teenager5);
-        it.add(teenager6);
-
-        for (Teenager teenager : fr) {
-            graphFRChezIT.ajouterSommet(teenager);
-        }
-
-        for (Teenager teenager : it) {
-            graphFRChezIT.ajouterSommet(teenager);
-        }
-
-
-        for (Teenager t1 : fr) {
-            for (Teenager t2 : it) {
-                graphFRChezIT.ajouterArete(t1, t2, AffectationUtil.weightVersion1(t1, t2));
-            }
-        }
-
-        CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
-        List<Arete<Teenager>> list = calculfr.calculerAffectation();
-        System.out.println("Affectation francais chez les Italiens :");
-        System.out.println(list);
-        System.out.println(calculfr.getCout());
-
-        System.out.println("\n");
-        System.out.println("\n");
-
 
 
         // Voici l'exemple 2 du sujet qui implemente IncompatibilityVsHobbies
@@ -105,10 +61,10 @@ public class AffectationVersion1Test {
         Criterion hobbiesDeD = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
 
 
-        Teenager teenager7 = new Teenager("A", "A" , "female",LocalDate.parse("2009-06-01"), Country.ITALY);
-        Teenager teenager8 = new Teenager("B", "B" ,"male",LocalDate.parse("2009-06-01"), Country.ITALY);
-        Teenager teenager9 = new Teenager("C", "C" , "female",LocalDate.parse("2009-06-01"),Country.GERMANY);
-        Teenager teenager10 = new Teenager("D", "D" ,"male",LocalDate.parse("2009-06-01"), Country.GERMANY);
+        teenager7 = new Teenager("A", "A" , "female",LocalDate.parse("2009-06-01"), Country.ITALY);
+        teenager8 = new Teenager("B", "B" ,"male",LocalDate.parse("2009-06-01"), Country.ITALY);
+        teenager9 = new Teenager("C", "C" , "female",LocalDate.parse("2009-06-01"),Country.GERMANY);
+        teenager10 = new Teenager("D", "D" ,"male",LocalDate.parse("2009-06-01"), Country.GERMANY);
 
         teenager7.addCriterion(CriterionName.HOBBIES.name(),hobbiesDeA);
         teenager7.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
@@ -124,57 +80,31 @@ public class AffectationVersion1Test {
         teenager10.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager10.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
 
-
-        GrapheNonOrienteValue<Teenager> graphALLChezIT = new GrapheNonOrienteValue<Teenager>();
-        GrapheNonOrienteValue<Teenager> graphITChezALL = new GrapheNonOrienteValue<Teenager>();
-
-
-        List<Teenager> allemandList = new ArrayList<Teenager>();
-        List<Teenager> italiensList = new ArrayList<Teenager>();
-
-        italiensList.add(teenager7);
-        italiensList.add(teenager8);
-
-        allemandList.add(teenager9);
-        allemandList.add(teenager10);
-
-        for (Teenager teenager : italiensList) {
-            graphALLChezIT.ajouterSommet(teenager);
-            graphITChezALL.ajouterSommet(teenager);
-        }
-
-
-        for (Teenager teenager : allemandList) {
-            graphALLChezIT.ajouterSommet(teenager);
-            graphITChezALL.ajouterSommet(teenager);
-        }
-
-
-        for (Teenager t1 : italiensList) {
-            for (Teenager t2 : allemandList) {
-                graphITChezALL.ajouterArete(t2, t1, AffectationUtil.weightVersion1(t2, t1));
-            }
-        }
-
-        for (Teenager t1 : allemandList) {
-            for (Teenager t2 : italiensList) {
-                graphALLChezIT.ajouterArete(t1, t2, AffectationUtil.weightVersion1(t1, t2));
-            }
-        }
-
-
-        CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
-        List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
-        System.out.println("Affectation allemand chez les Italiens :");
-        System.out.println(listALL);
-        System.out.println(calculALL.getCout());
-
-        CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
-        List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
-        System.out.println("Affectation italiens chez les Allemands :");
-        System.out.println(listIT);
-        System.out.println(calculIT.getCout());
-
-        System.out.println("\n");
     }
+
+
+    @Test
+    public void testWeightVersion1() {
+        assertEquals(200 , AffectationUtil.weightVersion1(teenager1,teenager2));
+        assertEquals(99 , AffectationUtil.weightVersion1(teenager1,teenager4));
+        assertEquals(99 , AffectationUtil.weightVersion1(teenager2,teenager5));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager3,teenager6));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager4,teenager5));
+        assertEquals(99 , AffectationUtil.weightVersion1(teenager4,teenager6));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager5,teenager6));
+    }
+
+
+
+    @Test
+    public void testCompatibilityVsHobbies() {
+        assertEquals(100, AffectationUtil.weightVersion1(teenager7,teenager8));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager7,teenager9));
+        assertEquals(50 , AffectationUtil.weightVersion1(teenager7,teenager10));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager8,teenager9));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager8,teenager10));
+        assertEquals(100 , AffectationUtil.weightVersion1(teenager9,teenager10));
+    }
+
+
 }

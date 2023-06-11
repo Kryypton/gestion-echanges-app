@@ -148,271 +148,358 @@ public class AffectationUtil implements Serializable {
 
     public static void main(String[] args) {
 
-        ///// Jeu de donnée pour tester la methode de calcul d'affectation /////
-            
+        
+        ////////////////////////// Graphe Version 1 //////////////////////////
+
+        // Voici l'exemple 1 du sujet implementé
+
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
         Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
-        
+
+        Criterion sportEtTechnologie = new Criterion("sports,technology", CriterionName.HOBBIES);
         Criterion sport = new Criterion("sports", CriterionName.HOBBIES);
         Criterion technologie = new Criterion("technology", CriterionName.HOBBIES);
-        Criterion science = new Criterion("science", CriterionName.HOBBIES);
-        Criterion reading = new Criterion("reading", CriterionName.HOBBIES);
-        Criterion music = new Criterion("music", CriterionName.HOBBIES);
-        Criterion hobbiesVide = new Criterion("", CriterionName.HOBBIES);
-        Criterion GuestFoodVege = new Criterion("vegetarian", CriterionName.GUEST_FOOD);
-        Criterion GuestFoodNonuts = new Criterion("nonuts", CriterionName.GUEST_FOOD);
-        Criterion HostFoodVege = new Criterion("vegetarian", CriterionName.HOST_FOOD);
-        Criterion HostFoodNonuts = new Criterion("nonuts", CriterionName.HOST_FOOD);
-        Criterion HostFoodVide = new Criterion("", CriterionName.HOST_FOOD);
-        Criterion GuestfoodVide = new Criterion("", CriterionName.GUEST_FOOD);
-        Criterion femme = new Criterion("female", CriterionName.GENDER);
-        Criterion homme = new Criterion("homme", CriterionName.GENDER);
-        Criterion other = new Criterion("other", CriterionName.GENDER);
-        Criterion veutFemme = new Criterion("female", CriterionName.PAIR_GENDER);
-        Criterion veutHomme = new Criterion("homme", CriterionName.PAIR_GENDER);
-        Criterion veutOther = new Criterion("other", CriterionName.PAIR_GENDER);
-        Criterion veutvidePair = new Criterion("", CriterionName.PAIR_GENDER);
-        Criterion historySame = new Criterion("same", CriterionName.HISTORY);
-        Criterion historyOther = new Criterion("other", CriterionName.HISTORY);
-        Criterion historyVide = new Criterion("", CriterionName.HISTORY);
+        Criterion scienceEtReading = new Criterion("science,reading", CriterionName.HOBBIES);
+        Criterion cultureEtTechnologie = new Criterion("culture,technology", CriterionName.HOBBIES);
+        Criterion cultureEtScience = new Criterion("culture,science", CriterionName.HOBBIES);
 
-        Teenager teenager1 = new Teenager(1, "teen1", "A", "male", LocalDate.of(2000, 5, 10), Country.FRANCE);
-        Teenager teenager2 = new Teenager(2, "teen2", "B", "female", LocalDate.of(2001, 8, 15), Country.ITALY);
-        Teenager teenager3 = new Teenager(3, "teen3", "C", "male", LocalDate.of(2002, 10, 20), Country.ITALY);
-        Teenager teenager4 = new Teenager(4, "teen4", "D", "male", LocalDate.of(2002, 8, 20), Country.FRANCE);
-        Teenager teenager5 = new Teenager(5, "teen5", "E", "other", LocalDate.of(1999, 12, 20), Country.FRANCE);
-        Teenager teenager6 = new Teenager(6, "teen6", "F", "female", LocalDate.of(2000, 5, 20), Country.FRANCE);
-        Teenager teenager7 = new Teenager(7, "teen7", "G", "female", LocalDate.of(2002, 10, 20), Country.FRANCE);
-        Teenager teenager8 = new Teenager(8, "teen8", "H", "male", LocalDate.of(2001, 10, 20), Country.ITALY);
-        Teenager teenager9 = new Teenager(9, "teen9", "I", "other", LocalDate.of(1999, 10, 20), Country.ITALY);
-        Teenager teenager10 = new Teenager(10, "teen10", "J", "female", LocalDate.of(2002, 10, 01), Country.ITALY);
-        Teenager teenager11 = new Teenager(11, "teen11", "K", "female", LocalDate.of(2002, 10, 10), Country.ITALY);
-        Teenager teenager12 = new Teenager(12, "teen12", "L", "male", LocalDate.of(2003, 2, 21), Country.FRANCE);
-        Teenager teenager13 = new Teenager(13, "teen13", "M", "male", LocalDate.of(2002, 10, 30), Country.FRANCE);
-        Teenager teenager14 = new Teenager(14, "teen14", "N", "male", LocalDate.of(2000, 3, 20), Country.FRANCE);
-        Teenager teenager15 = new Teenager(15, "teen15", "O", "male", LocalDate.of(2003, 10, 20), Country.ITALY);
-        Teenager teenager16 = new Teenager(16, "teen16", "M", "male", LocalDate.of(2001, 1, 25), Country.ITALY);
 
-        Affectation history = new Affectation();
-        
+        Teenager teenager1 = new Teenager("A", "Adonia" , Country.FRANCE);
+        Teenager teenager2 = new Teenager("B", "Bellatrix" , Country.FRANCE);
+        Teenager teenager3 = new Teenager("C", "Callista" , Country.FRANCE);
+        Teenager teenager4 = new Teenager("X", "Xolag" , Country.ITALY);
+        Teenager teenager5 = new Teenager("Y", "Yak" , Country.ITALY);
+        Teenager teenager6 = new Teenager("Z", "Zander" , Country.ITALY);
+
         teenager1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager1.addCriterion(CriterionName.HOBBIES.name(),sport);
-        teenager1.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager1.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVege);
-        teenager1.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager1.addCriterion(CriterionName.PAIR_GENDER.name(),veutHomme);
-        teenager1.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        teenager1.addCriterion(CriterionName.HOBBIES.name(),sportEtTechnologie);
 
-        teenager2.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager2.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aUnAnimal);
-        teenager2.addCriterion(CriterionName.HOBBIES.name(),technologie);
-        teenager2.addCriterion(CriterionName.GUEST_FOOD.name(),GuestFoodVege);
-        teenager2.addCriterion(CriterionName.HOST_FOOD.name(), HostFoodVide);
-        teenager2.addCriterion(CriterionName.GENDER.name(),femme);
-        teenager2.addCriterion(CriterionName.PAIR_GENDER.name(),veutvidePair);
-        teenager2.addCriterion(CriterionName.HISTORY.name(),historyOther);
+        teenager2.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
+        teenager2.addCriterion(CriterionName.HOBBIES.name(),cultureEtScience);
 
         teenager3.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager3.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager3.addCriterion(CriterionName.HOBBIES.name(),music);
-        teenager3.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager3.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager3.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager3.addCriterion(CriterionName.PAIR_GENDER.name(),veutOther);
-        teenager3.addCriterion(CriterionName.HISTORY.name(),historyOther);
+        teenager3.addCriterion(CriterionName.HOBBIES.name(),scienceEtReading);
 
-        teenager4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager4.addCriterion(CriterionName.HOBBIES.name(),reading);
-        teenager4.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager4.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager4.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager4.addCriterion(CriterionName.PAIR_GENDER.name(),veutHomme);
-        teenager4.addCriterion(CriterionName.HISTORY.name(),historySame);
 
-        teenager5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager5.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aUnAnimal);
-        teenager5.addCriterion(CriterionName.HOBBIES.name(),sport);
-        teenager5.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager5.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVege);
-        teenager5.addCriterion(CriterionName.GENDER.name(),other);
-        teenager5.addCriterion(CriterionName.PAIR_GENDER.name(),veutHomme);
-        teenager5.addCriterion(CriterionName.HISTORY.name(),historySame);
+        teenager4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        teenager4.addCriterion(CriterionName.HOBBIES.name(),cultureEtTechnologie);
 
-        teenager6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
-        teenager6.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
+        teenager5.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+        teenager5.addCriterion(CriterionName.HOBBIES.name(),scienceEtReading);
+
+        teenager6.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
         teenager6.addCriterion(CriterionName.HOBBIES.name(),technologie);
-        teenager6.addCriterion(CriterionName.GUEST_FOOD.name(),GuestFoodNonuts);
-        teenager6.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager6.addCriterion(CriterionName.GENDER.name(),femme);
-        teenager6.addCriterion(CriterionName.PAIR_GENDER.name(),veutOther);
-        teenager6.addCriterion(CriterionName.HISTORY.name(),historyVide);
-
-        teenager7.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager7.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager7.addCriterion(CriterionName.HOBBIES.name(),science);
-        teenager7.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager7.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager7.addCriterion(CriterionName.GENDER.name(),femme);
-        teenager7.addCriterion(CriterionName.PAIR_GENDER.name(),veutFemme);
-        teenager7.addCriterion(CriterionName.HISTORY.name(),historyVide);
-
-        teenager8.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
-        teenager8.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager8.addCriterion(CriterionName.HOBBIES.name(),reading);
-        teenager8.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager8.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager8.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager8.addCriterion(CriterionName.PAIR_GENDER.name(),veutvidePair);
-        teenager8.addCriterion(CriterionName.HISTORY.name(),historyOther);
-
-        teenager9.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager9.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aUnAnimal);
-        teenager9.addCriterion(CriterionName.HOBBIES.name(),hobbiesVide);
-        teenager9.addCriterion(CriterionName.GUEST_FOOD.name(),GuestFoodNonuts);
-        teenager9.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVege);
-        teenager9.addCriterion(CriterionName.GENDER.name(),other);
-        teenager9.addCriterion(CriterionName.PAIR_GENDER.name(),veutvidePair);
-        teenager9.addCriterion(CriterionName.HISTORY.name(),historySame);
-
-        teenager10.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager10.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager10.addCriterion(CriterionName.HOBBIES.name(),technologie);
-        teenager10.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager10.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager10.addCriterion(CriterionName.GENDER.name(),femme);
-        teenager10.addCriterion(CriterionName.PAIR_GENDER.name(),veutvidePair);
-        teenager10.addCriterion(CriterionName.HISTORY.name(),historyVide);
-
-        teenager11.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager11.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aUnAnimal);
-        teenager11.addCriterion(CriterionName.HOBBIES.name(),science);
-        teenager11.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager11.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVege);
-        teenager11.addCriterion(CriterionName.GENDER.name(),femme);
-        teenager11.addCriterion(CriterionName.PAIR_GENDER.name(),veutFemme);
-        teenager11.addCriterion(CriterionName.HISTORY.name(),historyVide);
-
-        teenager12.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
-        teenager12.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager12.addCriterion(CriterionName.HOBBIES.name(),reading);
-        teenager12.addCriterion(CriterionName.GUEST_FOOD.name(),GuestFoodNonuts);
-        teenager12.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager12.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager12.addCriterion(CriterionName.PAIR_GENDER.name(),veutFemme);
-        teenager12.addCriterion(CriterionName.HISTORY.name(),historyOther);
-
-        teenager13.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager13.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager13.addCriterion(CriterionName.HOBBIES.name(),sport);
-        teenager13.addCriterion(CriterionName.GUEST_FOOD.name(),GuestFoodVege);
-        teenager13.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodNonuts);
-        teenager13.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager13.addCriterion(CriterionName.PAIR_GENDER.name(),veutHomme);
-        teenager13.addCriterion(CriterionName.HISTORY.name(),historySame);
-
-        teenager14.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
-        teenager14.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager14.addCriterion(CriterionName.HOBBIES.name(),technologie);
-        teenager14.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager14.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodNonuts);
-        teenager14.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager14.addCriterion(CriterionName.PAIR_GENDER.name(),veutHomme);
-        teenager14.addCriterion(CriterionName.HISTORY.name(),historyVide);
-
-        teenager15.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager15.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aUnAnimal);
-        teenager15.addCriterion(CriterionName.HOBBIES.name(),science);
-        teenager15.addCriterion(CriterionName.GUEST_FOOD.name(),GuestfoodVide);
-        teenager15.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVide);
-        teenager15.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager15.addCriterion(CriterionName.PAIR_GENDER.name(),veutvidePair);
-        teenager15.addCriterion(CriterionName.HISTORY.name(),historyOther);
-
-        teenager16.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager16.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(),aPasAnimal);
-        teenager16.addCriterion(CriterionName.HOBBIES.name(),reading);
-        teenager16.addCriterion(CriterionName.GUEST_FOOD.name(),GuestFoodNonuts);
-        teenager16.addCriterion(CriterionName.HOST_FOOD.name(),HostFoodVege);
-        teenager16.addCriterion(CriterionName.GENDER.name(),homme);
-        teenager16.addCriterion(CriterionName.PAIR_GENDER.name(),veutvidePair);
-        teenager16.addCriterion(CriterionName.HISTORY.name(),historyOther);
-
-
-        history.affectations(teenager1, teenager2);
-        history.affectations(teenager3, teenager4);
-        history.affectations(teenager5, teenager6);
-        history.affectations(teenager7, teenager8);
-        history.affectations(teenager9, teenager10);
-        history.affectations(teenager11, teenager12);
-        history.affectations(teenager13, teenager14);
-        history.affectations(teenager15, teenager16);
-
-
 
         GrapheNonOrienteValue<Teenager> graphFRChezIT = new GrapheNonOrienteValue<Teenager>();
-        GrapheNonOrienteValue<Teenager> graphITChezFR = new GrapheNonOrienteValue<Teenager>();
-        
+
         List<Teenager> fr = new ArrayList<Teenager>();
         List<Teenager> it = new ArrayList<Teenager>();
 
         fr.add(teenager1);
-        fr.add(teenager4);
-        fr.add(teenager5);
-        fr.add(teenager6);
-        fr.add(teenager7);
-        fr.add(teenager12);
-        fr.add(teenager13);
-        fr.add(teenager14);
+        fr.add(teenager2);
+        fr.add(teenager3);
 
-        it.add(teenager2);
-        it.add(teenager3);
-        it.add(teenager8);
-        it.add(teenager9);
-        it.add(teenager10);
-        it.add(teenager11);
-        it.add(teenager15);
-        it.add(teenager16);
+        it.add(teenager4);
+        it.add(teenager5);
+        it.add(teenager6);
 
         for (Teenager teenager : fr) {
             graphFRChezIT.ajouterSommet(teenager);
-            graphITChezFR.ajouterSommet(teenager);
         }
 
         for (Teenager teenager : it) {
             graphFRChezIT.ajouterSommet(teenager);
-            graphITChezFR.ajouterSommet(teenager);
         }
+
 
         for (Teenager t1 : fr) {
             for (Teenager t2 : it) {
+                graphFRChezIT.ajouterArete(t1, t2, AffectationUtil.weightVersion1(t1, t2));
+            }
+        }
+
+        CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
+        List<Arete<Teenager>> list = calculfr.calculerAffectation();
+        System.out.println("Affectation francais chez les Italiens :");
+        System.out.println(list);
+        System.out.println(calculfr.getCout());
+
+        System.out.println("\n");
+        System.out.println("\n");
+
+
+        // Voici l'exemple 2 du sujet qui implemente IncompatibilityVsHobbies
+
+        Criterion hobbiesDeA = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
+        Criterion hobbiesDeD = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
+
+
+        Teenager teenager7 = new Teenager("A", "A" , "female",LocalDate.parse("2009-06-01"), Country.ITALY);
+        Teenager teenager8 = new Teenager("B", "B" ,"male",LocalDate.parse("2009-06-01"), Country.ITALY);
+        Teenager teenager9 = new Teenager("C", "C" , "female",LocalDate.parse("2009-06-01"),Country.GERMANY);
+        Teenager teenager10 = new Teenager("D", "D" ,"male",LocalDate.parse("2009-06-01"), Country.GERMANY);
+
+        teenager7.addCriterion(CriterionName.HOBBIES.name(),hobbiesDeA);
+        teenager7.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
+        teenager7.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+
+        teenager8.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager8.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+
+        teenager9.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager9.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+
+        teenager10.addCriterion(CriterionName.HOBBIES.name(),hobbiesDeD);
+        teenager10.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager10.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+
+
+        GrapheNonOrienteValue<Teenager> graphALLChezIT = new GrapheNonOrienteValue<Teenager>();
+        GrapheNonOrienteValue<Teenager> graphITChezALL = new GrapheNonOrienteValue<Teenager>();
+
+
+        List<Teenager> allemandList = new ArrayList<Teenager>();
+        List<Teenager> italiensList = new ArrayList<Teenager>();
+
+        italiensList.add(teenager7);
+        italiensList.add(teenager8);
+
+        allemandList.add(teenager9);
+        allemandList.add(teenager10);
+
+        for (Teenager teenager : italiensList) {
+            graphALLChezIT.ajouterSommet(teenager);
+            graphITChezALL.ajouterSommet(teenager);
+        }
+
+
+        for (Teenager teenager : allemandList) {
+            graphALLChezIT.ajouterSommet(teenager);
+            graphITChezALL.ajouterSommet(teenager);
+        }
+
+
+        for (Teenager t1 : italiensList) {
+            for (Teenager t2 : allemandList) {
+                graphITChezALL.ajouterArete(t2, t1, AffectationUtil.weightVersion1(t2, t1));
+            }
+        }
+
+        for (Teenager t1 : allemandList) {
+            for (Teenager t2 : italiensList) {
+                graphALLChezIT.ajouterArete(t1, t2, AffectationUtil.weightVersion1(t1, t2));
+            }
+        }
+
+
+        CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
+        List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
+        System.out.println("Affectation allemand chez les Italiens :");
+        System.out.println(listALL);
+        System.out.println(calculALL.getCout());
+
+        CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
+        List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
+        System.out.println("Affectation italiens chez les Allemands :");
+        System.out.println(listIT);
+        System.out.println(calculIT.getCout());
+
+        System.out.println("\n");
+
+
+
+
+
+
+        ////////////////////////// Graphe Version 2 //////////////////////////
+
+
+
+
+        // Premiere version de l'exemple pour l'historique
+
+        Criterion historySame = new Criterion("same", CriterionName.HISTORY);
+        Criterion historyOther = new Criterion("other", CriterionName.HISTORY);
+        Criterion historyVide = new Criterion("", CriterionName.HISTORY);
+
+        
+        Teenager teenager11 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
+        Teenager teenager12 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
+        Teenager teenager13 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
+        Teenager teenager14 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
+
+        Teenager teenager15 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
+        Teenager teenager16 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
+        Teenager teenager17 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2004-08-05") , Country.ITALY);   
+        Teenager teenager18 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2004-02-08") , Country.ITALY);    
+
+        Affectation history = new Affectation();
+
+
+        teenager11.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager11.addCriterion(CriterionName.HISTORY.name(),historySame);
+
+        teenager12.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager12.addCriterion(CriterionName.HISTORY.name(),historyOther);
+
+        teenager13.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager13.addCriterion(CriterionName.HISTORY.name(),historyVide);
+
+        teenager14.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager14.addCriterion(CriterionName.HISTORY.name(),historyOther);
+
+        teenager15.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager15.addCriterion(CriterionName.HISTORY.name(),historyOther);
+
+        teenager16.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager16.addCriterion(CriterionName.HISTORY.name(),historySame);
+
+        teenager17.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager17.addCriterion(CriterionName.HISTORY.name(),historyVide);
+
+        teenager18.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager18.addCriterion(CriterionName.HISTORY.name(),historySame);
+
+        history.affectations(teenager11, teenager16);
+        history.affectations(teenager12, teenager15);
+        history.affectations(teenager13, teenager17);
+        history.affectations(teenager14, teenager18);
+
+
+        GrapheNonOrienteValue<Teenager> graphFRChezIT2 = new GrapheNonOrienteValue<Teenager>();
+        List<Teenager> fr2 = new ArrayList<Teenager>();
+        List<Teenager> it2 = new ArrayList<Teenager>();
+
+        fr2.add(teenager11);
+        fr2.add(teenager12);
+        fr2.add(teenager13);
+        fr2.add(teenager14);
+
+        it2.add(teenager15);
+        it2.add(teenager16);
+        it2.add(teenager17);
+        it2.add(teenager18);
+
+        for (Teenager teenager : fr2) {
+            graphFRChezIT.ajouterSommet(teenager);
+        }
+
+        for (Teenager teenager : it2) {
+            graphFRChezIT.ajouterSommet(teenager);
+        }
+
+        for (Teenager t1 : fr2) {
+            for (Teenager t2 : it2) {
                 graphFRChezIT.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history));
             }
         }
 
-        for (Teenager t1 : it) {
-            for (Teenager t2 : fr) {
-                graphITChezFR.ajouterArete(t2, t1, AffectationUtil.weight(t1, t2, history));
+        CalculAffectation<Teenager> calculfr1 = new CalculAffectation<Teenager>(graphFRChezIT2, fr2, it2);
+        List<Arete<Teenager>> list2 = calculfr1.calculerAffectation();
+        System.out.println("Affectation FR chez IT :");
+        System.out.println(list2);
+        System.out.println(calculfr1.getCout());
+        System.out.println("\n");
+
+
+
+        // Deuxieme version de l'exemple pour l'historique avec les parametre en plus demandés
+
+        Criterion science = new Criterion("science", CriterionName.HOBBIES);
+        Criterion reading = new Criterion("reading", CriterionName.HOBBIES);
+        Criterion musicEtScience = new Criterion("music,science", CriterionName.HOBBIES);
+        Criterion sportsEtTechnologie = new Criterion("sports,technology", CriterionName.HOBBIES);
+        Criterion msuciEtReading = new Criterion("music,reading", CriterionName.HOBBIES);
+
+
+
+        Teenager teenager19 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
+        Teenager teenager20 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
+        Teenager teenager21 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
+        Teenager teenager22 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
+
+        Teenager teenager23 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
+        Teenager teenager24 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
+        Teenager teenager25 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2004-08-05") , Country.ITALY);   
+        Teenager teenager26 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2004-02-08") , Country.ITALY);    
+
+        Affectation history2 = new Affectation();
+
+        teenager19.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager19.addCriterion(CriterionName.HISTORY.name(),historySame);
+        teenager19.addCriterion(CriterionName.HOBBIES.name(),sport);
+
+        teenager20.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager20.addCriterion(CriterionName.HISTORY.name(),historyOther);
+        teenager20.addCriterion(CriterionName.HOBBIES.name(),technologie);
+
+        teenager21.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager21.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        teenager21.addCriterion(CriterionName.HOBBIES.name(),reading);
+
+        teenager22.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager22.addCriterion(CriterionName.HISTORY.name(),historyOther);
+        teenager22.addCriterion(CriterionName.HOBBIES.name(),musicEtScience);
+
+        teenager23.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager23.addCriterion(CriterionName.HISTORY.name(),historyOther);
+        teenager23.addCriterion(CriterionName.HOBBIES.name(),science);
+
+        teenager24.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager24.addCriterion(CriterionName.HISTORY.name(),historySame);
+        teenager24.addCriterion(CriterionName.HOBBIES.name(),sport);
+
+        teenager25.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager25.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        teenager25.addCriterion(CriterionName.HOBBIES.name(),sportsEtTechnologie);
+
+        teenager26.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
+        teenager26.addCriterion(CriterionName.HISTORY.name(),historySame);
+        teenager26.addCriterion(CriterionName.HOBBIES.name(),msuciEtReading);
+
+
+        history2.affectations(teenager19, teenager23);
+        history2.affectations(teenager20, teenager24);
+        history2.affectations(teenager21, teenager25);
+        history2.affectations(teenager22, teenager26);
+
+
+        GrapheNonOrienteValue<Teenager> graphFRChezIT3 = new GrapheNonOrienteValue<Teenager>();
+        List<Teenager> fr3 = new ArrayList<Teenager>();
+        List<Teenager> it3 = new ArrayList<Teenager>();
+
+        fr3.add(teenager9);
+        fr3.add(teenager10);
+        fr3.add(teenager11);
+        fr3.add(teenager12);
+
+        it3.add(teenager13);
+        it3.add(teenager14);
+        it3.add(teenager15);
+        it3.add(teenager16);
+
+        for (Teenager teenager : fr3) {
+            graphFRChezIT3.ajouterSommet(teenager);
+        }
+
+        for (Teenager teenager : it3) {
+            graphFRChezIT3.ajouterSommet(teenager);
+        }
+
+        for (Teenager t1 : fr3) {
+            for (Teenager t2 : it3) {
+                graphFRChezIT2.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history2));
             }
         }
 
-
-
-        CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
-        List<Arete<Teenager>> list = calculfr.calculerAffectation();
+        CalculAffectation<Teenager> calculfr3 = new CalculAffectation<Teenager>(graphFRChezIT2, fr2, it2);
+        List<Arete<Teenager>> list3 = calculfr3.calculerAffectation();
         System.out.println("Affectation FR chez IT :");
-        System.out.println(list);
-        System.out.println(calculfr.getCout());
-
-
-        CalculAffectation<Teenager> calculit = new CalculAffectation<Teenager>(graphITChezFR, it, fr);
-        List<Arete<Teenager>> list2 = calculit.calculerAffectation();
-        System.out.println("Affectation IT chez FR :");
-        System.out.println(list2);
-        System.out.println(calculit.getCout());
+        System.out.println(list3);
+        System.out.println(calculfr3.getCout());
+        System.out.println("\n");   
 
     }
 }
