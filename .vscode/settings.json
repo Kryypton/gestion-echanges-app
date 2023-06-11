@@ -21,4 +21,5 @@
         "lib/**/*.jar"
     ],
     //"java.debug.settings.vmArgs": "-Dappname=LocalTest ..."
+
 }
