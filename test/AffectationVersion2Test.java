@@ -1,8 +1,8 @@
-import fr.ulille.but.sae2_02.graphes.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
-import java.util.*;
+
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,44 +66,6 @@ public class AffectationVersion2Test {
         history.affectations(teenager2, teenager4);
         history.affectations(teenager5, teenager6);
         history.affectations(teenager7, teenager3);
-
-
-        GrapheNonOrienteValue<Teenager> graphFRChezIT = new GrapheNonOrienteValue<Teenager>();
-        List<Teenager> fr = new ArrayList<Teenager>();
-        List<Teenager> it = new ArrayList<Teenager>();
-
-        fr.add(teenager1);
-        fr.add(teenager2);
-        fr.add(teenager3);
-        fr.add(teenager4);
-
-        it.add(teenager5);
-        it.add(teenager6);
-        it.add(teenager7);
-        it.add(teenager8);
-
-        for (Teenager teenager : fr) {
-            graphFRChezIT.ajouterSommet(teenager);
-        }
-
-        for (Teenager teenager : it) {
-            graphFRChezIT.ajouterSommet(teenager);
-        }
-
-        for (Teenager t1 : fr) {
-            for (Teenager t2 : it) {
-                graphFRChezIT.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history));
-            }
-        }
-
-        CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
-        List<Arete<Teenager>> list = calculfr.calculerAffectation();
-        System.out.println("Affectation FR chez IT :");
-        System.out.println(list);
-        System.out.println(calculfr.getCout());
-
-        System.out.println("\n");
-
 
 
 
