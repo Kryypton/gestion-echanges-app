@@ -1,3 +1,5 @@
+package ihm.PrototypageHD;
+
 import java.io.IOException;
 import java.net.URL;
 
