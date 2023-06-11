@@ -196,7 +196,7 @@ public class Teenager implements Serializable{
         if (guest == null) return false;
         if (!compatibleAnimal(guest)) return false;
         if (!compatibleFood(guest)) return false;
-        if(this.countryName == Country.FRANCE && guest.getCountryName() == Country.FRANCE){
+        if(this.countryName == Country.FRANCE || guest.getCountryName() == Country.FRANCE){
             if(this.nbLoisirCommun(guest) == 0){
                 return false;
             }

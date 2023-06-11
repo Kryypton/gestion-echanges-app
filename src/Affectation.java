@@ -128,34 +128,42 @@ public class Affectation implements Serializable {
     // Methode qui permet de réevaluer le poids d'un arrete en fonction de l'historique des Teenagers.
     public int historyTeenager(Teenager host , Teenager visitor){
         if(estAffecter(host)){
-            if(this.getLast(host).equals(visitor)){
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) ){
-                    return -100;
+            if(host.getRequirements().containsKey("HISTORY")){
+                if(this.getLast(host).equals(visitor)){
+                    if(host.getCriterion(CriterionName.HISTORY).equals(null) || visitor.getCriterion(CriterionName.HISTORY).equals(null) ){
+                        return -100;
+                    }
+                    if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") && visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") ){
+                        return -100;
+                    }
+                    if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
+                        return -50;
+                    }
+                    if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other")){
+                        return 50;
+                    }
                 }
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") && visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") ){
-                    return -100;
-                }
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
-                    return -50;
-                }
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other")){
-                    return 50;
-                }
+            }else{
+                return -100;
             }
         }else if(estAffecter(visitor)){
-            if(this.getLast(visitor).equals(host)){
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase(null) ){
-                    return -100;
+            if(visitor.getRequirements().containsKey("HISTORY")){
+                if(this.getLast(visitor).equals(host)){
+                    if(host.getCriterion(CriterionName.HISTORY).equals(null) || visitor.getCriterion(CriterionName.HISTORY).equals(null) ){
+                        return -100;
+                    }
+                    if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") && visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
+                        return -100;
+                    }
+                    if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
+                        return -50;
+                    }
+                    if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other")){
+                        return 50;
+                    }
                 }
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") && visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
-                    return -100;
-                }
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("same")){
-                    return -50;
-                }
-                if(host.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other") || visitor.getCriterion(CriterionName.HISTORY).equalsIgnoreCase("other")){
-                    return 50;
-                }
+            }else{
+                return -100;
             }
         }
         return 0;
@@ -169,5 +177,38 @@ public class Affectation implements Serializable {
         }
         return sb.toString();
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((affectationsHistory == null) ? 0 : affectationsHistory.hashCode());
+        result = prime * result + ((Host == null) ? 0 : Host.hashCode());
+        result = prime * result + ((Visitor == null) ? 0 : Visitor.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Affectation other = (Affectation) obj;
+        if (affectationsHistory == null) {
+            if (other.affectationsHistory != null)
+                return false;
+        } else if (!affectationsHistory.equals(other.affectationsHistory))
+            return false;
+        if (Host != other.Host)
+            return false;
+        if (Visitor != other.Visitor)
+            return false;
+        return true;
+    }
+
+    
 
 }

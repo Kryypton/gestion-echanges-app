@@ -22,7 +22,7 @@ public class AffectationVersion2Test {
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
         Criterion historySame = new Criterion("same", CriterionName.HISTORY);
         Criterion historyOther = new Criterion("other", CriterionName.HISTORY);
-        Criterion historyVide = new Criterion("", CriterionName.HISTORY);
+        //Criterion historyVide = new Criterion(null, CriterionName.HISTORY);
 
         
         teenager1 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
@@ -45,7 +45,7 @@ public class AffectationVersion2Test {
         teenager2.addCriterion(CriterionName.HISTORY.name(),historyOther);
 
         teenager3.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager3.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        //teenager3.addCriterion(CriterionName.HISTORY.name(),historyVide);
 
         teenager4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager4.addCriterion(CriterionName.HISTORY.name(),historyOther);
@@ -57,7 +57,7 @@ public class AffectationVersion2Test {
         teenager6.addCriterion(CriterionName.HISTORY.name(),historySame);
 
         teenager7.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager7.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        //teenager7.addCriterion(CriterionName.HISTORY.name(),historyVide);
 
         teenager8.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager8.addCriterion(CriterionName.HISTORY.name(),historySame);
@@ -102,7 +102,7 @@ public class AffectationVersion2Test {
         teenager10.addCriterion(CriterionName.HOBBIES.name(),technologie);
 
         teenager11.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager11.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        // teenager11.addCriterion(CriterionName.HISTORY.name(),historyVide);
         teenager11.addCriterion(CriterionName.HOBBIES.name(),reading);
 
         teenager12.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
@@ -118,7 +118,7 @@ public class AffectationVersion2Test {
         teenager14.addCriterion(CriterionName.HOBBIES.name(),sport);
 
         teenager15.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager15.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        // teenager15.addCriterion(CriterionName.HISTORY.name(),historyVide);
         teenager15.addCriterion(CriterionName.HOBBIES.name(),sportsEtTechnologie);
 
         teenager16.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
@@ -137,10 +137,10 @@ public class AffectationVersion2Test {
 
     @Test
     public void testExemple1(){
-        assertEquals(90 , AffectationUtil.weight(teenager1, teenager5, history));
-        assertEquals(90 , AffectationUtil.weight(teenager2, teenager6, history));
-        assertEquals(90 , AffectationUtil.weight(teenager3, teenager7, history));
-        assertEquals(90 , AffectationUtil.weight(teenager4, teenager7, history));
+        assertEquals(165 , AffectationUtil.weight(teenager1, teenager5, history));
+        assertEquals(165 , AffectationUtil.weight(teenager2, teenager6, history));
+        assertEquals(65 , AffectationUtil.weight(teenager3, teenager7, history));
+        assertEquals(165 , AffectationUtil.weight(teenager4, teenager7, history));
     }
 
 
@@ -149,16 +149,5 @@ public class AffectationVersion2Test {
     public void testExemple2(){
         
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
+ 

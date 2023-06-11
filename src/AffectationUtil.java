@@ -13,16 +13,16 @@ public class AffectationUtil implements Serializable {
     
      public static int weight (Teenager host, Teenager guest , Affectation history) {
         int poid = 100;
-        int poids = 0;
-        poids -= host.nbLoisirCommun(guest);
-        if(!host.compatibleWithGuest(guest)) poids += 100;
+        //int poids = 0;
+        poid -= host.nbLoisirCommun(guest);
+        if(!host.compatibleWithGuest(guest)) poid += 100;
         //Age différent ?
-        if (host.getDiffAge(guest).toTotalMonths()>18) poids -= 25;
-        poid = poid + poids;
+        if (host.getDiffAge(guest).toTotalMonths()<18) poid -= 25;
+        //poid = poid + poids;
         poid = poid + history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest);
-        if (poid < 0) {
-            poid = 0;
-        }
+        // if (poid < 0) {
+        //     poid = 0;
+        // }
         return poid;
     }
 
@@ -220,14 +220,14 @@ public class AffectationUtil implements Serializable {
             }
         }
 
-        CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
-        List<Arete<Teenager>> list = calculfr.calculerAffectation();
-        System.out.println("Affectation francais chez les Italiens :");
-        System.out.println(list);
-        System.out.println(calculfr.getCout());
+        // CalculAffectation<Teenager> calculfr = new CalculAffectation<Teenager>(graphFRChezIT, fr, it);
+        // List<Arete<Teenager>> list = calculfr.calculerAffectation();
+        // System.out.println("Affectation francais chez les Italiens :");
+        // System.out.println(list);
+        // System.out.println(calculfr.getCout());
 
-        System.out.println("\n");
-        System.out.println("\n");
+        // System.out.println("\n");
+        // System.out.println("\n");
 
 
         // Voici l'exemple 2 du sujet qui implemente IncompatibilityVsHobbies
@@ -294,19 +294,19 @@ public class AffectationUtil implements Serializable {
         }
 
 
-        CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
-        List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
-        System.out.println("Affectation allemand chez les Italiens :");
-        System.out.println(listALL);
-        System.out.println(calculALL.getCout());
+        // CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
+        // List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
+        // System.out.println("Affectation allemand chez les Italiens :");
+        // System.out.println(listALL);
+        // System.out.println(calculALL.getCout());
 
-        CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
-        List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
-        System.out.println("Affectation italiens chez les Allemands :");
-        System.out.println(listIT);
-        System.out.println(calculIT.getCout());
+        // CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
+        // List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
+        // System.out.println("Affectation italiens chez les Allemands :");
+        // System.out.println(listIT);
+        // System.out.println(calculIT.getCout());
 
-        System.out.println("\n");
+        // System.out.println("\n");
 
 
 
@@ -322,7 +322,7 @@ public class AffectationUtil implements Serializable {
 
         Criterion historySame = new Criterion("same", CriterionName.HISTORY);
         Criterion historyOther = new Criterion("other", CriterionName.HISTORY);
-        Criterion historyVide = new Criterion("", CriterionName.HISTORY);
+        // Criterion historyVide = new Criterion("", CriterionName.HISTORY);
 
         
         Teenager teenager11 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
@@ -345,7 +345,7 @@ public class AffectationUtil implements Serializable {
         teenager12.addCriterion(CriterionName.HISTORY.name(),historyOther);
 
         teenager13.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager13.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        // teenager13.addCriterion(CriterionName.HISTORY.name(),historyVide);
 
         teenager14.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager14.addCriterion(CriterionName.HISTORY.name(),historyOther);
@@ -357,7 +357,7 @@ public class AffectationUtil implements Serializable {
         teenager16.addCriterion(CriterionName.HISTORY.name(),historySame);
 
         teenager17.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager17.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        //teenager17.addCriterion(CriterionName.HISTORY.name(),historyVide);
 
         teenager18.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager18.addCriterion(CriterionName.HISTORY.name(),historySame);
@@ -383,16 +383,16 @@ public class AffectationUtil implements Serializable {
         it2.add(teenager18);
 
         for (Teenager teenager : fr2) {
-            graphFRChezIT.ajouterSommet(teenager);
+            graphFRChezIT2.ajouterSommet(teenager);
         }
 
         for (Teenager teenager : it2) {
-            graphFRChezIT.ajouterSommet(teenager);
+            graphFRChezIT2.ajouterSommet(teenager);
         }
 
         for (Teenager t1 : fr2) {
             for (Teenager t2 : it2) {
-                graphFRChezIT.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history));
+                graphFRChezIT2.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history));
             }
         }
 
@@ -402,6 +402,20 @@ public class AffectationUtil implements Serializable {
         System.out.println(list2);
         System.out.println(calculfr1.getCout());
         System.out.println("\n");
+
+        // CalculAffectation<Teenager> calculALL = new CalculAffectation<Teenager>(graphALLChezIT, allemandList, italiensList);
+        // List<Arete<Teenager>> listALL = calculALL.calculerAffectation();
+        // System.out.println("Affectation allemand chez les Italiens :");
+        // System.out.println(listALL);
+        // System.out.println(calculALL.getCout());
+
+        // CalculAffectation<Teenager> calculIT = new CalculAffectation<Teenager>(graphITChezALL, italiensList, allemandList);
+        // List<Arete<Teenager>> listIT = calculIT.calculerAffectation();
+        // System.out.println("Affectation italiens chez les Allemands :");
+        // System.out.println(listIT);
+        // System.out.println(calculIT.getCout());
+
+        // System.out.println("\n");
 
 
 
@@ -436,7 +450,7 @@ public class AffectationUtil implements Serializable {
         teenager20.addCriterion(CriterionName.HOBBIES.name(),technologie);
 
         teenager21.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager21.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        // teenager21.addCriterion(CriterionName.HISTORY.name(),historyVide);
         teenager21.addCriterion(CriterionName.HOBBIES.name(),reading);
 
         teenager22.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
@@ -452,7 +466,7 @@ public class AffectationUtil implements Serializable {
         teenager24.addCriterion(CriterionName.HOBBIES.name(),sport);
 
         teenager25.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
-        teenager25.addCriterion(CriterionName.HISTORY.name(),historyVide);
+        // teenager25.addCriterion(CriterionName.HISTORY.name(),historyVide);
         teenager25.addCriterion(CriterionName.HOBBIES.name(),sportsEtTechnologie);
 
         teenager26.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
@@ -490,11 +504,11 @@ public class AffectationUtil implements Serializable {
 
         for (Teenager t1 : fr3) {
             for (Teenager t2 : it3) {
-                graphFRChezIT2.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history2));
+                graphFRChezIT3.ajouterArete(t1, t2, AffectationUtil.weight(t1, t2, history2));
             }
         }
 
-        CalculAffectation<Teenager> calculfr3 = new CalculAffectation<Teenager>(graphFRChezIT2, fr2, it2);
+        CalculAffectation<Teenager> calculfr3 = new CalculAffectation<Teenager>(graphFRChezIT3, fr3, it3);
         List<Arete<Teenager>> list3 = calculfr3.calculerAffectation();
         System.out.println("Affectation FR chez IT :");
         System.out.println(list3);
