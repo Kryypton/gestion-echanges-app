@@ -2,13 +2,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+
 import fr.ulille.but.sae2_02.graphes.Arete;
 import fr.ulille.but.sae2_02.graphes.CalculAffectation;
 import fr.ulille.but.sae2_02.graphes.GrapheNonOrienteValue;
 
 public class AffectationVersion1Test {
 
+    @BeforeEach
+    void initialization() {
 
+
+        
+    }
         public static void main(String[] args) {
                 
 

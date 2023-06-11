@@ -77,12 +77,12 @@ En implémentant l'exemple donner pour compatibilityVsHobbies nous avons génér
 
 Nous obtenons ce graphe lorsque se sont les Italiens qui se rendent chez les Allemands : 
 
-![Texte alternatif](./Img/)
+![Texte alternatif](./img/)
 
 
 Nous obtenons ce graphe lorsque se sont les Allemands qui se rendent chez les Italiens : 
 
-![Texte alternatif](./Img/)
+![Texte alternatif](./img/)
 
 
 Les tests fait pour obtenir ces graphe se trouve dans [AffectationVersion1Test.java](../test/AffectationVersion1Test.java) 
@@ -108,14 +108,10 @@ Sera évaluée à partir du tag git `Graphes-v2`
 
 Voici un petit exemple que l'on va utiliser pour tester l'historique : 
 
-![Texte alternatif](./Img/)
+![Texte alternatif](./img/ModelVersion1.png)
 
 
-
-Voici donc le graphe obtenu avec cette exemple : 
-
-![Texte alternatif](./Img/)
-
+Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
 
 ### Deuxième exemple pour la gestion d'historique
 
@@ -123,14 +119,24 @@ Voici donc le graphe obtenu avec cette exemple :
 
 *Donner l'appariement que vous considérez optimal dans ce deuxième exemple, toujours sans parler de graphes.*
 
+Voici l'exemple que l'on va utiliser pour tester l'historique avec les ajouts : 
+
+![Texte alternatif](./img/ModelVersion2.png)
+
+Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+
 ### Modélisation pour les exemples
 
 *Pour chacun des deux exemples précédents, donnez un graphe (donné par sa matrice d'adjacence) tel que l'affectation minimale dans ce graphe correspond à l'appariement optimal identifié plus haut. Expliquez comment vous avez choisi le poids pour chacune des arêtes.*
 
 
-![Texte alternatif](./Img/)
+Voici le graphe obtenu grace au premier exemple des 2 exemples precedents.
 
+![Texte alternatif](./img/)
 
+Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
+
+![Texte alternatif](./img/)
 
 ### Modélisation pour l'historique de la Version 2
 
