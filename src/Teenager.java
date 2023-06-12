@@ -46,6 +46,10 @@ public class Teenager implements Serializable{
         this.countryName = countryName;
     }
 
+    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , String countryName, Map<String, Criterion> requirements){
+        this(id,name,forname,gender,birthDate,isCountry(countryName),requirements);
+    }
+
     /**
      * Constructeur de la classe Teenager sans le paramètre (requirements) qui est un Map de (Criterion) Critères
      * @param id l'identifiant unique d'un adolescent
@@ -519,7 +523,8 @@ public class Teenager implements Serializable{
      * @param countryName Le nom du pays de l'étudiant
      * @return l'enum correspondant aux pays en paramètre
      */
-    public Country isCountry(String countryName){
+    public static Country isCountry(String countryName){
+        countryName.toUpperCase();
         if(countryName.equals("FRANCE")){
             return Country.FRANCE;
         }

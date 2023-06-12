@@ -1,12 +1,18 @@
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,14 +20,79 @@ public class ChangePlan {
 
     Platform platform ;
 
+    /*
+     * Pour la page de connexion
+     */
+
     @FXML
     TextField login;
     @FXML
     TextField password;
 
-    ListView listeTeenager; // Liste des Teenager
-    ListView listeAppariement; // Liste des Appariement
+    /*
+     * Pour les pages gestion élèves et appariement
+     */
+    @FXML
+    ListView<Teenager> listeTeenager; // Liste des Teenager
+    @FXML
+    ListView<Map<Teenager,Teenager>> listeAppariement; // Liste des Appariement
 
+    /*
+     * Pour la page de formulaire
+     */
+
+    @FXML
+    TextField formName;
+    @FXML
+    TextField formForename;
+    @FXML
+    TextField formCountry;
+    @FXML
+    TextField formHobbies;
+    @FXML
+    DatePicker formDate;
+    @FXML
+    RadioButton formAnimalYesV;
+    @FXML
+    RadioButton formAnimalNoV;
+    @FXML
+    RadioButton formAnimalYesH;
+    @FXML
+    RadioButton formAnimalNoH;
+    @FXML
+    RadioButton formGenderMale;
+    @FXML
+    RadioButton formGenderFemale;
+    @FXML
+    RadioButton formGenderOther;
+    @FXML
+    RadioButton formOtherGenderMale;
+    @FXML
+    RadioButton formOtherGenderFemale;
+    @FXML
+    RadioButton formOtherGenderOther;
+    @FXML
+    RadioButton formOtherGenderNull;
+    @FXML
+    RadioButton formHistorySame;
+    @FXML
+    RadioButton formHistoryOther;
+    @FXML
+    RadioButton formHistoryNull;
+    @FXML
+    CheckBox formNotNonuts;
+    @FXML
+    CheckBox formVegetarian;
+    @FXML
+    CheckBox formOtherNotNonuts;
+    @FXML
+    CheckBox formOtherVegetarian;
+
+    Criterion AnimalV;
+    Criterion AnimalH;
+    Criterion History;
+    Criterion gender;
+    Criterion otherGender;
     
 
     public void initialize() {
@@ -91,6 +162,14 @@ public class ChangePlan {
     //      ACTION
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void AjoutEleveFormulaire(ActionEvent event) throws IOException {
+        String name = formName.getCharacters().toString();
+        String forname = formForename.getCharacters().toString();
+        String countryName = formCountry.getCharacters().toString();
+        LocalDate birthDate = formDate.getValue();
+        Map<String, Criterion> requirements;
+    }
+
     // public void ImportationEleve(ActionEvent event) throws IOException {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
     // }
@@ -103,14 +182,11 @@ public class ChangePlan {
             platform.removeTeenager(t);
             sauvgardePlateforme();
         }
-
         // Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve"); Je sais pas a quoi sa sert cette ligne
     }
 
-    public void sauvgardePlateforme(){ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
-        platform.exportTeenagers(null, null);
-
-    
+    public void sauvgardePlateforme() throws IOException{ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
+        Platform.exportTeenagers(null, null);
     }
 
     // public void SupprimerAppariment(ActionEvent event) throws IOException {
