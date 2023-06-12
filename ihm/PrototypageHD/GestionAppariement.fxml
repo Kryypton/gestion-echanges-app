@@ -113,7 +113,7 @@
                                  <graphic>
                                     <ImageView fitHeight="160.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@img/bouton-modifier.png" />
+                                          <Image url="@img/modifier.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
