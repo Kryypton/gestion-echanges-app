@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,9 +11,10 @@ import javafx.stage.Stage;
 
 public class ChangePlan {
 
-    Stage stage;
+    @FXML
     TextField login;
-    TextField mdp;
+    @FXML
+    TextField password;
 
     public void initialize() {
         System.out.println("Initialisation...");
@@ -38,9 +40,9 @@ public class ChangePlan {
     //      CHANGEMENT DE PAGE
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void ConnexionValid(ActionEvent event) throws IOException {
-        if(login.getCharacters().toString().equals("root") && mdp.getCharacters().toString().equals("root")){
-            Charge(Start.stage,"ihm/PrototypageHD/Connexion.fxml","Connexion");
-        }else if(login.getCharacters().toString().equals("eleve") && mdp.getCharacters().toString().equals("eleve")){
+        if(login.getCharacters().toString().equals("root") && password.getCharacters().toString().equals("root")){
+            Charge(Start.stage,"ihm/PrototypageHD/accueil.fxml","Accueil");
+        }else if(login.getCharacters().toString().equals("eleve") && password.getCharacters().toString().equals("eleve")){
             Charge(Start.stage,"ihm/PrototypageHD/Formulaire.fxml","Formulaire");
         }
     }
