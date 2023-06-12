@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1280.0" style="-fx-background-color: #204382;">
+         <children>
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="583.0" text="Formulaire d'inscription" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="81.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" style="-fx-translate-x: -10;">
+                     <image>
+                        <Image url="@img/formulaire.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="524.0" prefWidth="1280.0">
+         <VBox.margin>
+            <Insets top="100.0" />
+         </VBox.margin>
+         <children>
+            <GridPane prefHeight="499.0" prefWidth="625.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="574.0" minWidth="10.0" prefWidth="570.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="469.0" minWidth="10.0" prefWidth="55.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox prefHeight="48.0" prefWidth="386.0" GridPane.rowIndex="1">
+                     <children>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de naissance" wrappingWidth="154.7294921875" />
+                              <DatePicker prefHeight="24.0" prefWidth="296.0">
+                                 <VBox.margin>
+                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays :" wrappingWidth="132.7294921875" />
+                              <ListView prefHeight="24.0" prefWidth="283.0">
+                                 <VBox.margin>
+                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                 </VBox.margin>
+                              </ListView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="48.0" prefWidth="386.0">
+                     <children>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom : " wrappingWidth="154.7294921875" />
+                              <TextField prefHeight="24.0" prefWidth="268.0">
+                                 <VBox.margin>
+                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom : " wrappingWidth="132.7294921875" />
+                              <TextField prefHeight="24.0" prefWidth="256.0">
+                                 <VBox.margin>
+                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="En tant que visiteur : " wrappingWidth="465.7529296875">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="48.0" prefWidth="386.0" GridPane.rowIndex="3">
+                     <children>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Etes-vous allergique à un animal ?" wrappingWidth="282.7294921875" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="13.0" prefWidth="144.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Oui" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Non" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Suivez-vous un régime alimentaire ?" wrappingWidth="279.7294921875" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="En tant qu'hote : " wrappingWidth="465.7529296875">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="48.0" prefWidth="386.0" GridPane.rowIndex="5">
+                     <children>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Possédez-vous un animal allergisant ?" wrappingWidth="282.7294921875" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="13.0" prefWidth="144.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Oui" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Non" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0" />
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quel régime alimentaire acceptez-vous ?" wrappingWidth="279.7294921875" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="6">
+                     <children>
+                        <Separator prefWidth="200.0" />
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Autres préférences et contraintes : " wrappingWidth="465.7529296875">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0" GridPane.rowIndex="7">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quels sont vos passes-temps préférés ?" wrappingWidth="402.7294921875" />
+                        <TextField prefHeight="24.0" prefWidth="268.0">
+                           <VBox.margin>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="48.0" prefWidth="386.0" GridPane.rowIndex="8">
+                     <children>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quel est votre genre ?" wrappingWidth="282.7294921875" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="95.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Femme" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="92.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Homme" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="100.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="72.0" text="Autres" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre préférence pour le genre de l'invité :" wrappingWidth="279.7294921875" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="77.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Femme" textFill="WHITE">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </RadioButton>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="79.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Homme" textFill="WHITE">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </RadioButton>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="73.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" text="Autres" textFill="WHITE">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </RadioButton>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="73.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" text="Aucunes préférences" textFill="WHITE">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </RadioButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0" GridPane.rowIndex="9">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Souhaitez-vous garder le meme correspondant que la dernière fois ? " textAlignment="CENTER" wrappingWidth="570.7294921875" />
+                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="95.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Oui" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="92.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Non" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="171.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="172.0" text="Aucunes préférences" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Canvas height="19.0" width="20.0" GridPane.columnIndex="1" />
+                  <Canvas height="19.0" width="20.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+      <HBox prefHeight="186.0" prefWidth="1280.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="1136.0">
+               <children>
+                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: #071835; -fx-border-color: #ffffff; -fx-border-width: 2;" text="Envoyer" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="cocogoose" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-translate-x: -2;">
+                           <image>
+                              <Image url="@img/verifie.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="130.0" prefWidth="619.0">
+               <children>
+                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: #071835; -fx-border-color: #ffAAAA; -fx-border-width: 2;" text="Déconnexion" textAlignment="CENTER" textFill="#b95757">
+                     <font>
+                        <Font name="cocogoose" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-translate-x: -2;">
+                           <image>
+                              <Image url="@img/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
