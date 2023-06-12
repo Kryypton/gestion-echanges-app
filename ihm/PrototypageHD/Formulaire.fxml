@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangePlan">
    <children>
       <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1280.0" style="-fx-background-color: #204382;">
          <children>
@@ -358,7 +358,7 @@
             </VBox>
             <VBox prefHeight="130.0" prefWidth="619.0">
                <children>
-                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: #071835; -fx-border-color: #ffAAAA; -fx-border-width: 2;" text="Déconnexion" textAlignment="CENTER" textFill="#b95757">
+                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#SelectConnexion" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: #071835; -fx-border-color: #ffAAAA; -fx-border-width: 2;" text="Déconnexion" textAlignment="CENTER" textFill="#b95757">
                      <font>
                         <Font name="cocogoose" size="14.0" />
                      </font>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangePlan">
    <children>
       <HBox alignment="CENTER" prefHeight="110.0" prefWidth="762.0" style="-fx-background-color: #204382;">
          <children>
@@ -36,7 +36,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="428.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="64.0" prefWidth="480.0" style="-fx-background-image: url(./student.png); -fx-background-color: #071835; -fx-border-color: #204382; -fx-border-width: 3; -fx-font-family: ./font/cocogoose.ttf;" text="Gestion des élèves" textAlignment="CENTER" textFill="WHITE">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#SelectGestionEleve" prefHeight="64.0" prefWidth="480.0" style="-fx-background-image: url(./student.png); -fx-background-color: #071835; -fx-border-color: #204382; -fx-border-width: 3; -fx-font-family: ./font/cocogoose.ttf;" text="Gestion des élèves" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -54,7 +54,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="480.0" style="-fx-background-color: #071835; -fx-border-color: #204382; -fx-border-width: 4;" text="Gestion des appariements" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#SelectGestionAppariemment" prefHeight="64.0" prefWidth="480.0" style="-fx-background-color: #071835; -fx-border-color: #204382; -fx-border-width: 4;" text="Gestion des appariements" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -81,7 +81,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="180.0" style="-fx-background-color: #071835; -fx-border-color: #ffffff; -fx-border-width: 2;" text="Déconnexion" textAlignment="CENTER" textFill="WHITE">
+                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#SelectConnexion" prefHeight="32.0" prefWidth="180.0" style="-fx-background-color: #071835; -fx-border-color: #ffffff; -fx-border-width: 2;" text="Déconnexion" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="cocogoose" size="14.0" />
                      </font>

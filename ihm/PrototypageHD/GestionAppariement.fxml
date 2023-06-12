@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangePlan">
    <children>
       <HBox alignment="CENTER" prefHeight="110.0" prefWidth="762.0" style="-fx-background-color: #204382;">
          <children>
@@ -139,7 +139,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="640.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="158.0" style="-fx-background-color: #203050; -fx-border-color: #254060; -fx-border-width: 4;" text="Retour" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#SelectAccueil" prefHeight="38.0" prefWidth="158.0" style="-fx-background-color: #203050; -fx-border-color: #254060; -fx-border-width: 4;" text="Retour" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -147,7 +147,7 @@
                         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="159.0" style="-fx-background-color: #203050; -fx-border-color: #254060; -fx-border-width: 4;" text="Accueil" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#SelectAccueil" prefHeight="34.0" prefWidth="159.0" style="-fx-background-color: #203050; -fx-border-color: #254060; -fx-border-width: 4;" text="Accueil" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -166,7 +166,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="96.0" prefWidth="640.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#pressedConnexion" prefHeight="31.0" prefWidth="198.0" style="-fx-background-color: #203050; -fx-border-color: #254060; -fx-border-width: 4;" text="Déconnexion" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#SelectConnexion" prefHeight="31.0" prefWidth="198.0" style="-fx-background-color: #203050; -fx-border-color: #254060; -fx-border-width: 4;" text="Déconnexion" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>

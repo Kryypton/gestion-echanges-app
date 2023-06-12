@@ -1,5 +1,3 @@
-package ihm.PrototypageHD;
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -11,9 +9,12 @@ import javafx.stage.Stage;
 
 public class Start extends Application {
 
+        public static Stage stage;
+
         public void start(Stage stage) throws IOException {
+                Start.stage = stage;
                 FXMLLoader loader = new FXMLLoader();
-                URL fxmlFileUrl = getClass().getResource("Connexion.fxml");
+                URL fxmlFileUrl = getClass().getResource("ihm/PrototypageHD/Connexion.fxml");
                 if (fxmlFileUrl == null) {
                         System.out.println("Impossible de charger le fichier fxml");
                         System.exit(-1);
