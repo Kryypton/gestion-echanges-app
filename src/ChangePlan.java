@@ -91,9 +91,45 @@ public class ChangePlan {
     //      ACTION
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    ///////////////////////////////////////////////////
+    //      Verification de la validité des champs
+    ///////////////////////////////////////////////////
+
+    public boolean champsValid(TextField t){
+        if(t.getText().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean dateValid(TextField t){
+        if(t.getText().isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+    public 
+        
+
     // public void ImportationEleve(ActionEvent event) throws IOException {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
     // }
+
+
+
+
+
+
+    ///////////////////////////////////////////////////
+
+
+
+    public void sauvegardeTeenager(){
+
+    }
+
 
     public void supprimerEleve(ActionEvent event) throws IOException {
         String eleve = listeTeenager.getSelectionModel().getSelectedItem().toString().split("\t")[0];
@@ -101,16 +137,14 @@ public class ChangePlan {
         if(t != null){
             listeTeenager.getItems().remove(eleve);
             platform.removeTeenager(t);
-            sauvgardePlateforme();
+            sauvegardePlateforme();
         }
-
         // Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve"); Je sais pas a quoi sa sert cette ligne
     }
 
-    public void sauvgardePlateforme(){ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
+    public void sauvegardePlateforme(){ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
         platform.exportTeenagers(null, null);
 
-    
     }
 
     // public void SupprimerAppariment(ActionEvent event) throws IOException {
