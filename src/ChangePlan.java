@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,6 +16,10 @@ public class ChangePlan {
     TextField login;
     @FXML
     TextField password;
+
+    ListView listeTeenager; // Liste des Teenager
+
+    
 
     public void initialize() {
         System.out.println("Initialisation...");
@@ -39,6 +44,7 @@ public class ChangePlan {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     //      CHANGEMENT DE PAGE
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void ConnexionValid(ActionEvent event) throws IOException {
         if(login.getCharacters().toString().equals("root") && password.getCharacters().toString().equals("root")){
             Charge(Start.stage,"ihm/PrototypageHD/accueil.fxml","Accueil");
@@ -85,9 +91,11 @@ public class ChangePlan {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
     // }
 
-    // public void SupprimerEleve(ActionEvent event) throws IOException {
-    //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
-    // }
+    public void supprimerEleve(ActionEvent event) throws IOException {
+        
+
+        // Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve"); Je sais pas a quoi sa sert cette ligne
+    }
 
     // public void SupprimerAppariment(ActionEvent event) throws IOException {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");

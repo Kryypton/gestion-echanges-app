@@ -1,9 +1,9 @@
 {
     "java.debug.settings.onBuildFailureProceed": true,
     "java.project.sourcePaths": [
-        "test",
+        ".",
         "src",
-        ""
+        "test"
     ],
     "apexPMD.commandBufferSize": 5000,
     "apexPMD.pmdBinPath": "./rules/pmd/bin",
