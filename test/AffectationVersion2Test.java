@@ -137,20 +137,20 @@ public class AffectationVersion2Test {
 
     @Test
     public void testExemple1(){
-        assertEquals(165 , AffectationUtil.weight(teenager1, teenager5, history));
-        assertEquals(165 , AffectationUtil.weight(teenager2, teenager6, history));
-        assertEquals(65 , AffectationUtil.weight(teenager3, teenager7, history));
-        assertEquals(165 , AffectationUtil.weight(teenager4, teenager7, history));
+        assertEquals(1965 , AffectationUtil.weight(teenager1, teenager5, history));
+        assertEquals(1965 , AffectationUtil.weight(teenager2, teenager6, history));
+        assertEquals(1865 , AffectationUtil.weight(teenager3, teenager7, history));
+        assertEquals(1865 , AffectationUtil.weight(teenager4, teenager7, history));
     }
 
 
 
     @Test
     public void testExemple2(){
-        assertEquals(115 , AffectationUtil.weight(teenager9, teenager13, history2));
-        assertEquals(115 , AffectationUtil.weight(teenager10, teenager14, history2));
-        assertEquals(65 , AffectationUtil.weight(teenager11, teenager15, history2));
-        assertEquals(14 , AffectationUtil.weight(teenager12, teenager16, history2));
+        assertEquals(1915 , AffectationUtil.weight(teenager9, teenager13, history2));
+        assertEquals(1915 , AffectationUtil.weight(teenager10, teenager14, history2));
+        assertEquals(1865 , AffectationUtil.weight(teenager11, teenager15, history2));
+        assertEquals(914 , AffectationUtil.weight(teenager12, teenager16, history2));
     }
 }
  

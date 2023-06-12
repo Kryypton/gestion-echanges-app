@@ -12,17 +12,17 @@ public class AffectationUtil implements Serializable {
      */
     
      public static int weight (Teenager host, Teenager guest , Affectation history) {
-        int poid = 100;
+        int poid = 1000;
         //int poids = 0;
         poid -= host.nbLoisirCommun(guest);
-        if(!host.compatibleWithGuest(guest)) poid += 100;
+        if(!host.compatibleWithGuest(guest)) poid += 1000;
         //Age différent ?
         if (host.getDiffAge(guest).toTotalMonths()<18) poid -= 25;
         //poid = poid + poids;
         poid = poid + history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest);
-        // if (poid < 0) {
-        //     poid = 0;
-        // }
+        if (poid < 0) {
+            poid = 0;
+        }
         return poid;
     }
 
@@ -487,15 +487,15 @@ public class AffectationUtil implements Serializable {
         List<Teenager> fr3 = new ArrayList<Teenager>();
         List<Teenager> it3 = new ArrayList<Teenager>();
 
-        fr3.add(teenager9);
-        fr3.add(teenager10);
-        fr3.add(teenager11);
-        fr3.add(teenager12);
+        fr3.add(teenager19);
+        fr3.add(teenager20);
+        fr3.add(teenager21);
+        fr3.add(teenager22);
 
-        it3.add(teenager13);
-        it3.add(teenager14);
-        it3.add(teenager15);
-        it3.add(teenager16);
+        it3.add(teenager23);
+        it3.add(teenager24);
+        it3.add(teenager25);
+        it3.add(teenager26);
 
         for (Teenager teenager : fr3) {
             graphFRChezIT3.ajouterSommet(teenager);

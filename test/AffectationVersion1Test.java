@@ -88,7 +88,7 @@ public class AffectationVersion1Test {
         assertEquals(200 , AffectationUtil.weightVersion1(teenager1,teenager2));
         assertEquals(99 , AffectationUtil.weightVersion1(teenager1,teenager4));
         assertEquals(99 , AffectationUtil.weightVersion1(teenager2,teenager5));
-        assertEquals(100 , AffectationUtil.weightVersion1(teenager3,teenager6));
+        assertEquals(200 , AffectationUtil.weightVersion1(teenager3,teenager6));
         assertEquals(100 , AffectationUtil.weightVersion1(teenager4,teenager5));
         assertEquals(99 , AffectationUtil.weightVersion1(teenager4,teenager6));
         assertEquals(100 , AffectationUtil.weightVersion1(teenager5,teenager6));

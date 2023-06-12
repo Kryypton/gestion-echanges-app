@@ -110,8 +110,15 @@ Voici un petit exemple que l'on va utiliser pour tester l'historique :
 
 ![Texte alternatif](./img/ModelVersion1.png)
 
-Pour nous les appariements optimals sont : 
-Ils sont optimals car 
+Pour nous les appariements optimals sont les suivant : 
+-   A Adham et F , Fabienne
+-   B Bertrand, G Gerard
+-   C Claudette, E Emile
+-   D Damiene, H Harvard
+
+
+Ils sont optimals car malgrés l'incompatibilté dut a leur provenance de leur pays (France et comme il nous pas de loisirs en commun c'est incompatibles) grace a cette exmple on retrouve tout les mise en situation pour les historiques on retrouve le faite que 2 personne veulent se remettre ensemble , que 2 personne ne veulent pas se remettre ensemble , que les 2 ne se sont pas exprimé et que un des 2 est d'accord.
+Et donc notre méthode weight ici fait bien se qui est demander. 
 
 
 Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
@@ -128,8 +135,10 @@ Voici l'exemple que l'on va utiliser pour tester l'historique avec les ajouts :
 
 
 Pour nous les appariements optimals sont : 
-
-
+-   D Damiene, E Emile
+-   C Claudette, H Harvard
+-   A Adham, F Fabienne
+-   B Bertrand, G Gerard
 
 
 Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
@@ -154,7 +163,6 @@ Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
 Pour modéliser l’historique :
     * Afin de modéliser l’historique nous avons décidé que chaque binôme de Teenager aller être répertoriés dans une Hashmap.
     * Nous avons implémenté des méthodes afin de garder une trace dans un fichier texte des historiques.
-
 
 
 ### Implémentation de l'historique de la Version 2
