@@ -12,12 +12,15 @@ import javafx.stage.Stage;
 
 public class ChangePlan {
 
+    Platform platform ;
+
     @FXML
     TextField login;
     @FXML
     TextField password;
 
     ListView listeTeenager; // Liste des Teenager
+    ListView listeAppariement; // Liste des Appariement
 
     
 
@@ -83,6 +86,7 @@ public class ChangePlan {
     }
 
 
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     //      ACTION
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,9 +96,21 @@ public class ChangePlan {
     // }
 
     public void supprimerEleve(ActionEvent event) throws IOException {
-        
+        String eleve = listeTeenager.getSelectionModel().getSelectedItem().toString().split("\t")[0];
+        Teenager t = platform.getIndexFromTeenager(Integer.parseInt(eleve));
+        if(t != null){
+            listeTeenager.getItems().remove(eleve);
+            platform.removeTeenager(t);
+            sauvgardePlateforme();
+        }
 
         // Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve"); Je sais pas a quoi sa sert cette ligne
+    }
+
+    public void sauvgardePlateforme(){ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
+        platform.exportTeenagers(null, null);
+
+    
     }
 
     // public void SupprimerAppariment(ActionEvent event) throws IOException {
@@ -108,5 +124,6 @@ public class ChangePlan {
     // public void CreeAppariement(ActionEvent event) throws IOException {
     //     weigth
     // }
+
 
 }

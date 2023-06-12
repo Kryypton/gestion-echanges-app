@@ -52,6 +52,20 @@ public class Platform {
     }
 
     /**
+     * Méthode qui renvois l'indice d'un teenager dans la liste des adolescents
+     * @param index index demandé
+     * @return true si l'adolescent a été supprimé, false sinon
+     */
+    public Teenager getIndexFromTeenager(int index){
+        for (Teenager teenager : teenagerList) {
+            if (teenager.getId() == index) {
+                return teenager;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Methode qui regarde si 2 adolescent sont compatible entre eux (Allergie, alimentation...) et les ajoute dans une map
      */
     public void findCompatibleTeenagers(){
