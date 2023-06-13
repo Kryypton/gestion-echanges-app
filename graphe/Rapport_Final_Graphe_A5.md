@@ -123,7 +123,9 @@ Ils sont optimals car malgrés l'incompatibilté dut a leur provenance de leur p
 Et donc notre méthode weight ici fait bien se qui est demander. 
 
 
-Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+Ce test pour obtenir les graph ont été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
 
 ### Deuxième exemple pour la gestion d'historique
 
@@ -143,7 +145,9 @@ Pour nous les appariements optimals sont :
 -   B Bertrand, G Gerard
 
 
-Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+Ce test pour obtenir les graph ont été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
 
 ### Modélisation pour les exemples
 
@@ -162,10 +166,7 @@ Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
 
 *Décrire une modélisation générale pour la Version 1. C'est à dire, donner une formule ou une description précise qui décrit comment, étant donné un adolescent hôte et un adolescent visiteur, on détermine le poids de l'arête entre ces deux adolescents en fonction des critères considérés dans la Version 1. Décrire également comment vous construisez le graphe modèle à partir des données en entrée.*
 
-Pour modéliser l’historique :
-    * Afin de modéliser l’historique nous avons décidé que chaque binôme de Teenager aller être répertoriés dans une Hashmap.
-    * Nous avons implémenté des méthodes afin de garder une trace dans un fichier texte des historiques.
-
+Pour modéliser l’historique nous verifions que les 2 teenagers au deja été ensemble en verifiant l'historique et ensuite on regarde leur choix au niveau de l'historique si la personne met same alors le poid diminue de -100 , si 1 des 2 met same alors cela diminue de -50 et si les 2 ont mis other alors le poids augmentes de 50.
 
 
 ### Implémentation de l'historique de la Version 2
@@ -190,7 +191,8 @@ C’est pour cela que dans notre classe `AffectationUtil.java` pour la méthode 
 *Créer la classe de TestAffectationVersion2 qui contiendra deux méthodes de test, une pour chacun des exemples. Chacune de ces méthodes doit avoir la même structure que pour TestAffectationVersion1, c'est à dire créer les données d'entrée (adolescents, historique), créer le graphe, calculer l'affectation, et tester que le résultat est comme attendu.*
 
 
-Ces tests a été fait dans la class [TestAffectationVersion2.java](../src/TestAffectationVersion2.java)
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
+
 
 
 ### Prendre en compte les autres préférences
@@ -218,5 +220,7 @@ Pour ces critères d'affiniter ci dessous cela sera verifier directement dans we
 
 *Proposer une formule ou une description précise qui explique comment calculer le poids d'une arête en considérant les incompatibilités comme des malus et les critères satisfaits comme des bonus. Implémenter cette formule dans une seconde méthode appelée `weightAdvanced`, ceci pour éviter de casser votre code. Puis, écrire une méthode de test qui permet d'illustrer le calcul d'affectation basé sur `weightAdvanced`. Vous pouvez égalmente tester l'affectation en utilisant le fichier de données `incompatibilityVsBonus.csv`.*
 
+
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
 
 
