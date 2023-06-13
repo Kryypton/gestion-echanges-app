@@ -51,6 +51,10 @@ public class Platform {
         return teenagerList.remove(teenager);
     }
 
+    public boolean removeCompatibleTeenager(Teenager host,Teenager visitor){
+        return compatibleTeenagers.remove(host,visitor);
+    }
+
     /**
      * Méthode qui renvois l'indice d'un teenager dans la liste des adolescents
      * @param index index demandé

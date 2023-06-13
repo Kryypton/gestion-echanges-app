@@ -1,7 +1,7 @@
 SAE S2.02 -- Rapport pour la ressource Graphes
 ===
 
-*Noms des auteurs, groupe*
+*Adham Berrakane , Nathan Dorny , Quentin moufort, Groupe A*
 
 Version 1
 ---
@@ -21,7 +21,6 @@ Sera évaluée à partir du tag git `Graphes-v1`
 
 
 Ces appariement sont possible car comparé au autre il ont des loisirs en commun et il ne faut aussi pas oublier que comme dit dans l'énoncé que les ado francais ne peuvent aller chez un hôte que si il ont un loisir en commun.
-
 Et aussi les autres appariement ne sont pas possible a cause de l’allergie au animaux en effet Bellatrix possède une allergie à l'animal de l'hôte Y.
 
 
@@ -44,7 +43,7 @@ Pour le choix du poids des arêtes, on les fait tous démarrer à 100. Nous avon
 *Décrire une modélisation générale pour la Version 1. C'est à dire, donner une formule ou une description précise qui décrit comment, étant donné un adolescent hôte et un adolescent visiteur, on détermine le poids de l'arête entre ces deux adolescents en fonction des critères considérés dans la Version 1.*
 
 
-Nous enlevons pour un appariement 1 point par hobbie commun, puis nous ajoutons 100 points par contrainte de comptabilité, donc à cause des allergies et autres et donc ici pour l'arrete est lourde moins ils sont compatible.
+Tout le monde commence a 100 nous enlevons 1 point par hobbie commun, puis nous ajoutons 100 points par contrainte de comptabilité, donc à cause des allergies et autres et donc ici pour l'arrete est lourde moins ils sont compatible.
 
 
 ### Implémentation de la Version 1
@@ -70,20 +69,23 @@ Pour le test il se trouve dans le fichier [AffectationVersion1Test.java](../test
 
     -   2 chose sont remarquable dans ce fichier : 
 
-        *   On peut voir dans ce fichier que certains adolescents n'ont aucun loisir alors que contrairement à d'autres adolescents qui eux ont beaucoup de loisirs.
-        *   Une incohérence est aussi présente dans ce fichier en effet on peut retrouver l’adolescent A A qui est allergique au animaux alors qu’il en possède un.
+*   On peut voir dans ce fichier que certains adolescents n'ont aucun loisir alors que contrairement à d'autres adolescents qui eux ont beaucoup de loisirs.
+*   Une incohérence est aussi présente dans ce fichier en effet on peut retrouver l’adolescent A A qui est allergique au animaux alors qu’il en possède un.
 
 En implémentant l'exemple donner pour compatibilityVsHobbies nous avons générer 2 graphe different grace a la regle de calcule de poinds mise en place un peu plus haut.
 
 Nous obtenons ce graphe lorsque se sont les Italiens qui se rendent chez les Allemands : 
 
-![Texte alternatif](./img/)
+![Exemple2](./img/Exemple2.png)
 
 
 Nous obtenons ce graphe lorsque se sont les Allemands qui se rendent chez les Italiens : 
 
-![Texte alternatif](./img/)
+![Exemple3](./img/Exemple3.png)
 
+
+
+Dans ces test fait on peut voir que notre systeme fonctionne bien car malgré le faite que le A et D on 50 hobbies en commun comme ils sont incompatibles ils ne vont jamais etre mis ensemble.
 
 Les tests fait pour obtenir ces graphe se trouve dans [AffectationVersion1Test.java](../test/AffectationVersion1Test.java) 
 Dans la partie : "Exemple 2 du sujet qui implemente IncompatibilityVsHobbies"
@@ -108,7 +110,7 @@ Sera évaluée à partir du tag git `Graphes-v2`
 
 Voici un petit exemple que l'on va utiliser pour tester l'historique : 
 
-![Texte alternatif](./img/ModelVersion1.png)
+![Exemple4](./img/ModelVersion1.png)
 
 Pour nous les appariements optimals sont les suivant : 
 -   A Adham et F , Fabienne
@@ -121,7 +123,9 @@ Ils sont optimals car malgrés l'incompatibilté dut a leur provenance de leur p
 Et donc notre méthode weight ici fait bien se qui est demander. 
 
 
-Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+Ce test pour obtenir les graph ont été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
 
 ### Deuxième exemple pour la gestion d'historique
 
@@ -131,7 +135,7 @@ Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil
 
 Voici l'exemple que l'on va utiliser pour tester l'historique avec les ajouts : 
 
-![Texte alternatif](./img/ModelVersion2.png)
+![Exemple5](./img/ModelVersion2.png)
 
 
 Pour nous les appariements optimals sont : 
@@ -141,7 +145,9 @@ Pour nous les appariements optimals sont :
 -   B Bertrand, G Gerard
 
 
-Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+Ce test pour obtenir les graph ont été fait dans la class [AffectationUtil.java](../src/AffectationUtil.java) 
+
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
 
 ### Modélisation pour les exemples
 
@@ -150,25 +156,22 @@ Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil
 
 Voici le graphe obtenu grace au premier exemple des 2 exemples precedents.
 
-![Texte alternatif](./img/)
+![Exemple4](./img/Exemple4.png)
 
 Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
 
-![Texte alternatif](./img/)
+![Exemple5](./img/Exemple5.png)
 
 ### Modélisation pour l'historique de la Version 2
 
 *Décrire une modélisation générale pour la Version 1. C'est à dire, donner une formule ou une description précise qui décrit comment, étant donné un adolescent hôte et un adolescent visiteur, on détermine le poids de l'arête entre ces deux adolescents en fonction des critères considérés dans la Version 1. Décrire également comment vous construisez le graphe modèle à partir des données en entrée.*
 
-Pour modéliser l’historique :
-    * Afin de modéliser l’historique nous avons décidé que chaque binôme de Teenager aller être répertoriés dans une Hashmap.
-    * Nous avons implémenté des méthodes afin de garder une trace dans un fichier texte des historiques.
+Pour modéliser l’historique nous verifions que les 2 teenagers au deja été ensemble en verifiant l'historique et ensuite on regarde leur choix au niveau de l'historique si la personne met same alors le poid diminue de -100 , si 1 des 2 met same alors cela diminue de -50 et si les 2 ont mis other alors le poids augmentes de 50.
 
 
 ### Implémentation de l'historique de la Version 2
 
 *Quelles fonctions de votre code avez-vous modifié pour prendre en compte le critère historique ? Donnez ici les noms des méthodes (et leur classe), à quoi elles servent, et quelles modifications vous avez apportées. Essayez d'être synthétique.*
-
 
 
 Pour implémenter cela nous avons créé une nouvelle class Affectation.java celle-ci a pour but la création d’une HashMap qui ici nous est indispensable pour l’appariement des Teenager dans l'historique. Cette classe dispose de plusieurs méthodes afin d’ajouter des Teenager dans la HashMap. Celle- ci va donc s’occuper de l’historique mais pas que. En effet dans cette classe nous disposons d’une méthode qui par rapport à l'historique va nous renvoyer une valeur celle ci se nomme history.
@@ -188,7 +191,8 @@ C’est pour cela que dans notre classe `AffectationUtil.java` pour la méthode 
 *Créer la classe de TestAffectationVersion2 qui contiendra deux méthodes de test, une pour chacun des exemples. Chacune de ces méthodes doit avoir la même structure que pour TestAffectationVersion1, c'est à dire créer les données d'entrée (adolescents, historique), créer le graphe, calculer l'affectation, et tester que le résultat est comme attendu.*
 
 
-Ces tests a été fait dans la class [TestAffectationVersion2.java](../src/TestAffectationVersion2.java)
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
+
 
 
 ### Prendre en compte les autres préférences
@@ -199,17 +203,17 @@ Dans la methode `weigth` nous avons aussi ajouter de nouveau critère d'affnité
 
 La methode `compatibleWishGender` va s'occuper de verifier les conditions ci dessous cette methode se trouve dans la class [Affectation.java](../src/Affectation.java) :
 
-    - Le faite que la demande de genre de la personne : 
-        *Si la demande est satisfaite cela diminue le poids de -10 
-        *Si la demande est satisfaite pour 1 des 2 cela diminue le poids de -5
-        *Si la demande n'est pas satisfaite cela ne change pas le poids de l'arrete
-        *Si aucun des 2 n'a de demande cela diminue de -10 car il serait dans tout les cas satisfait.
+- Le faite que la demande de genre de la personne : 
+    * Si la demande est satisfaite cela diminue le poids de -10 
+    * Si la demande est satisfaite pour 1 des 2 cela diminue le poids de -5
+    * Si la demande n'est pas satisfaite cela ne change pas le poids de l'arrete
+    * Si aucun des 2 n'a de demande cela diminue de -10 car il serait dans tout les cas satisfait.
 
 Pour ces critères d'affiniter ci dessous cela sera verifier directement dans weight :
 
-    - La difference d'age est un impact sur le poids de l'arrete : 
-        * Si la difference d'age entre les 2 etudiants est de mois de 1ans et demis cela diminue le poids de l'arrete de 25
-        * Sinon le poids de l'arrete de change pas
+- La difference d'age est un impact sur le poids de l'arrete : 
+    * Si la difference d'age entre les 2 etudiants est de mois de 1ans et demis cela diminue le poids de l'arrete de 25
+    * Sinon le poids de l'arrete de change pas
 
 
 ### L'incompatibilité en tant que malus
@@ -217,4 +221,8 @@ Pour ces critères d'affiniter ci dessous cela sera verifier directement dans we
 *Proposer une formule ou une description précise qui explique comment calculer le poids d'une arête en considérant les incompatibilités comme des malus et les critères satisfaits comme des bonus. Implémenter cette formule dans une seconde méthode appelée `weightAdvanced`, ceci pour éviter de casser votre code. Puis, écrire une méthode de test qui permet d'illustrer le calcul d'affectation basé sur `weightAdvanced`. Vous pouvez égalmente tester l'affectation en utilisant le fichier de données `incompatibilityVsBonus.csv`.*
 
 
+Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
+
+
+En diminuant le poids dut a une incompatibilité en ici en la mettant a 100 le faite qu'il y ai une incopatibilité ne vas plus obligatoirement interdire une association de 2 Teenager en effet ici si assez de critères sont satisfait cela permettre une association entre 2 teenager meme si cela sont incompatibles.
 

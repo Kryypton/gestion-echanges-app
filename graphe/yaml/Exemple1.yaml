@@ -1,0 +1,10 @@
+name: Exemple1
+type: uwgraph
+nodes: [A , B , C , X , Y , Z]
+wedges:
+  A: {X : 99, Y : 100, Z : 99}
+  B: {X : 99, Y : 199, Z : 100 }
+  C: {X : 199, Y : 98, Z :  100 }
+  X: {}
+  Y: {}
+  Z: {}
