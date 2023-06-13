@@ -119,6 +119,10 @@ public class Platform {
         return teenagerList;
     }
 
+    public ArrayList<Teenager> getTeenagerArrayList() {
+        return teenagerList;
+    }
+
     /**
      * Setter qui modifie la liste des adolescents de la plateforme
      * @param teenagerList la nouvelle liste d'adolescents

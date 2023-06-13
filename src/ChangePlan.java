@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +78,7 @@ public class ChangePlan<Eleve> {
     @FXML
     TableColumn<Eleve, Criterion> userHistory;
     @FXML
-    ListView<Teenager> listeTeenager; // Liste des Teenager
+    ListView<Teenager> listeTeenager = new ListView<>(); // Liste des Teenager
     @FXML
     ListView<Map<Teenager,Teenager>> listeAppariement; // Liste des Appariement
 
@@ -170,6 +171,9 @@ public class ChangePlan<Eleve> {
         loader.setLocation(fxmlFileUrl);
         Parent root = loader.load();
         formCountryList = (SplitMenuButton) loader.getNamespace().get("formCountryList");
+        Collection<Teenager> t = platform.getTeenagerList();
+        ObservableList<Teenager> observableList = FXCollections.observableArrayList(t);
+        listeTeenager.getItems().setAll(observableList);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(title);
@@ -503,7 +507,6 @@ public class ChangePlan<Eleve> {
     }
 
     public Criterion pairGender(){
-        System.out.println("Genre souhaité : " + pairGender.idProperty().toString());
         if(pairGender.idProperty().getValue().toString().equals("formOtherGenderFemale")){
             return new Criterion("female", CriterionName.PAIR_GENDER);
         }
@@ -520,41 +523,6 @@ public class ChangePlan<Eleve> {
     public void handleSendButtonAction(){
         Teenager teenager;
         String food = "";
-
-        System.out.println(this.isChoised(allergieAnimaux));
-
-        System.out.println(champsValid(name));
-        try {
-
-            System.out.println(name.getText());
-        } catch (Exception e) {
-
-        }
-        System.out.println(champsValid(forename));
-        try {
-            System.out.println(forename.getText());
-        } catch (Exception e) {
-
-        }
-        System.out.println(dateValid(birthDate));
-        try {
-            System.out.println(birthDate.getValue());
-        } catch (Exception e) {
-
-        }
-
-        System.out.println( isChoised(gender));
-        try {
-            gender.getId().toString();
-        } catch (Exception e) {
-
-        }
-        System.out.println(isSelected(country));
-        try {
-            System.out.println(country.getText());
-        } catch (Exception e) {
-
-        }
         if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isSelected(country)){
             if (platform.containsSame(name.getText(), forename.getText())) return;
             teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getText().toUpperCase()));
@@ -566,11 +534,9 @@ public class ChangePlan<Eleve> {
             if(isChecked(guestVegetarian)){ food = food + "vegetarian,";}
             if(food.length() > 0){ teenager.addCriterion(CriterionName.GUEST_FOOD.name(), regimeAlimentaire(food));}
 
-            System.out.println(haveAnimal() + "animauldsqldsqfujiqsçfhqsçp");
 
         
             teenager.addCriterion(CriterionName.HOST_HAS_ANIMAL.name() , haveAnimal());
-            System.out.println(haveAllergie() + "allergie");
             teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name() , haveAllergie());
             food = "";
 
