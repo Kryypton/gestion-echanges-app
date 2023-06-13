@@ -156,4 +156,26 @@ public class AffectationVersion2Test {
 
 
     }
+
+    @Test
+    public void testWeigthAdvanced1(){
+        assertEquals(1065 , AffectationUtil.weightAdvanced(teenager1, teenager5, history)); 
+        assertEquals(1065 , AffectationUtil.weightAdvanced(teenager2, teenager6, history));
+        assertEquals(965 , AffectationUtil.weightAdvanced(teenager3, teenager7, history));
+        assertEquals(1065 , AffectationUtil.weightAdvanced(teenager4, teenager7, history));
+        assertEquals(1065 , AffectationUtil.weightAdvanced(teenager1, teenager6, history));
+        assertEquals(1065 , AffectationUtil.weightAdvanced(teenager2, teenager5, history));
+        assertEquals(965 , AffectationUtil.weightAdvanced(teenager3, teenager6, history));
+    }
+
+    @Test
+    public void testWeigthAdvanced2(){
+        assertEquals(1015 , AffectationUtil.weightAdvanced(teenager9, teenager13, history2));
+        assertEquals(1015 , AffectationUtil.weightAdvanced(teenager10, teenager14, history2));
+        assertEquals(965 , AffectationUtil.weightAdvanced(teenager11, teenager15, history2));
+        assertEquals(914 , AffectationUtil.weightAdvanced(teenager12, teenager16, history2));
+        assertEquals(964 , AffectationUtil.weightAdvanced(teenager9, teenager14, history2));
+        assertEquals(1065 , AffectationUtil.weightAdvanced(teenager10, teenager13, history2));
+        assertEquals(965 , AffectationUtil.weightAdvanced(teenager11, teenager14, history2));
+    }
 }

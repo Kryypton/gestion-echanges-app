@@ -1,7 +1,7 @@
 SAE S2.02 -- Rapport pour la ressource Graphes
 ===
 
-*Noms des auteurs, groupe*
+*Adham Berrakane , Nathan Dorny , Quentin moufort, Groupe A*
 
 Version 1
 ---
@@ -69,19 +69,19 @@ Pour le test il se trouve dans le fichier [AffectationVersion1Test.java](../test
 
     -   2 chose sont remarquable dans ce fichier : 
 
-        *   On peut voir dans ce fichier que certains adolescents n'ont aucun loisir alors que contrairement à d'autres adolescents qui eux ont beaucoup de loisirs.
-        *   Une incohérence est aussi présente dans ce fichier en effet on peut retrouver l’adolescent A A qui est allergique au animaux alors qu’il en possède un.
+*   On peut voir dans ce fichier que certains adolescents n'ont aucun loisir alors que contrairement à d'autres adolescents qui eux ont beaucoup de loisirs.
+*   Une incohérence est aussi présente dans ce fichier en effet on peut retrouver l’adolescent A A qui est allergique au animaux alors qu’il en possède un.
 
 En implémentant l'exemple donner pour compatibilityVsHobbies nous avons générer 2 graphe different grace a la regle de calcule de poinds mise en place un peu plus haut.
 
 Nous obtenons ce graphe lorsque se sont les Italiens qui se rendent chez les Allemands : 
 
-![Texte alternatif](./img/Exemple2.png)
+![Exemple2](./img/Exemple2.png)
 
 
 Nous obtenons ce graphe lorsque se sont les Allemands qui se rendent chez les Italiens : 
 
-![Texte alternatif](./img/Exemple3.png)
+![Exemple3](./img/Exemple3.png)
 
 
 
@@ -110,7 +110,7 @@ Sera évaluée à partir du tag git `Graphes-v2`
 
 Voici un petit exemple que l'on va utiliser pour tester l'historique : 
 
-![Texte alternatif](./img/ModelVersion1.png)
+![Exemple4](./img/ModelVersion1.png)
 
 Pour nous les appariements optimals sont les suivant : 
 -   A Adham et F , Fabienne
@@ -135,7 +135,7 @@ Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersi
 
 Voici l'exemple que l'on va utiliser pour tester l'historique avec les ajouts : 
 
-![Texte alternatif](./img/ModelVersion2.png)
+![Exemple5](./img/ModelVersion2.png)
 
 
 Pour nous les appariements optimals sont : 
@@ -156,11 +156,11 @@ Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersi
 
 Voici le graphe obtenu grace au premier exemple des 2 exemples precedents.
 
-![Texte alternatif](./img/Exemple4.png)
+![Exemple4](./img/Exemple4.png)
 
 Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
 
-![Texte alternatif](./img/Exemple5.png)
+![Exemple5](./img/Exemple5.png)
 
 ### Modélisation pour l'historique de la Version 2
 
@@ -203,17 +203,17 @@ Dans la methode `weigth` nous avons aussi ajouter de nouveau critère d'affnité
 
 La methode `compatibleWishGender` va s'occuper de verifier les conditions ci dessous cette methode se trouve dans la class [Affectation.java](../src/Affectation.java) :
 
-    - Le faite que la demande de genre de la personne : 
-        *Si la demande est satisfaite cela diminue le poids de -10 
-        *Si la demande est satisfaite pour 1 des 2 cela diminue le poids de -5
-        *Si la demande n'est pas satisfaite cela ne change pas le poids de l'arrete
-        *Si aucun des 2 n'a de demande cela diminue de -10 car il serait dans tout les cas satisfait.
+- Le faite que la demande de genre de la personne : 
+    * Si la demande est satisfaite cela diminue le poids de -10 
+    * Si la demande est satisfaite pour 1 des 2 cela diminue le poids de -5
+    * Si la demande n'est pas satisfaite cela ne change pas le poids de l'arrete
+    * Si aucun des 2 n'a de demande cela diminue de -10 car il serait dans tout les cas satisfait.
 
 Pour ces critères d'affiniter ci dessous cela sera verifier directement dans weight :
 
-    - La difference d'age est un impact sur le poids de l'arrete : 
-        * Si la difference d'age entre les 2 etudiants est de mois de 1ans et demis cela diminue le poids de l'arrete de 25
-        * Sinon le poids de l'arrete de change pas
+- La difference d'age est un impact sur le poids de l'arrete : 
+    * Si la difference d'age entre les 2 etudiants est de mois de 1ans et demis cela diminue le poids de l'arrete de 25
+    * Sinon le poids de l'arrete de change pas
 
 
 ### L'incompatibilité en tant que malus
@@ -223,4 +223,6 @@ Pour ces critères d'affiniter ci dessous cela sera verifier directement dans we
 
 Les tests se trouve dans [AffectationVersion2Test.java](../test/AffectationVersion2Test.java) 
 
+
+En diminuant le poids dut a une incompatibilité en ici en la mettant a 100 le faite qu'il y ai une incopatibilité ne vas plus obligatoirement interdire une association de 2 Teenager en effet ici si assez de critères sont satisfait cela permettre une association entre 2 teenager meme si cela sont incompatibles.
 

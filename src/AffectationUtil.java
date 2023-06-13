@@ -27,6 +27,22 @@ public class AffectationUtil implements Serializable {
     }
 
 
+    public static int weightAdvanced (Teenager host, Teenager guest , Affectation history) {
+        int poid = 1000;
+        //int poids = 0;
+        poid -= host.nbLoisirCommun(guest);
+        if(!host.compatibleWithGuest(guest)) poid += 100 ;
+        //Age différent ?
+        if (host.getDiffAge(guest).toTotalMonths()<18) poid -= 25;
+        //poid = poid + poids;
+        poid = poid + history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest);
+        if (poid < 0) {
+            poid = 0;
+        }
+        return poid;
+    }
+
+
     public static int weightVersion1 (Teenager host, Teenager guest) {
         int poid = 100;
         int poids = 0;
