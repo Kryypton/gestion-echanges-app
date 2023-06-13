@@ -6,9 +6,10 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -67,7 +68,7 @@
                         <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de naissance" wrappingWidth="154.7294921875" />
-                              <DatePicker prefHeight="24.0" prefWidth="296.0">
+                              <DatePicker fx:id="birthEntry" onAction="#birthEntryAction" prefHeight="24.0" prefWidth="296.0">
                                  <VBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </VBox.margin>
@@ -77,11 +78,14 @@
                         <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pays :" wrappingWidth="132.7294921875" />
-                              <ListView prefHeight="24.0" prefWidth="283.0">
-                                 <VBox.margin>
-                                    <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-                                 </VBox.margin>
-                              </ListView>
+                              <SplitMenuButton fx:id="formCountryList" onAction="#selectCountry" prefHeight="25.0" prefWidth="281.0" text="Choisir un pays">
+                                 <items>
+                                       <MenuItem fx:id="menuItemFrance" onAction="#selectCountry" text="France" />
+                                       <MenuItem fx:id="menuItemGermany" onAction="#selectCountry" text="Germany" />
+                                       <MenuItem fx:id="menuItemSpain" onAction="#selectCountry" text="Spain" />
+                                       <MenuItem fx:id="menuItemItaly" onAction="#selectCountry" text="Italy" />
+                                 </items>
+                              </SplitMenuButton>
                            </children>
                         </VBox>
                      </children>
@@ -91,7 +95,7 @@
                         <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom : " wrappingWidth="154.7294921875" />
-                              <TextField prefHeight="24.0" prefWidth="268.0">
+                              <TextField fx:id="nameEntry" onAction="#nameEntryAction" prefHeight="24.0" prefWidth="268.0">
                                  <VBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </VBox.margin>
@@ -101,7 +105,7 @@
                         <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="292.0">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom : " wrappingWidth="132.7294921875" />
-                              <TextField prefHeight="24.0" prefWidth="256.0">
+                              <TextField fx:id="forenameEntry" onAction="#forenameEntryAction" prefHeight="24.0" prefWidth="256.0">
                                  <VBox.margin>
                                     <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                                  </VBox.margin>
@@ -228,7 +232,7 @@
                   <VBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="297.0" GridPane.rowIndex="7">
                      <children>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quels sont vos passes-temps préférés ?" wrappingWidth="402.7294921875" />
-                        <TextField prefHeight="24.0" prefWidth="268.0">
+                        <TextField fx:id="preferencesEntry" onAction="#preferencesEntryAction" prefHeight="24.0" prefWidth="268.0">
                            <VBox.margin>
                               <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                            </VBox.margin>
@@ -342,7 +346,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="1136.0">
                <children>
-                  <Button alignment="BASELINE_CENTER" mnemonicParsing="false" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: #071835; -fx-border-color: #ffffff; -fx-border-width: 2;" text="Envoyer" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="sendButton" alignment="BASELINE_CENTER" mnemonicParsing="false" onAction="#handleSendButtonAction" prefHeight="57.0" prefWidth="220.0" style="-fx-background-color: #071835; -fx-border-color: #ffffff; -fx-border-width: 2;" text="Envoyer" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="cocogoose" size="14.0" />
                      </font>

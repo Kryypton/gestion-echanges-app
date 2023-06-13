@@ -17,7 +17,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,14 +31,12 @@ public class ChangePlan<Eleve> {
 
     Platform platform ;
 
-
-
     RadioButton gender, pairGender, history;
-    ListView<Country> country;
+    SplitMenuButton country ;
     TextField name , forename , hobbies;
-    CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
+    CheckBox hostVegetarian , guestNuts  , hostNuts, guestVegetarian;
     DatePicker birthDate;
-
+    RadioButton allergieAnimaux , hostAnimal;
     /*
      * Pour la page de connexion
      */
@@ -52,8 +52,6 @@ public class ChangePlan<Eleve> {
     @FXML
     TableView<Eleve> infoTeen;
     @FXML
-
-
     TableColumn<Eleve, String> userNameCol;
     @FXML
     TableColumn<Eleve, String> userFornameCol;
@@ -77,8 +75,6 @@ public class ChangePlan<Eleve> {
     TableColumn<Eleve, Criterion> userPairGender;
     @FXML
     TableColumn<Eleve, Criterion> userHistory;
-
-
     @FXML
     ListView<Teenager> listeTeenager; // Liste des Teenager
     @FXML
@@ -87,7 +83,6 @@ public class ChangePlan<Eleve> {
     /*
      * Pour la page de formulaire
      */
-
     @FXML
     TextField formName;
     @FXML
@@ -134,6 +129,24 @@ public class ChangePlan<Eleve> {
     CheckBox formOtherNotNonuts;
     @FXML
     CheckBox formOtherVegetarian;
+    @FXML
+    SplitMenuButton formCountryList;
+    @FXML
+    MenuItem menuItemGermany;
+    @FXML
+    MenuItem menuItemSpain;
+    @FXML
+    MenuItem menuItemFrance;
+    @FXML
+    MenuItem menuItemItaly;
+    @FXML
+    TextField nameEntry;
+    @FXML
+    TextField forenameEntry;
+    @FXML
+    TextField preferencesEntry;
+    @FXML
+    DatePicker birthEntry;
 
     /*Criterion AnimalV;
     Criterion AnimalH;
@@ -144,7 +157,6 @@ public class ChangePlan<Eleve> {
 
     public void initialize() {
         System.out.println("Initialisation...");
-
     }
 
     public void Charge(Stage stage, String fichier, String title) throws IOException {
@@ -156,7 +168,7 @@ public class ChangePlan<Eleve> {
         }
         loader.setLocation(fxmlFileUrl);
         Parent root = loader.load();
-
+        formCountryList = (SplitMenuButton) loader.getNamespace().get("formCountryList");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(title);
@@ -206,39 +218,46 @@ public class ChangePlan<Eleve> {
     public void SelectYesFormAnimal(ActionEvent event) throws IOException {
         formAnimalYesV.setSelected(true);
         formAnimalNoV.setSelected(false);
+        this.allergieAnimaux = formAnimalYesV;
     }
 
     public void SelectNoFormAnimal(ActionEvent event) throws IOException {
         formAnimalYesV.setSelected(false);
         formAnimalNoV.setSelected(true);
+        this.allergieAnimaux = formAnimalNoV;
     }
 
     public void SelectYesFormAnimalH(ActionEvent event) throws IOException {
         formAnimalYesH.setSelected(true);
         formAnimalNoH.setSelected(false);
+        this.hostAnimal = formAnimalYesH;
     }
 
     public void SelectNoFormAnimalH(ActionEvent event) throws IOException {
         formAnimalYesH.setSelected(false);
         formAnimalNoH.setSelected(true);
+        this.hostAnimal = formAnimalNoH;
     }
 
     public void SelectMaleFormGender(ActionEvent event) throws IOException {
         formGenderMale.setSelected(true);
         formGenderFemale.setSelected(false);
         formGenderOther.setSelected(false);
+        this.gender = formGenderMale;
     }
 
     public void SelectFemaleFormGender(ActionEvent event) throws IOException {
         formGenderMale.setSelected(false);
         formGenderFemale.setSelected(true);
         formGenderOther.setSelected(false);
+        this.gender = formGenderFemale;
     }
 
     public void SelectOtherFormGender(ActionEvent event) throws IOException {
         formGenderMale.setSelected(false);
         formGenderFemale.setSelected(false);
         formGenderOther.setSelected(true);
+        this.gender = formGenderOther;
     }
 
     public void SelectMaleFormOtherGender(ActionEvent event) throws IOException {
@@ -246,6 +265,7 @@ public class ChangePlan<Eleve> {
         formOtherGenderFemale.setSelected(false);
         formOtherGenderOther.setSelected(false);
         formOtherGenderNull.setSelected(false);
+        this.pairGender = formOtherGenderMale;
     }
 
     public void SelectFemaleFormOtherGender(ActionEvent event) throws IOException {
@@ -253,6 +273,7 @@ public class ChangePlan<Eleve> {
         formOtherGenderFemale.setSelected(true);
         formOtherGenderOther.setSelected(false);
         formOtherGenderNull.setSelected(false);
+        this.pairGender = formOtherGenderFemale;
     }
 
     public void SelectOtherFormOtherGender(ActionEvent event) throws IOException {
@@ -260,6 +281,7 @@ public class ChangePlan<Eleve> {
         formOtherGenderFemale.setSelected(false);
         formOtherGenderOther.setSelected(true);
         formOtherGenderNull.setSelected(false);
+        this.pairGender = formOtherGenderOther;
     }
 
     public void SelectNullFormOtherGender(ActionEvent event) throws IOException {
@@ -267,26 +289,79 @@ public class ChangePlan<Eleve> {
         formOtherGenderFemale.setSelected(false);
         formOtherGenderOther.setSelected(false);
         formOtherGenderNull.setSelected(true);
+        this.pairGender = formOtherGenderNull;
     }
 
     public void SelectSameFormHistory(ActionEvent event) throws IOException {
         formHistorySame.setSelected(true);
         formHistoryOther.setSelected(false);
         formHistoryNull.setSelected(false);
+        this.history = formHistorySame;
     }
 
     public void SelectOtherFormHistory(ActionEvent event) throws IOException {
         formHistorySame.setSelected(false);
         formHistoryOther.setSelected(true);
         formHistoryNull.setSelected(false);
+        this.history = formHistoryOther;
     }
 
     public void SelectNullFormHistory(ActionEvent event) throws IOException {
         formHistorySame.setSelected(false);
         formHistoryOther.setSelected(false);
         formHistoryNull.setSelected(true);
+        this.history = formHistoryNull;
+    }
+
+    public void selectCountry(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String countryName = menuItem.getText();
+        formCountryList.setText(countryName);
+        this.country = formCountryList;
+    }
+
+    public void nameEntryAction(ActionEvent event) {
+        this.name = nameEntry;
+    }
+
+    public void forenameEntryAction(ActionEvent event) {
+        this.forename = forenameEntry;
+    }
+
+    public void preferencesEntryAction(ActionEvent event) {
+        this.hobbies = preferencesEntry;
+    }
+
+    public void birthEntryAction(ActionEvent event) {
+        this.birthDate = birthEntry;
+    }
+    /*public void FormGermanySelect(ActionEvent event) throws IOException {
+        formGermany.setText("Allemagne");
+        formFrance.setText("France");
+        formSpain.setText("Spain");
+        formItaly.setText("Italie");
     }
     
+    public void FormFranceSelect(ActionEvent event) throws IOException {
+        formGermany.setText("Germany");
+        formFrance.setText("France");
+        formSpain.setText("Spain");
+        formItaly.setText("Italie");
+    }
+
+    public void FormSpainSelect(ActionEvent event) throws IOException {
+        formGermany.setText("Germany");
+        formFrance.setText("France");
+        formSpain.setText("Spain");
+        formItaly.setText("Italie");
+    }
+
+    public void FormItalieSelect(ActionEvent event) throws IOException {
+        formGermany.setText("Germany");
+        formFrance.setText("France");
+        formSpain.setText("Spain");
+        formItaly.setText("Italie");
+    }*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     //      FORMULAIRE
@@ -317,15 +392,17 @@ public class ChangePlan<Eleve> {
     ///////////////////////////////////////////////////
 
     public boolean champsValid(TextField t){
+        if (t.getText() == null) return false;
         String regex = "[a-zA-Z]+";
         String text = t.getText();
         if(text.isEmpty()) return false;
-        if (text.matches(regex)) return false;
+        if (!text.matches(regex)) return false;
         if (text.length() > 20) return false;
         return true;
     }
 
     public boolean dateValid(DatePicker t){
+        if (t == null) return false;
         LocalDate date = t.getValue();
         if(date == null) return false;
         if( date.isAfter(LocalDate.now())) return false;
@@ -333,17 +410,20 @@ public class ChangePlan<Eleve> {
     }
 
     public boolean isChecked(CheckBox t){
+        if (t == null) return false;
         if(t.isSelected()) return true;
         return false;
     }
 
     public boolean isChoised(RadioButton t){
+        if (t == null) return false;
         if(t.isSelected()) return true;
         return false;
     }
 
-    public boolean isSelected (ListView<Country> t){
-        if(t.getSelectionModel().getSelectedItem() == null) return false;
+    public boolean isSelected (SplitMenuButton t){
+        if (t == null) return false;
+        if(t.getText().equals("Pays")) return false;
         return true;
     }
 
@@ -410,15 +490,48 @@ public class ChangePlan<Eleve> {
 
     ///////////////////////////////////////////////////
 
-
-
-    public void addNewTeenager(ActionEvent event){
+    @FXML
+    public void handleSendButtonAction(){
         Teenager teenager;
         String food = "";
 
+        System.out.println(this.isChoised(allergieAnimaux));
+
+        System.out.println(champsValid(name));
+        try {
+
+            System.out.println(name.getText());
+        } catch (Exception e) {
+
+        }
+        System.out.println(champsValid(forename));
+        try {
+            System.out.println(forename.getText());
+        } catch (Exception e) {
+
+        }
+        System.out.println(dateValid(birthDate));
+        try {
+            System.out.println(birthDate.getValue());
+        } catch (Exception e) {
+
+        }
+
+        System.out.println( isChoised(gender));
+        try {
+            gender.getId().toString();
+        } catch (Exception e) {
+
+        }
+        System.out.println(isSelected(country));
+        try {
+            System.out.println(country.getText());
+        } catch (Exception e) {
+
+        }
         if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isSelected(country)){
             
-            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), country.getSelectionModel().getSelectedItem());
+            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getText()));
 
             teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), animalAllergy());
             teenager.addCriterion(CriterionName.GENDER.name() , genreTeenager());
@@ -439,17 +552,18 @@ public class ChangePlan<Eleve> {
             teenager.addCriterion(CriterionName.HOBBIES.name(), hobbiesTeenager());
 
             if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
-
-            platform.addTeenager(teenager);
+            
+            /*platform.addTeenager(teenager);
             try {
                 sauvegardePlateforme();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("Erreur lors de la sauvegarde de la plateforme !");
-            }
-
+            }*/
         }
     }
+
+
 
 
     public void supprimerEleve(ActionEvent event) throws IOException {
