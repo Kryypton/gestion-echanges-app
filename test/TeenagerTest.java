@@ -36,11 +36,6 @@ public class TeenagerTest {
         forname3 = "Garnier";
         forname4 = "Lefebvre";
         forname5 = "Martin";
-        gender1 = "F";
-        gender2 = "M";
-        gender3 = "M";
-        gender4 = "M";
-        gender5 = "F";
         countryName1 = Country.FRANCE;
         countryName2 = Country.GERMANY;
         countryName3 = Country.SPAIN;
@@ -77,11 +72,11 @@ public class TeenagerTest {
         requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
         requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
         
-        t1 = new Teenager(id1, name1, forname1, gender1, birthDate1, countryName1);
-        t2 = new Teenager(id2, name2, forname2, gender2, birthDate2, countryName2, requirements2);
-        t3 = new Teenager(id3, name3, forname3, gender3, birthDate3, countryName3, requirements3);
-        t4 = new Teenager(id4, forname4, forname4, gender4, birthDate4, countryName4);
-        t5 = new Teenager(id5, name5, forname5, gender5, birthDate5, countryName5);
+        t1 = new Teenager(id1, name1, forname1, birthDate1, countryName1);
+        t2 = new Teenager(id2, name2, forname2, birthDate2, countryName2, requirements2);
+        t3 = new Teenager(id3, name3, forname3, birthDate3, countryName3, requirements3);
+        t4 = new Teenager(id4, forname4, forname4, birthDate4, countryName4);
+        t5 = new Teenager(id5, name5, forname5, birthDate5, countryName5);
 
         t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
         t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
@@ -169,10 +164,10 @@ public class TeenagerTest {
     @Test
     void testAddCriterion(){
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
-        Teenager t5 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
+        Teenager t5 = new Teenager(id1, forname2, forname1, birthDate1, countryName1);
         assertTrue(t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique));
         assertEquals(t5.getRequirements().size(), 1);
-        Teenager t6 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
+        Teenager t6 = new Teenager(id1, forname2, forname1, birthDate1, countryName1);
         assertTrue(t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique));
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         assertFalse(t6.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique));
@@ -184,7 +179,7 @@ public class TeenagerTest {
     @Test
     void testEditCriterion(){
         Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
-        Teenager t5 = new Teenager(id1, forname2, forname1, gender1, birthDate1, countryName1);
+        Teenager t5 = new Teenager(id1, forname2, forname1, birthDate1, countryName1);
         t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
         Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
         t5.editCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);

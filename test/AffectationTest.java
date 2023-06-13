@@ -13,10 +13,10 @@ public class AffectationTest {
     @BeforeEach
     public void setUp() {
         affectation = new Affectation();
-        t1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
-        t2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
-        t3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
-        t4 = new Teenager(4, "teen4", "C", "F", LocalDate.of(2002, 10, 20), Country.SPAIN);
+        t1 = new Teenager(1, "teen1", "A", LocalDate.of(2000, 5, 10), Country.FRANCE);
+        t2 = new Teenager(2, "teen2", "B",  LocalDate.of(2001, 8, 15), Country.GERMANY);
+        t3 = new Teenager(3, "teen3", "C",  LocalDate.of(2002, 10, 20), Country.ITALY);
+        t4 = new Teenager(4, "teen4", "C",  LocalDate.of(2002, 10, 20), Country.SPAIN);
     }
 
     @Test

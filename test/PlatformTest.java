@@ -39,7 +39,7 @@ public class PlatformTest {
         reqMrBouffeTout.put(CriterionName.HOST_FOOD.name(), posseDeTout);
         reqMrBouffeTout.put(CriterionName.GUEST_FOOD.name(), mangeTout);
 
-        Teenager teenager1 = new Teenager(1, "MrBouffeTout", "Martin", "F", LocalDate.of(2005, 6, 20), Country.FRANCE , reqMrBouffeTout);
+        Teenager teenager1 = new Teenager(1, "MrBouffeTout", "Martin", LocalDate.of(2005, 6, 20), Country.FRANCE , reqMrBouffeTout);
         return teenager1;
     }
 

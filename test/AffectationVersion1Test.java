@@ -61,10 +61,10 @@ public class AffectationVersion1Test {
         Criterion hobbiesDeD = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
 
 
-        teenager7 = new Teenager("A", "A" , "female",LocalDate.parse("2009-06-01"), Country.ITALY);
-        teenager8 = new Teenager("B", "B" ,"male",LocalDate.parse("2009-06-01"), Country.ITALY);
-        teenager9 = new Teenager("C", "C" , "female",LocalDate.parse("2009-06-01"),Country.GERMANY);
-        teenager10 = new Teenager("D", "D" ,"male",LocalDate.parse("2009-06-01"), Country.GERMANY);
+        teenager7 = new Teenager("A", "A" ,LocalDate.parse("2009-06-01"), Country.ITALY);
+        teenager8 = new Teenager("B", "B" ,LocalDate.parse("2009-06-01"), Country.ITALY);
+        teenager9 = new Teenager("C", "C" , LocalDate.parse("2009-06-01"),Country.GERMANY);
+        teenager10 = new Teenager("D", "D" , LocalDate.parse("2009-06-01"), Country.GERMANY);
 
         teenager7.addCriterion(CriterionName.HOBBIES.name(),hobbiesDeA);
         teenager7.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);

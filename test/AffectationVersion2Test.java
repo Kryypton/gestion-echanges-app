@@ -25,15 +25,15 @@ public class AffectationVersion2Test {
         //Criterion historyVide = new Criterion(null, CriterionName.HISTORY);
 
         
-        teenager1 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
-        teenager2 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
-        teenager3 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
-        teenager4 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
+        teenager1 = new Teenager("Adham" , "A"  , LocalDate.parse("2004-10-08") , Country.FRANCE);
+        teenager2 = new Teenager("Bertrand" , "B" , LocalDate.parse("2004-02-12") , Country.FRANCE);
+        teenager3 = new Teenager("Claudette" , "C" ,  LocalDate.parse("2004-12-30") , Country.FRANCE);
+        teenager4 = new Teenager("Damiene" , "D" ,  LocalDate.parse("2004-09-23") , Country.FRANCE);
 
-        teenager5 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
-        teenager6 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
-        teenager7 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2005-08-05") , Country.ITALY);   
-        teenager8 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2006-02-08") , Country.ITALY);    
+        teenager5 = new Teenager("Emile" , "E" ,  LocalDate.parse("2004-04-18") , Country.ITALY);     
+        teenager6 = new Teenager("Fabienne" , "F" ,  LocalDate.parse("2004-11-29") , Country.ITALY);        
+        teenager7 = new Teenager("Gerard" , "G" ,  LocalDate.parse("2005-08-05") , Country.ITALY);   
+        teenager8 = new Teenager("Harvard" , "H" ,LocalDate.parse("2006-02-08") , Country.ITALY);    
 
 
 
@@ -81,15 +81,15 @@ public class AffectationVersion2Test {
 
 
 
-        teenager9 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
-        teenager10 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
-        teenager11 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
-        teenager12 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
+        teenager9 = new Teenager("Adham" , "A" ,  LocalDate.parse("2004-10-08") , Country.FRANCE);
+        teenager10 = new Teenager("Bertrand" , "B" ,  LocalDate.parse("2004-02-12") , Country.FRANCE);
+        teenager11 = new Teenager("Claudette" , "C" ,  LocalDate.parse("2004-12-30") , Country.FRANCE);
+        teenager12 = new Teenager("Damiene" , "D" ,  LocalDate.parse("2004-09-23") , Country.FRANCE);
 
-        teenager13 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
-        teenager14 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
-        teenager15 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2004-08-05") , Country.ITALY);   
-        teenager16 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2004-02-08") , Country.ITALY);    
+        teenager13 = new Teenager("Emile" , "E" ,  LocalDate.parse("2004-04-18") , Country.ITALY);     
+        teenager14 = new Teenager("Fabienne" , "F" ,  LocalDate.parse("2004-11-29") , Country.ITALY);        
+        teenager15 = new Teenager("Gerard" , "G" ,  LocalDate.parse("2004-08-05") , Country.ITALY);   
+        teenager16 = new Teenager("Harvard" , "H" ,  LocalDate.parse("2004-02-08") , Country.ITALY);    
 
 
 
