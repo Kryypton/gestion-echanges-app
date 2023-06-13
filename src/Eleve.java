@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Eleve{
+public class Eleve extends Teenager{
     
     private String name;
     private String forname;
@@ -15,19 +15,9 @@ public class Eleve{
     private Criterion Gender;
     private Criterion History;
 
-    public Eleve(Teenager teen){
-        this.name = teen.getName();
-        this.forname = teen.getForname();
-        this.countryName = teen.getCountryName();
-        this.birthDate = teen.getBirthDate();
-        this.HostFood = teen.getCriterion("HOST_FOOD");
-        this.GuestFood = teen.getCriterion("GUEST_FOOD");
-        this.HostAnimal = teen.getCriterion("HOST_HAS_ANIMAL");
-        this.GuestHanimal = teen.getCriterion("GUEST_ANIMAL_ALLERGY");
-        this.Hobbies = teen.getCriterion("HOBBIES");
-        this.PairGender = teen.getCriterion("GENDER");
-        this.Gender = teen.getCriterion("PAIR_GENDER");
-        this.History = teen.getCriterion("HISTORY");
+    public Eleve(){
+        super();
+        
     }
 
     public String getName() {
@@ -77,6 +67,4 @@ public class Eleve{
     public Criterion getHistory() {
         return History;
     }
-
-    
 }

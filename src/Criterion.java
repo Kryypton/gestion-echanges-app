@@ -135,6 +135,6 @@ public class Criterion{
 
     @Override
     public String toString() {
-        return ""+value;
+        return "" + value;
     }
 }

@@ -31,7 +31,8 @@ public class ChangePlan<Eleve> {
 
 
 
-    ChoiceBox gender , pairGender , country , history;
+    RadioButton gender, pairGender, history;
+    ListView<Country> country;
     TextField name , forename , hobbies;
     CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
     DatePicker birthDate;
@@ -341,14 +342,14 @@ public class ChangePlan<Eleve> {
         return false;
     }
 
-    
+    public boolean isSelected (ListView<Country> t){
+        if(t.getSelectionModel().getSelectedItem() == null) return false;
+        return true;
+    }
 
-        
     ///////////////////////////////////////////////////
     //  Crétation des critères
     ///////////////////////////////////////////////////
-
-
 
     public Criterion animalAllergy(){
         if(allergieAnimaux.isSelected()){
@@ -358,20 +359,21 @@ public class ChangePlan<Eleve> {
     }
 
     public Criterion genreTeenager(){
-        if(gender.getValue().toString().toLowerCase() == "homme"){
-        return  new Criterion("male", CriterionName.GENDER);
+        if(gender.idProperty().toString().equals("formGenderFemale")){
+        return  new Criterion("female", CriterionName.GENDER);
         }
-        if(gender.getValue().toString().toLowerCase() == "femme"){
-            return new Criterion("female", CriterionName.GENDER);
+        if(gender.idProperty().toString().equals("formGenderMale")){
+            return new Criterion("male", CriterionName.GENDER);
         }
         return new Criterion("other", CriterionName.GENDER);
+        //TODO : A voir si on met un null ou un other
     }
 
     public Criterion haveAnimal(){
         if(hostAnimal.isSelected()){
-            return new Criterion( "yes" , CriterionName.HOST_HAS_ANIMAL);
+            return new Criterion("yes" , CriterionName.HOST_HAS_ANIMAL);
         }
-        return new Criterion( "no" , CriterionName.HOST_HAS_ANIMAL);
+        return new Criterion("no" , CriterionName.HOST_HAS_ANIMAL);
     }
 
 
@@ -385,7 +387,7 @@ public class ChangePlan<Eleve> {
 
 
     public Criterion history(){
-        if(history.getValue().toString().toLowerCase() == "same"){
+        if(history.idProperty().toString().equals("formHistorySame")){
             return new Criterion("same", CriterionName.HISTORY);
         }
         return new Criterion("other", CriterionName.HISTORY);
@@ -396,17 +398,15 @@ public class ChangePlan<Eleve> {
     }
 
     public Criterion pairGender(){
-        if(pairGender.getValue().toString().toLowerCase() == "homme"){
-            return  new Criterion("male", CriterionName.PAIR_GENDER);
-        }
-        if(pairGender.getValue().toString().toLowerCase() == "femme"){
+        if(pairGender.idProperty().toString().equals("formOtherGenderFemale")){
             return new Criterion("female", CriterionName.PAIR_GENDER);
         }
+        if(pairGender.idProperty().toString().equals("formOtherGenderMale")){
+            return new Criterion("male", CriterionName.PAIR_GENDER);
+        }
         return new Criterion("other", CriterionName.PAIR_GENDER);
+        //TODO : A voir si on met un null ou un other
     }
-
-
-
 
     ///////////////////////////////////////////////////
 
@@ -416,8 +416,9 @@ public class ChangePlan<Eleve> {
         Teenager teenager;
         String food = "";
 
-        if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isChoised(country)){
-            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getValue().toString()));
+        if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isSelected(country)){
+            
+            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), country.getSelectionModel().getSelectedItem());
 
             teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), animalAllergy());
             teenager.addCriterion(CriterionName.GENDER.name() , genreTeenager());
@@ -440,7 +441,12 @@ public class ChangePlan<Eleve> {
             if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
 
             platform.addTeenager(teenager);
-            sauvegardePlateforme();
+            try {
+                sauvegardePlateforme();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Erreur lors de la sauvegarde de la plateforme !");
+            }
 
         }
     }
@@ -594,7 +600,6 @@ public class ChangePlan<Eleve> {
         Eleve teen2 = new Eleve(listeTeenager.getItems().get(1));
         Eleve teen3 = new Eleve(listeTeenager.getItems().get(2));
         Eleve teen4 = new Eleve(listeTeenager.getItems().get(3));
-
         infoTeen.getItems().add(teen1);
     }
 }
