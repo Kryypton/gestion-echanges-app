@@ -113,8 +113,8 @@ public class Affectation implements Serializable {
 
     public int compatibleWishGender(Teenager host, Teenager other) {
         try {
-            if (host.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(other.getGender()) ||  other.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(host.getGender())) {
-                if(host.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(other.getGender()) &&  other.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(host.getGender())) {
+            if (host.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(other.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue()) ||  other.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(host.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue())) {
+                if(host.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(other.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue()) && other.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue().equals(host.getRequirements().get(CriterionName.PAIR_GENDER.name()).getValue())) {
                     return -10;
                 } else return -5; 
             }

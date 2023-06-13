@@ -20,7 +20,6 @@ public class Teenager implements Serializable{
     private int id;
     private String name;
     private String forname; 
-    private String gender;
     private Country countryName;
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
@@ -36,18 +35,17 @@ public class Teenager implements Serializable{
      * @param countryName le pays d'un adolescent
      * @param requirements les critères de compatibilité d'un adolescent
      */
-    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
+    public Teenager(int id , String name , String forname ,  LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
         this.id = id ;
         this.name = name;
         this.forname = forname;
-        this.gender = gender;
         this.birthDate = birthDate;
         this.requirements = requirements;
         this.countryName = countryName;
     }
 
-    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , String countryName, Map<String, Criterion> requirements){
-        this(id,name,forname,gender,birthDate,isCountry(countryName),requirements);
+    public Teenager(int id , String name , String forname , LocalDate birthDate , String countryName, Map<String, Criterion> requirements){
+        this(id,name,forname,birthDate,isCountry(countryName),requirements);
     }
 
     /**
@@ -59,20 +57,10 @@ public class Teenager implements Serializable{
      * @param birthDate la date de naissance d'un adolescent
      * @param countryName le pays d'un adolescent
      */
-    public Teenager(int id , String name , String forname , String gender , LocalDate birthDate , Country countryName){
+    public Teenager(int id , String name , String forname  , LocalDate birthDate , Country countryName){
         this.id = id ;
         this.name = name;
         this.forname = forname;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.requirements = new HashMap<String, Criterion>();
-        this.countryName = countryName;
-    }
-
-    public Teenager(String name , String forname , String gender , LocalDate birthDate , Country countryName){
-        this.name = name;
-        this.forname = forname;
-        this.gender = gender;
         this.birthDate = birthDate;
         this.requirements = new HashMap<String, Criterion>();
         this.countryName = countryName;
@@ -152,8 +140,6 @@ public class Teenager implements Serializable{
         requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
         requirements.put(CriterionName.HISTORY.name(), history);
         this.requirements = requirements;
-
-        this.gender = "" +requirements.get(CriterionName.GENDER.name()) ;
 
         scan.close();
         scanPatern.close();
@@ -346,13 +332,7 @@ public class Teenager implements Serializable{
         return this.birthDate;
     }
 
-    /**
-     * Getter qui permet retourne le genre d'un adolescent
-     * @return le genre de l'adolescent [M] pour male [F] pour femme [O] pour autre
-     */
-    public String getGender(){
-        return this.gender;
-    }
+
 
     /**
      * Setter qui permet de modifier l'identifiant d'un adolescent
@@ -378,13 +358,7 @@ public class Teenager implements Serializable{
         this.forname = forname;
     }
 
-    /**
-     * Setter qui permet de modifier le genre d'un adolescent
-     * @param gender le nouveau genre de l'adolescent
-     */
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+
 
     /**
      * Setter qui permet de modifier le pays d'un adolescent
@@ -474,7 +448,6 @@ public class Teenager implements Serializable{
         result = prime * result + id;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((forname == null) ? 0 : forname.hashCode());
-        result = prime * result + ((gender == null) ? 0 : gender.hashCode());
         result = prime * result + ((countryName == null) ? 0 : countryName.hashCode());
         result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
         result = prime * result + ((requirements == null) ? 0 : requirements.hashCode());
@@ -501,11 +474,6 @@ public class Teenager implements Serializable{
             if (other.forname != null)
                 return false;
         } else if (!forname.equals(other.forname))
-            return false;
-        if (gender == null) {
-            if (other.gender != null)
-                return false;
-        } else if (!gender.equals(other.gender))
             return false;
         if (countryName != other.countryName)
             return false;
@@ -555,7 +523,7 @@ public class Teenager implements Serializable{
         return this.forname+";"+this.name+";"+this.countryName+";"+this.birthDate.toString()+";"+this.requirements.get(CriterionName.HOBBIES.name())+
         ";"+this.requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY.name())+";"+this.requirements.get(CriterionName.HOST_HAS_ANIMAL.name())+";"+
         this.requirements.get(CriterionName.GUEST_FOOD.name())+";"+this.requirements.get(CriterionName.HOST_FOOD.name())+
-        ";"+this.gender+";" +this.requirements.get(CriterionName.PAIR_GENDER.name())+";"+this.requirements.get(CriterionName.HISTORY.name());
+        ";"+this.requirements.get(CriterionName.PAIR_GENDER.name())+";"+this.requirements.get(CriterionName.HISTORY.name());
     }
 
     public Criterion getHistory() {
@@ -563,9 +531,9 @@ public class Teenager implements Serializable{
     }
 
     public static void main(String[] args) {
-        Teenager teenager1 = new Teenager(1, "teen1", "A", "M", LocalDate.of(2000, 5, 10), Country.FRANCE);
+        Teenager teenager1 = new Teenager(1, "teen1", "A",  LocalDate.of(2000, 5, 10), Country.FRANCE);
         //Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
-        Teenager teenager3 = new Teenager(3, "teen3", "C", "F", LocalDate.of(2002, 10, 20), Country.ITALY);
+        Teenager teenager3 = new Teenager(3, "teen3", "C", LocalDate.of(2002, 10, 20), Country.ITALY);
         System.out.println(teenager1.getDiffAge(teenager3).toTotalMonths());
     }
 

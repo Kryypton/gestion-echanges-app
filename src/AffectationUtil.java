@@ -242,10 +242,10 @@ public class AffectationUtil implements Serializable {
         Criterion hobbiesDeD = new Criterion("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,pp,qq,rr,ss,tt,uu,vv,ww,xx", CriterionName.HOBBIES);
 
 
-        Teenager teenager7 = new Teenager("A", "A" , "female",LocalDate.parse("2009-06-01"), Country.ITALY);
-        Teenager teenager8 = new Teenager("B", "B" ,"male",LocalDate.parse("2009-06-01"), Country.ITALY);
-        Teenager teenager9 = new Teenager("C", "C" , "female",LocalDate.parse("2009-06-01"),Country.GERMANY);
-        Teenager teenager10 = new Teenager("D", "D" ,"male",LocalDate.parse("2009-06-01"), Country.GERMANY);
+        Teenager teenager7 = new Teenager("A", "A" ,LocalDate.parse("2009-06-01"), Country.ITALY);
+        Teenager teenager8 = new Teenager("B", "B" ,LocalDate.parse("2009-06-01"), Country.ITALY);
+        Teenager teenager9 = new Teenager("C", "C" ,LocalDate.parse("2009-06-01"),Country.GERMANY);
+        Teenager teenager10 = new Teenager("D", "D" , LocalDate.parse("2009-06-01"), Country.GERMANY);
 
         teenager7.addCriterion(CriterionName.HOBBIES.name(),hobbiesDeA);
         teenager7.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estAlergique);
@@ -338,15 +338,15 @@ public class AffectationUtil implements Serializable {
         // Criterion historyVide = new Criterion("", CriterionName.HISTORY);
 
         
-        Teenager teenager11 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
-        Teenager teenager12 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
-        Teenager teenager13 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
-        Teenager teenager14 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
+        Teenager teenager11 = new Teenager("Adham" , "A" , LocalDate.parse("2004-10-08") , Country.FRANCE);
+        Teenager teenager12 = new Teenager("Bertrand" , "B"  , LocalDate.parse("2004-02-12") , Country.FRANCE);
+        Teenager teenager13 = new Teenager("Claudette" , "C" , LocalDate.parse("2004-12-30") , Country.FRANCE);
+        Teenager teenager14 = new Teenager("Damiene" , "D" ,  LocalDate.parse("2004-09-23") , Country.FRANCE);
 
-        Teenager teenager15 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
-        Teenager teenager16 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
-        Teenager teenager17 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2004-08-05") , Country.ITALY);   
-        Teenager teenager18 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2004-02-08") , Country.ITALY);    
+        Teenager teenager15 = new Teenager("Emile" , "E" , LocalDate.parse("2004-04-18") , Country.ITALY);     
+        Teenager teenager16 = new Teenager("Fabienne" , "F" ,  LocalDate.parse("2004-11-29") , Country.ITALY);        
+        Teenager teenager17 = new Teenager("Gerard" , "G" , LocalDate.parse("2004-08-05") , Country.ITALY);   
+        Teenager teenager18 = new Teenager("Harvard" , "H" ,  LocalDate.parse("2004-02-08") , Country.ITALY);    
 
         Affectation history = new Affectation();
 
@@ -432,15 +432,15 @@ public class AffectationUtil implements Serializable {
 
 
 
-        Teenager teenager19 = new Teenager("Adham" , "A" , "male" , LocalDate.parse("2004-10-08") , Country.FRANCE);
-        Teenager teenager20 = new Teenager("Bertrand" , "B" , "male" , LocalDate.parse("2004-02-12") , Country.FRANCE);
-        Teenager teenager21 = new Teenager("Claudette" , "C" , "female" , LocalDate.parse("2004-12-30") , Country.FRANCE);
-        Teenager teenager22 = new Teenager("Damiene" , "D" , "female" , LocalDate.parse("2004-09-23") , Country.FRANCE);
+        Teenager teenager19 = new Teenager("Adham" , "A" ,  LocalDate.parse("2004-10-08") , Country.FRANCE);
+        Teenager teenager20 = new Teenager("Bertrand" , "B" ,  LocalDate.parse("2004-02-12") , Country.FRANCE);
+        Teenager teenager21 = new Teenager("Claudette" , "C" ,  LocalDate.parse("2004-12-30") , Country.FRANCE);
+        Teenager teenager22 = new Teenager("Damiene" , "D" ,  LocalDate.parse("2004-09-23") , Country.FRANCE);
 
-        Teenager teenager23 = new Teenager("Emile" , "E" , "male" , LocalDate.parse("2004-04-18") , Country.ITALY);     
-        Teenager teenager24 = new Teenager("Fabienne" , "F" , "female" , LocalDate.parse("2004-11-29") , Country.ITALY);        
-        Teenager teenager25 = new Teenager("Gerard" , "G" , "male" , LocalDate.parse("2004-08-05") , Country.ITALY);   
-        Teenager teenager26 = new Teenager("Harvard" , "H" , "male" , LocalDate.parse("2004-02-08") , Country.ITALY);    
+        Teenager teenager23 = new Teenager("Emile" , "E" ,  LocalDate.parse("2004-04-18") , Country.ITALY);     
+        Teenager teenager24 = new Teenager("Fabienne" , "F" ,  LocalDate.parse("2004-11-29") , Country.ITALY);        
+        Teenager teenager25 = new Teenager("Gerard" , "G" ,  LocalDate.parse("2004-08-05") , Country.ITALY);   
+        Teenager teenager26 = new Teenager("Harvard" , "H" ,  LocalDate.parse("2004-02-08") , Country.ITALY);    
 
         Affectation history2 = new Affectation();
 

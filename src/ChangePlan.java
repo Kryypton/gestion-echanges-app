@@ -182,7 +182,7 @@ public class ChangePlan {
     // }
 
 
-    
+
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,7 +292,7 @@ public class ChangePlan {
 
 
 
-    public void sauvegardeTeenager(ActionEvent event){
+    public void addNewTeenager(ActionEvent event){
         Teenager teenager;
         String food = "";
 
