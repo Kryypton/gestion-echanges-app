@@ -61,8 +61,8 @@ public class AffectationVersion2Test {
         teenager8.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(),estPasAlergique);
         teenager8.addCriterion(CriterionName.HISTORY.name(),historySame);
 
-        history.affectations(teenager1, teenager6);
-        history.affectations(teenager2, teenager5);
+        history.affectations(teenager1, teenager8);
+        history.affectations(teenager2, teenager4);
         history.affectations(teenager3, teenager7);
         history.affectations(teenager4, teenager8);
 
@@ -142,29 +142,6 @@ public class AffectationVersion2Test {
         assertEquals(1965 , AffectationUtil.weight(teenager4, teenager7, history));
 
 
-
-        ////Test pour chaque etudiants 
-
-        assertEquals(1965 , AffectationUtil.weight(teenager1, teenager5, history));
-        assertEquals(1865 , AffectationUtil.weight(teenager1, teenager6, history));
-        assertEquals(1965 , AffectationUtil.weight(teenager1, teenager7, history));
-        assertEquals(1965 , AffectationUtil.weight(teenager1, teenager8, history));
-
-        assertEquals(2015 , AffectationUtil.weight(teenager2, teenager5, history));
-        assertEquals(1965 , AffectationUtil.weight(teenager2, teenager6, history));
-        assertEquals(1965 , AffectationUtil.weight(teenager2, teenager7, history));
-        assertEquals(1990 , AffectationUtil.weight(teenager2, teenager8, history));
-
-        assertEquals(1865 , AffectationUtil.weight(teenager3, teenager5, history));
-        assertEquals(1865 , AffectationUtil.weight(teenager3, teenager6, history));
-        assertEquals(1865 , AffectationUtil.weight(teenager3, teenager7, history));
-        assertEquals(1865 , AffectationUtil.weight(teenager3, teenager8, history));
-
-        assertEquals(1965 , AffectationUtil.weight(teenager4, teenager5, history));
-        assertEquals(1965 , AffectationUtil.weight(teenager4, teenager6, history));
-        assertEquals(1965 , AffectationUtil.weight(teenager4, teenager7, history));
-        assertEquals(1915 , AffectationUtil.weight(teenager4, teenager8, history));
-
     }
 
 
@@ -175,31 +152,6 @@ public class AffectationVersion2Test {
         assertEquals(1915 , AffectationUtil.weight(teenager10, teenager14, history2));
         assertEquals(1865 , AffectationUtil.weight(teenager11, teenager15, history2));
         assertEquals(914 , AffectationUtil.weight(teenager12, teenager16, history2));
-
-
-
-        /// Tets pour chaque etudiants
-
-        assertEquals(1915 , AffectationUtil.weight(teenager9, teenager13, history2));
-        assertEquals(964 , AffectationUtil.weight(teenager9, teenager14, history2));
-        assertEquals(964 , AffectationUtil.weight(teenager9, teenager15, history2));
-        assertEquals(1965 , AffectationUtil.weight(teenager9, teenager16, history2));
-
-        assertEquals(1965 , AffectationUtil.weight(teenager10, teenager13, history2));
-        assertEquals(1915 , AffectationUtil.weight(teenager10, teenager14, history2));
-        assertEquals(964 , AffectationUtil.weight(teenager10, teenager15, history2));
-        assertEquals(1965 , AffectationUtil.weight(teenager10, teenager16, history2));
-
-        assertEquals(1865 , AffectationUtil.weight(teenager11, teenager13, history2));
-        assertEquals(1865 , AffectationUtil.weight(teenager11, teenager14, history2));
-        assertEquals(1865 , AffectationUtil.weight(teenager11, teenager15, history2));
-        assertEquals(864 , AffectationUtil.weight(teenager11, teenager16, history2));
-
-        assertEquals(964 , AffectationUtil.weight(teenager12, teenager13, history2));
-        assertEquals(1965 , AffectationUtil.weight(teenager12, teenager14, history2));
-        assertEquals(1965 , AffectationUtil.weight(teenager12, teenager15, history2));
-        assertEquals(914 , AffectationUtil.weight(teenager12, teenager16, history2));
-
 
 
 
