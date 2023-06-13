@@ -25,16 +25,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ChangePlan<Eleve> {
+public class ChangePlan {
 
     Platform platform ;
 
 
 
-    ChoiceBox gender , pairGender , country , history;
-    TextField name , forename , hobbies;
-    CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
-    DatePicker birthDate;
+    // ChoiceBox gender , pairGender , country , history;
+    // TextField name , forename , hobbies;
+    // CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
+    // DatePicker birthDate;
 
     /*
      * Pour la page de connexion
@@ -50,9 +50,8 @@ public class ChangePlan<Eleve> {
      */
     @FXML
     TableView<Eleve> infoTeen;
+
     @FXML
-
-
     TableColumn<Eleve, String> userNameCol;
     @FXML
     TableColumn<Eleve, String> userFornameCol;
@@ -88,13 +87,7 @@ public class ChangePlan<Eleve> {
      */
 
     @FXML
-    TextField formName;
-    @FXML
-    TextField formForname;
-    @FXML
-    TextField formCountry;
-    @FXML
-    TextField formHobbies;
+    TextField formName,formForname,formCountry,formHobbies;
     @FXML
     DatePicker formDate;
     @FXML
@@ -126,13 +119,7 @@ public class ChangePlan<Eleve> {
     @FXML
     RadioButton formHistoryNull;
     @FXML
-    CheckBox formNotNonuts;
-    @FXML
-    CheckBox formVegetarian;
-    @FXML
-    CheckBox formOtherNotNonuts;
-    @FXML
-    CheckBox formOtherVegetarian;
+    CheckBox formNotNonuts,formVegetarian,formOtherNotNonuts,formOtherVegetarian;
 
     /*Criterion AnimalV;
     Criterion AnimalH;
@@ -205,16 +192,6 @@ public class ChangePlan<Eleve> {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     //      FORMULAIRE
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // public void AjoutEleveFormulaire(ActionEvent event) throws IOException {
-    //     String name = formName.getCharacters().toString();
-    //     String forname = formForname.getCharacters().toString();
-    //     String countryName = formCountry.getCharacters().toString();
-    //     LocalDate birthDate = formDate.getValue();
-    //     Map<String, Criterion> requirements;
-
-    //     Teenager teen = new Teenager(name,forname);
-    // }
 
 
 
@@ -327,7 +304,7 @@ public class ChangePlan<Eleve> {
 
 
 
-    public void addNewTeenager(ActionEvent event){
+    public void addNewTeenager(ActionEvent event) throws IOException{
         Teenager teenager;
         String food = "";
 
@@ -355,6 +332,9 @@ public class ChangePlan<Eleve> {
             if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
 
             platform.addTeenager(teenager);
+            listeTeenager.getItems().add(listeTeenager.getItems().size(),teenager);
+            listeTeenager.scrollTo(teenager);
+            listeTeenager.edit(listeTeenager.getItems().size() - 1);
             sauvegardePlateforme();
 
         }
@@ -394,7 +374,7 @@ public class ChangePlan<Eleve> {
 
 
 
-    public void afficherEleve(ActionEvent event) throws IOException{
+     public void afficherEleve(ActionEvent event) throws IOException{
 
         Teenager t1, t2, t3, t4, t5;
         int id1, id2, id3, id4 ,id5;
@@ -494,7 +474,7 @@ public class ChangePlan<Eleve> {
 
     public void afficherCase(MouseEvent event) throws IOException{
         //System.out.println(""+listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
-        //ObservableList<Teenager> list =  FXCollections.observableArrayList(listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
+        ObservableList<Eleve> list = infoTeen.getItems();
         // listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
         //userFornameCol.cellValueFactoryProperty(new PropertyValueFactory<Teenager, String>(name));
         //infoTeen.setItems(list);
@@ -505,11 +485,40 @@ public class ChangePlan<Eleve> {
         // userNameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Nom"));
         // userCountry.setCellValueFactory(new PropertyValueFactory<Teenager, Country>("Pays"));
 
-        Eleve teen1 = new Eleve(listeTeenager.getItems().get(0));
-        Eleve teen2 = new Eleve(listeTeenager.getItems().get(1));
-        Eleve teen3 = new Eleve(listeTeenager.getItems().get(2));
-        Eleve teen4 = new Eleve(listeTeenager.getItems().get(3));
+        System.out.println("ok");
 
-        infoTeen.getItems().add(teen1);
+        Teenager teen1 = listeTeenager.getItems().get(0);
+        Teenager teen2 = listeTeenager.getItems().get(1);
+        Teenager teen3 = listeTeenager.getItems().get(2);
+        Teenager teen4 = listeTeenager.getItems().get(3);
+
+        System.out.println("ok");
+
+        Eleve t1 = new Eleve(teen1);
+        Eleve t2 = new Eleve(teen2);
+        Eleve t3 = new Eleve(teen3);
+        Eleve t4 = new Eleve(teen4);
+
+        System.out.println(teen1.toString());
+
+        list.addAll(t1,t2,t3,t4);
+
+        System.out.println(list.toString());
+
+        System.out.println(infoTeen.toString());
+
+        infoTeen.setItems(list);
+
+        System.out.println(infoTeen.getColumns().get(0).toString());
+
+        System.out.println("fin");
     }
+
+
+    // A FAIRE VITE 
+    /*
+     * afficherCaseAffectation
+     * affectation
+     * 
+     */
 }

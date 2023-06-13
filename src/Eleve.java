@@ -1,18 +1,20 @@
 import java.time.LocalDate;
 
 public class Eleve{
-    
+
     private String name;
     private String forname;
     private Country countryName;
     private LocalDate birthDate;
-    private Criterion HostFood;
-    private Criterion GuestFood;
-    private Criterion HostAnimal;
+
     private Criterion GuestHanimal;
+    private Criterion HostAnimal;
+    private Criterion GuestFood;
+    private Criterion HostFood;
+    
     private Criterion Hobbies;
-    private Criterion PairGender;
     private Criterion Gender;
+    private Criterion PairGender;
     private Criterion History;
 
     public Eleve(Teenager teen){
