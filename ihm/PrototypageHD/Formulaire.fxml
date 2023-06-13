@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangePlan">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #071835; -fx-background-size: 1500;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangePlan">
    <children>
       <HBox alignment="CENTER" prefHeight="160.0" prefWidth="1280.0" style="-fx-background-color: #204382;">
          <children>
@@ -129,12 +129,12 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="13.0" prefWidth="144.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Oui" textFill="WHITE" />
+                                          <RadioButton fx:id="formAnimalYesV" mnemonicParsing="false" onAction="#SelectYesFormAnimal" text="Oui" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Non" textFill="WHITE" />
+                                          <RadioButton fx:id="formAnimalNoV" mnemonicParsing="false" onAction="#SelectNoFormAnimal" text="Non" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -148,12 +148,12 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
+                                          <CheckBox fx:id="formNotNonuts" mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
+                                          <CheckBox fx:id="formVegetarian" mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -181,12 +181,12 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="13.0" prefWidth="144.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Oui" textFill="WHITE" />
+                                          <RadioButton fx:id="formAnimalYesH" mnemonicParsing="false" onAction="#SelectYesFormAnimalH" text="Oui" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Non" textFill="WHITE" />
+                                          <RadioButton fx:id="formAnimalNoH" mnemonicParsing="false" onAction="#SelectNoFormAnimalH" text="Non" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -201,12 +201,12 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
+                                          <CheckBox fx:id="formOtherNotNonuts" mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
+                                          <CheckBox fx:id="formOtherVegetarian" mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -244,17 +244,17 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="95.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Femme" textFill="WHITE" />
+                                          <RadioButton fx:id="formGenderFemale" mnemonicParsing="false" onAction="#SelectFemaleFormGender" text="Femme" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="92.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Homme" textFill="WHITE" />
+                                          <RadioButton fx:id="formGenderMale" mnemonicParsing="false" onAction="#SelectMaleFormGender" text="Homme" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="100.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="72.0" text="Autres" textFill="WHITE" />
+                                          <RadioButton fx:id="formGenderOther" mnemonicParsing="false" onAction="#SelectOtherFormGender" prefHeight="18.0" prefWidth="72.0" text="Autres" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -268,7 +268,7 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="77.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Femme" textFill="WHITE">
+                                          <RadioButton fx:id="formOtherGenderFemale" mnemonicParsing="false" onAction="#SelectFemaleFormOtherGender" text="Femme" textFill="WHITE">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -277,7 +277,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="79.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Homme" textFill="WHITE">
+                                          <RadioButton fx:id="formOtherGenderMale" mnemonicParsing="false" onAction="#SelectMaleFormOtherGender" text="Homme" textFill="WHITE">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -286,7 +286,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="73.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" text="Autres" textFill="WHITE">
+                                          <RadioButton fx:id="formOtherGenderOther" mnemonicParsing="false" onAction="#SelectOtherFormOtherGender" prefHeight="18.0" prefWidth="61.0" text="Autres" textFill="WHITE">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -295,7 +295,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="73.0">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="61.0" text="Aucunes préférences" textFill="WHITE">
+                                          <RadioButton fx:id="formOtherGenderNull" mnemonicParsing="false" onAction="#SelectNullFormOtherGender" prefHeight="18.0" prefWidth="61.0" text="Aucunes préférences" textFill="WHITE">
                                              <font>
                                                 <Font size="12.0" />
                                              </font>
@@ -315,17 +315,17 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="95.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="Oui" textFill="WHITE" />
+                                    <RadioButton fx:id="formHistorySame" mnemonicParsing="false" onAction="#SelectSameFormHistory" text="Oui" textFill="WHITE" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="92.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" text="Non" textFill="WHITE" />
+                                    <RadioButton fx:id="formHistoryOther" mnemonicParsing="false" onAction="#SelectOtherFormHistory" text="Non" textFill="WHITE" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="171.0">
                                  <children>
-                                    <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="172.0" text="Aucunes préférences" textFill="WHITE" />
+                                    <RadioButton fx:id="formHistoryNull" mnemonicParsing="false" onAction="#SelectNullFormHistory" prefHeight="18.0" prefWidth="172.0" text="Aucunes préférences" textFill="WHITE" />
                                  </children>
                               </HBox>
                            </children>

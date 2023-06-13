@@ -31,10 +31,11 @@ public class ChangePlan {
 
 
 
-    // ChoiceBox gender , pairGender , country , history;
-    // TextField name , forename , hobbies;
-    // CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
-    // DatePicker birthDate;
+    RadioButton gender, pairGender, history;
+    ListView<Country> country;
+    TextField name , forename , hobbies;
+    CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
+    DatePicker birthDate;
 
     /*
      * Pour la page de connexion
@@ -130,6 +131,7 @@ public class ChangePlan {
 
     public void initialize() {
         System.out.println("Initialisation...");
+
     }
 
     public void Charge(Stage stage, String fichier, String title) throws IOException {
@@ -160,7 +162,6 @@ public class ChangePlan {
         }
     }
 
-
     public void SelectConnexion(ActionEvent event) throws IOException {
         Charge(Start.stage,"ihm/PrototypageHD/Connexion.fxml","Connexion");
     }
@@ -189,6 +190,91 @@ public class ChangePlan {
         Charge(Start.stage,"ihm/PrototypageHD/ReappariementEleve.fxml","ReappariementEleve");
     }
 
+    public void SelectYesFormAnimal(ActionEvent event) throws IOException {
+        formAnimalYesV.setSelected(true);
+        formAnimalNoV.setSelected(false);
+    }
+
+    public void SelectNoFormAnimal(ActionEvent event) throws IOException {
+        formAnimalYesV.setSelected(false);
+        formAnimalNoV.setSelected(true);
+    }
+
+    public void SelectYesFormAnimalH(ActionEvent event) throws IOException {
+        formAnimalYesH.setSelected(true);
+        formAnimalNoH.setSelected(false);
+    }
+
+    public void SelectNoFormAnimalH(ActionEvent event) throws IOException {
+        formAnimalYesH.setSelected(false);
+        formAnimalNoH.setSelected(true);
+    }
+
+    public void SelectMaleFormGender(ActionEvent event) throws IOException {
+        formGenderMale.setSelected(true);
+        formGenderFemale.setSelected(false);
+        formGenderOther.setSelected(false);
+    }
+
+    public void SelectFemaleFormGender(ActionEvent event) throws IOException {
+        formGenderMale.setSelected(false);
+        formGenderFemale.setSelected(true);
+        formGenderOther.setSelected(false);
+    }
+
+    public void SelectOtherFormGender(ActionEvent event) throws IOException {
+        formGenderMale.setSelected(false);
+        formGenderFemale.setSelected(false);
+        formGenderOther.setSelected(true);
+    }
+
+    public void SelectMaleFormOtherGender(ActionEvent event) throws IOException {
+        formOtherGenderMale.setSelected(true);
+        formOtherGenderFemale.setSelected(false);
+        formOtherGenderOther.setSelected(false);
+        formOtherGenderNull.setSelected(false);
+    }
+
+    public void SelectFemaleFormOtherGender(ActionEvent event) throws IOException {
+        formOtherGenderMale.setSelected(false);
+        formOtherGenderFemale.setSelected(true);
+        formOtherGenderOther.setSelected(false);
+        formOtherGenderNull.setSelected(false);
+    }
+
+    public void SelectOtherFormOtherGender(ActionEvent event) throws IOException {
+        formOtherGenderMale.setSelected(false);
+        formOtherGenderFemale.setSelected(false);
+        formOtherGenderOther.setSelected(true);
+        formOtherGenderNull.setSelected(false);
+    }
+
+    public void SelectNullFormOtherGender(ActionEvent event) throws IOException {
+        formOtherGenderMale.setSelected(false);
+        formOtherGenderFemale.setSelected(false);
+        formOtherGenderOther.setSelected(false);
+        formOtherGenderNull.setSelected(true);
+    }
+
+    public void SelectSameFormHistory(ActionEvent event) throws IOException {
+        formHistorySame.setSelected(true);
+        formHistoryOther.setSelected(false);
+        formHistoryNull.setSelected(false);
+    }
+
+    public void SelectOtherFormHistory(ActionEvent event) throws IOException {
+        formHistorySame.setSelected(false);
+        formHistoryOther.setSelected(true);
+        formHistoryNull.setSelected(false);
+    }
+
+    public void SelectNullFormHistory(ActionEvent event) throws IOException {
+        formHistorySame.setSelected(false);
+        formHistoryOther.setSelected(false);
+        formHistoryNull.setSelected(true);
+    }
+    
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     //      FORMULAIRE
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,39 +294,39 @@ public class ChangePlan {
     ///////////////////////////////////////////////////
 
     public boolean champsValid(TextField t){
-        if(t.getText().isEmpty()){
-            return false;
-        }
+        String regex = "[a-zA-Z]+";
+        String text = t.getText();
+        if(text.isEmpty()) return false;
+        if (text.matches(regex)) return false;
+        if (text.length() > 20) return false;
         return true;
     }
 
     public boolean dateValid(DatePicker t){
-        if(t.getValue().equals(null)){
-            return false;
-        }
+        LocalDate date = t.getValue();
+        if(date == null) return false;
+        if( date.isAfter(LocalDate.now())) return false;
         return true;
     }
 
     public boolean isChecked(CheckBox t){
-        if(t.isSelected()){
-            return true;
-        }
+        if(t.isSelected()) return true;
         return false;
     }
 
-    public boolean isChoised(ChoiceBox t){
-        if(t.getValue().toString() != null){
-            return true;
-        }
+    public boolean isChoised(RadioButton t){
+        if(t.isSelected()) return true;
         return false;
     }
 
-        
+    public boolean isSelected (ListView<Country> t){
+        if(t.getSelectionModel().getSelectedItem() == null) return false;
+        return true;
+    }
+
     ///////////////////////////////////////////////////
     //  Crétation des critères
     ///////////////////////////////////////////////////
-
-
 
     public Criterion animalAllergy(){
         if(allergieAnimaux.isSelected()){
@@ -250,20 +336,21 @@ public class ChangePlan {
     }
 
     public Criterion genreTeenager(){
-        if(gender.getValue().toString().toLowerCase() == "homme"){
-        return  new Criterion("male", CriterionName.GENDER);
+        if(gender.idProperty().toString().equals("formGenderFemale")){
+        return  new Criterion("female", CriterionName.GENDER);
         }
-        if(gender.getValue().toString().toLowerCase() == "femme"){
-            return new Criterion("female", CriterionName.GENDER);
+        if(gender.idProperty().toString().equals("formGenderMale")){
+            return new Criterion("male", CriterionName.GENDER);
         }
         return new Criterion("other", CriterionName.GENDER);
+        //TODO : A voir si on met un null ou un other
     }
 
     public Criterion haveAnimal(){
         if(hostAnimal.isSelected()){
-            return new Criterion( "yes" , CriterionName.HOST_HAS_ANIMAL);
+            return new Criterion("yes" , CriterionName.HOST_HAS_ANIMAL);
         }
-        return new Criterion( "no" , CriterionName.HOST_HAS_ANIMAL);
+        return new Criterion("no" , CriterionName.HOST_HAS_ANIMAL);
     }
 
 
@@ -277,7 +364,7 @@ public class ChangePlan {
 
 
     public Criterion history(){
-        if(history.getValue().toString().toLowerCase() == "same"){
+        if(history.idProperty().toString().equals("formHistorySame")){
             return new Criterion("same", CriterionName.HISTORY);
         }
         return new Criterion("other", CriterionName.HISTORY);
@@ -288,17 +375,15 @@ public class ChangePlan {
     }
 
     public Criterion pairGender(){
-        if(pairGender.getValue().toString().toLowerCase() == "homme"){
-            return  new Criterion("male", CriterionName.PAIR_GENDER);
-        }
-        if(pairGender.getValue().toString().toLowerCase() == "femme"){
+        if(pairGender.idProperty().toString().equals("formOtherGenderFemale")){
             return new Criterion("female", CriterionName.PAIR_GENDER);
         }
+        if(pairGender.idProperty().toString().equals("formOtherGenderMale")){
+            return new Criterion("male", CriterionName.PAIR_GENDER);
+        }
         return new Criterion("other", CriterionName.PAIR_GENDER);
+        //TODO : A voir si on met un null ou un other
     }
-
-
-
 
     ///////////////////////////////////////////////////
 
@@ -308,8 +393,9 @@ public class ChangePlan {
         Teenager teenager;
         String food = "";
 
-        if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isChoised(country)){
-            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getValue().toString()));
+        if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isSelected(country)){
+            
+            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), country.getSelectionModel().getSelectedItem());
 
             teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), animalAllergy());
             teenager.addCriterion(CriterionName.GENDER.name() , genreTeenager());
@@ -332,10 +418,12 @@ public class ChangePlan {
             if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
 
             platform.addTeenager(teenager);
-            listeTeenager.getItems().add(listeTeenager.getItems().size(),teenager);
-            listeTeenager.scrollTo(teenager);
-            listeTeenager.edit(listeTeenager.getItems().size() - 1);
-            sauvegardePlateforme();
+            try {
+                sauvegardePlateforme();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Erreur lors de la sauvegarde de la plateforme !");
+            }
 
         }
     }
@@ -510,7 +598,6 @@ public class ChangePlan {
         infoTeen.setItems(list);
 
         System.out.println(infoTeen.getColumns().get(0).toString());
-
         System.out.println("fin");
     }
 
