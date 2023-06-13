@@ -21,7 +21,6 @@ Sera évaluée à partir du tag git `Graphes-v1`
 
 
 Ces appariement sont possible car comparé au autre il ont des loisirs en commun et il ne faut aussi pas oublier que comme dit dans l'énoncé que les ado francais ne peuvent aller chez un hôte que si il ont un loisir en commun.
-
 Et aussi les autres appariement ne sont pas possible a cause de l’allergie au animaux en effet Bellatrix possède une allergie à l'animal de l'hôte Y.
 
 
@@ -44,7 +43,7 @@ Pour le choix du poids des arêtes, on les fait tous démarrer à 100. Nous avon
 *Décrire une modélisation générale pour la Version 1. C'est à dire, donner une formule ou une description précise qui décrit comment, étant donné un adolescent hôte et un adolescent visiteur, on détermine le poids de l'arête entre ces deux adolescents en fonction des critères considérés dans la Version 1.*
 
 
-Nous enlevons pour un appariement 1 point par hobbie commun, puis nous ajoutons 100 points par contrainte de comptabilité, donc à cause des allergies et autres et donc ici pour l'arrete est lourde moins ils sont compatible.
+Tout le monde commence a 100 nous enlevons 1 point par hobbie commun, puis nous ajoutons 100 points par contrainte de comptabilité, donc à cause des allergies et autres et donc ici pour l'arrete est lourde moins ils sont compatible.
 
 
 ### Implémentation de la Version 1
@@ -84,6 +83,9 @@ Nous obtenons ce graphe lorsque se sont les Allemands qui se rendent chez les It
 
 ![Texte alternatif](./img/)
 
+
+
+Dans ces test fait on peut voir que notre systeme fonctionne bien car malgré le faite que le A et D on 50 hobbies en commun comme ils sont incompatibles ils ne vont jamais etre mis ensemble.
 
 Les tests fait pour obtenir ces graphe se trouve dans [AffectationVersion1Test.java](../test/AffectationVersion1Test.java) 
 Dans la partie : "Exemple 2 du sujet qui implemente IncompatibilityVsHobbies"
@@ -168,7 +170,6 @@ Pour modéliser l’historique :
 ### Implémentation de l'historique de la Version 2
 
 *Quelles fonctions de votre code avez-vous modifié pour prendre en compte le critère historique ? Donnez ici les noms des méthodes (et leur classe), à quoi elles servent, et quelles modifications vous avez apportées. Essayez d'être synthétique.*
-
 
 
 Pour implémenter cela nous avons créé une nouvelle class Affectation.java celle-ci a pour but la création d’une HashMap qui ici nous est indispensable pour l’appariement des Teenager dans l'historique. Cette classe dispose de plusieurs méthodes afin d’ajouter des Teenager dans la HashMap. Celle- ci va donc s’occuper de l’historique mais pas que. En effet dans cette classe nous disposons d’une méthode qui par rapport à l'historique va nous renvoyer une valeur celle ci se nomme history.

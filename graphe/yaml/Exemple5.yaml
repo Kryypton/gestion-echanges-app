@@ -1,0 +1,12 @@
+name: Exemple5
+type: uwgraph
+nodes: [A , B , C  , D , E , F , G  , H]
+wedges:
+  A: {E:  , F:   ,G :  , H : }
+  B: {E:  , F:   ,G :  , H : }
+  C: {E:  , F:   ,G :  , H : }
+  D: {E:  , F:   ,G :  , H : }
+  E: {}
+  F: {}
+  G: {}
+  H: {}
