@@ -76,12 +76,12 @@ En implémentant l'exemple donner pour compatibilityVsHobbies nous avons génér
 
 Nous obtenons ce graphe lorsque se sont les Italiens qui se rendent chez les Allemands : 
 
-![Texte alternatif](./img/)
+![Texte alternatif](./img/Exemple2.png)
 
 
 Nous obtenons ce graphe lorsque se sont les Allemands qui se rendent chez les Italiens : 
 
-![Texte alternatif](./img/)
+![Texte alternatif](./img/Exemple3.png)
 
 
 
@@ -152,11 +152,11 @@ Ce test a été fait dans la class [AffectationUtil.java](../src/AffectationUtil
 
 Voici le graphe obtenu grace au premier exemple des 2 exemples precedents.
 
-![Texte alternatif](./img/)
+![Texte alternatif](./img/Exemple4.png)
 
 Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
 
-![Texte alternatif](./img/)
+![Texte alternatif](./img/Exemple5.png)
 
 ### Modélisation pour l'historique de la Version 2
 
@@ -165,6 +165,7 @@ Voici le graphe obtenu grace au deuxieme exemple des 2 exemples precedents.
 Pour modéliser l’historique :
     * Afin de modéliser l’historique nous avons décidé que chaque binôme de Teenager aller être répertoriés dans une Hashmap.
     * Nous avons implémenté des méthodes afin de garder une trace dans un fichier texte des historiques.
+
 
 
 ### Implémentation de l'historique de la Version 2
