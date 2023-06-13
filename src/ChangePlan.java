@@ -1,8 +1,11 @@
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.Csv;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,9 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ChangePlan<Eleve> {
-
-    Platform platform ;
-
+    public static Platform platform = new Platform();
     RadioButton gender, pairGender, history;
     SplitMenuButton country ;
     TextField name , forename , hobbies;
@@ -122,13 +123,13 @@ public class ChangePlan<Eleve> {
     @FXML
     RadioButton formHistoryNull;
     @FXML
-    CheckBox formNotNonuts;
+    CheckBox formGuestNotNonuts;
     @FXML
-    CheckBox formVegetarian;
+    CheckBox formGuestVegetarian;
     @FXML
-    CheckBox formOtherNotNonuts;
+    CheckBox formHostNotNonuts;
     @FXML
-    CheckBox formOtherVegetarian;
+    CheckBox formHostVegetarian;
     @FXML
     SplitMenuButton formCountryList;
     @FXML
@@ -335,6 +336,22 @@ public class ChangePlan<Eleve> {
     public void birthEntryAction(ActionEvent event) {
         this.birthDate = birthEntry;
     }
+
+    public void SelectFormGuestNotNonuts(ActionEvent event) {
+        this.guestNuts = formGuestNotNonuts;
+    }
+
+    public void SelectFormGuestVegetarian(ActionEvent event) {
+        this.guestVegetarian = formGuestVegetarian;
+    } 
+
+    public void SelectFormHostNotNonuts(ActionEvent event) {
+        this.hostNuts = formHostNotNonuts;
+    } 
+
+    public void SelectFormHostVegetarian(ActionEvent event) {
+        this.hostVegetarian = formHostVegetarian;
+    } 
     /*public void FormGermanySelect(ActionEvent event) throws IOException {
         formGermany.setText("Allemagne");
         formFrance.setText("France");
@@ -431,18 +448,18 @@ public class ChangePlan<Eleve> {
     //  Crétation des critères
     ///////////////////////////////////////////////////
 
-    public Criterion animalAllergy(){
+    /*public Criterion animalAllergy(){
         if(allergieAnimaux.isSelected()){
             return new Criterion( "yes" , CriterionName.GUEST_ANIMAL_ALLERGY);
         }
         return new Criterion( "no" , CriterionName.GUEST_ANIMAL_ALLERGY);
-    }
+    }*/
 
     public Criterion genreTeenager(){
-        if(gender.idProperty().toString().equals("formGenderFemale")){
+        if(gender.idProperty().getValue().toString().equals("formGenderFemale")){
         return  new Criterion("female", CriterionName.GENDER);
         }
-        if(gender.idProperty().toString().equals("formGenderMale")){
+        if(gender.idProperty().getValue().toString().equals("formGenderMale")){
             return new Criterion("male", CriterionName.GENDER);
         }
         return new Criterion("other", CriterionName.GENDER);
@@ -450,12 +467,20 @@ public class ChangePlan<Eleve> {
     }
 
     public Criterion haveAnimal(){
-        if(hostAnimal.isSelected()){
+        if(hostAnimal.idProperty().getValue().toString().equals("formAnimalYesH")){
             return new Criterion("yes" , CriterionName.HOST_HAS_ANIMAL);
         }
         return new Criterion("no" , CriterionName.HOST_HAS_ANIMAL);
     }
 
+    public Criterion haveAllergie(){
+        if(allergieAnimaux.idProperty().getValue().toString().equals("formAnimalYesV")){
+            return new Criterion("yes" , CriterionName.GUEST_ANIMAL_ALLERGY);
+        } else if(allergieAnimaux.idProperty().getValue().toString().equals("formAnimalNoV")){
+            return new Criterion("no" , CriterionName.GUEST_ANIMAL_ALLERGY);
+        }
+        return new Criterion("no" , CriterionName.GUEST_ANIMAL_ALLERGY);
+    }
 
     public Criterion regimeAlimentaire(String food){
         if(food.length() > 0){
@@ -467,7 +492,7 @@ public class ChangePlan<Eleve> {
 
 
     public Criterion history(){
-        if(history.idProperty().toString().equals("formHistorySame")){
+        if(history.idProperty().getValue().toString().equals("formHistorySame")){
             return new Criterion("same", CriterionName.HISTORY);
         }
         return new Criterion("other", CriterionName.HISTORY);
@@ -478,7 +503,8 @@ public class ChangePlan<Eleve> {
     }
 
     public Criterion pairGender(){
-        if(pairGender.idProperty().toString().equals("formOtherGenderFemale")){
+        System.out.println("Genre souhaité : " + pairGender.idProperty().toString());
+        if(pairGender.idProperty().getValue().toString().equals("formOtherGenderFemale")){
             return new Criterion("female", CriterionName.PAIR_GENDER);
         }
         if(pairGender.idProperty().toString().equals("formOtherGenderMale")){
@@ -530,18 +556,22 @@ public class ChangePlan<Eleve> {
 
         }
         if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isSelected(country)){
-            
-            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getText()));
+            if (platform.containsSame(name.getText(), forename.getText())) return;
+            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getText().toUpperCase()));
 
-            teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), animalAllergy());
+            //teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), animalAllergy());
             teenager.addCriterion(CriterionName.GENDER.name() , genreTeenager());
 
             if(isChecked(guestNuts)){ food = food + "nonuts,";}
             if(isChecked(guestVegetarian)){ food = food + "vegetarian,";}
             if(food.length() > 0){ teenager.addCriterion(CriterionName.GUEST_FOOD.name(), regimeAlimentaire(food));}
 
-            teenager.addCriterion(CriterionName.HOST_HAS_ANIMAL.name() , haveAnimal());
+            System.out.println(haveAnimal() + "animauldsqldsqfujiqsçfhqsçp");
 
+        
+            teenager.addCriterion(CriterionName.HOST_HAS_ANIMAL.name() , haveAnimal());
+            System.out.println(haveAllergie() + "allergie");
+            teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name() , haveAllergie());
             food = "";
 
             if(isChecked(hostNuts)){ food = food + "nonuts,";}
@@ -552,14 +582,14 @@ public class ChangePlan<Eleve> {
             teenager.addCriterion(CriterionName.HOBBIES.name(), hobbiesTeenager());
 
             if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
-            
-            /*platform.addTeenager(teenager);
+            System.out.println(teenager.teenagerToString());
+            platform.addTeenager(teenager);
             try {
                 sauvegardePlateforme();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("Erreur lors de la sauvegarde de la plateforme !");
-            }*/
+            }
         }
     }
 
@@ -578,7 +608,7 @@ public class ChangePlan<Eleve> {
     }
 
     public void sauvegardePlateforme() throws IOException{ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
-        Platform.exportTeenagers(null, null);
+       platform.exportTeenagers((ArrayList) platform.getTeenagerList() , "res/teenagerList.csv");
     }
 
     // public void SupprimerAppariment(ActionEvent event) throws IOException {

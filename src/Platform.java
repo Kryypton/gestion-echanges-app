@@ -85,6 +85,13 @@ public class Platform {
         }
     }
 
+    public boolean containsSame(String name, String forename) {
+        for (Teenager teenager : teenagerList) {
+            if (teenager.getName().equals(name) && (teenager.getForname().equals(forename))) return true;
+        }
+        return false;
+    }
+
     /** 
      * Methode qui supprime les adolescents qui n'ont pas de saisies valides
      */

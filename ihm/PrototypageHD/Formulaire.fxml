@@ -152,12 +152,12 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox fx:id="formNotNonuts" mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
+                                          <CheckBox fx:id="formGuestNotNonuts" mnemonicParsing="false" onAction="#SelectFormGuestNotNonuts" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox fx:id="formVegetarian" mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
+                                          <CheckBox fx:id="formGuestVegetarian" mnemonicParsing="false" onAction="#SelectFormGuestVegetarian" text="Végétarien" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -205,12 +205,12 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox fx:id="formOtherNotNonuts" mnemonicParsing="false" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
+                                          <CheckBox fx:id="formHostNotNonuts" mnemonicParsing="false" onAction="#SelectFormHostNotNonuts" prefHeight="18.0" prefWidth="98.0" text="Sans noix" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="117.0">
                                        <children>
-                                          <CheckBox fx:id="formOtherVegetarian" mnemonicParsing="false" text="Végétarien" textFill="WHITE" />
+                                          <CheckBox fx:id="formHostVegetarian" mnemonicParsing="false" onAction="#SelectFormHostVegetarian" text="Végétarien" textFill="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>

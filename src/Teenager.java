@@ -24,6 +24,7 @@ public class Teenager implements Serializable{
     private LocalDate birthDate;
     private Map<String, Criterion> requirements;
     private Teenager lastAffectation;
+    private static int ctp = 0;
 
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
@@ -36,7 +37,7 @@ public class Teenager implements Serializable{
      * @param requirements les critères de compatibilité d'un adolescent
      */
     public Teenager(int id , String name , String forname ,  LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
-        this.id = id ;
+        this.id = Teenager.ctp++ ;
         this.name = name;
         this.forname = forname;
         this.birthDate = birthDate;
@@ -58,7 +59,7 @@ public class Teenager implements Serializable{
      * @param countryName le pays d'un adolescent
      */
     public Teenager(int id , String name , String forname  , LocalDate birthDate , Country countryName){
-        this.id = id ;
+        this.id = Teenager.ctp++ ;
         this.name = name;
         this.forname = forname;
         this.birthDate = birthDate;
@@ -67,6 +68,7 @@ public class Teenager implements Serializable{
     }
 
     public Teenager(String name , String forname  , LocalDate birthDate , Country countryName){
+        this.id = Teenager.ctp++ ;
         this.name = name;
         this.forname = forname;
         this.birthDate = birthDate;
@@ -76,6 +78,7 @@ public class Teenager implements Serializable{
 
 
     public Teenager(String forname , String name , Country countryName ){
+        this.id = Teenager.ctp++ ;
         this.name = name;
         this.forname = forname;
         this.countryName = countryName;
@@ -89,6 +92,7 @@ public class Teenager implements Serializable{
      * @param patern l'ordre des paramétre
      */
     public Teenager(String CSV, int id, String patern){
+        this.id = Teenager.ctp++ ;
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter(";");
         Scanner scanPatern = new Scanner(patern);
@@ -445,12 +449,12 @@ public class Teenager implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((forname == null) ? 0 : forname.hashCode());
         result = prime * result + ((countryName == null) ? 0 : countryName.hashCode());
         result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
         result = prime * result + ((requirements == null) ? 0 : requirements.hashCode());
+        result = prime * result + ((lastAffectation == null) ? 0 : lastAffectation.hashCode());
         return result;
     }
 
@@ -463,8 +467,6 @@ public class Teenager implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Teenager other = (Teenager) obj;
-        if (id != other.id)
-            return false;
         if (name == null) {
             if (other.name != null)
                 return false;
@@ -486,6 +488,11 @@ public class Teenager implements Serializable{
             if (other.requirements != null)
                 return false;
         } else if (!requirements.equals(other.requirements))
+            return false;
+        if (lastAffectation == null) {
+            if (other.lastAffectation != null)
+                return false;
+        } else if (!lastAffectation.equals(other.lastAffectation))
             return false;
         return true;
     }
@@ -520,9 +527,9 @@ public class Teenager implements Serializable{
      * @return un String avec les informations de l'adolescent
      */
     public String teenagerToString(){
-        return this.forname+";"+this.name+";"+this.countryName+";"+this.birthDate.toString()+";"+this.requirements.get(CriterionName.HOBBIES.name())+
+        return this.getId() + ";" + this.forname+";"+this.name+";"+this.countryName+";"+this.birthDate.toString()+";"+this.requirements.get(CriterionName.HOBBIES.name())+
         ";"+this.requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY.name())+";"+this.requirements.get(CriterionName.HOST_HAS_ANIMAL.name())+";"+
-        this.requirements.get(CriterionName.GUEST_FOOD.name())+";"+this.requirements.get(CriterionName.HOST_FOOD.name())+
+        this.requirements.get(CriterionName.GUEST_FOOD.name())+";"+this.requirements.get(CriterionName.HOST_FOOD.name())+";"+this.requirements.get(CriterionName.GENDER.name())+
         ";"+this.requirements.get(CriterionName.PAIR_GENDER.name())+";"+this.requirements.get(CriterionName.HISTORY.name());
     }
 
