@@ -7,13 +7,16 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.AccessibleAttribute;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ChangePlan {
@@ -44,7 +47,7 @@ public class ChangePlan {
     @FXML
     TextField formName;
     @FXML
-    TextField formForename;
+    TextField formForname;
     @FXML
     TextField formCountry;
     @FXML
@@ -160,13 +163,15 @@ public class ChangePlan {
     //      FORMULAIRE
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void AjoutEleveFormulaire(ActionEvent event) throws IOException {
-        String name = formName.getCharacters().toString();
-        String forname = formForename.getCharacters().toString();
-        String countryName = formCountry.getCharacters().toString();
-        LocalDate birthDate = formDate.getValue();
-        Map<String, Criterion> requirements;
-    }
+    // public void AjoutEleveFormulaire(ActionEvent event) throws IOException {
+    //     String name = formName.getCharacters().toString();
+    //     String forname = formForname.getCharacters().toString();
+    //     String countryName = formCountry.getCharacters().toString();
+    //     LocalDate birthDate = formDate.getValue();
+    //     Map<String, Criterion> requirements;
+
+    //     Teenager teen = new Teenager(name,forname);
+    // }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,6 +245,35 @@ public class ChangePlan {
     // public void CreeAppariement(ActionEvent event) throws IOException {
     //     weigth
     // }
+
+    public void afficherEleve(ActionEvent event) throws IOException{
+        Teenager teen1 = new Teenager("Ab","A",Country.FRANCE);
+        Teenager teen2 = new Teenager("Bb","B",Country.ITALY);
+        Teenager teen3 = new Teenager("Cb","C",Country.GERMANY);
+        Teenager teen4 = new Teenager("Db","D",Country.SPAIN);
+
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen1);
+        listeTeenager.scrollTo(teen1);
+        listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen2);
+        listeTeenager.scrollTo(teen2);
+        listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen3);
+        listeTeenager.scrollTo(teen3);
+        listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen4);
+        listeTeenager.scrollTo(teen4);
+        listeTeenager.edit(listeTeenager.getItems().size() - 1);
+    }
+
+    public void afficherCase(MouseEvent event) throws IOException{
+        // Teenager teen = (Teenager) listeTeenager.getCellFactory().call(listeTeenager).queryAccessibleAttribute(AccessibleAttribute.VALUE);
+        // System.out.println(teen);
+        
+        //System.out.println(""+listeTeenager.getItems().get(listeTeenager.getEditingIndex(listeTeenager.scrollTo( (Teenager) event.getSource()))));
+        // System.out.println(""+listeTeenager.toString());
+        System.out.println(""+(Teenager) event.getSource());
+    }
 
 
 }
