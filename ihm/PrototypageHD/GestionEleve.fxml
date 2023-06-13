@@ -81,10 +81,10 @@
                               </Button>
                            </children>
                         </VBox>
-                        <TableView layoutX="226.0" layoutY="21.0" prefHeight="473.0" prefWidth="1040.0" style="-fx-background-color: #204382; -fx-border-color: #ffffff; -fx-border-width: 4px;">
+                        <TableView fx:id="infoTeen" layoutX="226.0" layoutY="21.0" prefHeight="473.0" prefWidth="1040.0" style="-fx-background-color: #204382; -fx-border-color: #ffffff; -fx-border-width: 4px;">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nom" />
-                            <TableColumn prefWidth="75.0" text="Prénom" />
+                            <TableColumn fx:id="userNameCol" prefWidth="75.0" text="Nom" />
+                            <TableColumn fx:id="userFornameCol" prefWidth="75.0" text="Prénom" />
                               <TableColumn prefWidth="75.0" text="Country" />
                               <TableColumn prefWidth="75.0" text="Birth-Date" />
                               <TableColumn minWidth="20.0" prefWidth="91.0" text="Guest Animal Allergiy" />

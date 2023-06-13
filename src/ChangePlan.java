@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +18,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ChangePlan {
+public class ChangePlan<Eleve> {
 
     Platform platform ;
 
@@ -43,6 +48,36 @@ public class ChangePlan {
     /*
      * Pour les pages gestion élèves et appariement
      */
+    @FXML
+    TableView<Eleve> infoTeen;
+    @FXML
+
+
+    TableColumn<Eleve, String> userNameCol;
+    @FXML
+    TableColumn<Eleve, String> userFornameCol;
+    @FXML
+    TableColumn<Eleve, Country> userCountry;
+    @FXML
+    TableColumn<Eleve, LocalDate> userDate;
+    @FXML
+    TableColumn<Eleve, Criterion> userGAnimal;
+    @FXML
+    TableColumn<Eleve, Criterion> userHAnimal;
+    @FXML
+    TableColumn<Eleve, Criterion> userGFood;
+    @FXML
+    TableColumn<Eleve, Criterion> userHFood;
+    @FXML
+    TableColumn<Eleve, Criterion> userHobbies;
+    @FXML
+    TableColumn<Eleve, Criterion> userGender;
+    @FXML
+    TableColumn<Eleve, Criterion> userPairGender;
+    @FXML
+    TableColumn<Eleve, Criterion> userHistory;
+
+
     @FXML
     ListView<Teenager> listeTeenager; // Liste des Teenager
     @FXML
@@ -360,33 +395,121 @@ public class ChangePlan {
 
 
     public void afficherEleve(ActionEvent event) throws IOException{
-        Teenager teen1 = new Teenager("Ab","A",Country.FRANCE);
-        Teenager teen2 = new Teenager("Bb","B",Country.ITALY);
-        Teenager teen3 = new Teenager("Cb","C",Country.GERMANY);
-        Teenager teen4 = new Teenager("Db","D",Country.SPAIN);
 
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen1);
-        listeTeenager.scrollTo(teen1);
+        Teenager t1, t2, t3, t4, t5;
+        int id1, id2, id3, id4 ,id5;
+        String name1, name2, name3, name4 ,name5;
+        String forname1, forname2, forname3, forname4, forname5;
+        String gender1, gender2, gender3, gender4, gender5;
+        Country countryName1, countryName2, countryName3, countryName4, countryName5;
+        LocalDate birthDate1, birthDate2, birthDate3, birthDate4, birthDate5;
+        Map<String, Criterion> requirements1, requirements2, requirements3, requirements4, requirements5;
+        id1 = 1;
+        id2 = 2;
+        id3 = 3;
+        id4 = 4;
+        id5 = 5;
+        name1 = "Alice";
+        name2 = "Bruno";
+        name3 = "Clément";
+        name4 = "Dylan";
+        name5 = "Eva";
+        forname1 = "Brown";
+        forname2 = "Dumont";
+        forname3 = "Garnier";
+        forname4 = "Lefebvre";
+        forname5 = "Martin";
+        countryName1 = Country.FRANCE;
+        countryName2 = Country.GERMANY;
+        countryName3 = Country.SPAIN;
+        countryName4 = Country.ITALY;
+        countryName5 = Country.FRANCE;
+        birthDate1 = LocalDate.parse("2000-01-01");
+        birthDate2 = LocalDate.parse("2002-08-04");
+        birthDate3 = LocalDate.parse("2001-11-21");
+        birthDate4 = LocalDate.parse("2003-03-15");
+        birthDate5 = LocalDate.parse("2001-12-03");
+
+        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
+        Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
+        Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
+        Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
+        Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
+        Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
+        Criterion posseDeTout = new Criterion("none", CriterionName.HOST_FOOD);
+        Criterion mangeTout = new Criterion("none", CriterionName.GUEST_FOOD);  
+        Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
+        Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
+        Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.NUMERIC);
+        Criterion biologie = new Criterion("biologie", CriterionName.HOBBIES);
+
+        requirements2 = new HashMap<String, Criterion>();
+        requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        requirements2.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+        requirements2.put(CriterionName.HOST_FOOD.name(), possedeVege);
+        requirements2.put(CriterionName.GUEST_FOOD.name(), mangeVege);
+
+        requirements3 = new HashMap<String, Criterion>();
+        requirements3.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        requirements3.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
+        requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
+        
+        t1 = new Teenager(id1, name1, forname1, birthDate1, countryName1);
+        t2 = new Teenager(id2, name2, forname2, birthDate2, countryName2, requirements2);
+        t3 = new Teenager(id3, name3, forname3, birthDate3, countryName3, requirements3);
+        t4 = new Teenager(id4, forname4, forname4, birthDate4, countryName4);
+        t5 = new Teenager(id5, name5, forname5, birthDate5, countryName5);
+
+        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
+        t1.addCriterion(CriterionName.GUEST_FOOD.name(), mangeTout);
+        t1.addCriterion(CriterionName.GUEST_FOOD.name(), biologie);
+
+        t4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t4.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
+        t4.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+
+        t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        t5.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        t5.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
+        t5.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+        t5.addCriterion(CriterionName.HOBBIES.name(), biologie);
+
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),t1);
+        listeTeenager.scrollTo(t1);
         listeTeenager.edit(listeTeenager.getItems().size() - 1);
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen2);
-        listeTeenager.scrollTo(teen2);
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),t2);
+        listeTeenager.scrollTo(t2);
         listeTeenager.edit(listeTeenager.getItems().size() - 1);
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen3);
-        listeTeenager.scrollTo(teen3);
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),t3);
+        listeTeenager.scrollTo(t3);
         listeTeenager.edit(listeTeenager.getItems().size() - 1);
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),teen4);
-        listeTeenager.scrollTo(teen4);
+        listeTeenager.getItems().add(listeTeenager.getItems().size(),t4);
+        listeTeenager.scrollTo(t4);
         listeTeenager.edit(listeTeenager.getItems().size() - 1);
     }
 
     public void afficherCase(MouseEvent event) throws IOException{
-        // Teenager teen = (Teenager) listeTeenager.getCellFactory().call(listeTeenager).queryAccessibleAttribute(AccessibleAttribute.VALUE);
-        // System.out.println(teen);
-        
-        //System.out.println(""+listeTeenager.getItems().get(listeTeenager.getEditingIndex(listeTeenager.scrollTo( (Teenager) event.getSource()))));
-        // System.out.println(""+listeTeenager.toString());
-        System.out.println(""+(Teenager) event.getSource());
+        //System.out.println(""+listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
+        //ObservableList<Teenager> list =  FXCollections.observableArrayList(listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
+        // listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
+        //userFornameCol.cellValueFactoryProperty(new PropertyValueFactory<Teenager, String>(name));
+        //infoTeen.setItems(list);
+
+        // Teenager teen = listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
+
+        // userFornameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Prenom"));
+        // userNameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Nom"));
+        // userCountry.setCellValueFactory(new PropertyValueFactory<Teenager, Country>("Pays"));
+
+        Eleve teen1 = new Eleve(listeTeenager.getItems().get(0));
+        Eleve teen2 = new Eleve(listeTeenager.getItems().get(1));
+        Eleve teen3 = new Eleve(listeTeenager.getItems().get(2));
+        Eleve teen4 = new Eleve(listeTeenager.getItems().get(3));
+
+        infoTeen.getItems().add(teen1);
     }
-
-
 }
