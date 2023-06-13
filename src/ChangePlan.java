@@ -1,8 +1,15 @@
+import java.io.Console;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.JFileChooser;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -418,12 +425,7 @@ public class ChangePlan {
             if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
 
             platform.addTeenager(teenager);
-            try {
-                sauvegardePlateforme();
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.err.println("Erreur lors de la sauvegarde de la plateforme !");
-            }
+            sauvegardePlateforme();
 
         }
     }
@@ -444,24 +446,49 @@ public class ChangePlan {
         Platform.exportTeenagers(null, null);
     }
 
-    // public void SupprimerAppariment(ActionEvent event) throws IOException {
-    //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
-    // }
+    public void SupprimerAppariment(ActionEvent event) throws IOException {
+        //faire demande des 2 teenagers
+        //platform.getCompatibleTeenagers().removeCompatibleTeenager(/*hote,visitor*/);
+    }
 
     // public void ModifierEleve(ActionEvent event) throws IOException {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
     // }
 
-    // public void CreeAppariement(ActionEvent event) throws IOException {
-    //     weigth
-    // }
+    public void CreeAppariement(ActionEvent event) throws IOException {
+        //remplacer les nulls par les valeurs des pays
+        // il faut donc faire la demande des pays
+        platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(), null, null)));
+        
+        for(Map<Teenager, Teenager> teen : platform.getCompatibleTeenagers().entrySet()){
+            listeAppariement.getItems().add(listeTeenager.getItems().size(),teen);
+            listeAppariement.scrollTo(teen);
+            listeAppariement.edit(listeTeenager.getItems().size() - 1);
+        }
+        
+    }
 
-        // public void ImportationEleve(ActionEvent event) throws IOException {
-    //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
-    // }
+    public void ImportationEleve(ActionEvent event) throws IOException {
+         // sert a demander le chemin vers un fichier (.csv)
+        JFileChooser dialogue = new JFileChooser(new File("."));
+        PrintWriter sortie;
+        File fichier;
+        
+        if (dialogue.showOpenDialog(null)== JFileChooser.APPROVE_OPTION) {
+            fichier = dialogue.getSelectedFile();
+            sortie = new PrintWriter
+            (new FileWriter(fichier.getPath(), true));
+            //je crois est censé donner le chemin donné
+            //sortie.println(arg[0]);
+            sortie.close();
+        }
+        
+        platform.setTeenagerList(Platform.importListTeenagers(fichier));
+            
+    }
 
 
-
+        // sert a affichre les eleve (en cliquant sur modifier de gestion eleve)(sert aussi a tester)
      public void afficherEleve(ActionEvent event) throws IOException{
 
         Teenager t1, t2, t3, t4, t5;
@@ -560,52 +587,27 @@ public class ChangePlan {
         listeTeenager.edit(listeTeenager.getItems().size() - 1);
     }
 
-    public void afficherCase(MouseEvent event) throws IOException{
-        //System.out.println(""+listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
+    // est censé afficher dans les table views les valeurs selectionné
+    public void afficherCaseEleve(MouseEvent event) throws IOException{
+
+        //crée une ObservableList (on en a besoin)
         ObservableList<Eleve> list = infoTeen.getItems();
-        // listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
-        //userFornameCol.cellValueFactoryProperty(new PropertyValueFactory<Teenager, String>(name));
-        //infoTeen.setItems(list);
 
-        // Teenager teen = listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
+        //permet de récuperer le teeneger selectionner dans la listeView
+        Teenager teen = listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
 
-        // userFornameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Prenom"));
-        // userNameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Nom"));
-        // userCountry.setCellValueFactory(new PropertyValueFactory<Teenager, Country>("Pays"));
+        //creation de eleve a partir de teenager (servent juste a contourne le requirement)
+        Eleve t1 = new Eleve(teen);
 
-        System.out.println("ok");
-
-        Teenager teen1 = listeTeenager.getItems().get(0);
-        Teenager teen2 = listeTeenager.getItems().get(1);
-        Teenager teen3 = listeTeenager.getItems().get(2);
-        Teenager teen4 = listeTeenager.getItems().get(3);
-
-        System.out.println("ok");
-
-        Eleve t1 = new Eleve(teen1);
-        Eleve t2 = new Eleve(teen2);
-        Eleve t3 = new Eleve(teen3);
-        Eleve t4 = new Eleve(teen4);
-
-        System.out.println(teen1.toString());
-
-        list.addAll(t1,t2,t3,t4);
-
-        System.out.println(list.toString());
-
-        System.out.println(infoTeen.toString());
-
+        //mettre toutes les valeurs dans list
+        list.add(t1);
+        
+        // mettre les valeur dans le tableView (prend en param ObservableList)
         infoTeen.setItems(list);
-
-        System.out.println(infoTeen.getColumns().get(0).toString());
-        System.out.println("fin");
     }
 
+    // public void afficherCaseAppariement(ActionEvent event) throws IOException{
 
-    // A FAIRE VITE 
-    /*
-     * afficherCaseAffectation
-     * affectation
-     * 
-     */
+    //     ObservableList<Map<Teenager,Teenager>> list = FXCollections.observableArrayList();
+    // }
 }
