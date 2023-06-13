@@ -11,6 +11,7 @@ import javafx.scene.AccessibleAttribute;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -22,6 +23,13 @@ import javafx.stage.Stage;
 public class ChangePlan {
 
     Platform platform ;
+
+
+
+    ChoiceBox gender , pairGender , country , history;
+    TextField name , forename , hobbies;
+    CheckBox allergieAnimaux , hostAnimal , hostNuts  , hostVegetarian , guestNuts  , guestVegetarian;
+    DatePicker birthDate;
 
     /*
      * Pour la page de connexion
@@ -91,11 +99,11 @@ public class ChangePlan {
     @FXML
     CheckBox formOtherVegetarian;
 
-    Criterion AnimalV;
+    /*Criterion AnimalV;
     Criterion AnimalH;
     Criterion History;
     Criterion gender;
-    Criterion otherGender;
+    Criterion otherGender;*/
     
 
     public void initialize() {
@@ -174,6 +182,9 @@ public class ChangePlan {
     // }
 
 
+    
+
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     //      ACTION
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -191,21 +202,88 @@ public class ChangePlan {
         return true;
     }
 
-    public boolean dateValid(TextField t){
-        if(t.getText().isEmpty()){
+    public boolean dateValid(DatePicker t){
+        if(t.getValue().equals(null)){
             return false;
         }
         return true;
     }
 
-    public 
+    public boolean isChecked(CheckBox t){
+        if(t.isSelected()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isChoised(ChoiceBox t){
+        if(t.getValue().toString() != null){
+            return true;
+        }
+        return false;
+    }
+
         
+    ///////////////////////////////////////////////////
+    //  Crétation des critères
+    ///////////////////////////////////////////////////
 
-    // public void ImportationEleve(ActionEvent event) throws IOException {
-    //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
-    // }
 
 
+    public Criterion animalAllergy(){
+        if(allergieAnimaux.isSelected()){
+            return new Criterion( "yes" , CriterionName.GUEST_ANIMAL_ALLERGY);
+        }
+        return new Criterion( "no" , CriterionName.GUEST_ANIMAL_ALLERGY);
+    }
+
+    public Criterion genreTeenager(){
+        if(gender.getValue().toString().toLowerCase() == "homme"){
+        return  new Criterion("male", CriterionName.GENDER);
+        }
+        if(gender.getValue().toString().toLowerCase() == "femme"){
+            return new Criterion("female", CriterionName.GENDER);
+        }
+        return new Criterion("other", CriterionName.GENDER);
+    }
+
+    public Criterion haveAnimal(){
+        if(hostAnimal.isSelected()){
+            return new Criterion( "yes" , CriterionName.HOST_HAS_ANIMAL);
+        }
+        return new Criterion( "no" , CriterionName.HOST_HAS_ANIMAL);
+    }
+
+
+    public Criterion regimeAlimentaire(String food){
+        if(food.length() > 0){
+        return new Criterion( food.substring(0, food.length() -1 ), CriterionName.GUEST_FOOD);
+        }
+        return new Criterion( null , CriterionName.GUEST_FOOD);
+    }
+
+
+
+    public Criterion history(){
+        if(history.getValue().toString().toLowerCase() == "same"){
+            return new Criterion("same", CriterionName.HISTORY);
+        }
+        return new Criterion("other", CriterionName.HISTORY);
+    }
+
+    public Criterion hobbiesTeenager(){
+        return new Criterion(hobbies.getText(), CriterionName.HOBBIES);
+    }
+
+    public Criterion pairGender(){
+        if(pairGender.getValue().toString().toLowerCase() == "homme"){
+            return  new Criterion("male", CriterionName.PAIR_GENDER);
+        }
+        if(pairGender.getValue().toString().toLowerCase() == "femme"){
+            return new Criterion("female", CriterionName.PAIR_GENDER);
+        }
+        return new Criterion("other", CriterionName.PAIR_GENDER);
+    }
 
 
 
@@ -214,8 +292,37 @@ public class ChangePlan {
 
 
 
-    public void sauvegardeTeenager(){
+    public void sauvegardeTeenager(ActionEvent event){
+        Teenager teenager;
+        String food = "";
 
+        if(champsValid(name) && champsValid(forename) && dateValid(birthDate) && isChoised(gender) && isChoised(country)){
+            teenager = new Teenager(name.getText(), forename.getText(), birthDate.getValue(), Country.valueOf(country.getValue().toString()));
+
+            teenager.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), animalAllergy());
+            teenager.addCriterion(CriterionName.GENDER.name() , genreTeenager());
+
+            if(isChecked(guestNuts)){ food = food + "nonuts,";}
+            if(isChecked(guestVegetarian)){ food = food + "vegetarian,";}
+            if(food.length() > 0){ teenager.addCriterion(CriterionName.GUEST_FOOD.name(), regimeAlimentaire(food));}
+
+            teenager.addCriterion(CriterionName.HOST_HAS_ANIMAL.name() , haveAnimal());
+
+            food = "";
+
+            if(isChecked(hostNuts)){ food = food + "nonuts,";}
+            if(isChecked(hostVegetarian)){ food = food + "vegetarian,";}
+            if(food.length() > 0){ teenager.addCriterion(CriterionName.HOST_FOOD.name(), regimeAlimentaire(food));}
+
+            teenager.addCriterion(CriterionName.HISTORY.name(), history());
+            teenager.addCriterion(CriterionName.HOBBIES.name(), hobbiesTeenager());
+
+            if(isChoised(pairGender)){ teenager.addCriterion(CriterionName.PAIR_GENDER.name(), pairGender()); }
+
+            platform.addTeenager(teenager);
+            sauvegardePlateforme();
+
+        }
     }
 
 
@@ -245,6 +352,12 @@ public class ChangePlan {
     // public void CreeAppariement(ActionEvent event) throws IOException {
     //     weigth
     // }
+
+        // public void ImportationEleve(ActionEvent event) throws IOException {
+    //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
+    // }
+
+
 
     public void afficherEleve(ActionEvent event) throws IOException{
         Teenager teen1 = new Teenager("Ab","A",Country.FRANCE);
