@@ -229,6 +229,10 @@ public class ChangePlan<Eleve> {
         Charge(Start.stage,"ihm/PrototypageHD/ReappariementEleve.fxml","ReappariementEleve");
     }
 
+    public void SelectHistory(ActionEvent event) throws IOException {
+        Charge(Start.stage,"ihm/PrototypageHD/historique.fxml","Historique");
+    }
+
     public void SelectYesFormAnimal(ActionEvent event) throws IOException {
         formAnimalYesV.setSelected(true);
         formAnimalNoV.setSelected(false);
