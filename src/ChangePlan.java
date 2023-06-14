@@ -1,9 +1,11 @@
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.Csv;
@@ -170,10 +172,28 @@ public class ChangePlan<Eleve> {
         }
         loader.setLocation(fxmlFileUrl);
         Parent root = loader.load();
+
         formCountryList = (SplitMenuButton) loader.getNamespace().get("formCountryList");
-        Collection<Teenager> t = platform.getTeenagerList();
-        ObservableList<Teenager> observableList = FXCollections.observableArrayList(t);
-        listeTeenager.getItems().setAll(observableList);
+
+        // File f = new File("teenagerList");
+
+        // platform.setTeenagerList(Platform.importListTeenagers(f));//new ArrayList<Teenager>();
+        
+        // Collection<Teenager> t = platform.getTeenagerList();
+
+        // for(Teenager teen: t){
+        //     // listeTeenager.getItems().add(listeTeenager.getItems().size(),teen);
+        //     // listeTeenager.scrollTo(teen);
+        //     // listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        //     System.out.println(teen);
+        // }
+        
+
+        //ObservableList<Teenager> observableList = FXCollections.observableArrayList(t);
+
+        
+       // listeTeenager.getItems().setAll(observableList);
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(title);
@@ -198,6 +218,7 @@ public class ChangePlan<Eleve> {
 
     public void SelectAccueil(ActionEvent event) throws IOException {
         Charge(Start.stage,"ihm/PrototypageHD/accueil.fxml","Accueil");
+        afficherEleve(event);
     }
 
     public void SelectGestionEleve(ActionEvent event) throws IOException {
@@ -597,100 +618,122 @@ public class ChangePlan<Eleve> {
 
     public void afficherEleve(ActionEvent event) throws IOException{
 
-        Teenager t1, t2, t3, t4, t5;
-        int id1, id2, id3, id4 ,id5;
-        String name1, name2, name3, name4 ,name5;
-        String forname1, forname2, forname3, forname4, forname5;
-        String gender1, gender2, gender3, gender4, gender5;
-        Country countryName1, countryName2, countryName3, countryName4, countryName5;
-        LocalDate birthDate1, birthDate2, birthDate3, birthDate4, birthDate5;
-        Map<String, Criterion> requirements1, requirements2, requirements3, requirements4, requirements5;
-        id1 = 1;
-        id2 = 2;
-        id3 = 3;
-        id4 = 4;
-        id5 = 5;
-        name1 = "Alice";
-        name2 = "Bruno";
-        name3 = "Clément";
-        name4 = "Dylan";
-        name5 = "Eva";
-        forname1 = "Brown";
-        forname2 = "Dumont";
-        forname3 = "Garnier";
-        forname4 = "Lefebvre";
-        forname5 = "Martin";
-        countryName1 = Country.FRANCE;
-        countryName2 = Country.GERMANY;
-        countryName3 = Country.SPAIN;
-        countryName4 = Country.ITALY;
-        countryName5 = Country.FRANCE;
-        birthDate1 = LocalDate.parse("2000-01-01");
-        birthDate2 = LocalDate.parse("2002-08-04");
-        birthDate3 = LocalDate.parse("2001-11-21");
-        birthDate4 = LocalDate.parse("2003-03-15");
-        birthDate5 = LocalDate.parse("2001-12-03");
+        // Teenager t1, t2, t3, t4, t5;
+        // int id1, id2, id3, id4 ,id5;
+        // String name1, name2, name3, name4 ,name5;
+        // String forname1, forname2, forname3, forname4, forname5;
+        // String gender1, gender2, gender3, gender4, gender5;
+        // Country countryName1, countryName2, countryName3, countryName4, countryName5;
+        // LocalDate birthDate1, birthDate2, birthDate3, birthDate4, birthDate5;
+        // Map<String, Criterion> requirements1, requirements2, requirements3, requirements4, requirements5;
+        // id1 = 1;
+        // id2 = 2;
+        // id3 = 3;
+        // id4 = 4;
+        // id5 = 5;
+        // name1 = "Alice";
+        // name2 = "Bruno";
+        // name3 = "Clément";
+        // name4 = "Dylan";
+        // name5 = "Eva";
+        // forname1 = "Brown";
+        // forname2 = "Dumont";
+        // forname3 = "Garnier";
+        // forname4 = "Lefebvre";
+        // forname5 = "Martin";
+        // countryName1 = Country.FRANCE;
+        // countryName2 = Country.GERMANY;
+        // countryName3 = Country.SPAIN;
+        // countryName4 = Country.ITALY;
+        // countryName5 = Country.FRANCE;
+        // birthDate1 = LocalDate.parse("2000-01-01");
+        // birthDate2 = LocalDate.parse("2002-08-04");
+        // birthDate3 = LocalDate.parse("2001-11-21");
+        // birthDate4 = LocalDate.parse("2003-03-15");
+        // birthDate5 = LocalDate.parse("2001-12-03");
 
-        Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
-        Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
-        Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
-        Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
-        Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
-        Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
-        Criterion posseDeTout = new Criterion("none", CriterionName.HOST_FOOD);
-        Criterion mangeTout = new Criterion("none", CriterionName.GUEST_FOOD);  
-        Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
-        Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
-        Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.NUMERIC);
-        Criterion biologie = new Criterion("biologie", CriterionName.HOBBIES);
+        // Criterion estAlergique = new Criterion("yes", CriterionName.GUEST_ANIMAL_ALLERGY);
+        // Criterion estPasAlergique = new Criterion("no", CriterionName.GUEST_ANIMAL_ALLERGY);
+        // Criterion aUnAnimal = new Criterion("yes", CriterionName.HOST_HAS_ANIMAL);
+        // Criterion aPasAnimal = new Criterion("no", CriterionName.HOST_HAS_ANIMAL);
+        // Criterion possedeVege = new Criterion("végétarien", CriterionName.HOST_FOOD);
+        // Criterion possedeSport = new Criterion("sport", CriterionName.HOST_FOOD);
+        // Criterion posseDeTout = new Criterion("none", CriterionName.HOST_FOOD);
+        // Criterion mangeTout = new Criterion("none", CriterionName.GUEST_FOOD);  
+        // Criterion mangeVege = new Criterion("végétarien", CriterionName.GUEST_FOOD);
+        // Criterion mangeSport = new Criterion("sport", CriterionName.GUEST_FOOD); 
+        // Criterion saisieIncorrect = new Criterion("pasBien", CriterionName.NUMERIC);
+        // Criterion biologie = new Criterion("biologie", CriterionName.HOBBIES);
 
-        requirements2 = new HashMap<String, Criterion>();
-        requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        requirements2.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
-        requirements2.put(CriterionName.HOST_FOOD.name(), possedeVege);
-        requirements2.put(CriterionName.GUEST_FOOD.name(), mangeVege);
+        // requirements2 = new HashMap<String, Criterion>();
+        // requirements2.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        // requirements2.put(CriterionName.HOST_HAS_ANIMAL.name(), aUnAnimal);
+        // requirements2.put(CriterionName.HOST_FOOD.name(), possedeVege);
+        // requirements2.put(CriterionName.GUEST_FOOD.name(), mangeVege);
 
-        requirements3 = new HashMap<String, Criterion>();
-        requirements3.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
-        requirements3.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
-        requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
+        // requirements3 = new HashMap<String, Criterion>();
+        // requirements3.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estAlergique);
+        // requirements3.put(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        // requirements3.put(CriterionName.HOST_FOOD.name(), possedeSport);
+        // requirements3.put(CriterionName.GUEST_FOOD.name(), mangeSport);
         
-        t1 = new Teenager(id1, name1, forname1, birthDate1, countryName1);
-        t2 = new Teenager(id2, name2, forname2, birthDate2, countryName2, requirements2);
-        t3 = new Teenager(id3, name3, forname3, birthDate3, countryName3, requirements3);
-        t4 = new Teenager(id4, forname4, forname4, birthDate4, countryName4);
-        t5 = new Teenager(id5, name5, forname5, birthDate5, countryName5);
+        // t1 = new Teenager(id1, name1, forname1, birthDate1, countryName1);
+        // t2 = new Teenager(id2, name2, forname2, birthDate2, countryName2, requirements2);
+        // t3 = new Teenager(id3, name3, forname3, birthDate3, countryName3, requirements3);
+        // t4 = new Teenager(id4, forname4, forname4, birthDate4, countryName4);
+        // t5 = new Teenager(id5, name5, forname5, birthDate5, countryName5);
 
-        t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
-        t1.addCriterion(CriterionName.GUEST_FOOD.name(), mangeTout);
-        t1.addCriterion(CriterionName.GUEST_FOOD.name(), biologie);
+        // t1.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        // t1.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        // t1.addCriterion(CriterionName.HOST_FOOD.name(), posseDeTout);
+        // t1.addCriterion(CriterionName.GUEST_FOOD.name(), mangeTout);
+        // t1.addCriterion(CriterionName.GUEST_FOOD.name(), biologie);
 
-        t4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        t4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        t4.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
-        t4.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+        // t4.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        // t4.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        // t4.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
+        // t4.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
 
-        t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
-        t5.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
-        t5.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
-        t5.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
-        t5.addCriterion(CriterionName.HOBBIES.name(), biologie);
+        // t5.addCriterion(CriterionName.GUEST_ANIMAL_ALLERGY.name(), estPasAlergique);
+        // t5.addCriterion(CriterionName.HOST_HAS_ANIMAL.name(), aPasAnimal);
+        // t5.addCriterion(CriterionName.HOST_FOOD.name(), saisieIncorrect);
+        // t5.addCriterion(CriterionName.GUEST_FOOD.name(), saisieIncorrect);
+        // t5.addCriterion(CriterionName.HOBBIES.name(), biologie);
 
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),t1);
-        listeTeenager.scrollTo(t1);
-        listeTeenager.edit(listeTeenager.getItems().size() - 1);
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),t2);
-        listeTeenager.scrollTo(t2);
-        listeTeenager.edit(listeTeenager.getItems().size() - 1);
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),t3);
-        listeTeenager.scrollTo(t3);
-        listeTeenager.edit(listeTeenager.getItems().size() - 1);
-        listeTeenager.getItems().add(listeTeenager.getItems().size(),t4);
-        listeTeenager.scrollTo(t4);
-        listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        // listeTeenager.getItems().add(listeTeenager.getItems().size(),t1);
+        // listeTeenager.scrollTo(t1);
+        // listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        // listeTeenager.getItems().add(listeTeenager.getItems().size(),t2);
+        // listeTeenager.scrollTo(t2);
+        // listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        // listeTeenager.getItems().add(listeTeenager.getItems().size(),t3);
+        // listeTeenager.scrollTo(t3);
+        // listeTeenager.edit(listeTeenager.getItems().size() - 1);
+        // listeTeenager.getItems().add(listeTeenager.getItems().size(),t4);
+        // listeTeenager.scrollTo(t4);
+        // listeTeenager.edit(listeTeenager.getItems().size() - 1);
+
+        System.out.println("teenagerList");
+        File f = new File("teenagerList.csv");
+        System.out.println("teenagerList");
+
+        System.out.println(platform.getTeenagerList().size());
+
+        platform.setTeenagerList(Platform.importListTeenagers(f));//new ArrayList<Teenager>();
+        System.out.println("teen");
+        System.out.println(platform.getTeenagerList().size());
+        
+        Collection<Teenager> t = platform.getTeenagerList();
+        System.out.println("teen");
+
+        System.out.println(t.size());
+
+        for(Teenager teen: t){
+            // listeTeenager.getItems().add(listeTeenager.getItems().size(),teen);
+            // listeTeenager.scrollTo(teen);
+            // listeTeenager.edit(listeTeenager.getItems().size() - 1);
+            System.out.println(teen);
+        }
     }
 
     public void afficherCase(MouseEvent event) throws IOException{
