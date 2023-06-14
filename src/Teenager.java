@@ -91,62 +91,85 @@ public class Teenager implements Serializable{
      * @param id l'identifiant unique d'un adolescent
      * @param patern l'ordre des paramétre
      */
-    public Teenager(String CSV, int id, String patern){
-        this.id = Teenager.ctp++ ;
+    public Teenager(String CSV, int id, String pattern) {
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter(";");
-        Scanner scanPatern = new Scanner(patern);
 
-        Criterion guest_animal_allergy = new Criterion(null, CriterionName.GUEST_ANIMAL_ALLERGY);
-        Criterion host_as_animal = new Criterion(null, CriterionName.HOST_HAS_ANIMAL);
-        Criterion guest_food = new Criterion(null, CriterionName.GUEST_FOOD); 
-        Criterion host_food = new Criterion(null, CriterionName.HOST_FOOD);
-        Criterion hobbie = new Criterion(null, CriterionName.HOBBIES);
-        Criterion gender = new Criterion(null, CriterionName.GENDER);
-        Criterion pair_gender = new Criterion(null, CriterionName.PAIR_GENDER);
-        Criterion history = new Criterion(null, CriterionName.HISTORY);
+        int i = 0;
+        String forename = "";
+        String name = "";
+        Country country = null;
+        LocalDate birthDate = null;
+        String hobbies = "";
+        Criterion guestAnimalAllergy = null;
+        Criterion hostHasAnimal = null;
+        Criterion guestFood = null;
+        Criterion hostFood = null;
+        Criterion gender = null;
+        Criterion pairGender = null;
+        Criterion history = null;
 
-        while(scan.hasNext()){
-            if(scanPatern.next().equals("NAME")){
-                this.name = scan.next();
-            }else if(scanPatern.next().equals("FORENAME")){
-                this.forname = scan.next();
-            }else if(scanPatern.next().equals("COUNTRY")){
-                this.countryName = isCountry(scan.next());
-            }else if(scanPatern.next().equals("BIRTH_DATE")){
-                this.birthDate = LocalDate.parse(scan.next());
-            }else if(scanPatern.next().equals("GUEST_ANIMAL_ALLERGY")){
-                guest_animal_allergy = new Criterion(scan.next(), CriterionName.GUEST_ANIMAL_ALLERGY);
-            }else if(scanPatern.next().equals("HOST_HAS_ANIMAL")){
-                host_as_animal = new Criterion(scan.next(), CriterionName.HOST_HAS_ANIMAL);
-            }else if(scanPatern.next().equals("GUEST_FOOD_CONSTRAINT")){
-                guest_food = new Criterion(scan.next(), CriterionName.GUEST_FOOD);
-            }else if(scanPatern.next().equals("HOST_FOOD")){
-                host_food = new Criterion(scan.next(), CriterionName.HOST_FOOD);
-            }else if(scanPatern.next().equals("HOBBIES")){
-                hobbie = new Criterion(scan.next(), CriterionName.HOBBIES);
-            }else if(scanPatern.next().equals("GENDER")){
-                gender = new Criterion(scan.next(), CriterionName.GENDER);
-            }else if(scanPatern.next().equals("PAIR_GENDER")){
-                pair_gender = new Criterion(scan.next(), CriterionName.PAIR_GENDER);
-            }else if(scanPatern.next().equals("HISTORY")){
-                history = new Criterion(scan.next(), CriterionName.HISTORY);
+        while (scan.hasNext()) {
+            String value = scan.next();
+
+            switch (i) {
+                case 0:
+                    break;
+                case 1:
+                    forename = value;
+                    break;
+                case 2:
+                    name = value;
+                    break;
+                case 3:
+                    country = Country.valueOf(value.toUpperCase());
+                    break;
+                case 4:
+                    birthDate = LocalDate.parse(value);
+                    break;
+                case 5:
+                    hobbies = value;
+                    break;
+                case 6:
+                    guestAnimalAllergy = new Criterion(value, CriterionName.GUEST_ANIMAL_ALLERGY);
+                    break;
+                case 7:
+                    hostHasAnimal = new Criterion(value, CriterionName.HOST_HAS_ANIMAL);
+                    break;
+                case 8:
+                    guestFood = new Criterion(value, CriterionName.GUEST_FOOD);
+                    break;
+                case 9:
+                    hostFood = new Criterion(value, CriterionName.HOST_FOOD);
+                    break;
+                case 10:
+                    gender = new Criterion(value, CriterionName.GENDER);
+                    break;
+                case 11:
+                    pairGender = new Criterion(value, CriterionName.PAIR_GENDER);
+                    break;
+                case 12:
+                    history = new Criterion(value, CriterionName.HISTORY);
+                    break;
             }
-        }
 
-        Map<String, Criterion> requirements = new HashMap<>();
-        requirements.put(CriterionName.HOST_FOOD.name(), host_food);
-        requirements.put(CriterionName.GUEST_FOOD.name(), guest_food);
-        requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), host_as_animal);
-        requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), guest_animal_allergy);
-        requirements.put(CriterionName.HOBBIES.name(), hobbie);
-        requirements.put(CriterionName.GENDER.name(), gender);
-        requirements.put(CriterionName.PAIR_GENDER.name(), pair_gender);
-        requirements.put(CriterionName.HISTORY.name(), history);
-        this.requirements = requirements;
+            i++;
+        }
+        this.id = id;
+        this.forname = forename;
+        this.name = name;
+        this.countryName = country;
+        this.birthDate = birthDate;
+        this.requirements = new HashMap<>();
+        this.requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), guestAnimalAllergy);
+        this.requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), hostHasAnimal);
+        this.requirements.put(CriterionName.GUEST_FOOD.name(), guestFood);
+        this.requirements.put(CriterionName.HOST_FOOD.name(), hostFood);
+        this.requirements.put(CriterionName.GENDER.name(), gender);
+        this.requirements.put(CriterionName.PAIR_GENDER.name(), pairGender);
+        this.requirements.put(CriterionName.HISTORY.name(), history);
 
         scan.close();
-        scanPatern.close();
     }
 
     /**
