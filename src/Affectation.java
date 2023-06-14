@@ -67,12 +67,10 @@ public class Affectation implements Serializable {
         return false;
     }
 
-
     // retourne tout les associations 
     public Map<Teenager, Teenager> getAssociations() {
         return this.affectationsHistory ;
     }
-
 
     /**
      * Sauvegarde l'historique dans un fichier en utilisant la sérialisation binaire

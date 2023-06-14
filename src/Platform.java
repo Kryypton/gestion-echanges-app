@@ -152,20 +152,29 @@ public class Platform {
      * @param CSV le fichier CSV contenant les adolescents
      * @return une liste de tous les adolescents
      */
-    public static ArrayList<Teenager> importListTeenagers(File CSV) throws FileNotFoundException{
+    public static ArrayList<Teenager> importListTeenagers(File CSV) throws FileNotFoundException {
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter("\n");
         ArrayList<Teenager> list = new ArrayList<Teenager>();
-        int i=1;
-        String pattern =scan.next();
-        while(scan.hasNextLine()){
-            list.add(new Teenager(scan.next(),i,pattern));
-            scan.nextLine();
-            i++;
+        int i = 1;
+        String pattern = scan.next();
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            if (!line.isEmpty()) { 
+                Scanner lineScanner = new Scanner(line);
+                lineScanner.useDelimiter(";");
+                if (lineScanner.hasNext()) {
+                    String csvData = lineScanner.next();
+                    list.add(new Teenager(line, i, pattern));
+                    i++;
+                }
+                lineScanner.close();
+            }
         }
         scan.close();
         return list;
     }
+
 
     /**
      * Méthode qui permet d'importer des couples adolescents
@@ -233,6 +242,19 @@ public class Platform {
         }catch(IOException e) {
                 System.out.println("Writing error: " + e.getMessage());
                 e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        Platform platform = new Platform();
+        try {
+            ArrayList<Teenager> list = importListTeenagers(new File("res/teenagerList.csv"));
+            platform.setTeenagerList(list);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (Teenager teenager : platform.getTeenagerList()) {
+            System.out.println(teenager.getName());
         }
     }
 }

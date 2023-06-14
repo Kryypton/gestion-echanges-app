@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -52,7 +55,7 @@ public class ChangePlan<Eleve> {
      * Pour les pages gestion élèves et appariement
      */
     @FXML
-    TableView<Eleve> infoTeen;
+    TableView<Teenager> infoTeen;
     @FXML
     TableColumn<Eleve, String> userNameCol;
     @FXML
@@ -78,7 +81,7 @@ public class ChangePlan<Eleve> {
     @FXML
     TableColumn<Eleve, Criterion> userHistory;
     @FXML
-    ListView<Teenager> listeTeenager = new ListView<>(); // Liste des Teenager
+    ListView<String> listeTeenager = new ListView<>(); // Liste des Teenager
     @FXML
     ListView<Map<Teenager,Teenager>> listeAppariement; // Liste des Appariement
 
@@ -171,9 +174,12 @@ public class ChangePlan<Eleve> {
         loader.setLocation(fxmlFileUrl);
         Parent root = loader.load();
         formCountryList = (SplitMenuButton) loader.getNamespace().get("formCountryList");
-        Collection<Teenager> t = platform.getTeenagerList();
-        ObservableList<Teenager> observableList = FXCollections.observableArrayList(t);
-        listeTeenager.getItems().setAll(observableList);
+        Platform plateform = new Platform();
+        File file = new File("res/TeenagerList.csv");
+        plateform.importListTeenagers(file);
+        for (Teenager t: plateform.getTeenagerList()) {
+                listeTeenager.getItems().add(t.toString());
+            }
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle(title);
@@ -694,22 +700,6 @@ public class ChangePlan<Eleve> {
     }
 
     public void afficherCase(MouseEvent event) throws IOException{
-        //System.out.println(""+listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
-        //ObservableList<Teenager> list =  FXCollections.observableArrayList(listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex()));
-        // listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
-        //userFornameCol.cellValueFactoryProperty(new PropertyValueFactory<Teenager, String>(name));
-        //infoTeen.setItems(list);
-
-        // Teenager teen = listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
-
-        // userFornameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Prenom"));
-        // userNameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("Nom"));
-        // userCountry.setCellValueFactory(new PropertyValueFactory<Teenager, Country>("Pays"));
-
-        Eleve teen1 = new Eleve(listeTeenager.getItems().get(0));
-        Eleve teen2 = new Eleve(listeTeenager.getItems().get(1));
-        Eleve teen3 = new Eleve(listeTeenager.getItems().get(2));
-        Eleve teen4 = new Eleve(listeTeenager.getItems().get(3));
-        infoTeen.getItems().add(teen1);
+        infoTeen.getItems().addAll();
     }
 }
