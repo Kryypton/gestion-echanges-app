@@ -1,5 +1,8 @@
 package Main;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Criterion.Country;
@@ -70,6 +73,17 @@ public class TableauDeBordRoot {
                 return saisieClavierDate();
             }
         }
+
+        public static File saisieClavierFile() {
+            try {
+                String str = sc.nextLine();
+                File f = new File(str);
+                return f;
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                return saisieClavierFile();
+            }
+        }
     }
     
     private static char gestionEleve() {
@@ -124,6 +138,18 @@ public class TableauDeBordRoot {
         System.out.printf("Etudiant [%s]-[%s]-[%s] a été ajouter avec succès\n", teenager.getName(), teenager.getAgeYear(), teenager.getId());
     }
 
+    private static void addToPlatformbyCSV(String path) {
+        try {
+            ArrayList<Teenager> list = Platform.importListTeenagers(new File(path));
+            for (Teenager teenager : list) {
+                platform.addTeenager(teenager);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.printf("Erreur lors de l'importation du fichier [%s] n'est pas un fichier CSV ou n'existe pas.\n", path);
+        }
+        System.out.printf("Les étudiants du fichier [%s] ont été ajouter avec succès\n", path);
+    }
+
     public void run() {
         String saisie;
         while (isRunning) {
@@ -135,15 +161,18 @@ public class TableauDeBordRoot {
             if (saisie.equals("ge1")) {
                 System.out.println("Vous avez choisi d'ajouter un eleve à la liste");
                 addToPlatform(createTeenagerManually());
+                System.out.println("→ Retour au menu principal");
             }
             if (saisie.equals("ge2")) {
                 System.out.println("Vous avez choisi d'ajouter des eleves à la liste à parit d'un fichier CSV");
-                addToPlatform(createTeenagerManually());
+                addToPlatformbyCSV(SaisieClavier.saisieClavierStr());
+                System.out.println("→ Retour au menu principal");
             }
 
             if (saisie.equals("ge3")) {
                 System.out.println("Vous avez choisi d'afficher les élèves");
-                platform.toStringTeengarderList();
+                System.out.println(platform.toStringTeengarderList()); 
+                System.out.println("Retour au menu principal");
             }
 
             if (saisie.equals("2")) saisie = "ga" + gestionAppariement();
