@@ -36,7 +36,7 @@ public class Teenager implements Serializable{
      * @param countryName le pays d'un adolescent
      * @param requirements les critères de compatibilité d'un adolescent
      */
-    public Teenager(int id , String name , String forname ,  LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
+    public Teenager(String name , String forname ,  LocalDate birthDate , Country countryName, Map<String, Criterion> requirements){
         this.id = Teenager.ctp++ ;
         this.name = name;
         this.forname = forname;
@@ -45,8 +45,8 @@ public class Teenager implements Serializable{
         this.countryName = countryName;
     }
 
-    public Teenager(int id , String name , String forname , LocalDate birthDate , String countryName, Map<String, Criterion> requirements){
-        this(id,name,forname,birthDate,isCountry(countryName),requirements);
+    public Teenager(String name , String forname , LocalDate birthDate , String countryName, Map<String, Criterion> requirements){
+        this(name,forname,birthDate,isCountry(countryName),requirements);
     }
 
     /**
@@ -58,15 +58,6 @@ public class Teenager implements Serializable{
      * @param birthDate la date de naissance d'un adolescent
      * @param countryName le pays d'un adolescent
      */
-    public Teenager(int id , String name , String forname  , LocalDate birthDate , Country countryName){
-        this.id = Teenager.ctp++ ;
-        this.name = name;
-        this.forname = forname;
-        this.birthDate = birthDate;
-        this.requirements = new HashMap<String, Criterion>();
-        this.countryName = countryName;
-    }
-
     public Teenager(String name , String forname  , LocalDate birthDate , Country countryName){
         this.id = Teenager.ctp++ ;
         this.name = name;
@@ -558,13 +549,6 @@ public class Teenager implements Serializable{
 
     public Criterion getHistory() {
         return requirements.get(CriterionName.HISTORY.name());
-    }
-
-    public static void main(String[] args) {
-        Teenager teenager1 = new Teenager(1, "teen1", "A",  LocalDate.of(2000, 5, 10), Country.FRANCE);
-        //Teenager teenager2 = new Teenager(2, "teen2", "B", "F", LocalDate.of(2001, 8, 15), Country.GERMANY);
-        Teenager teenager3 = new Teenager(3, "teen3", "C", LocalDate.of(2002, 10, 20), Country.ITALY);
-        System.out.println(teenager1.getDiffAge(teenager3).toTotalMonths());
     }
 
     public void setLastAffectation(Teenager t){
