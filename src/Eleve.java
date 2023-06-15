@@ -1,5 +1,9 @@
 import java.time.LocalDate;
 
+import Criterion.Country;
+import Criterion.Criterion;
+import Tennager.Teenager;
+
 public class Eleve{
 
     private String name;

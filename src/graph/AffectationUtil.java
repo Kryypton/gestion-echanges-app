@@ -1,7 +1,13 @@
+package graph;
 import fr.ulille.but.sae2_02.graphes.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
+
+import Criterion.Country;
+import Criterion.Criterion;
+import Criterion.CriterionName;
+import Tennager.Teenager;
 
 public class AffectationUtil implements Serializable {
     /**

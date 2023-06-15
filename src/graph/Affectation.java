@@ -1,6 +1,11 @@
+package graph;
+
 import java.io.*;
 import java.util.*;
 
+import Criterion.Country;
+import Criterion.CriterionName;
+import Tennager.Teenager;
 import fr.ulille.but.sae2_02.graphes.Arete;
 
 public class Affectation implements Serializable {

@@ -4,6 +4,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Criterion.Criterion;
+import Criterion.CriterionName;
+import Criterion.CriterionTypeException;
+
 public class CriterionTest {
     Criterion criterion1, criterion2, criterion3, criterion4, criterion5, criterion6, criterion7, criterion8, criterion9;
 

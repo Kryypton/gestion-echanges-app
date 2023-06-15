@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Criterion.Country;
+import Criterion.Criterion;
+import Criterion.CriterionName;
+import Tennager.Teenager;
+import graph.AffectationUtil;
+
 public class AffectationVersion1Test {
 
     Teenager teenager1 , teenager2 , teenager3 , teenager4 , teenager5 , teenager6 , teenager7 , teenager8 , teenager9 , teenager10;

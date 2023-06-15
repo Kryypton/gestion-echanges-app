@@ -1,8 +1,14 @@
+package Tennager;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Map;
 import java.util.Scanner;
+
+import Criterion.Country;
+import Criterion.Criterion;
+import Criterion.CriterionName;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
