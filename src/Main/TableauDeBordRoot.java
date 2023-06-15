@@ -353,6 +353,22 @@ public class TableauDeBordRoot {
     }
 
     public static void main(String[] args) {
+        System.out.println("Bienvenue dans le programme de gestion des appariements");
+        System.out.println("Veuillez choisir un Pays d'accueil :");
+        System.out.println("1 - France");
+        System.out.println("2 - Allemagne");
+        System.out.println("3 - Espagne");
+        System.out.println("4 - Italie");
+
+        if (SaisieClavier.saisieClavierInt() == 1) {
+            countryHote = "France";
+        } else if (SaisieClavier.saisieClavierInt() == 2) {
+            countryHote = "Allemagne";
+        } else if (SaisieClavier.saisieClavierInt() == 3) {
+            countryHote = "Espagne";
+        } else if (SaisieClavier.saisieClavierInt() == 4) {
+            countryHote = "Italie";
+        }
         TableauDeBordRoot main = new TableauDeBordRoot();
         main.runRoot();
     }
