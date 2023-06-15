@@ -24,6 +24,9 @@ public class Criterion{
      * @param label le label du critére / le nom du critére
      */
     public Criterion(String value , CriterionName label){
+        if (value == null || label == null) {
+            throw new NullPointerException("Le label ou la valeur du critère est null");
+        }
         this.value = value;
         this.label = label;
     }

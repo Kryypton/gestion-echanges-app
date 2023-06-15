@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import Criterion.Country;
+import Criterion.CriterionName;
 import Criterion.CriterionTypeException;
 import Tennager.Teenager;
 
@@ -272,6 +274,26 @@ public class Platform {
         return str;
     }
 
+    public ArrayList<Teenager> getTeenagerFromCountry(Country country) {
+        ArrayList<Teenager> list = new ArrayList<Teenager>();
+        for (Teenager teenager : this.teenagerList) {
+            if (teenager.getCountryName().getCOUNTRY_NAME().equals(country.getCOUNTRY_NAME())) {
+                list.add(teenager);
+            }
+        }
+        return list;
+    }
+
+    public Teenager getTeenagerById(int id) {
+        for (Teenager teenager : this.teenagerList) {
+            if (teenager.getId() == id) {
+                return teenager;
+            }
+        }
+        return null;
+    }
+    
+
     public static void main(String[] args) {
         Platform platform = new Platform();
         try {
@@ -304,7 +326,7 @@ public class Platform {
         File f1,f2;
         if(!listPath.equals("false")){
             try {
-                f1 = new File(listPath)
+                f1 = new File(listPath);
                 this.importListTeenagers(f1);
             } catch (Exception e) {
                 throw new CriterionTypeException("Erreur fichier.");

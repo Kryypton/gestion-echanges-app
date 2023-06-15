@@ -34,6 +34,7 @@ public class Teenager implements Serializable{
     private Teenager lastAffectation;
     private static int ctp = 0;
 
+    
     /**
      * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères
      * @param id l'identifiant unique d'un adolescent
@@ -51,6 +52,26 @@ public class Teenager implements Serializable{
         this.birthDate = birthDate;
         this.requirements = requirements;
         this.countryName = countryName;
+    }
+
+    /**
+     * Constructeur de la classe Teenager avec le paramètre (requirements) qui est un Map de (Criterion) Critères et sa derniere affectation
+     * @param id l'identifiant unique d'un adolescent
+     * @param name le nom d'un adolescent
+     * @param forname le prénom d'un adolescent
+     * @param gender le genre d'un adolescent
+     * @param birthDate la date de naissance d'un adolescent
+     * @param countryName le pays d'un adolescent
+     * @param requirements les critères de compatibilité d'un adolescent
+     */
+    public Teenager(String name , String forname ,  LocalDate birthDate , Country countryName, Map<String, Criterion> requirements, Teenager lastAffectation){
+        this.id = Teenager.ctp++ ;
+        this.name = name;
+        this.forname = forname;
+        this.birthDate = birthDate;
+        this.requirements = requirements;
+        this.countryName = countryName;
+        this.lastAffectation = lastAffectation;
     }
 
     public Teenager(String name , String forname , LocalDate birthDate , String countryName, Map<String, Criterion> requirements){
@@ -107,6 +128,11 @@ public class Teenager implements Serializable{
         Criterion gender = null;
         Criterion pairGender = null;
         Criterion history = null;
+        Scanner scan2 = new Scanner(pattern);
+        scan2.useDelimiter(";");
+        if (!scan2.next().equals("ID")) {
+            i = 1;
+        }
 
         while (scan.hasNext()) {
             String value = scan.next();
@@ -549,8 +575,15 @@ public class Teenager implements Serializable{
         return true;
     }
 
-    public String toString() {
+    public String toString1() {
         return this.getForname() + " " +  this.getName();
+    }
+
+    @Override
+    public String toString() {
+        return "Teenager [id=" + id + ", name=" + name + ", forname=" + forname + ", countryName=" + countryName
+                + ", birthDate=" + birthDate + ", requirements=" + requirements + ", lastAffectation=" + lastAffectation
+                + "]";
     }
 
     /**
@@ -590,6 +623,16 @@ public class Teenager implements Serializable{
     }
 
     public void setLastAffectation(Teenager t){
+        this.lastAffectation = t;
+    }
+
+    public void setLastAffectationById(ArrayList<Teenager> listTeenager, int id){
+        Teenager t = null;
+        for(Teenager teenager : listTeenager){
+            if(teenager.getId() == id){
+                t = teenager;
+            }
+        }
         this.lastAffectation = t;
     }
 
