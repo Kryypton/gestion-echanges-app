@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.module.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import Criterion.CriterionTypeException;
 import Tennager.Teenager;
 
 import java.util.HashMap;
@@ -102,6 +104,18 @@ public class Platform {
     public void purgeInvalidRequirements(){
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidRequirement();
+        }
+    }
+
+    public void purgeInvalidAnimalRequirements(){
+        for (Teenager teenager : teenagerList) {
+            teenager.purgeInvalidAnimalRequirement();
+        }
+    }
+
+    public void purgeInvalidFoodRequirements(){
+        for (Teenager teenager : teenagerList) {
+            teenager.purgeInvalidFoodRequirement();
         }
     }
 
@@ -270,4 +284,41 @@ public class Platform {
             System.out.println(teenager.getName());
         }
     }
+
+
+    public void fichierConfig() throws FileNotFoundException{
+        File f = new File("res/Configuration.csv");
+        Scanner scan = new Scanner(f);
+        scan.next();
+        scan.useDelimiter(";");
+        if(scan.next().equals("true")){
+            this.purgeInvalidRequirements();
+        }
+        if(scan.next().equals("true")){
+            this.purgeInvalidAnimalRequirements();
+        }
+        if(scan.next().equals("true")){
+            this.purgeInvalidFoodRequirements();
+        }
+        String listPath = scan.next();
+        File f1,f2;
+        if(!listPath.equals("false")){
+            try {
+                f1 = new File(listPath)
+                this.importListTeenagers(f1);
+            } catch (Exception e) {
+                throw new CriterionTypeException("Erreur fichier.");
+            }
+        }
+        String compatiblePath = scan.next();
+        if(!compatiblePath.equals("false")){
+            try {
+                f2 = new File(compatiblePath)
+                this.importListTeenagers(f2);
+            } catch (Exception e) {
+                throw new CriterionTypeException("Erreur fichier.");
+            }
+        }
+    }
+
 }
