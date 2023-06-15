@@ -10,6 +10,14 @@ import Criterion.CriterionName;
 import Tennager.Teenager;
 
 public class AffectationUtil implements Serializable {
+    public static final int POIDS_INITIAL = 1000;
+    public static final int POID_REDIBITOIRE = 1000;
+
+    public static int poid_initial = POIDS_INITIAL;
+    public static int poid_redibitoire = POID_REDIBITOIRE;
+
+
+
     /**
      * Méthode qui permet de savoir le niveau de compatibilité de 2 adolescent. Il commence avec 100 point, et plus ils seront compatible, plus leurs scores diminueras
      * @param host l'adolescent hôte
@@ -18,10 +26,10 @@ public class AffectationUtil implements Serializable {
      */
     
      public static int weight (Teenager host, Teenager guest , Affectation history) {
-        int poid = 1000;
+        int poid = 0;
         //int poids = 0;
         poid -= host.nbLoisirCommun(guest);
-        if(!host.compatibleWithGuest(guest)) poid += 1000;
+        if(!host.compatibleWithGuest(guest)) poid += poid_redibitoire;
         //Age différent ?
         if (host.getDiffAge(guest).toTotalMonths()<18) poid -= 25;
         //poid = poid + poids;
@@ -85,6 +93,22 @@ public class AffectationUtil implements Serializable {
         }
     }
 
+
+    public int getPoidInitial(){
+        return poid_initial;
+    }
+
+    public int getPoidRedibitoire(){
+        return poid_redibitoire;
+    }
+
+    public int setPoidInitial(int poid){
+        return poid_initial = poid;
+    }
+
+    public int setPoidRedibitoire(int poid){
+        return poid_redibitoire = poid;
+    }
     
     /**
      * Méthode qui permet de recuperer tout les étudiants appartenant a un pays donnée

@@ -14,6 +14,8 @@ import Criterion.Country;
 import Criterion.CriterionName;
 import Criterion.CriterionTypeException;
 import Tennager.Teenager;
+import fr.ulille.but.sae2_02.graphes.Arete;
+import graph.AffectationUtil;
 
 import java.util.HashMap;
 
@@ -295,6 +297,54 @@ public class Platform {
         return null;
     }
     
+        public Teenager getTeenagerFromID(int id) {
+        for (Teenager teenager : this.teenagerList) {
+            if (teenager.getId() == id) {
+                return teenager;
+            }
+        }
+        return null;
+    }
+    
+   public void exporterAffectationAutomatique(String fichier , Country host , Country guest) throws FileNotFoundException{
+        File file = new File(fichier);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new FileNotFoundException("Le fichier n'existe pas");
+            }
+        }
+        List<Arete<Teenager>> listeAretes = getAretesBetween(host, guest);
+        try {
+            for (Arete<Teenager> arete : listeAretes) {
+                String chaine = arete.getExtremite1().getName() + ";" + arete.getExtremite2().getName() + ";" + !arete.getExtremite1().compatibleWithGuest(arete.getExtremite2());
+                BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+                bw.write(chaine);
+                bw.newLine();
+             }
+        } catch (Exception e) {
+            throw new FileNotFoundException("Le fichier n'existe pas");
+        }
+    }
+
+
+
+    public List<Arete<Teenager>> getAretesBetween(Country host ,  Country guest){
+        return AffectationUtil.affectation(this.teenagerList, host , guest);
+
+    }
+
+    public int getNbCountry(Country country){
+        int nb = 0;
+        for (Teenager teenager : this.teenagerList) {
+            if (teenager.getCountryName() == country) {
+                nb++;
+            }
+        }
+        return nb;
+    }
+
 
     public static void main(String[] args) {
         Platform platform = new Platform();

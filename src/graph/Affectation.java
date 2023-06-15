@@ -212,6 +212,15 @@ public class Affectation implements Serializable {
         return true;
     }
 
-    
+    public void clear() {
+        this.affectationsHistory.clear();
+    }
+
+    public void add(List<Arete<Teenager>> aretes) {
+        for(Arete<Teenager> arete : aretes){
+            this.affectations(arete.getExtremite1() , arete.getExtremite2());
+        }
+    }
+
 
 }

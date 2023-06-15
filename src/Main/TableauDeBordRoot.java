@@ -3,9 +3,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.swing.text.html.HTMLDocument.BlockElement;
 
@@ -14,6 +16,8 @@ import Criterion.Criterion;
 import Criterion.CriterionName;
 import Platform.Platform;
 import Tennager.Teenager;
+import graph.Affectation;
+import graph.AffectationUtil;
 
 public class TableauDeBordRoot {
     private static Platform platform = new Platform();
@@ -327,5 +331,104 @@ public class TableauDeBordRoot {
     public static void main(String[] args) {
         TableauDeBordRoot main = new TableauDeBordRoot();
         main.runRoot();
+    }
+
+
+        public static boolean idPresent(int id , Collection<Teenager> list){
+        for (Teenager teenager : list) {
+            if(teenager.getId() == id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    ////// Permet de créer un appariement manuellement avec les ID //////
+    public static void créerAppariement(Affectation affectation , Platform platform){
+        Set<Teenager> hote = affectation.getAssociations().keySet();
+        Collection<Teenager> visiteur = affectation.getAssociations().values();
+        int idHost = -1;
+        int idVisitor = -1; ////// pas a 0 car l'id peut etre de 0 ;
+
+        System.out.println("Bienvenue dans le menu de création d'appariement");
+
+        System.out.println("Voici la liste des hôtes : ");
+        for (Teenager teenager : hote) {
+            System.out.println(teenager);
+        }
+
+        System.out.println("Voici la liste des visiteurs : ");
+        for (Teenager teenager : visiteur) {
+            System.out.println(teenager);
+        }
+
+        while (!idPresent(idVisitor, visiteur)) {
+            System.out.println("Veuillez saisir l'id du visiteur : ");
+            try {
+                idVisitor = SaisieClavier.saisieClavierInt(); 
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+            }
+        }
+            
+        while (!idPresent(idHost, hote)) {
+            System.out.println("Veuillez saisir l'id de l'hôte : ");
+            try {
+                idHost = SaisieClavier.saisieClavierInt(); 
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+            }
+
+        }
+        ///// Les affectations sont faites ici /////
+        affectation.clear();
+        affectation.affectations(platform.getTeenagerFromID(idHost), platform.getTeenagerFromID(idVisitor));
+
+        ////// On supprime les étudiants de la liste des étudiants comme il sont affecter //////
+        platform.removeTeenager(platform.getTeenagerFromID(idHost));
+        platform.removeTeenager(platform.getTeenagerFromID(idVisitor));
+
+        affectation.add(AffectationUtil.affectation(platform.getTeenagerArrayList(), affectation.getVisitor(), affectation.getHost()));
+    }
+
+
+
+    ////// Permet de créer un appariement automatique//////
+
+    public static void gestionDesAppariement(Country host , Country visitor){
+        Platform platform = new Platform();
+        boolean isRunning = true;
+
+        try {
+            platform.importListTeenagers(new File("res/Teenagers.csv"));   
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'importation du fichier");
+        }
+
+
+        if(platform.getNbCountry(host) > 1 && platform.getNbCountry(visitor) >1 ){
+            System.out.println("Il y a plus d'un étudiant de chaque pays");
+
+            while (isRunning) {
+            Affectation affectation = new Affectation(AffectationUtil.affectation(platform.getTeenagerList(), visitor, host),  host , visitor);
+            System.out.println("La touche <a> vous permet de generer les appariements");
+            System.out.println("La touche <z> vous permet de créer un appariement manuellement");
+            System.out.println("La touche <q> vous permet de quitter");
+            char c = SaisieClavier.saisieClavierChar();
+
+            if(c == 'a'){
+                try {
+                    platform.exporterAffectationAutomatique("res/Appariement.csv" , host , visitor);
+                } catch (FileNotFoundException e) {
+                    System.err.println("Erreur lors de l'exportation du fichier");
+                }
+            }else if(c == 'z'){
+                créerAppariement(affectation, platform);
+            }else if(c == 'q'){
+                isRunning = false;
+            } 
+            }
+
+        }
     }
 }
