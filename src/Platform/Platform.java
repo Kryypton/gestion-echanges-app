@@ -274,6 +274,8 @@ public class Platform {
         return str;
     }
 
+    
+
     public ArrayList<Teenager> getTeenagerFromCountry(Country country) {
         ArrayList<Teenager> list = new ArrayList<Teenager>();
         for (Teenager teenager : this.teenagerList) {

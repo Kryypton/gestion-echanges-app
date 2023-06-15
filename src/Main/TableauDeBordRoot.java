@@ -157,6 +157,8 @@ public class TableauDeBordRoot {
         System.out.println("1 - Ajouter un Etudiant manuellement à la liste");
         System.out.println("2 - Ajouter un Enssemble d'étudiant à partir d'un fichier CSV");
         System.out.println("3 - Afficher les étudiants");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
         return c;
     }
@@ -165,6 +167,8 @@ public class TableauDeBordRoot {
         System.out.println("1 - Ajouter un Appariement manuellement à la liste");
         System.out.println("2 - Générer les appariements à l'aide de Graph");
         System.out.println("3 - Afficher les appariements");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
         return c;
     }
@@ -178,6 +182,8 @@ public class TableauDeBordRoot {
         System.out.println("1 - Gestion élèves");
         System.out.println("2 - Gestion des appariements");
         System.out.println("2 - Consulter l'historique");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
         return c;
     }
@@ -252,11 +258,12 @@ public class TableauDeBordRoot {
     public void runRoot() {
         String saisie;
         while (isRunning) {
+            System.out.println("-------------------- Menu principal --------------------");
             saisie = "" + tableauDeBord();
             //////////////////////////////// Gestion des élèves ////////////////////////////////
 
             if (saisie.equals("1")) {
-                System.out.println("Vous avez choisi La gestion des élèves");
+                System.out.println("-------------------- Gestion des élèves --------------------");
                 saisie = "ge" + gestionEleve(); 
             } 
             ////// Ajout d'un élève à la liste //////
@@ -280,7 +287,7 @@ public class TableauDeBordRoot {
                 System.out.println("Retour au menu principal");
             }
 
-            //////////////////////////// Gestion des appariements ////////////////////////////
+            //////////////////////////// Gestion des affectations ////////////////////////////
 
             if (saisie.equals("2")) {
                 System.out.println("Vous avez choisi La gestion des appariements");
@@ -294,7 +301,7 @@ public class TableauDeBordRoot {
                 System.out.println("→ Retour au menu principal");
             }
 
-            ////// Ajout d'un appariement à la liste //////
+            ////// Ajout d'une affectation à la liste //////
             if (saisie.equals("ga1")) {
 
             }
@@ -303,6 +310,17 @@ public class TableauDeBordRoot {
             //////////////////////////// Gestion de l'historique ////////////////////////////
             if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
             
+            //////////////////////////// Retour au Menu principal ////////////////////////////
+            if (saisie.equals("b")) {
+                System.out.println("Vous avez choisi de retourner au menu principal");
+            }
+
+            if (saisie.equals("q")) {
+                System.out.println("Vous avez choisi de quitter le programme");
+                isRunning = false;
+            }
+
+            ///
         } 
     }
 
