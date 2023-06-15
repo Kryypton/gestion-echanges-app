@@ -174,7 +174,7 @@ public class Platform {
         Scanner scan = new Scanner(CSV);
         scan.useDelimiter("\n");
         ArrayList<Teenager> list = new ArrayList<Teenager>();
-        int i = 1;
+        int i = 0;
         String pattern = scan.next();
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
@@ -183,6 +183,7 @@ public class Platform {
                 lineScanner.useDelimiter(";");
                 if (lineScanner.hasNext()) {
                     String csvData = lineScanner.next();
+                    System.out.println(line);
                     list.add(new Teenager(line, i, pattern));
                     i++;
                 }
@@ -266,7 +267,7 @@ public class Platform {
     public String toStringTeengarderList() {
         String str = "";
         for (Teenager teenager : this.teenagerList) {
-            str += teenager.toString() + "\n";
+            str += teenager.getName() + "\n";
         }
         return str;
     }
