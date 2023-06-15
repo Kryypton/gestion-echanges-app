@@ -307,34 +307,49 @@ public class Teenager implements Serializable{
     }
 
     public void purgeInvalidAnimalRequirement() throws CriterionTypeException{
-        if(requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("true") && requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("true")){
+        if(!(requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("yes") || requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("no"))){
+            throw new CriterionTypeException("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
+        }
+        if(!(requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("yes") || requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("no"))){
+            throw new CriterionTypeException("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
+        }
+        if(!(requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("yes") && requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("yes"))){
             throw new CriterionTypeException("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
         }
     }
 
-    // public void purgeInvalidFoodRequirement()throws CriterionTypeException{
-    //     List<String> gFood = new ArrayList<String>();
-    //     List<String> hFood = new ArrayList<String>();
+    public void purgeInvalidFoodRequirement()throws CriterionTypeException{
+        List<String> gFood = new ArrayList<String>();
+        List<String> hFood = new ArrayList<String>();
 
-    //     Scanner scan = new Scanner(requirements.get(CriterionName.GUEST_FOOD).getValue());
-    //     scan.useDelimiter(",");
+        Scanner scan = new Scanner(requirements.get(CriterionName.GUEST_FOOD).getValue());
+        scan.useDelimiter(",");
 
-    //     while(scan.hasNext()){
-    //         gFood.add(scan.next());
-    //     }
+        while(scan.hasNext()){
+            gFood.add(scan.next());
+        }
 
-    //     scan.close();
+        scan.close();
 
-    //     scan = new Scanner(requirements.get(CriterionName.HOST_FOOD).getValue());
-    //     scan.useDelimiter(",");
+        scan = new Scanner(requirements.get(CriterionName.HOST_FOOD).getValue());
+        scan.useDelimiter(",");
 
-    //     while(scan.hasNext()){
-    //         hFood.add(scan.next());
-    //     }
+        while(scan.hasNext()){
+            hFood.add(scan.next());
+        }
 
+        for(String s: hFood){
+            if(!(s.equals("nonuts") || s.equals("vegetarian"))){
+                throw new CriterionTypeException("Erreur host_food_argument: choisir nonuts, vegetarian, ou rien");
+            }
+        }
 
-
-    // }
+        for(String s: gFood){
+            if(!(s.equals("nonuts") || s.equals("vegetarian"))){
+                throw new CriterionTypeException("Erreur Guest_food argument: choisir nonuts, vegetarian, ou rien");
+            }
+        }
+    }
 
     /**
     * Renvoie le nombre de loisirs communs entre les 2 Teenager.
