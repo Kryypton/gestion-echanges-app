@@ -321,4 +321,62 @@ public class Platform {
         }
     }
 
+    public void changeFichierConfig(){
+        boolean run = true;
+        String saisie,chemin,c;
+        Scanner sc;
+
+        /*
+         * A FAIRE: recuperer les valeurs donnée par l'utilisateur
+         * faire variable pour chaque partie du csv
+         * changer fichier
+         */
+
+
+        do{
+            System.out.println("1 - Erreur d'entré de critére");
+            System.out.println("2 - Erreur d'entrée pour les animaux");
+            System.out.println("3 - Erreur d'entrée pour la nourriture");
+            System.out.println("4 - Changer de fichier d'adolescent");
+            System.out.println("5 - Changer de fichier d'appariemment");
+            System.out.println("0 - retour");
+            sc = new Scanner(System.in);  
+
+            saisie = "" + sc.next();
+            //////////////////////////////// Gestion des élèves ////////////////////////////////
+
+            if (saisie.equals("0")) {
+                run = false;
+
+            }else if (saisie.equals("1")) {
+                do{
+                    System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+                    c = sc.next();
+                }while(!c.equals("y") || !c.equals("n"));
+                System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+
+            }else if (saisie.equals("2")) {
+                do{
+                    System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+                    c = sc.next();
+                }while(!c.equals("y") || !c.equals("n"));
+
+            }else if (saisie.equals("3")) {
+                do{
+                    System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+                    c = sc.next();
+                }while(!c.equals("y") || !c.equals("n"));
+
+            }else if (saisie.equals("4")) {
+                System.out.println("");
+
+            }else if (saisie.equals("5")) {
+                System.out.println("");
+            }
+
+            sc.close();
+        }while(run);
+        
+    }
+
 }
