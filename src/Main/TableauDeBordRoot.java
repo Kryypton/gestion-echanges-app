@@ -1,15 +1,12 @@
 package Main;
-import java.io.File;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import Criterion.Country;
 import Platform.Platform;
 import Tennager.Teenager;
 
-public class Main {
+public class TableauDeBordRoot {
     private static Platform platform = new Platform();
     private static Boolean isRunning = true;
     private static Scanner sc = new Scanner(System.in);
@@ -75,11 +72,31 @@ public class Main {
         }
     }
     
-    private static char tableauDeBordArrive() {
+    private static char gestionEleve() {
         System.out.println("1 - Ajouter un Etudiant manuellement à la liste");
         System.out.println("2 - Ajouter un Enssemble d'étudiant à partir d'un fichier CSV");
-        System.out.println("3 - Ajouter un Etudiant à la liste");
-        System.out.println("4 - Ajouter un Etudiant à la liste");
+        System.out.println("3 - Afficher les étudiants");
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        return c;
+    }
+
+    public static char gestionAppariement() {
+        System.out.println("1 - Ajouter un Appariement manuellement à la liste");
+        System.out.println("2 - Générer les appariements à l'aide de Graph");
+        System.out.println("3 - Afficher les appariements");
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        return c;
+    }
+
+    public static char gestionHistorique() {
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        return c;
+    }
+
+    public static char tableauDeBord() {
+        System.out.println("1 - Gestion élèves");
+        System.out.println("2 - Gestion des appariements");
+        System.out.println("2 - Consulter l'historique");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
         return c;
     }
@@ -107,58 +124,36 @@ public class Main {
         System.out.printf("Etudiant [%s]-[%s]-[%s] a été ajouter avec succès\n", teenager.getName(), teenager.getAgeYear(), teenager.getId());
     }
 
-    private static void afficherList(List list){
-        for(int i = 0; i<list.size(); i++){
-            System.out.println(list.get(i));
-        }
-    }
-
-    private static void afficherMap(Map list){
-        for(int i = 0; i<list.size(); i++){
-            System.out.println(list.get(i));
-        }
-    }
-
     public void run() {
-        char saisie;
+        String saisie;
         while (isRunning) {
-            if (tableauDeBord() == '1') {
-                System.out.println("Vous avez choisi 1 - L'ajout manuel d'un étudiant");
+            saisie = "" + tableauDeBord();
+            if (saisie.equals("1")) {
+                System.out.println("Vous avez choisi La gestion des élèves");
+                saisie = "ge" + gestionEleve(); 
+            } 
+            if (saisie.equals("ge1")) {
+                System.out.println("Vous avez choisi d'ajouter un eleve à la liste");
                 addToPlatform(createTeenagerManually());
             }
-            if (tableauDeBord() == '2') {
-                System.out.println("Vous avez choisi 2 - Ajouter un Ensemble d'étudiant à partir d'un fichier CSV");
-                System.out.println("Donner le chemin vers le fichier");
+            if (saisie.equals("ge2")) {
+                System.out.println("Vous avez choisi d'ajouter des eleves à la liste à parit d'un fichier CSV");
+                addToPlatform(createTeenagerManually());
+            }
 
-                Scanner saisieUtilisateur = new Scanner(System.in);
+            if (saisie.equals("ge3")) {
+                System.out.println("Vous avez choisi d'afficher les élèves");
+                platform.toStringTeengarderList();
+            }
 
-                System.out.println("Veuillez saisir le chemin vers le fichier CSV");
-                String str = saisieUtilisateur.next();
-
-                try {
-                    File csv = new File(str);
-                    Platform.importListTeenagers(csv);
-                } catch (Exception e) {
-                    System.out.println("Erreur, fichier introuvable");
-                }
-            }
-            if (tableauDeBord() == '3') {
-                System.out.println("Vous avez choisi 3 - ");
-            }
-            if (tableauDeBord() == '4') {
-                System.out.println("Vous avez choisi 4 - ");
-            }
-            if (tableauDeBord() == '5') {
-                System.out.println("Vous avez choisi 5 - ");
-            }
-            if (tableauDeBord() == '6') {
-                System.out.println("Vous avez choisi 6 - ");
-            }
-        }
+            if (saisie.equals("2")) saisie = "ga" + gestionAppariement();
+            if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
+            
+        } 
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        TableauDeBordRoot main = new TableauDeBordRoot();
         main.run();
     }
 }
