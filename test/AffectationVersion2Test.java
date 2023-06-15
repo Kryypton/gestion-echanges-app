@@ -4,6 +4,14 @@ import java.time.LocalDate;
 
 
 import org.junit.jupiter.api.Test;
+
+import Criterion.Country;
+import Criterion.Criterion;
+import Criterion.CriterionName;
+import Tennager.Teenager;
+import graph.Affectation;
+import graph.AffectationUtil;
+
 import org.junit.jupiter.api.BeforeEach;
 
 

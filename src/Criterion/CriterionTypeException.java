@@ -1,3 +1,4 @@
+package Criterion;
 
 
 public class CriterionTypeException extends Exception {

@@ -1,3 +1,4 @@
+package Criterion;
 /**
  * Enumère les différents pays pouvant être utilisés pour faire correspondre un invité et un hôte.
  * @version 1.0

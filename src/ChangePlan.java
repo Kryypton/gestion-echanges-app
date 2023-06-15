@@ -12,6 +12,11 @@ import java.util.Map;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.Csv;
 
+import Criterion.Country;
+import Criterion.Criterion;
+import Criterion.CriterionName;
+import Platform.Platform;
+import Tennager.Teenager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

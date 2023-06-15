@@ -1,3 +1,4 @@
+package Criterion;
 /**
  * Enumère les différents types de critères pouvant être utilisés pour faire correspondre un invité et un hôte.
  * @version 1.0
