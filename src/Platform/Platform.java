@@ -107,13 +107,13 @@ public class Platform {
         }
     }
 
-    public void purgeInvalidAnimalRequirements(){
+    public void purgeInvalidAnimalRequirements() throws CriterionTypeException{
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidAnimalRequirement();
         }
     }
 
-    public void purgeInvalidFoodRequirements(){
+    public void purgeInvalidFoodRequirements() throws CriterionTypeException{
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidFoodRequirement();
         }
@@ -285,7 +285,7 @@ public class Platform {
     }
 
 
-    public void fichierConfig() throws FileNotFoundException{
+    public void fichierConfig() throws FileNotFoundException, CriterionTypeException{
         File f = new File("res/Configuration.csv");
         Scanner scan = new Scanner(f);
         scan.next();
@@ -303,7 +303,7 @@ public class Platform {
         File f1,f2;
         if(!listPath.equals("false")){
             try {
-                f1 = new File(listPath)
+                f1 = new File(listPath);
                 this.importListTeenagers(f1);
             } catch (Exception e) {
                 throw new CriterionTypeException("Erreur fichier.");
@@ -312,7 +312,7 @@ public class Platform {
         String compatiblePath = scan.next();
         if(!compatiblePath.equals("false")){
             try {
-                f2 = new File(compatiblePath)
+                f2 = new File(compatiblePath);
                 this.importListTeenagers(f2);
             } catch (Exception e) {
                 throw new CriterionTypeException("Erreur fichier.");
