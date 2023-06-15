@@ -8,7 +8,9 @@ import java.util.Scanner;
 import Criterion.Country;
 import Criterion.Criterion;
 import Criterion.CriterionName;
+import Criterion.CriterionTypeException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -276,6 +278,18 @@ public class Teenager implements Serializable{
             }
         }
         this.requirements = validRequirements;
+    }
+
+    public void purgeInvalidAnimalRequirement() throws CriterionTypeException{
+        if(requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("true") && requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("true")){
+            throw new CriterionTypeException("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
+        }
+    }
+
+    public void purgeInvalidFoodRequirement()throws CriterionTypeException{
+        List<String> gFood = new ArrayList<String>();
+        List<String> hFood = new ArrayList<String>();
+
     }
 
     /**

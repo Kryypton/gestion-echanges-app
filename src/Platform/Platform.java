@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.module.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -102,6 +103,18 @@ public class Platform {
     public void purgeInvalidRequirements(){
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidRequirement();
+        }
+    }
+
+    public void purgeInvalidAnimalRequirements(){
+        for (Teenager teenager : teenagerList) {
+            teenager.purgeInvalidAnimalRequirement();
+        }
+    }
+
+    public void purgeInvalidFoodRequirements(){
+        for (Teenager teenager : teenagerList) {
+            teenager.purgeInvalidFoodRequirement();
         }
     }
 
@@ -261,4 +274,28 @@ public class Platform {
             System.out.println(teenager.getName());
         }
     }
+
+
+    public void fichierConfig() throws FileNotFoundException{
+        File f = new File("res/Configuration.csv");
+        Scanner scan = new Scanner(f);
+        scan.next();
+        scan.useDelimiter(";");
+        if(scan.next().equals("true")){
+            this.purgeInvalidRequirements();
+        }
+        if(scan.next().equals("true")){
+
+        }
+        if(scan.next().equals("true")){
+
+        }
+        if(scan.next().equals("true")){
+
+        }
+        if(scan.next().equals("true")){
+
+        }
+    }
+
 }
