@@ -23,6 +23,8 @@ public class TableauDeBordRoot {
     private static Platform platform = new Platform();
     private static Boolean isRunning = true;
     private static Scanner sc = new Scanner(System.in);
+    private static Country countryHote;
+    private static Country countryVisiteur;
 
     public static class SaisieClavier {
 
@@ -251,6 +253,21 @@ public class TableauDeBordRoot {
         System.out.printf("Les étudiants du fichier [%s] ont été ajouter avec succès\n", path);
     }
 
+    //////////////////////////////// Gestion des appariements ////////////////////////////////
+
+    private static void appariement() {
+        Teenager teenager1;
+        Teenager teenager2;
+        do {
+            System.out.println("ID de l'étudiant 1 : ");
+            teenager1 = SaisieClavier.saisieClavierTeenager();
+            System.out.println("Prénom : ");
+            teenager2 = SaisieClavier.saisieClavierTeenager();
+            if (teenager1.equals(teenager2)) System.out.println("Les deux étudiants sont les mêmes, veuillez recommencer.");
+        } while (teenager1.equals(teenager2));
+        plat
+    }
+
     private static void afficherAppariement() {
         /*System.out.println("Voici les appariements :");
         for (Pair pair : platform.getPairs()) {
@@ -298,6 +315,13 @@ public class TableauDeBordRoot {
                 saisie = "ga" + gestionAppariement();
             }
 
+            if (saisie.equals("ga1")) {
+                System.out.println("Vous avez choisi d'affecter manullement 2 étudiants");
+                System.out.println("Quel est le pays ");
+                System.out.println(platform.getCompatibleTeenagers().toString());
+                System.out.println("→ Retour au menu principal");
+            }
+
             if (saisie.equals("ga3")) {
                 System.out.println("Vous avez choisi d'afficher les appariements");
                 platform.findCompatibleTeenagers();
@@ -333,8 +357,7 @@ public class TableauDeBordRoot {
         main.runRoot();
     }
 
-
-        public static boolean idPresent(int id , Collection<Teenager> list){
+    public static boolean idPresent(int id , Collection<Teenager> list){
         for (Teenager teenager : list) {
             if(teenager.getId() == id){
                 return true;
@@ -355,6 +378,7 @@ public class TableauDeBordRoot {
         System.out.println("Voici la liste des hôtes : ");
         for (Teenager teenager : hote) {
             System.out.println(teenager);
+
         }
 
         System.out.println("Voici la liste des visiteurs : ");
