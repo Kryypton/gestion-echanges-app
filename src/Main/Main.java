@@ -91,7 +91,7 @@ public class Main {
         System.out.println("Nom : ");
         nom = SaisieClavier.saisieClavierStr();
         System.out.println("Prénom : ");
-        prenom = SaisieClavier.saisieClavierStr(););
+        prenom = SaisieClavier.saisieClavierStr();
         System.out.println("Date de naissance : (format : yyyy-mm-dd)");
         dateNaissance = SaisieClavier.saisieClavierDate();
         System.out.println("Pays : ");
@@ -105,14 +105,14 @@ public class Main {
     }
 
     public void run() {
+        char saisie;
         while (isRunning) {
-            saisieClavierChar =  saisieClavier()
-            if (tableauDeBordArrive() == '1') addToPlatform(createTeenagerManually());
-            if (tableauDeBordArrive() == '2') System.out.println("Vous avez choisi 2");
-            if (tableauDeBordArrive() == '3') System.out.println("Vous avez choisi 3");
-            if (tableauDeBordArrive() == '3') System.out.println("Vous avez choisi 4");
-        }
-        
+            saisie = tableauDeBordArrive();
+            if (saisie == '1') addToPlatform(createTeenagerManually());
+            if (saisie == '2') System.out.println("Vous avez choisi 2");
+            if (saisie == '3') System.out.println("Vous avez choisi 3");
+            if (saisie == '3') System.out.println("Vous avez choisi 4");
+        } 
     }
 
     public static void main(String[] args) {
