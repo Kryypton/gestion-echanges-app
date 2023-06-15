@@ -24,7 +24,7 @@ public class Start extends Application {
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("FXML demo");
+                stage.setTitle("Connexion");
                 stage.show();
         }
 
