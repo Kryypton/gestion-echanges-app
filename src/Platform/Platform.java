@@ -249,6 +249,14 @@ public class Platform {
         }
     }
 
+    public String toStringTeengarderList() {
+        String str = "";
+        for (Teenager teenager : this.teenagerList) {
+            str += teenager.toString() + "\n";
+        }
+        return str;
+    }
+
     public static void main(String[] args) {
         Platform platform = new Platform();
         try {
