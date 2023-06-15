@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import Criterion.CriterionTypeException;
 import Tennager.Teenager;
 
 import java.util.HashMap;
@@ -285,16 +286,29 @@ public class Platform {
             this.purgeInvalidRequirements();
         }
         if(scan.next().equals("true")){
-
+            this.purgeInvalidAnimalRequirements();
         }
         if(scan.next().equals("true")){
-
+            this.purgeInvalidFoodRequirements();
         }
-        if(scan.next().equals("true")){
-
+        String listPath = scan.next();
+        File f1,f2;
+        if(!listPath.equals("false")){
+            try {
+                f1 = new File(listPath)
+                this.importListTeenagers(f1);
+            } catch (Exception e) {
+                throw new CriterionTypeException("Erreur fichier.");
+            }
         }
-        if(scan.next().equals("true")){
-
+        String compatiblePath = scan.next();
+        if(!compatiblePath.equals("false")){
+            try {
+                f2 = new File(compatiblePath)
+                this.importListTeenagers(f2);
+            } catch (Exception e) {
+                throw new CriterionTypeException("Erreur fichier.");
+            }
         }
     }
 

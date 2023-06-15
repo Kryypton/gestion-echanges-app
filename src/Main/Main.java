@@ -12,50 +12,99 @@ import Tennager.Teenager;
 public class Main {
     private static Platform platform = new Platform();
     private static Boolean isRunning = true;
+    private static Scanner sc = new Scanner(System.in);
 
-    private static String saisieClavier() {
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        sc.close();
-        return str;
+    public static class SaisieClavier {
+
+        public static String saisieClavierStr() {
+            String str = sc.nextLine();
+            return str;
+        }
+
+        public static char saisieClavierChar() {
+            try {
+                String str = sc.nextLine();
+                char c = str.charAt(0);
+                return c;
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                return saisieClavierChar();
+            }
+        }
+
+        public static int saisieClavierInt() {
+            try {
+                int i = sc.nextInt();
+                return i;
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                return saisieClavierInt();
+            }
+        }
+
+        public static double saisieClavierDouble() {
+            try {
+                double d = sc.nextDouble();
+                return d;
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                return saisieClavierDouble();
+            }
+        }
+
+        public static Country saisieClavierCountry() {
+            try {
+                String str = sc.nextLine();
+                Country c = Country.valueOf(str.toUpperCase());
+                return c;
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                return saisieClavierCountry();
+            }
+        }
+
+        public static LocalDate saisieClavierDate() {
+            try {
+                String str = sc.nextLine();
+                LocalDate d = LocalDate.parse(str);
+                return d;
+            } catch (Exception e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                return saisieClavierDate();
+            }
+        }
     }
     
-    private static char tableauDeBord() {
+    private static char tableauDeBordArrive() {
         System.out.println("1 - Ajouter un Etudiant manuellement à la liste");
-        System.out.println("2 - Ajouter un Ensemble d'étudiant à partir d'un fichier CSV");
-        System.out.println("3 - Supprimer un étudiants de la liste");
-        System.out.println("4 - Afficher la liste d'étudiants");
-        System.out.println("4 - Afficher la liste des appariements");
-        System.out.println("4 - Générer les appariements");
-        Scanner sc = new Scanner(System.in);
-        char c = sc.next().charAt(0);
-        sc.close();
+        System.out.println("2 - Ajouter un Enssemble d'étudiant à partir d'un fichier CSV");
+        System.out.println("3 - Ajouter un Etudiant à la liste");
+        System.out.println("4 - Ajouter un Etudiant à la liste");
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
         return c;
     }
 
     private static Teenager createTeenagerManually() {
+        System.out.println("L'ajout manuel d'un étudiant");
         String nom;
         String prenom;
         LocalDate dateNaissance;
         Country pays;
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Nom : ");
-        nom = saisieClavier();
+        nom = SaisieClavier.saisieClavierStr();
         System.out.println("Prénom : ");
-        prenom = saisieClavier();
+        prenom = SaisieClavier.saisieClavierStr();
         System.out.println("Date de naissance : (format : yyyy-mm-dd)");
-        dateNaissance = LocalDate.parse(saisieClavier());
+        dateNaissance = SaisieClavier.saisieClavierDate();
         System.out.println("Pays : ");
-        pays = Country.valueOf(saisieClavier().toUpperCase());
-        saisieClavier();
-        sc.close();
+        pays = SaisieClavier.saisieClavierCountry();
         return new Teenager(nom, prenom, dateNaissance, pays);
     }
 
     private static void addToPlatform(Teenager teenager) {
         platform.addTeenager(teenager);
-        System.out.println("Etudiant ajouté avec succès");
+        System.out.printf("Etudiant [%s]-[%s]-[%s] a été ajouter avec succès\n", teenager.getName(), teenager.getAgeYear(), teenager.getId());
     }
 
     private static void afficherList(List list){
@@ -70,7 +119,8 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public void run() {
+        char saisie;
         while (isRunning) {
             if (tableauDeBord() == '1') {
                 System.out.println("Vous avez choisi 1 - L'ajout manuel d'un étudiant");
@@ -107,4 +157,8 @@ public class Main {
         }
     }
 
+    public static void main(String[] args) {
+        Main main = new Main();
+        main.run();
+    }
 }
