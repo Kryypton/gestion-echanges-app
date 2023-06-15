@@ -455,4 +455,38 @@ public class TableauDeBordRoot {
 
         }
     }
+
+
+
+
+
+
+
+
+
+
+    public static void supprimerTeenagerFromCSV(Teenager teen){
+        Platform platform = new Platform();
+        try {
+            platform.importListTeenagers(new File("res/Teenagers.csv"));   
+        } catch (Exception e) {
+            System.out.println("Erreur lors de l'importation du fichier");
+        }
+        platform.removeTeenager(teen);
+        try {
+            platform.exporterListe("res/Teenagers.csv");    /////////////////////// Je sais pas comment faire pour que ça marche mais vous avez l'idée
+        } catch (FileNotFoundException e) {
+            System.out.println("Erreur lors de l'exportation du fichier");
+        }
+    }
+
+    
+    public static void supprimerTeenager(Platform platform){
+        System.out.println("Voici la liste des étudiants : ");
+        System.out.println(platform.toStringTeengarderList());
+        System.out.println("Veuillez saisir l'id de l'étudiant à supprimer : ");
+        int id = SaisieClavier.saisieClavierInt();
+        Teenager teen = platform.getTeenagerFromID(id);
+        supprimerTeenagerFromCSV(teen);
+    }
 }
