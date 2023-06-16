@@ -1,6 +1,7 @@
 package Main;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -199,7 +200,7 @@ public class TableauDeBordRoot {
     public static char tableauDeBord() {
         System.out.println("1 - Gestion élèves");
         System.out.println("2 - Gestion des appariements");
-        System.out.println("2 - Consulter l'historique");
+        System.out.println("3 - Consulter l'historique");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
@@ -494,7 +495,7 @@ public class TableauDeBordRoot {
 
 
 
-    public static void supprimerTeenagerFromCSV(Teenager teen){
+    public static void supprimerTeenagerFromCSV(Teenager teen) throws IOException{
         Platform platform = new Platform();
         try {
             platform.importListTeenagers(new File("res/Teenagers.csv"));   
@@ -503,8 +504,8 @@ public class TableauDeBordRoot {
         }
         platform.removeTeenager(teen);
         try {
-            platform.exporterListe("res/Teenagers.csv");    /////////////////////// Je sais pas comment faire pour que ça marche mais vous avez l'idée
-        } catch (FileNotFoundException e) {
+            Platform.exportTeenagers(platform.getTeenagerArrayList(),"res/Teenagers.csv");    /////////////////////// Je sais pas comment faire pour que ça marche mais vous avez l'idée
+        } catch (FileNotFoundException e) {                                                           /////////////////////// tiens c'est cadeau
             System.out.println("Erreur lors de l'exportation du fichier");
         }
     }

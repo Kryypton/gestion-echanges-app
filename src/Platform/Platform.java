@@ -395,17 +395,12 @@ public class Platform {
         }
     }
 
-    public void changeFichierConfig(){
-        boolean run = true;
-        String saisie,chemin,c;
+    public void changeFichierConfig() throws IOException{
+        boolean run = true,chemin = false;
+        String saisie;
         Scanner sc;
-
-        /*
-         * A FAIRE: recuperer les valeurs donnée par l'utilisateur
-         * faire variable pour chaque partie du csv
-         * changer fichier
-         */
-
+        File f;
+        String type,animal,food,liste,map;
 
         do{
             System.out.println("1 - Erreur d'entré de critére");
@@ -425,31 +420,62 @@ public class Platform {
             }else if (saisie.equals("1")) {
                 do{
                     System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
-                    c = sc.next();
-                }while(!c.equals("y") || !c.equals("n"));
-                System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+                    saisie = sc.next();
+                }while(!saisie.equals("y") || !saisie.equals("n"));
+                type = saisie;
 
             }else if (saisie.equals("2")) {
                 do{
                     System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
-                    c = sc.next();
-                }while(!c.equals("y") || !c.equals("n"));
+                    saisie = sc.next();
+                }while(!saisie.equals("y") || !saisie.equals("n"));
+                animal = saisie;
 
             }else if (saisie.equals("3")) {
                 do{
                     System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
-                    c = sc.next();
-                }while(!c.equals("y") || !c.equals("n"));
+                    saisie = sc.next();
+                }while(!saisie.equals("y") || !saisie.equals("n"));
+                food = saisie;
 
             }else if (saisie.equals("4")) {
-                System.out.println("");
+                do{
+                    if(chemin == true){
+                        System.out.println("Erreur, le fichier donné ne peut pas être lu. ");
+                    }else{
+                        chemin = true;
+                    }
+                    
+                    System.out.println("Entrer le chemin vers le fichier d'importation: ");
+                    saisie = sc.next();
+                    f = new File(saisie);
+                }while(f.canRead());
+                liste = saisie;
 
             }else if (saisie.equals("5")) {
-                System.out.println("");
+                do{
+                    if(chemin == true){
+                        System.out.println("Erreur, le fichier donné ne peut pas être lu. ");
+                    }else{
+                        chemin = true;
+                    }
+
+                    System.out.println("Entrer le chemin vers le fichier d'importation: ");
+                    saisie = sc.next();
+                    f = new File(saisie);
+                }while(f.canRead());
+                map = saisie;
             }
 
             sc.close();
         }while(run);
+
+        f = new File("res/configuration.csv");
+        f.delete();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        bw.write("CRITERION_TYPE;ANIMAL_ALLERGY;FOOD_ALLERGY;TEENAGER_LIST;COMPATIBLE_TEENAGER_LIST");
+        bw.newLine();
+        bw.write(type+";"+animal+";"+food+";"+liste+";"+map);
         
     }
 
