@@ -17,6 +17,7 @@ import javax.swing.text.html.HTMLDocument.BlockElement;
 import Criterion.Country;
 import Criterion.Criterion;
 import Criterion.CriterionName;
+import Criterion.CriterionTypeException;
 import Platform.Platform;
 import Tennager.Teenager;
 import graph.Affectation;
@@ -204,6 +205,7 @@ public class TableauDeBordRoot {
         System.out.println("1 - Gestion élèves");
         System.out.println("2 - Gestion des appariements");
         System.out.println("3 - Consulter l'historique");
+        System.out.println("4 - Option");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
@@ -355,9 +357,12 @@ public class TableauDeBordRoot {
         } while (countryHote == countryVisiteur);
     }
     
-    public void runRoot() throws IOException {
+    public void runRoot() throws IOException, CriterionTypeException {
         String saisie;
         parametre();
+        if(configExist()){
+            Platform.fichierConfig();
+        }
         while (isRunning) {
             System.out.println("-------------------- Menu principal --------------------");
             saisie = "" + tableauDeBord();
@@ -451,6 +456,9 @@ public class TableauDeBordRoot {
 
             //////////////////////////// Gestion de l'historique ////////////////////////////
             if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
+
+            //////////////////////////// Option ////////////////////////////
+            if (saisie.equals("3")) option();
             
             //////////////////////////// Retour au Menu principal ////////////////////////////
             if (saisie.equals("b")) {
@@ -463,6 +471,23 @@ public class TableauDeBordRoot {
             }
         } 
     }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
 
@@ -592,4 +617,40 @@ public class TableauDeBordRoot {
         Teenager teen = platform.getTeenagerFromID(id);
         supprimerTeenagerFromCSV(teen);
     }
+
+    public void option() throws IOException{
+        String saisie;
+        if(configExist()){
+            do{
+                System.out.println("il existe un fichier de configuration, voulez vous :");
+                System.out.println("1 - modifier le fichier");
+                System.out.println("2 - supprimer le fichier");
+                System.out.println("3 - retour");
+                saisie = sc.next();
+            }while(!saisie.equals("1") && !saisie.equals("2") && !saisie.equals("3"));
+            if (saisie.equals("1")){
+                Platform.changeFichierConfig();
+            }else if(saisie.equals("2")){
+                Platform.deleteFichierConfig();
+            }
+        }else{
+            do{
+                System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
+                System.out.println("[y/n]");
+                saisie = sc.next();
+            }while(!saisie.equals("y") || !saisie.equals("n"));
+            if (saisie.equals("y")){
+                Platform.createFichierConfig();
+            }
+        }
+    }
+
+    public boolean configExist(){
+        File f = new File("res/configuration.csv");
+        if(f.exists()){
+            return true;
+        }
+        return false;
+    }
+
 }

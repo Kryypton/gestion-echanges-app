@@ -361,8 +361,13 @@ public class Platform {
         }
     }
 
+    public static void sansFichierConfig() throws CriterionTypeException{
+        this.purgeInvalidRequirements();
+        this.purgeInvalidAnimalRequirements();
+        this.purgeInvalidFoodRequirements();
+    }
 
-    public void fichierConfig() throws FileNotFoundException, CriterionTypeException{
+    public static void fichierConfig() throws FileNotFoundException, CriterionTypeException{
         File f = new File("res/Configuration.csv");
         Scanner scan = new Scanner(f);
         scan.next();
@@ -397,7 +402,7 @@ public class Platform {
         }
     }
 
-    public void changeFichierConfig() throws IOException{
+    public static void changeFichierConfig() throws IOException{
         boolean run = true,chemin = false;
         String saisie;
         Scanner sc,scInit;
@@ -506,6 +511,24 @@ public class Platform {
         bw.newLine();
         bw.write(type+";"+animal+";"+food+";"+liste+";"+map);
         
+    }
+
+    public static void deleteFichierConfig(){
+        File f = new File("res/configuration.csv");
+        try {
+            f.delete();
+        } catch (Exception e) {
+            System.out.println("Le fichier n'as pas pu être supprimer.");
+        }
+    }
+
+    public static void createFichierConfig() throws IOException{
+        File f = new File("res/configuration.csv");
+        f.delete();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        bw.write("CRITERION_TYPE;ANIMAL_ALLERGY;FOOD_ALLERGY;TEENAGER_LIST;COMPATIBLE_TEENAGER_LIST");
+        bw.newLine();
+        bw.write("false;false;false;false;false");
     }
 
     public ArrayList<Teenager> cleanByCountry(Country country1, Country country2){
