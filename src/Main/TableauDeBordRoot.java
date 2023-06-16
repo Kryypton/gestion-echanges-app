@@ -493,6 +493,7 @@ public class TableauDeBordRoot {
             if (saisie.equals("op2")) {
                 System.out.println("Vous avez choisi de supprimer le fichier");
                 System.out.println("→ Retour au menu principal");
+                Platform.deleteFichierConfig();
             }
 
             if (saisie.equals("so1")) {

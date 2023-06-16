@@ -405,7 +405,7 @@ public class Platform {
     public void changeFichierConfig() throws IOException{
         boolean run = true,chemin = false;
         String saisie;
-        Scanner sc,scInit;
+        Scanner sc = new Scanner(System.in),scInit;
         File f,fInit;
 
         fInit = new File("res/configuration.csv");
@@ -421,7 +421,6 @@ public class Platform {
             System.out.println("4 - Changer de fichier d'adolescent");
             System.out.println("5 - Changer de fichier d'appariemment");
             System.out.println("0 - retour");
-            sc = new Scanner(System.in);  
 
             saisie = "" + sc.next();
             //////////////////////////////// Gestion des élèves ////////////////////////////////
@@ -515,8 +514,9 @@ public class Platform {
 
     public static void deleteFichierConfig(){
         File f = new File("res/configuration.csv");
+        System.out.println(f.exists());
         try {
-            f.delete();
+            System.out.println(f.delete());
         } catch (Exception e) {
             System.out.println("Le fichier n'as pas pu être supprimer.");
         }
