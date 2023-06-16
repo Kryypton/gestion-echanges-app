@@ -234,6 +234,8 @@ public class Platform {
      */
     public static void exportTeenagers(ArrayList<Teenager> CSV, String fichier) throws IOException{
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
+            bw.write("FORENAME;NAME;COUNTRY;BIRTH_DATE;HOBBIES;GUEST_ANIMAL_ALLERGY;HOST_HAS_ANIMAL;GUEST_FOOD;HOST_FOOD;GENDER;PAIR_GENDER;HISTORY");
+            bw.newLine(); 
             for(Teenager a: CSV){
                 bw.write(a.teenagerToString());
                 bw.newLine(); 
@@ -398,9 +400,14 @@ public class Platform {
     public void changeFichierConfig() throws IOException{
         boolean run = true,chemin = false;
         String saisie;
-        Scanner sc;
-        File f;
-        String type,animal,food,liste,map;
+        Scanner sc,scInit;
+        File f,fInit;
+
+        fInit = new File("res/configuration.csv");
+        scInit = new Scanner(fInit);
+        scInit.next();
+        scInit.useDelimiter(";");
+        String type = scInit.next(),animal = scInit.next(),food = scInit.next(),liste = scInit.next(),map= scInit.next();
 
         do{
             System.out.println("1 - Erreur d'entré de critére");
@@ -422,21 +429,34 @@ public class Platform {
                     System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
                 }while(!saisie.equals("y") || !saisie.equals("n"));
-                type = saisie;
+                if (saisie.equals("y")){
+                    type = "true";
+                }else{
+                    type = "false";
+                }
+                
 
             }else if (saisie.equals("2")) {
                 do{
                     System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
                 }while(!saisie.equals("y") || !saisie.equals("n"));
-                animal = saisie;
+                if (saisie.equals("y")){
+                    animal = "true";
+                }else{
+                    animal = "false";
+                }
 
             }else if (saisie.equals("3")) {
                 do{
                     System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
                 }while(!saisie.equals("y") || !saisie.equals("n"));
-                food = saisie;
+                if (saisie.equals("y")){
+                    food = "true";
+                }else{
+                    food = "false";
+                }
 
             }else if (saisie.equals("4")) {
                 do{
@@ -451,6 +471,11 @@ public class Platform {
                     f = new File(saisie);
                 }while(f.canRead());
                 liste = saisie;
+                if (saisie.equals("y")){
+                    liste = saisie;
+                }else{
+                    liste = "false";
+                }
 
             }else if (saisie.equals("5")) {
                 do{
@@ -464,7 +489,11 @@ public class Platform {
                     saisie = sc.next();
                     f = new File(saisie);
                 }while(f.canRead());
-                map = saisie;
+                if (saisie.equals("y")){
+                    map = saisie;
+                }else{
+                    map = "false";
+                }
             }
 
             sc.close();

@@ -176,6 +176,7 @@ public class TableauDeBordRoot {
         System.out.println("1 - Ajouter un Etudiant manuellement à la liste");
         System.out.println("2 - Ajouter un Enssemble d'étudiant à partir d'un fichier CSV");
         System.out.println("3 - Afficher les étudiants");
+        System.out.println("4 - Sauvegarder les étudiants");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
@@ -186,6 +187,8 @@ public class TableauDeBordRoot {
         System.out.println("1 - Ajouter un Appariement manuellement à la liste");
         System.out.println("2 - Générer les appariements à l'aide de Graph");
         System.out.println("3 - Afficher les appariements");
+        System.out.println("4 - importer des appariements");
+        System.out.println("5 - Sauvegarder les appariements");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
@@ -256,10 +259,16 @@ public class TableauDeBordRoot {
 
     private static void addToPlatformbyCSV(String path) {
         try {
-            ArrayList<Teenager> list = Platform.importListTeenagers(new File(path));
-            for (Teenager teenager : list) {
-                platform.addTeenager(teenager);
-            }
+            platform.setTeenagerList(Platform.importListTeenagers(new File(path)));
+        } catch (FileNotFoundException e) {
+            System.out.printf("Erreur lors de l'importation du fichier [%s] n'est pas un fichier CSV ou n'existe pas.\n", path);
+        }
+        System.out.printf("Les étudiants du fichier [%s] ont été ajouter avec succès\n", path);
+    }
+
+    private static void addToPlatformbyCompatibleCSV(String path) {
+        try {
+            platform.setCompatibleTeenagers(Platform.importCompatibleTeenagers(new File(path)));
         } catch (FileNotFoundException e) {
             System.out.printf("Erreur lors de l'importation du fichier [%s] n'est pas un fichier CSV ou n'existe pas.\n", path);
         }
@@ -282,11 +291,10 @@ public class TableauDeBordRoot {
     }
 
     private static void afficherAppariement() {
-        /*System.out.println("Voici les appariements :");
-        for (Pair pair : platform.getPairs()) {
-            System.out.printf("Pair [%s]-[%s] :\n", pair.getTeenager1().getName(), pair.getTeenager2().getName());
-            System.out.printf("    - [%s]-[%s]-[%s] avec [%s]-[%s]-[%s]\n", pair.getTeenager1().getName(), pair.getTeenager1().getAgeYear(), pair.getTeenager1().getId(), pair.getTeenager2().getName(), pair.getTeenager2().getAgeYear(), pair.getTeenager2().getId());
-        }*/
+        System.out.println("Voici les appariements :");
+        for(Teenager a: platform.getCompatibleTeenagers().keySet()){
+            System.out.println(a.teenagerToString()+";"+platform.getCompatibleTeenagers().get(a).teenagerToString()+"\n");
+        }
     }
 
     //////////////////////////////// PARAMETTRE ////////////////////////////////
@@ -306,7 +314,7 @@ public class TableauDeBordRoot {
         } while (countryHote == countryVisiteur);
     }
     
-    public void runRoot() {
+    public void runRoot() throws IOException {
         String saisie;
         parametre();
         while (isRunning) {
@@ -327,7 +335,7 @@ public class TableauDeBordRoot {
 
             ////// Ajout d'élèves à la liste à partir d'un fichier CSV //////
             if (saisie.equals("ge2")) {
-                System.out.println("Vous avez choisi d'ajouter des eleves à la liste à parit d'un fichier CSV");
+                System.out.println("Vous avez choisi d'ajouter des eleves à la liste à partir d'un fichier CSV");
                 addToPlatformbyCSV(SaisieClavier.saisieClavierStr());
                 System.out.println("→ Retour au menu principal");
             }
@@ -338,6 +346,13 @@ public class TableauDeBordRoot {
                 System.out.println(platform.toStringTeengarderList()); 
                 System.out.println("Retour au menu principal");
             }
+            ////// exporter des étudiants //////
+            if (saisie.equals("ge4")) {
+                System.out.println("Vous avez choisi de sauvegarder les élèves");
+                System.out.println("Donner le chemin vers pour le fichier de sauvegarder");
+                Platform.exportTeenagers(platform.getTeenagerArrayList(), SaisieClavier.saisieClavierStr());
+                System.out.println("Retour au menu principal");
+            }
 
             //////////////////////////// Gestion des affectations ////////////////////////////
 
@@ -345,21 +360,39 @@ public class TableauDeBordRoot {
                 System.out.println("Vous avez choisi La gestion des appariements");
                 saisie = "ga" + gestionAppariement();
             }
-
+            ////// ajouter appariements //////
             if (saisie.equals("ga1")) {
                 System.out.println("Vous avez choisi d'affecter manullement 2 étudiants");
                 System.out.println("Quel est le pays ");
                 System.out.println(platform.getCompatibleTeenagers().toString());
                 System.out.println("→ Retour au menu principal");
             }
-
+            ////// générer appariements //////
+            if (saisie.equals("ga2")) {
+                System.out.println("Vous avez choisi de générer automatiquement les appariements :");
+                AffectationUtil.affectation(platform.getTeenagerList(), countryVisiteur, countryHote);
+                System.out.println("→ Retour au menu principal");
+            }
+            ////// Affichage des appariements //////
             if (saisie.equals("ga3")) {
                 System.out.println("Vous avez choisi d'afficher les appariements");
                 platform.findCompatibleTeenagers();
                 System.out.println(platform.getCompatibleTeenagers().toString());
                 System.out.println("→ Retour au menu principal");
             }
-
+            ////// importer appariements //////
+            if (saisie.equals("ga4")) {
+                System.out.println("Vous avez choisi d'ajouter des appariements à partir d'un fichier CSV");
+                addToPlatformbyCompatibleCSV(SaisieClavier.saisieClavierStr());
+                System.out.println("→ Retour au menu principal");
+            }
+            ////// exporter appriements //////
+            if (saisie.equals("ge5")) {
+                System.out.println("Vous avez choisi de sauvegarder les appariements");
+                System.out.println("Donner le chemin vers pour le fichier de sauvegarder");
+                Platform.exportCompatibleTeenager(platform.getCompatibleTeenagers(), SaisieClavier.saisieClavierStr());
+                System.out.println("Retour au menu principal");
+            }
             ////// Ajout d'une affectation à la liste //////
             if (saisie.equals("ga1")) {
 
@@ -382,7 +415,7 @@ public class TableauDeBordRoot {
 
     
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         TableauDeBordRoot main = new TableauDeBordRoot();
         System.out.println("Bienvenue dans le programme de gestion des appariements");
         main.runRoot();
@@ -445,8 +478,6 @@ public class TableauDeBordRoot {
 
         affectation.add(AffectationUtil.affectation(platform.getTeenagerArrayList(), affectation.getVisitor(), affectation.getHost()));
     }
-
-
 
     ////// Permet de créer un appariement automatique//////
 
@@ -511,7 +542,7 @@ public class TableauDeBordRoot {
     }
 
     
-    public static void supprimerTeenager(Platform platform){
+    public static void supprimerTeenager(Platform platform) throws IOException{
         System.out.println("Voici la liste des étudiants : ");
         System.out.println(platform.toStringTeengarderList());
         System.out.println("Veuillez saisir l'id de l'étudiant à supprimer : ");
