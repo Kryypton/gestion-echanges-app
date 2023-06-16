@@ -363,7 +363,6 @@ public class TableauDeBordRoot {
             ////// ajouter appariements //////
             if (saisie.equals("ga1")) {
                 System.out.println("Vous avez choisi d'affecter manullement 2 étudiants");
-                System.out.println("Quel est le pays ");
                 System.out.println(platform.getCompatibleTeenagers().toString());
                 System.out.println("→ Retour au menu principal");
             }
@@ -518,14 +517,6 @@ public class TableauDeBordRoot {
         }
     }
 
-
-
-
-
-
-
-
-
     public static void supprimerTeenagerFromCSV(Teenager teen) throws IOException{
         Platform platform = new Platform();
         try {
@@ -541,7 +532,6 @@ public class TableauDeBordRoot {
         }
     }
 
-    
     public static void supprimerTeenager(Platform platform) throws IOException{
         System.out.println("Voici la liste des étudiants : ");
         System.out.println(platform.toStringTeengarderList());
