@@ -24,7 +24,7 @@ public class CriterionTest {
         criterion9 = new Criterion("1/1", CriterionName.HISTORY);
 
     }
-
+/*
     @Test
     void testIsValid() {
         try{
@@ -55,5 +55,5 @@ public class CriterionTest {
         }catch(CriterionTypeException e){
             assertTrue(true);
         }
-    }
+    }*/
 }

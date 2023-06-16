@@ -8,8 +8,6 @@ import java.util.Scanner;
 import Criterion.Country;
 import Criterion.Criterion;
 import Criterion.CriterionName;
-import Criterion.CriterionTypeException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

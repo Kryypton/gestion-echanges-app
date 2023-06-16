@@ -1,34 +1,21 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.junit.jupiter.params.shadow.com.univocity.parsers.csv.Csv;
-
 import Criterion.Country;
 import Criterion.Criterion;
 import Criterion.CriterionName;
 import Platform.Platform;
 import Tennager.Teenager;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.AccessibleAttribute;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
@@ -36,7 +23,6 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -485,7 +471,6 @@ public class ChangePlan<Eleve> {
             return new Criterion("male", CriterionName.GENDER);
         }
         return new Criterion("other", CriterionName.GENDER);
-        //TODO : A voir si on met un null ou un other
     }
 
     public Criterion haveAnimal(){
@@ -532,7 +517,6 @@ public class ChangePlan<Eleve> {
             return new Criterion("male", CriterionName.PAIR_GENDER);
         }
         return new Criterion("other", CriterionName.PAIR_GENDER);
-        //TODO : A voir si on met un null ou un other
     }
 
     ///////////////////////////////////////////////////

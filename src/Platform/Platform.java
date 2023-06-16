@@ -4,15 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.module.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import Criterion.Country;
-import Criterion.CriterionName;
-import Criterion.CriterionTypeException;
 import Tennager.Teenager;
 import fr.ulille.but.sae2_02.graphes.Arete;
 import graph.AffectationUtil;

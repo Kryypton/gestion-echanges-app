@@ -10,19 +10,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-
 import Criterion.Country;
 import Criterion.Criterion;
 import Criterion.CriterionName;
 import Platform.Platform;
 import Tennager.Teenager;
-import graph.Affectation;
 import graph.AffectationUtil;
 
 public class TableauDeBordRoot {
