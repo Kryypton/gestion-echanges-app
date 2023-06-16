@@ -57,13 +57,32 @@ public class TableauDeBordRoot {
 
         public static int saisieClavierInt() {
             try {
-                int i = sc.nextInt();
+                String input = sc.next();
+                int i = Integer.parseInt(input);
                 return i;
             } catch (Exception e) {
                 System.out.println("Erreur de saisie, veuillez recommencer");
+                sc.nextLine(); 
                 return saisieClavierInt();
             }
         }
+
+        public static int saisieClavierIntPos() {
+            try {
+                String input = sc.next();
+                int i = Integer.parseInt(input);
+                if (i < 0) {
+                    System.out.println("Erreur de saisie, veuillez recommencer");
+                    return saisieClavierIntPos();
+                }
+                return i;
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur de saisie, veuillez recommencer");
+                sc.nextLine(); 
+                return saisieClavierIntPos();
+            }
+        }
+
 
         public static double saisieClavierDouble() {
             try {
@@ -377,6 +396,7 @@ public class TableauDeBordRoot {
     
     public void runRoot() throws IOException{
         String saisie;
+        gestionPonderation();
         parametre();
         if(configExist()){
             platform.fichierConfig();
@@ -660,5 +680,19 @@ public class TableauDeBordRoot {
         System.out.println("Les pondération ont été fixer");
     }*/
 
-    
+    public static void gestionPonderation(){
+        System.out.println("-------------------------- Menu de changement de pondération --------------------------");
+        System.out.println("Vous etes dans le menu de changement de ponderation");
+
+        System.out.println("\t> La pondération des critères redibitoire est de : " + AffectationUtil.poid_redibitoire);
+        System.out.println("\t> La pondération des critères de préférence est de : " + AffectationUtil.multiplicateur_pref);
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("Veuillez choisir la pondération des critère redibitoire : (entier positif)");
+
+        AffectationUtil.poid_redibitoire = SaisieClavier.saisieClavierIntPos();
+        System.out.println("Veuillez choisir la pondération des critères de préférence : (entier positif)");
+        AffectationUtil.multiplicateur_pref = SaisieClavier.saisieClavierIntPos();
+        
+        System.out.println("Les pondération ont été fixer");
+    }
 }
