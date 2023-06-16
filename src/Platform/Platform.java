@@ -400,6 +400,7 @@ public class Platform {
                 System.out.println("Erreur fichier.");
             }
         }
+        scan.close();
     }
 
     public void changeFichierConfig() throws IOException{
@@ -514,18 +515,6 @@ public class Platform {
         
     }
 
-    public static void deleteFichierConfig(){
-        File f = new File("res/configuration.csv");
-        System.out.println(f.exists());
-        try {
-            while(f.exists()){
-                System.out.println(f.delete());
-            }
-        } catch (Exception e) {
-            System.out.println("Le fichier n'as pas pu être supprimer.");
-        }
-    }
-
     public static void createFichierConfig() throws IOException{
         // File f = new File("res/configuration.csv");
         // f.delete();
@@ -558,6 +547,6 @@ public class Platform {
                 .append(" (").append(teenager2.getCountryName()).append(")\n");
     }
     return sb.toString();
-}
+    }
 
 }

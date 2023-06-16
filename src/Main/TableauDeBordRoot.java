@@ -177,13 +177,14 @@ public class TableauDeBordRoot {
         return false;
     }
 
-    private void modification() {
-        try {
-            platform.changeFichierConfig();
-        } catch (Exception e) {
-            System.out.println("Erreur de saisie, veuillez recommencer");
-            modification();
-        }
+    private char modification() {
+        System.out.println("1 - Erreur d'entré de critére");
+        System.out.println("2 - Erreur d'entrée pour les animaux");
+        System.out.println("3 - Erreur d'entrée pour la nourriture");
+        System.out.println("4 - Changer de fichier d'adolescent");
+        System.out.println("5 - Changer de fichier d'appariemment");
+        char c = SaisieClavier.saisieClavierChar();
+        return c;
     }
 
     private static char gestionEleve() {
@@ -193,7 +194,7 @@ public class TableauDeBordRoot {
         System.out.println("4 - Sauvegarder les étudiants");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
-        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        char c = SaisieClavier.saisieClavierChar();
         return c;
     }
 
@@ -485,27 +486,61 @@ public class TableauDeBordRoot {
             ////// Modifier le fichier //////
             if (saisie.equals("op1")) {
                 System.out.println("Vous avez choisi de modifier le fichier");
-                System.out.println("→ Retour au menu principal");
-                modification();
+                
+                saisie = saisie + modification();
             }
 
+            if (saisie.equals("op11")) {
+                System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées ");
+                
+                saisie = saisie + modification();
+            }
+
+            if (saisie.equals("op12")) {
+                System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées pour les animaux");
+                
+                saisie = saisie + modification();
+            }
+
+            if (saisie.equals("op13")) {
+                System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées pour la nourriture");
+                
+                saisie = saisie + modification();
+            }
+
+            if (saisie.equals("op14")) {
+                System.out.println("Vous avez choisi de changer de fichier d'adolescent");
+                
+                saisie = saisie + modification();
+            }
+
+            if (saisie.equals("op15")) {
+                System.out.println("Vous avez choisi de changer le fichier d'appariemment");
+                
+                saisie = saisie + modification();
+            }
             ////// Supprimer le fichier //////
             if (saisie.equals("op2")) {
                 System.out.println("Vous avez choisi de supprimer le fichier");
-                System.out.println("→ Retour au menu principal");
-                Platform.deleteFichierConfig();
+                if (configExist()) {
+                    System.out.println("Voulez-vous vraiment supprimer le fichier ? (y/n)");
+                    char c = SaisieClavier.saisieClavierChar();
+                    if (c == 'y') {
+                        File file = new File("res/configuration.csv");
+                        boolean deleted = file.delete();
+                        if (deleted) {
+                            System.out.println("Le fichier a été supprimé.");
+                        } else {
+                            System.out.println("Impossible de supprimer le fichier.");
+                        }
+                    } else {
+                        System.out.println("Le fichier n'a pas été supprimé.");
+                    }
+                } else {
+                    System.out.println("Le fichier n'existe pas. Retour au menu principal.");
+                }
             }
 
-            if (saisie.equals("so1")) {
-                System.out.println("Vous avez choisi de crée un fichier par défault.");
-                System.out.println("Pour le modifier, veuiller retourner dans options.");
-                System.out.println("→ Retour au menu principal");
-                creationfichier();
-            }
-
-            if (saisie.equals("so2")) {
-                System.out.println("→ Retour au menu principal");
-            }
 
             //////////////////////////// Retour au Menu principal ////////////////////////////
             if (saisie.equals("b")) {
@@ -570,25 +605,30 @@ public class TableauDeBordRoot {
         return c;
     }
 
-    public void creationfichier() throws IOException{
-        Platform.createFichierConfig();
-    }
-
-
-
-
-    public static void gestionPonderation(){
-        System.out.println("Vous etes dans le menu de changement de ponderation");
-
-        System.out.println("La pondération des critères redibitoire est de : " + AffectationUtil.poid_redibitoire);
-        System.out.println("La pondération des critères de préférence est de : " + AffectationUtil.multiplicateur_pref);
-
-        System.out.println("Veuillez choisir la pondération des critère redibitoire");
-        try {
-            AffectationUtil.poid_redibitoire = SaisieClavier.saisieClavierInt();
-
-        } catch (Exception e) {
-            System.out.println("Erreur de saisie, veuillez recommencer");
+    /*if(configExist()){
+            do{
+                        System.out.println("1 - Erreur d'entré de critère");
+        System.out.println("2 - Erreur d'entré pour les animaux");
+        System.out.println("3 - Erreur d'entré pour la nourriture");
+        System.out.println("4 - Changer de fichier d'adolescent");
+        System.out.println("5 - Changer de fichier d'appariemment");
+                S
+                saisie = sc.next();spain
+            }while(!saisie.equals("1") && !saisie.equals("2") && !saisie.equals("3"));
+            if (saisie.equals("1")){
+                Platform.changeFichierConfig();
+            }else if(saisie.equals("2")){
+                Platform.deleteFichierConfig();
+            }
+        }else{
+            do{
+                System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
+                System.out.println("[y/n]");
+                saisie = sc.next();
+            }while(!saisie.equals("y") || !saisie.equals("n"));
+            if (saisie.equals("y")){
+                Platform.createFichierConfig();
+            }
         }
 
         System.out.println("Veuillez choisir la pondération des critères de préférence");
@@ -601,7 +641,7 @@ public class TableauDeBordRoot {
         }
 
         System.out.println("Les pondération ont été fixer");
-    }
+    }*/
 
     
 }
