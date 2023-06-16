@@ -660,5 +660,87 @@ public class TableauDeBordRoot {
         System.out.println("Les pondération ont été fixer");
     }*/
 
-    
+    public void entryError(){
+        String saisie,type;
+        do{
+            System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+            saisie = sc.next();
+        } while(!saisie.equals("y") && !saisie.equals("n"));
+        if (saisie.equals("y")) {
+            type = "true";
+        } else {
+            type = "false";
+        }
+    }
+
+    public void animalError(){
+        String saisie,animal;
+        do{
+            System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+            saisie = sc.next();
+        }while(!saisie.equals("y") && !saisie.equals("n"));
+        if (saisie.equals("y")){
+            animal = "true";
+        }else{
+            animal = "false";
+        }
+    }
+
+    public void foodError(){
+        String saisie,food;
+        do{
+            System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
+            saisie = sc.next();
+        }while(!saisie.equals("y") && !saisie.equals("n"));
+        if (saisie.equals("y")){
+            food = "true";
+        }else{
+            food = "false";
+        }
+    }
+
+    public void listPath(){
+        String saisie,liste;
+        File f;
+        boolean chemin;
+        do{
+            if(chemin == true){
+                System.out.println("Erreur, le fichier donné ne peut pas être lu. ");
+            }else{
+                chemin = true;
+            }
+                        
+            System.out.println("Entrer le chemin vers le fichier d'importation: ");
+            saisie = sc.next();
+            f = new File(saisie);
+        }while(f.canRead());
+            liste = saisie;
+        if (saisie.equals("y")){
+            liste = saisie;
+        }else{
+            liste = "false";
+        }
+
+    public void mapPath(){
+        String saisie,map;
+        File f;
+        boolean chemin;
+        do{
+            if(chemin == true){
+                System.out.println("Erreur, le fichier donné ne peut pas être lu. ");
+            }else{
+                chemin = true;
+            }
+
+        System.out.println("Entrer le chemin vers le fichier d'importation: ");
+        saisie = sc.next();
+        f = new File(saisie);
+        }while(f.canRead());
+        if (saisie.equals("y")){
+            map = saisie;
+        }else{
+            map = "false";
+        }
+    } 
+
 }
