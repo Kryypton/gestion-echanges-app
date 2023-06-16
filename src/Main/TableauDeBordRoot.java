@@ -475,7 +475,11 @@ public class TableauDeBordRoot {
             //////////////////////////// Option ////////////////////////////
             if (saisie.equals("4")){
                 System.out.println("Vous avez choisi les options");
-                saisie = "op" + option();
+                if(configExist()){
+                    saisie = "op" + option();
+                }else{
+                    saisie = "so" + sansFichier();
+                }
             }
 
             ////// Modifier le fichier //////
@@ -488,6 +492,17 @@ public class TableauDeBordRoot {
             ////// Supprimer le fichier //////
             if (saisie.equals("op2")) {
                 System.out.println("Vous avez choisi de supprimer le fichier");
+                System.out.println("→ Retour au menu principal");
+            }
+
+            if (saisie.equals("so1")) {
+                System.out.println("Vous avez choisi de crée un fichier par défault.");
+                System.out.println("Pour le modifier, veuiller retourner dans options.");
+                System.out.println("→ Retour au menu principal");
+                creationfichier();
+            }
+
+            if (saisie.equals("so2")) {
                 System.out.println("→ Retour au menu principal");
             }
 
@@ -520,7 +535,7 @@ public class TableauDeBordRoot {
         platform.removeTeenager(teen);
         try {
             Platform.exportTeenagers(platform.getTeenagerArrayList(),"res/Teenagers.csv");    /////////////////////// Je sais pas comment faire pour que ça marche mais vous avez l'idée
-        } catch (FileNotFoundException e) {                                                           /////////////////////// tiens c'est cadeau
+        } catch (FileNotFoundException e) {
             System.out.println("Erreur lors de l'exportation du fichier");
         }
     }
@@ -544,31 +559,18 @@ public class TableauDeBordRoot {
         return c;
     }
 
+    public char sansFichier() throws IOException{
+        System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
+        System.out.println("1 - crée le fichier");
+        System.out.println("2 - retour");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        return c;
+    }
 
-    /*if(configExist()){
-            do{
-                        System.out.println("1 - Erreur d'entré de critère");
-        System.out.println("2 - Erreur d'entré pour les animaux");
-        System.out.println("3 - Erreur d'entré pour la nourriture");
-        System.out.println("4 - Changer de fichier d'adolescent");
-        System.out.println("5 - Changer de fichier d'appariemment");
-                S
-                saisie = sc.next();
-            }while(!saisie.equals("1") && !saisie.equals("2") && !saisie.equals("3"));
-            if (saisie.equals("1")){
-                Platform.changeFichierConfig();
-            }else if(saisie.equals("2")){
-                Platform.deleteFichierConfig();
-            }
-        }else{
-            do{
-                System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
-                System.out.println("[y/n]");
-                saisie = sc.next();
-            }while(!saisie.equals("y") || !saisie.equals("n"));
-            if (saisie.equals("y")){
-                Platform.createFichierConfig();
-            }
-        }
-    }*/
+    public void creationfichier() throws IOException{
+        Platform.createFichierConfig();
+    }
+
 }

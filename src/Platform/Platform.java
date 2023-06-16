@@ -433,7 +433,7 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                } while(!saisie.equals("y") || !saisie.equals("n"));
+                } while(!saisie.equals("y") && !saisie.equals("n"));
                 if (saisie.equals("y")) {
                     type = "true";
                 } else {
@@ -445,7 +445,7 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                }while(!saisie.equals("y") || !saisie.equals("n"));
+                }while(!saisie.equals("y") && !saisie.equals("n"));
                 if (saisie.equals("y")){
                     animal = "true";
                 }else{
@@ -456,7 +456,7 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                }while(!saisie.equals("y") || !saisie.equals("n"));
+                }while(!saisie.equals("y") && !saisie.equals("n"));
                 if (saisie.equals("y")){
                     food = "true";
                 }else{
