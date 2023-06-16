@@ -111,13 +111,13 @@ public class Platform {
         }
     }
 
-    public void purgeInvalidAnimalRequirements() throws CriterionTypeException{
+    public void purgeInvalidAnimalRequirements(){
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidAnimalRequirement();
         }
     }
 
-    public void purgeInvalidFoodRequirements() throws CriterionTypeException{
+    public void purgeInvalidFoodRequirements(){
         for (Teenager teenager : teenagerList) {
             teenager.purgeInvalidFoodRequirement();
         }
@@ -361,25 +361,25 @@ public class Platform {
         }
     }
 
-    public static void sansFichierConfig() throws CriterionTypeException{
-        this.purgeInvalidRequirements();
-        this.purgeInvalidAnimalRequirements();
-        this.purgeInvalidFoodRequirements();
+    public void sansFichierConfig(){
+        purgeInvalidRequirements();
+        purgeInvalidAnimalRequirements();
+        purgeInvalidFoodRequirements();
     }
 
-    public static void fichierConfig() throws FileNotFoundException, CriterionTypeException{
+    public void fichierConfig() throws FileNotFoundException{
         File f = new File("res/Configuration.csv");
         Scanner scan = new Scanner(f);
         scan.next();
         scan.useDelimiter(";");
         if(scan.next().equals("true")){
-            this.purgeInvalidRequirements();
+            purgeInvalidRequirements();
         }
         if(scan.next().equals("true")){
-            this.purgeInvalidAnimalRequirements();
+            purgeInvalidAnimalRequirements();
         }
         if(scan.next().equals("true")){
-            this.purgeInvalidFoodRequirements();
+            purgeInvalidFoodRequirements();
         }
         String listPath = scan.next();
         File f1,f2;
@@ -388,7 +388,7 @@ public class Platform {
                 f1 = new File(listPath);
                 this.importListTeenagers(f1);
             } catch (Exception e) {
-                throw new CriterionTypeException("Erreur fichier.");
+                System.out.println("Erreur fichier.");
             }
         }
         String compatiblePath = scan.next();
@@ -397,7 +397,7 @@ public class Platform {
                 f2 = new File(compatiblePath);
                 this.importListTeenagers(f2);
             } catch (Exception e) {
-                throw new CriterionTypeException("Erreur fichier.");
+                System.out.println("Erreur fichier.");
             }
         }
     }

@@ -357,11 +357,13 @@ public class TableauDeBordRoot {
         } while (countryHote == countryVisiteur);
     }
     
-    public void runRoot() throws IOException, CriterionTypeException {
+    public void runRoot() throws IOException{
         String saisie;
         parametre();
         if(configExist()){
-            Platform.fichierConfig();
+            platform.fichierConfig();
+        }else{
+            platform.sansFichierConfig();
         }
         while (isRunning) {
             System.out.println("-------------------- Menu principal --------------------");
@@ -458,8 +460,10 @@ public class TableauDeBordRoot {
             if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
 
             //////////////////////////// Option ////////////////////////////
-            if (saisie.equals("3")) option();
-            
+            if (saisie.equals("4")){
+                option();
+                System.out.println("Retour au menu principal");
+            }
             //////////////////////////// Retour au Menu principal ////////////////////////////
             if (saisie.equals("b")) {
                 System.out.println("Vous avez choisi de retourner au menu principal");
@@ -476,20 +480,6 @@ public class TableauDeBordRoot {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
     public static void main(String[] args) throws IOException {
         TableauDeBordRoot main = new TableauDeBordRoot();
