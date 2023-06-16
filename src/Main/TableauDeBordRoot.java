@@ -476,7 +476,11 @@ public class TableauDeBordRoot {
             //////////////////////////// Option ////////////////////////////
             if (saisie.equals("4")){
                 System.out.println("Vous avez choisi les options");
-                saisie = "op" + option();
+                if(configExist()){
+                    saisie = "op" + option();
+                }else{
+                    saisie = "so" + sansFichier();
+                }
             }
 
             ////// Modifier le fichier //////
@@ -567,7 +571,7 @@ public class TableauDeBordRoot {
         platform.removeTeenager(teen);
         try {
             Platform.exportTeenagers(platform.getTeenagerArrayList(),"res/Teenagers.csv");    /////////////////////// Je sais pas comment faire pour que ça marche mais vous avez l'idée
-        } catch (FileNotFoundException e) {                                                           /////////////////////// tiens c'est cadeau
+        } catch (FileNotFoundException e) {
             System.out.println("Erreur lors de l'exportation du fichier");
         }
     }
@@ -591,6 +595,15 @@ public class TableauDeBordRoot {
         return c;
     }
 
+    public char sansFichier() throws IOException{
+        System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
+        System.out.println("1 - crée le fichier");
+        System.out.println("2 - retour");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        return c;
+    }
 
     /*if(configExist()){
             do{
@@ -617,5 +630,18 @@ public class TableauDeBordRoot {
                 Platform.createFichierConfig();
             }
         }
+
+        System.out.println("Veuillez choisir la pondération des critères de préférence");
+
+        try {
+            AffectationUtil.multiplicateur_pref = SaisieClavier.saisieClavierInt();
+
+        } catch (Exception e) {
+            System.out.println("Erreur de saisie, veuillez recommencer");
+        }
+
+        System.out.println("Les pondération ont été fixer");
     }*/
+
+    
 }

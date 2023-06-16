@@ -406,7 +406,7 @@ public class Platform {
     public void changeFichierConfig() throws IOException{
         boolean run = true,chemin = false;
         String saisie;
-        Scanner sc,scInit;
+        Scanner sc = new Scanner(System.in),scInit;
         File f,fInit;
 
         fInit = new File("res/configuration.csv");
@@ -422,7 +422,6 @@ public class Platform {
             System.out.println("4 - Changer de fichier d'adolescent");
             System.out.println("5 - Changer de fichier d'appariemment");
             System.out.println("0 - retour");
-            sc = new Scanner(System.in);  
 
             saisie = "" + sc.next();
             //////////////////////////////// Gestion des élèves ////////////////////////////////
@@ -434,7 +433,7 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                } while(!saisie.equals("y") || !saisie.equals("n"));
+                } while(!saisie.equals("y") && !saisie.equals("n"));
                 if (saisie.equals("y")) {
                     type = "true";
                 } else {
@@ -446,7 +445,7 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                }while(!saisie.equals("y") || !saisie.equals("n"));
+                }while(!saisie.equals("y") && !saisie.equals("n"));
                 if (saisie.equals("y")){
                     animal = "true";
                 }else{
@@ -457,7 +456,7 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                }while(!saisie.equals("y") || !saisie.equals("n"));
+                }while(!saisie.equals("y") && !saisie.equals("n"));
                 if (saisie.equals("y")){
                     food = "true";
                 }else{
@@ -514,6 +513,19 @@ public class Platform {
         
     }
 
+<<<<<<< HEAD
+=======
+    public static void deleteFichierConfig(){
+        File f = new File("res/configuration.csv");
+        System.out.println(f.exists());
+        try {
+            System.out.println(f.delete());
+        } catch (Exception e) {
+            System.out.println("Le fichier n'as pas pu être supprimer.");
+        }
+    }
+
+>>>>>>> 3dc283c8ee3027091e7ee2ab844940cfa0cee369
     public static void createFichierConfig() throws IOException{
         File f = new File("res/configuration.csv");
         f.delete();
