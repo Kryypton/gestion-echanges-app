@@ -513,19 +513,6 @@ public class Platform {
         
     }
 
-<<<<<<< HEAD
-=======
-    public static void deleteFichierConfig(){
-        File f = new File("res/configuration.csv");
-        System.out.println(f.exists());
-        try {
-            System.out.println(f.delete());
-        } catch (Exception e) {
-            System.out.println("Le fichier n'as pas pu être supprimer.");
-        }
-    }
-
->>>>>>> 3dc283c8ee3027091e7ee2ab844940cfa0cee369
     public static void createFichierConfig() throws IOException{
         File f = new File("res/configuration.csv");
         f.delete();
