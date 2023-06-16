@@ -403,26 +403,19 @@ public class Platform {
         scan.close();
     }
 
-    public void changeFichierConfig() throws IOException{
-        boolean run = true,chemin = false;
-        String saisie;
-        Scanner sc = new Scanner(System.in),scInit;
-        File f,fInit;
+    public void changeFichierConfig(String saisie) throws IOException{
+        boolean run = true, chemin = false;
+
+        Scanner sc = new Scanner(System.in), scInit;
+        File f, fInit;
 
         fInit = new File("res/configuration.csv");
         scInit = new Scanner(fInit);
         scInit.next();
         scInit.useDelimiter(";");
-        String type = scInit.next(),animal = scInit.next(),food = scInit.next(),liste = scInit.next(),map= scInit.next();
+        String type = scInit.next(), animal = scInit.next(), food = scInit.next(), liste = scInit.next(), map= scInit.next();
 
         do{
-            System.out.println("1 - Erreur d'entré de critére");
-            System.out.println("2 - Erreur d'entrée pour les animaux");
-            System.out.println("3 - Erreur d'entrée pour la nourriture");
-            System.out.println("4 - Changer de fichier d'adolescent");
-            System.out.println("5 - Changer de fichier d'appariemment");
-            System.out.println("0 - retour");
-
             saisie = "" + sc.next();
             //////////////////////////////// Gestion des élèves ////////////////////////////////
 

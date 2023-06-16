@@ -501,44 +501,42 @@ public class TableauDeBordRoot {
                     } catch (IOException e) {
                         System.out.println("Une erreur s'est produite lors de la copie du fichier : " + e.getMessage());
                     }
-                saisie = saisie + modification();
             }
 
             ////// Modifier le fichier //////
             if (saisie.equals("op1")) {
                 System.out.println("Vous avez choisi de modifier le fichier");
                 
-                saisie = saisie + modification();
+                saisie = "op1" + modification();
             }
 
             if (saisie.equals("op11")) {
                 System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées ");
                 
-                saisie = saisie + modification();
+                
             }
 
             if (saisie.equals("op12")) {
                 System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées pour les animaux");
                 
-                saisie = saisie + modification();
+               
             }
 
             if (saisie.equals("op13")) {
                 System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées pour la nourriture");
                 
-                saisie = saisie + modification();
+                
             }
 
             if (saisie.equals("op14")) {
                 System.out.println("Vous avez choisi de changer de fichier d'adolescent");
                 
-                saisie = saisie + modification();
+               
             }
 
             if (saisie.equals("op15")) {
                 System.out.println("Vous avez choisi de changer le fichier d'appariemment");
                 
-                saisie = saisie + modification();
             }
             ////// Supprimer le fichier //////
             if (saisie.equals("op2")) {
@@ -561,7 +559,6 @@ public class TableauDeBordRoot {
                     System.out.println("Le fichier n'existe pas. Retour au menu principal.");
                 }
             }
-
 
             //////////////////////////// Retour au Menu principal ////////////////////////////
             if (saisie.equals("b")) {
