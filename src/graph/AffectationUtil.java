@@ -12,10 +12,11 @@ import Tennager.Teenager;
 public class AffectationUtil implements Serializable {
     public static final int POIDS_INITIAL = 1000;
     public static final int POID_REDIBITOIRE = 1000;
+        public static final int MULTIPLICATEUR_PREF = 1;
 
     public static int poid_initial = POIDS_INITIAL;
     public static int poid_redibitoire = POID_REDIBITOIRE;
-
+    public static int multiplicateur_pref = MULTIPLICATEUR_PREF;
 
 
     /**
@@ -33,7 +34,7 @@ public class AffectationUtil implements Serializable {
         //Age différent ?
         if (host.getDiffAge(guest).toTotalMonths()<18) poid -= 25;
         //poid = poid + poids;
-        poid = poid + history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest);
+        poid = poid + ((history.historyTeenager(host, guest) + history.compatibleWishGender(host, guest)) * multiplicateur_pref) ;
         if (poid < 0) {
             poid = 0;
         }
@@ -101,6 +102,15 @@ public class AffectationUtil implements Serializable {
     public int getPoidRedibitoire(){
         return poid_redibitoire;
     }
+
+    public int getMultplicateurPref(){
+        return multiplicateur_pref;
+    }
+
+    public int setMultplicateurPref(int mult){
+        return multiplicateur_pref = mult;
+    }
+
 
     public int setPoidInitial(int poid){
         return poid_initial = poid;
