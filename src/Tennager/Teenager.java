@@ -308,13 +308,13 @@ public class Teenager implements Serializable{
 
     public void purgeInvalidAnimalRequirement(){
         if(!(requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("yes") || requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("no"))){
-            System.out.println("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
+            System.out.println("ID: "+this.id + ";Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
         }
         if(!(requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("yes") || requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("no"))){
-            System.out.println("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
+            System.out.println("ID: "+this.id + ";Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
         }
         if(!(requirements.get(CriterionName.GUEST_ANIMAL_ALLERGY).getValue().equals("yes") && requirements.get(CriterionName.HOST_HAS_ANIMAL).getValue().equals("yes"))){
-            System.out.println("Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
+            System.out.println("ID: "+this.id + ";Critére illogique: l''adolescent est allergique aux animaux, alors qu'il en posséde.");
         }
     }
 
@@ -340,13 +340,13 @@ public class Teenager implements Serializable{
 
         for(String s: hFood){
             if(!(s.equals("nonuts") || s.equals("vegetarian"))){
-                System.out.println("Erreur host_food_argument: choisir nonuts, vegetarian, ou rien");
+                System.out.println("ID: "+this.id + ";Erreur host_food_argument: choisir nonuts, vegetarian, ou rien");
             }
         }
 
         for(String s: gFood){
             if(!(s.equals("nonuts") || s.equals("vegetarian"))){
-                System.out.println("Erreur Guest_food argument: choisir nonuts, vegetarian, ou rien");
+                System.out.println("ID: "+this.id + ";Erreur Guest_food argument: choisir nonuts, vegetarian, ou rien");
             }
         }
     }
