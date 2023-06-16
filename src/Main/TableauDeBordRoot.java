@@ -252,6 +252,47 @@ public class TableauDeBordRoot {
         return new Teenager(nom, prenom, dateNaissance, pays, requirements, lastAffectation);
     }
 
+    private static Teenager createTeenagerManuallyByCountry(Country c) {
+        System.out.println("L'ajout manuel d'un étudiant");
+        String nom;
+        String prenom;
+        LocalDate dateNaissance;
+        Country pays = c;
+        Map<String, Criterion> requirements = new HashMap<String, Criterion>();
+        Teenager lastAffectation = null;
+
+        System.out.println("Nom : ");
+        nom = SaisieClavier.saisieClavierStr();
+        System.out.println("Prénom : ");
+        prenom = SaisieClavier.saisieClavierStr();
+        System.out.println("Date de naissance : (format : yyyy-mm-dd)");
+        dateNaissance = SaisieClavier.saisieClavierDate();
+        System.out.println("Genre : (female/male/other)");
+        requirements.put(CriterionName.GENDER.name(), new Criterion(SaisieClavier.saisieGenre(), CriterionName.GENDER));
+        System.out.println("L'étudiant a-t-il des allargie aux animaux ? (y/n)");
+        requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no", CriterionName.GUEST_ANIMAL_ALLERGY));
+        System.out.println("L'étudiant possède-t-il un animal chez lui ? (y/n)");
+        requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no", CriterionName.HOST_HAS_ANIMAL));
+        System.out.println("L'étudiant suis-t-il un régime spécial ? (y/n)");
+        if (SaisieClavier.saisieYesOrNo() == 'y') {
+            System.out.println("Quel régime ?");
+            requirements.put(CriterionName.GUEST_FOOD.name(), new Criterion(SaisieClavier.saisieClavierRegime(), CriterionName.GUEST_FOOD));
+        } else requirements.put(CriterionName.GUEST_FOOD.name(), new Criterion("no", CriterionName.GUEST_FOOD));
+        System.out.println("L'étudiant peut-il cuisiner pour des Végétariens ? (y/n)");
+        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no" , CriterionName.HOST_FOOD));
+        System.out.println("L'étudiant peut-il cuisiner pour des personnes allergiques aux noix ? (y/n)");
+        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no" , CriterionName.HOST_FOOD));
+        System.out.println("Avec quel genre l'étudiant souhaite être ? (male/female/other)");
+        requirements.put(CriterionName.PAIR_GENDER.name(), new Criterion(SaisieClavier.saisieGenre(), CriterionName.PAIR_GENDER));
+        System.out.println("L'étudiant souhaite-t-il être avec son ancienne affectation ? (y/n)");
+        if (SaisieClavier.saisieYesOrNo() == 'y') {
+            System.out.println("Quel est l'ID de son ancienne affectation ?");
+            lastAffectation = SaisieClavier.saisieClavierTeenager();
+        }
+        return new Teenager(nom, prenom, dateNaissance, pays, requirements, lastAffectation);
+    }
+    
+
     private static void addToPlatform(Teenager teenager) {
         platform.addTeenager(teenager);
         System.out.printf("Etudiant [%s]-[%s]-[%s] a été ajouter avec succès\n", teenager.toString(), teenager.getAgeYear(), teenager.getId());
@@ -369,14 +410,25 @@ public class TableauDeBordRoot {
             ////// générer appariements //////
             if (saisie.equals("ga2")) {
                 System.out.println("Vous avez choisi de générer automatiquement les appariements :");
-                AffectationUtil.affectation(platform.getTeenagerList(), countryVisiteur, countryHote);
+                do {
+                    if (platform.getNbCountry(countryHote) != platform.getNbCountry(countryVisiteur)) {
+                        System.out.println("La génération est impossible ! Puisque le nombre d'étudiant hôte n'est pas égal au nombre d'étudiants Visteur ! " + platform.getNbCountry(countryHote)  + "(" + countryHote.getCOUNTRY_NAME() + ") /" + platform.getNbCountry(countryVisiteur) + "(" + countryVisiteur.getCOUNTRY_NAME() + ")");
+                        if (platform.getNbCountry(countryHote) > platform.getNbCountry(countryVisiteur)) {
+                            System.out.println("Veuillez ajouter un étudiant (nombre impair !) " + countryVisiteur.getCOUNTRY_NAME() + " : ");
+                            platform.addTeenager(createTeenagerManuallyByCountry(countryVisiteur));
+                        } else {
+                            System.out.println("Veuillez ajouter un étudiant (nombre impair !) " + countryHote.getCOUNTRY_NAME() + " : ");
+                            platform.addTeenager(createTeenagerManuallyByCountry(countryHote));
+                        }
+                    }
+                } while (platform.getNbCountry(countryHote) == platform.getNbCountry(countryVisiteur));
+                platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(), countryVisiteur, countryHote)));
                 System.out.println("→ Retour au menu principal");
             }
             ////// Affichage des appariements //////
             if (saisie.equals("ga3")) {
                 System.out.println("Vous avez choisi d'afficher les appariements");
-                platform.findCompatibleTeenagers();
-                System.out.println(platform.getCompatibleTeenagers().toString());
+                System.out.println(platform.toStringCompatibleTeenagers());
                 System.out.println("→ Retour au menu principal");
             }
             ////// importer appariements //////

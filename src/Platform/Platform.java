@@ -259,7 +259,7 @@ public class Platform {
     }
 
     public static void exportCompatibleTeenager(Map<Teenager,Teenager> CSV, String fichier) throws IOException{
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(fichier))){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("res/" + fichier + ".csv"))){
             for(Teenager a: CSV.keySet()){
                 bw.write(a.teenagerToString()+";"+CSV.get(a).teenagerToString()+"\n");
                 bw.newLine();
@@ -517,4 +517,20 @@ public class Platform {
         }
         return list;
     }
+
+
+    public String toStringCompatibleTeenagers() {
+    StringBuilder sb = new StringBuilder();
+    for (Map.Entry<Teenager, Teenager> entry : compatibleTeenagers.entrySet()) {
+        Teenager teenager1 = entry.getKey();
+        Teenager teenager2 = entry.getValue();
+        
+        sb.append(teenager1.getName()).append(" ").append(teenager1.getForname())
+                .append(" (").append(teenager1.getCountryName()).append(") + ")
+                .append(teenager2.getName()).append(" ").append(teenager2.getForname())
+                .append(" (").append(teenager2.getCountryName()).append(")\n");
+    }
+    return sb.toString();
+}
+
 }
