@@ -1,8 +1,12 @@
 package Main;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,16 +44,17 @@ public class TableauDeBordRoot {
         }
 
         public static String saisieClavierStr() {
-            String str = sc.nextLine();
+            String str = sc.next();
             return str;
         }
 
         public static char saisieClavierChar() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 char c = str.charAt(0);
                 return c;
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 return saisieClavierChar();
             }
@@ -61,6 +66,7 @@ public class TableauDeBordRoot {
                 int i = Integer.parseInt(input);
                 return i;
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 sc.nextLine(); 
                 return saisieClavierInt();
@@ -77,6 +83,7 @@ public class TableauDeBordRoot {
                 }
                 return i;
             } catch (NumberFormatException e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 sc.nextLine(); 
                 return saisieClavierIntPos();
@@ -89,6 +96,7 @@ public class TableauDeBordRoot {
                 double d = sc.nextDouble();
                 return d;
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 return saisieClavierDouble();
             }
@@ -96,7 +104,7 @@ public class TableauDeBordRoot {
 
         public static Country saisieClavierCountry() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 Country c = Country.valueOf(str.toUpperCase());
                 return c;
             } catch (Exception e) {
@@ -107,10 +115,11 @@ public class TableauDeBordRoot {
 
         public static LocalDate saisieClavierDate() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 LocalDate d = LocalDate.parse(str);
                 return d;
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 return saisieClavierDate();
             }
@@ -118,10 +127,11 @@ public class TableauDeBordRoot {
 
         public static File saisieClavierFile() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 File f = new File(str);
                 return f;
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 return saisieClavierFile();
             }
@@ -129,14 +139,16 @@ public class TableauDeBordRoot {
 
         public static String saisieClavierRegime() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 if (str.equals("vegetarian") || str.equals("nonuts")) {
                     return str;
                 } else {
+
                     System.out.println("Erreur de saisie, veuillez recommencer");
                     return saisieClavierRegime();
                 }
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer");
                 return saisieClavierRegime();
             }
@@ -144,7 +156,7 @@ public class TableauDeBordRoot {
 
         public static String saisieGenre() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 if (str.equals("female") || str.equals("male") || str.equals("other")) {
                     return str;
                 } else {
@@ -168,6 +180,7 @@ public class TableauDeBordRoot {
                     return t;
                 }
             } catch (Exception e) {
+
                 System.out.println("Erreur de saisie, veuillez recommencer, l'étudiant n'existe pas.");
                 return saisieClavierTeenager();
             }
@@ -175,7 +188,7 @@ public class TableauDeBordRoot {
 
         public static char saisieYesOrNo() {
             try {
-                String str = sc.nextLine();
+                String str = sc.next();
                 char c = str.charAt(0);
                 if (c == 'y' || c == 'n') {
                     return c;
@@ -202,8 +215,6 @@ public class TableauDeBordRoot {
         System.out.println("1 - Erreur d'entré de critére");
         System.out.println("2 - Erreur d'entrée pour les animaux");
         System.out.println("3 - Erreur d'entrée pour la nourriture");
-        System.out.println("4 - Changer de fichier d'adolescent");
-        System.out.println("5 - Changer de fichier d'appariemment");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierChar();
@@ -229,23 +240,22 @@ public class TableauDeBordRoot {
         System.out.println("5 - Sauvegarder les appariements");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
-        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        char c = SaisieClavier.saisieClavierChar();
         return c;
     }
 
-    public static char gestionHistorique() {
+    /*public static char gestionHistorique() {
         char c = SaisieClavier.saisieClavierStr().charAt(0);
         return c;
-    }
+    }*/
 
     public static char tableauDeBord() {
         System.out.println("1 - Gestion élèves");
         System.out.println("2 - Gestion des appariements");
-        System.out.println("3 - Consulter l'historique");
         System.out.println("4 - Option");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
-        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        char c = SaisieClavier.saisieClavierChar();
         return c;
     }
 
@@ -289,6 +299,45 @@ public class TableauDeBordRoot {
             lastAffectation = SaisieClavier.saisieClavierTeenager();
         }
         return new Teenager(nom, prenom, dateNaissance, pays, requirements, lastAffectation);
+    }
+
+    private static Teenager createTeenagerManuallyForm() {
+        System.out.println("L'ajout manuel d'un étudiant");
+        String nom;
+        String prenom;
+        LocalDate dateNaissance;
+        Country pays;
+        Map<String, Criterion> requirements = new HashMap<String, Criterion>();
+        Teenager lastAffectation = null;
+
+        System.out.println("Nom : ");
+        nom = SaisieClavier.saisieClavierStr();
+        System.out.println("Prénom : ");
+        prenom = SaisieClavier.saisieClavierStr();
+        System.out.println("Date de naissance : (format : yyyy-mm-dd)");
+        dateNaissance = SaisieClavier.saisieClavierDate();
+        System.out.println("Pays : (France/Italy/Spain/Germany)");
+        pays = SaisieClavier.saisieClavierCountry();
+        System.out.println("Genre : (female/male/other)");
+        requirements.put(CriterionName.GENDER.name(), new Criterion(SaisieClavier.saisieGenre(), CriterionName.GENDER));
+        System.out.println("Êtes-vous allergique aux animaux ? (y/n)");
+        requirements.put(CriterionName.GUEST_ANIMAL_ALLERGY.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no", CriterionName.GUEST_ANIMAL_ALLERGY));
+        System.out.println("Possédez-vous un animal ? (y/n)");
+        requirements.put(CriterionName.HOST_HAS_ANIMAL.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no", CriterionName.HOST_HAS_ANIMAL));
+        System.out.println("Suivez-vous un régime spécial ? (y/n)");
+        if (SaisieClavier.saisieYesOrNo() == 'y') {
+            System.out.println("Quel est votre régime ? (vegetarian/nonuts)");
+            requirements.put(CriterionName.GUEST_FOOD.name(), new Criterion(SaisieClavier.saisieClavierRegime(), CriterionName.GUEST_FOOD));
+        } else requirements.put(CriterionName.GUEST_FOOD.name(), new Criterion("no", CriterionName.GUEST_FOOD));
+        System.out.println("Pouvez-vous cuisiner pour des Végétariens ? (y/n)");
+        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no" , CriterionName.HOST_FOOD));
+        System.out.println("Pouvez-vous cuisiner pour des personnes allergiques aux noix ? (y/n)");
+        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no" , CriterionName.HOST_FOOD));
+        System.out.println("Avec quel genre d'étudiant souhaitez-vous être ? (male/female/other)");
+        requirements.put(CriterionName.PAIR_GENDER.name(), new Criterion(SaisieClavier.saisieGenre(), CriterionName.PAIR_GENDER));
+        System.out.println("Souhaitez-vous être avec votre ancienne affectation ? (y/n)");
+        requirements.put(CriterionName.HISTORY.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "same" : "other" , CriterionName.HISTORY));
+        return new Teenager(nom, prenom, dateNaissance, pays, requirements);
     }
 
     private static Teenager createTeenagerManuallyByCountry(Country c) {
@@ -355,28 +404,6 @@ public class TableauDeBordRoot {
         System.out.printf("Les étudiants du fichier [%s] ont été ajouter avec succès\n", path);
     }
 
-    //////////////////////////////// Gestion des appariements ////////////////////////////////
-
-    /*private static void appariement() {
-        Teenager teenager1;
-        Teenager teenager2;
-        do {
-            System.out.println("ID de l'étudiant 1 : ");
-            teenager1 = SaisieClavier.saisieClavierTeenager();
-            System.out.println("ID de l'étudiant 2 :");
-            teenager2 = SaisieClavier.saisieClavierTeenager();
-            if (teenager1.equals(teenager2)) System.out.println("Les deux étudiants sont les mêmes, veuillez recommencer.");
-        } while (teenager1.equals(teenager2));
-
-    }
-
-    private static void afficherAppariement() {
-        System.out.println("Voici les appariements :");
-        for(Teenager a: platform.getCompatibleTeenagers().keySet()){
-            System.out.println(a.teenagerToString()+";"+platform.getCompatibleTeenagers().get(a).teenagerToString()+"\n");
-        }
-    }*/
-
     //////////////////////////////// PARAMETTRE ////////////////////////////////
     private static void parametre() {
         do {
@@ -394,6 +421,19 @@ public class TableauDeBordRoot {
         } while (countryHote == countryVisiteur);
     }
     
+    public void runUser() throws IOException{
+        String saisie; 
+        
+        System.out.println("-------------------- Menu Formulaire --------------------");
+        form();
+        System.out.println("Votre formulaire a bien été enregistré ! \n Retour au menu principal ...");
+        main(null);
+    }
+
+    public void form() {
+        platform.addTeenager(createTeenagerManuallyForm());
+    }
+
     public void runRoot() throws IOException{
         String saisie;
         gestionPonderation();
@@ -409,11 +449,15 @@ public class TableauDeBordRoot {
             //////////////////////////////// Gestion des élèves ////////////////////////////////
 
             if (saisie.equals("1")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("-------------------- Gestion des élèves --------------------");
                 saisie = "ge" + gestionEleve(); 
             } 
             ////// Ajout d'un élève à la liste //////
             if (saisie.equals("ge1")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi d'ajouter un eleve à la liste");
                 addToPlatform(createTeenagerManually());
                 System.out.println("→ Retour au menu principal");
@@ -421,6 +465,8 @@ public class TableauDeBordRoot {
 
             ////// Ajout d'élèves à la liste à partir d'un fichier CSV //////
             if (saisie.equals("ge2")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi d'ajouter des eleves à la liste à partir d'un fichier CSV");
                 addToPlatformbyCSV(SaisieClavier.saisieClavierStr());
                 System.out.println("→ Retour au menu principal");
@@ -428,12 +474,16 @@ public class TableauDeBordRoot {
 
             ////// Affichage des élèves //////
             if (saisie.equals("ge3")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi d'afficher les élèves");
                 System.out.println(platform.toStringTeengarderList()); 
                 System.out.println("Retour au menu principal");
             }
             ////// exporter des étudiants //////
             if (saisie.equals("ge4")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de sauvegarder les élèves");
                 System.out.println("Donner le chemin vers pour le fichier de sauvegarder");
                 Platform.exportTeenagers(platform.getTeenagerArrayList(), SaisieClavier.saisieClavierStr());
@@ -443,17 +493,23 @@ public class TableauDeBordRoot {
             //////////////////////////// Gestion des affectations ////////////////////////////
 
             if (saisie.equals("2")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi La gestion des appariements");
                 saisie = "ga" + gestionAppariement();
             }
             ////// ajouter appariements //////
             if (saisie.equals("ga1")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi d'affecter manullement 2 étudiants");
                 System.out.println(platform.getCompatibleTeenagers().toString());
                 System.out.println("→ Retour au menu principal");
             }
             ////// générer appariements //////
             if (saisie.equals("ga2")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de générer automatiquement les appariements :");
                 do {
                     if (platform.getNbCountry(countryHote) != platform.getNbCountry(countryVisiteur)) {
@@ -466,39 +522,44 @@ public class TableauDeBordRoot {
                             platform.addTeenager(createTeenagerManuallyByCountry(countryHote));
                         }
                     }
-                } while (platform.getNbCountry(countryHote) == platform.getNbCountry(countryVisiteur));
+                } while (platform.getNbCountry(countryHote) != platform.getNbCountry(countryVisiteur));
                 platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(), countryVisiteur, countryHote)));
                 System.out.println("→ Retour au menu principal");
             }
             ////// Affichage des appariements //////
             if (saisie.equals("ga3")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi d'afficher les appariements");
                 System.out.println(platform.toStringCompatibleTeenagers());
                 System.out.println("→ Retour au menu principal");
             }
             ////// importer appariements //////
             if (saisie.equals("ga4")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi d'ajouter des appariements à partir d'un fichier CSV");
                 addToPlatformbyCompatibleCSV(SaisieClavier.saisieClavierStr());
                 System.out.println("→ Retour au menu principal");
             }
             ////// exporter appriements //////
             if (saisie.equals("ge5")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de sauvegarder les appariements");
                 System.out.println("Donner le chemin vers pour le fichier de sauvegarder");
                 Platform.exportCompatibleTeenager(platform.getCompatibleTeenagers(), SaisieClavier.saisieClavierStr());
                 System.out.println("Retour au menu principal");
             }
-            ////// Ajout d'une affectation à la liste //////
-            if (saisie.equals("ga1")) {
 
-            }
 
             //////////////////////////// Gestion de l'historique ////////////////////////////
-            if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
+            //if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
 
             //////////////////////////// Option ////////////////////////////
             if (saisie.equals("4")){
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi les options");
                 if(configExist()){
                     saisie = "op" + option();
@@ -508,6 +569,8 @@ public class TableauDeBordRoot {
             }
 
             if (saisie.equals("so1")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de créer le fichier de configuration");
                 try (FileInputStream fis = new FileInputStream("res/defaultconfig.csv");
                     FileOutputStream fos = new FileOutputStream("res/configuration.csv")) {
@@ -525,41 +588,37 @@ public class TableauDeBordRoot {
 
             ////// Modifier le fichier //////
             if (saisie.equals("op1")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de modifier le fichier");
-                
                 saisie = "op1" + modification();
             }
 
             if (saisie.equals("op11")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées ");
-                
-                
+                entryError();
             }
 
             if (saisie.equals("op12")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées pour les animaux");
-                
-               
+                animalError();
             }
 
             if (saisie.equals("op13")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de modifier le paramètre conncernant les erreurs d'entrées pour la nourriture");
-                
-                
+                foodError();
             }
 
-            if (saisie.equals("op14")) {
-                System.out.println("Vous avez choisi de changer de fichier d'adolescent");
-                
-               
-            }
-
-            if (saisie.equals("op15")) {
-                System.out.println("Vous avez choisi de changer le fichier d'appariemment");
-                
-            }
             ////// Supprimer le fichier //////
             if (saisie.equals("op2")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de supprimer le fichier");
                 if (configExist()) {
                     System.out.println("Voulez-vous vraiment supprimer le fichier ? (y/n)");
@@ -582,22 +641,37 @@ public class TableauDeBordRoot {
 
             //////////////////////////// Retour au Menu principal ////////////////////////////
             if (saisie.equals("b")) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de retourner au menu principal");
             }
 
-            if (saisie.equals("q")) {
+            if ((saisie.equals("q")) || (saisie.equals("opq")) ||(saisie.equals("soq")) || (saisie.equals("geq"))) {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("Vous avez choisi de quitter le programme");
                 isRunning = false;
+                main(null);
             }
         } 
     }
 
     public static void main(String[] args) throws IOException {
         TableauDeBordRoot main = new TableauDeBordRoot();
-        System.out.println("Bienvenue dans le programme de gestion des appariements");
+        System.out.println("----------- Bienvenue dans l'application -----------");
+        System.out.print("Veuillez entrer votre nom d'utilisateur : ");
+        String username = SaisieClavier.saisieClavierStr();
+        System.out.print("Veuillez entrer votre mot de passe : ");
+        String password = SaisieClavier.saisieClavierStr();
+        if (username.equals("admin") && password.equals("admin")) {
+            System.out.println("Vous êtes connecté en tant qu'administrateur");
+            main.runRoot();
+        } else {
+            System.out.println("Vous êtes connecté en tant qu'utilisateur");
+            main.runUser();
+        }
         main.runRoot();
     }
-
 
     public static void supprimerTeenagerFromCSV(Teenager teen) throws IOException{
         Platform platform = new Platform();
@@ -629,7 +703,7 @@ public class TableauDeBordRoot {
         System.out.println("2 - supprimer le fichier");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
-        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        char c = SaisieClavier.saisieClavierChar();
         return c;
     }
 
@@ -638,91 +712,143 @@ public class TableauDeBordRoot {
         System.out.println("1 - crée le fichier");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
-        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        char c = SaisieClavier.saisieClavierChar();
         return c;
     }
 
-    /*if(configExist()){
-            do{
-                        System.out.println("1 - Erreur d'entré de critère");
-        System.out.println("2 - Erreur d'entré pour les animaux");
-        System.out.println("3 - Erreur d'entré pour la nourriture");
-        System.out.println("4 - Changer de fichier d'adolescent");
-        System.out.println("5 - Changer de fichier d'appariemment");
-                S
-                saisie = sc.next();spain
-            }while(!saisie.equals("1") && !saisie.equals("2") && !saisie.equals("3"));
-            if (saisie.equals("1")){
-                Platform.changeFichierConfig();
-            }else if(saisie.equals("2")){
-                Platform.deleteFichierConfig();
+    public void entryError() {
+        System.out.println("Activer le controle de saisie des critère aux animaux ?  (y/n)");
+        String saisie = String.valueOf(SaisieClavier.saisieYesOrNo());
+        File inputFile = new File("res/configuration.csv");
+        File tempFile = new File("res/configuration_temp.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+            String line;
+            boolean isFirstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    bw.write(line);
+                    bw.newLine();
+                    isFirstLine = false;
+                } else {
+                    String[] columns = line.split(";");
+                    if (columns.length >= 2) {
+                        columns[0] = saisie.equals("y") ? "true" : "false";
+                        bw.write(String.join(";", columns));
+                        bw.newLine();
+                    } else {
+                        bw.write(line);
+                        bw.newLine();
+                    }
+                }
             }
-        }else{
-            do{
-                System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
-                System.out.println("[y/n]");
-                saisie = sc.next();
-            }while(!saisie.equals("y") || !saisie.equals("n"));
-            if (saisie.equals("y")){
-                Platform.createFichierConfig();
+        } catch (IOException e) {
+            System.out.println("Une erreur s'est produite lors de la mise à jour de la valeur de CRITERION_TYPE.");
+            return;
+        }
+        if (inputFile.delete()) {
+            if (tempFile.renameTo(inputFile)) {
+                System.out.println("La valeur de CRITERION_TYPE a été mise à jour avec succès.");
+            } else {
+                System.out.println("Une erreur s'est produite lors de la mise à jour de la valeur de CRITERION_TYPE.");
+                if (!tempFile.renameTo(inputFile)) {
+                    System.out.println("Une erreur s'est produite lors de la restauration du fichier d'origine.");
+                }
             }
-        }
-
-        System.out.println("Veuillez choisir la pondération des critères de préférence");
-
-        try {
-            AffectationUtil.multiplicateur_pref = SaisieClavier.saisieClavierInt();
-
-        } catch (Exception e) {
-            System.out.println("Erreur de saisie, veuillez recommencer");
-        }
-
-        System.out.println("Les pondération ont été fixer");
-    }*/
-
-    public void entryError(){
-        String saisie,type;
-        do{
-            System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
-            saisie = sc.next();
-        } while(!saisie.equals("y") && !saisie.equals("n"));
-        if (saisie.equals("y")) {
-            type = "true";
-        } else {
-            type = "false";
-        }
+        } else System.out.println("Une erreur s'est produite lors de la suppression du fichier d'origine.");
     }
+
+    
 
     public void animalError(){
-        String saisie,animal;
-        do{
-            System.out.println("Si vous voulez activer le controle des Animaux, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
-            saisie = sc.next();
-        }while(!saisie.equals("y") && !saisie.equals("n"));
-        if (saisie.equals("y")){
-            animal = "true";
-        }else{
-            animal = "false";
+        System.out.println("Activer le controle de saisie des critères d'allergie aux animaux ?  (y/n)");
+        String saisie = String.valueOf(SaisieClavier.saisieYesOrNo());
+        File inputFile = new File("res/configuration.csv");
+        File tempFile = new File("res/configuration_temp.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+            String line;
+            boolean isFirstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    bw.write(line);
+                    bw.newLine();
+                    isFirstLine = false;
+                } else {
+                    String[] columns = line.split(";");
+                    if (columns.length >= 2) {
+                        columns[1] = saisie.equals("y") ? "true" : "false";
+                        bw.write(String.join(";", columns));
+                        bw.newLine();
+                    } else {
+                        bw.write(line);
+                        bw.newLine();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Une erreur s'est produite lors de la mise à jour de la valeur de ANIMAL_ALLERGY.");
+            return;
         }
+        if (inputFile.delete()) {
+            if (tempFile.renameTo(inputFile)) {
+                System.out.println("La valeur de ANIMAL_ALLERGY a été mise à jour avec succès.");
+            } else {
+                System.out.println("Une erreur s'est produite lors de la mise à jour de la valeur de ANIMAL_ALLERGY.");
+                if (!tempFile.renameTo(inputFile)) {
+                    System.out.println("Une erreur s'est produite lors de la restauration du fichier d'origine.");
+                }
+            }
+        } else System.out.println("Une erreur s'est produite lors de la suppression du fichier d'origine.");
     }
+        
 
     public void foodError(){
-        String saisie,food;
-        do{
-            System.out.println("Si vous voulez activer le controle de la nourriture, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
-            saisie = sc.next();
-        }while(!saisie.equals("y") && !saisie.equals("n"));
-        if (saisie.equals("y")){
-            food = "true";
-        }else{
-            food = "false";
+        System.out.println("Activer le controle de saisie des critères alimentaires ?  (y/n)");
+        String saisie = String.valueOf(SaisieClavier.saisieYesOrNo());
+        File inputFile = new File("res/configuration.csv");
+        File tempFile = new File("res/configuration_temp.csv");
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+            String line;
+            boolean isFirstLine = true;
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    bw.write(line);
+                    bw.newLine();
+                    isFirstLine = false;
+                } else {
+                    String[] columns = line.split(";");
+                    if (columns.length >= 2) {
+                        columns[2] = saisie.equals("y") ? "true" : "false";
+                        bw.write(String.join(";", columns));
+                        bw.newLine();
+                    } else {
+                        bw.write(line);
+                        bw.newLine();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Une erreur s'est produite lors de la mise à jour de la valeur de FOOD_ALLERGY.");
+            return;
         }
+        if (inputFile.delete()) {
+            if (tempFile.renameTo(inputFile)) {
+                System.out.println("La valeur de FOOD_ALLERGY a été mise à jour avec succès.");
+            } else {
+                System.out.println("Une erreur s'est produite lors de la mise à jour de la valeur de FOOD_ALLERGY.");
+                if (!tempFile.renameTo(inputFile)) {
+                    System.out.println("Une erreur s'est produite lors de la restauration du fichier d'origine.");
+                }
+            }
+        } else System.out.println("Une erreur s'est produite lors de la suppression du fichier d'origine.");
     }
 
     public void listPath(){
         String saisie,liste;
         File f;
-        boolean chemin;
+        boolean chemin = false;
         do{
             if(chemin == true){
                 System.out.println("Erreur, le fichier donné ne peut pas être lu. ");
@@ -740,11 +866,12 @@ public class TableauDeBordRoot {
         }else{
             liste = "false";
         }
+    }
 
     public void mapPath(){
         String saisie,map;
         File f;
-        boolean chemin;
+        boolean chemin = false;
         do{
             if(chemin == true){
                 System.out.println("Erreur, le fichier donné ne peut pas être lu. ");
@@ -762,6 +889,7 @@ public class TableauDeBordRoot {
             map = "false";
         }
     } 
+    
     public static void gestionPonderation(){
         System.out.println("-------------------------- Menu de changement de pondération --------------------------");
         System.out.println("Vous etes dans le menu de changement de ponderation");

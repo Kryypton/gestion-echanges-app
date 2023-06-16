@@ -498,14 +498,13 @@ public class Platform {
         }while(run);
         
         sc.close();
-
         f = new File("res/configuration.csv");
         f.delete();
         BufferedWriter bw = new BufferedWriter(new FileWriter(f));
         bw.write("CRITERION_TYPE;ANIMAL_ALLERGY;FOOD_ALLERGY;TEENAGER_LIST;COMPATIBLE_TEENAGER_LIST");
         bw.newLine();
         bw.write(type+";"+animal+";"+food+";"+liste+";"+map);
-        
+        scInit.close();
     }
 
     public static void createFichierConfig() throws IOException{
