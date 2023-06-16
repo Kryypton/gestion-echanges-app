@@ -453,4 +453,13 @@ public class Platform {
         
     }
 
+    public ArrayList<Teenager> cleanByCountry(Country country1, Country country2){
+        ArrayList<Teenager> list = new ArrayList<Teenager>();
+        for (Teenager teenager : this.teenagerList) {
+            if (teenager.getCountryName().equals(country1) || teenager.getCountryName().equals(country2)) {
+                list.add(teenager);
+            }
+        }
+        return list;
+    }
 }

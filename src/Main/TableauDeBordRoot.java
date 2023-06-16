@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -25,6 +27,11 @@ public class TableauDeBordRoot {
     private static Scanner sc = new Scanner(System.in);
     private static Country countryHote;
     private static Country countryVisiteur;
+    private static ArrayList<Country> CountryList = new ArrayList<Country>();
+    static {
+        EnumSet.allOf(Country.class).forEach(country -> CountryList.add(country));
+    }
+    
 
     public static class SaisieClavier {
 
@@ -135,7 +142,12 @@ public class TableauDeBordRoot {
             try {
                 int id = Integer.parseInt(sc.nextLine());
                 Teenager t = platform.getTeenagerById(id);
-                return t;
+                if (!platform.cleanByCountry(countryHote, countryVisiteur).contains(t)) {
+                    System.out.println("Erreur de saisie, veuillez recommencer, l'étudiant n'existe pas dans les pays selectionnés.");
+                    return saisieClavierTeenager();
+                } else {
+                    return t;
+                }
             } catch (Exception e) {
                 System.out.println("Erreur de saisie, veuillez recommencer, l'étudiant n'existe pas.");
                 return saisieClavierTeenager();
@@ -223,9 +235,9 @@ public class TableauDeBordRoot {
             requirements.put(CriterionName.GUEST_FOOD.name(), new Criterion(SaisieClavier.saisieClavierRegime(), CriterionName.GUEST_FOOD));
         } else requirements.put(CriterionName.GUEST_FOOD.name(), new Criterion("no", CriterionName.GUEST_FOOD));
         System.out.println("L'étudiant peut-il cuisiner pour des Végétariens ? (y/n)");
-        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "vegetarian" : null , CriterionName.HOST_FOOD));
+        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no" , CriterionName.HOST_FOOD));
         System.out.println("L'étudiant peut-il cuisiner pour des personnes allergiques aux noix ? (y/n)");
-        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "nonuts" : null , CriterionName.HOST_FOOD));
+        requirements.put(CriterionName.HOST_FOOD.name(), new Criterion(SaisieClavier.saisieYesOrNo() == 'y' ? "yes" : "no" , CriterionName.HOST_FOOD));
         System.out.println("Avec quel genre l'étudiant souhaite être ? (male/female/other)");
         requirements.put(CriterionName.PAIR_GENDER.name(), new Criterion(SaisieClavier.saisieGenre(), CriterionName.PAIR_GENDER));
         System.out.println("L'étudiant souhaite-t-il être avec son ancienne affectation ? (y/n)");
@@ -261,11 +273,11 @@ public class TableauDeBordRoot {
         do {
             System.out.println("ID de l'étudiant 1 : ");
             teenager1 = SaisieClavier.saisieClavierTeenager();
-            System.out.println("Prénom : ");
+            System.out.println("ID de l'étudiant 2 :");
             teenager2 = SaisieClavier.saisieClavierTeenager();
             if (teenager1.equals(teenager2)) System.out.println("Les deux étudiants sont les mêmes, veuillez recommencer.");
         } while (teenager1.equals(teenager2));
-        plat
+
     }
 
     private static void afficherAppariement() {
@@ -275,9 +287,27 @@ public class TableauDeBordRoot {
             System.out.printf("    - [%s]-[%s]-[%s] avec [%s]-[%s]-[%s]\n", pair.getTeenager1().getName(), pair.getTeenager1().getAgeYear(), pair.getTeenager1().getId(), pair.getTeenager2().getName(), pair.getTeenager2().getAgeYear(), pair.getTeenager2().getId());
         }*/
     }
+
+    //////////////////////////////// PARAMETTRE ////////////////////////////////
+    private static void parametre() {
+        do {
+            System.out.print("Veuillez choisir un Pays d'accueil : ");
+            for (Country country : CountryList) System.out.print(country.name() + "/");
+            System.out.println();
+            
+            countryHote = SaisieClavier.saisieClavierCountry();
+            CountryList.remove(countryHote);
+            System.out.print("Veuillez choisir un Pays d'invité : ");
+            for (Country country : CountryList) System.out.print(country.name() + "/");
+            System.out.println();
+            countryVisiteur = SaisieClavier.saisieClavierCountry();
+            if (countryHote.equals(countryVisiteur)) System.out.println("Les deux pays sont les mêmes, veuillez recommencer.");
+        } while (countryHote == countryVisiteur);
+    }
     
     public void runRoot() {
         String saisie;
+        parametre();
         while (isRunning) {
             System.out.println("-------------------- Menu principal --------------------");
             saisie = "" + tableauDeBord();
@@ -334,7 +364,6 @@ public class TableauDeBordRoot {
 
             }
 
-
             //////////////////////////// Gestion de l'historique ////////////////////////////
             if (saisie.equals("3")) saisie = "gh" + gestionHistorique();
             
@@ -347,29 +376,14 @@ public class TableauDeBordRoot {
                 System.out.println("Vous avez choisi de quitter le programme");
                 isRunning = false;
             }
-
-            ///
         } 
     }
 
-    public static void main(String[] args) {
-        System.out.println("Bienvenue dans le programme de gestion des appariements");
-        System.out.println("Veuillez choisir un Pays d'accueil :");
-        System.out.println("1 - France");
-        System.out.println("2 - Allemagne");
-        System.out.println("3 - Espagne");
-        System.out.println("4 - Italie");
+    
 
-        if (SaisieClavier.saisieClavierInt() == 1) {
-            countryHote = "France";
-        } else if (SaisieClavier.saisieClavierInt() == 2) {
-            countryHote = "Allemagne";
-        } else if (SaisieClavier.saisieClavierInt() == 3) {
-            countryHote = "Espagne";
-        } else if (SaisieClavier.saisieClavierInt() == 4) {
-            countryHote = "Italie";
-        }
+    public static void main(String[] args) {
         TableauDeBordRoot main = new TableauDeBordRoot();
+        System.out.println("Bienvenue dans le programme de gestion des appariements");
         main.runRoot();
     }
 
@@ -471,7 +485,6 @@ public class TableauDeBordRoot {
 
         }
     }
-
 
 
 
