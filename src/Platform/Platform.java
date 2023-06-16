@@ -402,7 +402,7 @@ public class Platform {
         }
     }
 
-    public static void changeFichierConfig() throws IOException{
+    public void changeFichierConfig() throws IOException{
         boolean run = true,chemin = false;
         String saisie;
         Scanner sc,scInit;
@@ -433,10 +433,10 @@ public class Platform {
                 do{
                     System.out.println("Si vous voulez activer le controle des entrées, appuyer sur 'y', ou sur 'n' dans le cas contraire:");
                     saisie = sc.next();
-                }while(!saisie.equals("y") || !saisie.equals("n"));
-                if (saisie.equals("y")){
+                } while(!saisie.equals("y") || !saisie.equals("n"));
+                if (saisie.equals("y")) {
                     type = "true";
-                }else{
+                } else {
                     type = "false";
                 }
                 
@@ -540,7 +540,6 @@ public class Platform {
         }
         return list;
     }
-
 
     public String toStringCompatibleTeenagers() {
     StringBuilder sb = new StringBuilder();

@@ -5,19 +5,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import javax.swing.text.html.HTMLDocument.BlockElement;
-
 import Criterion.Country;
 import Criterion.Criterion;
 import Criterion.CriterionName;
-import Criterion.CriterionTypeException;
 import Platform.Platform;
 import Tennager.Teenager;
 import graph.Affectation;
@@ -173,6 +169,23 @@ public class TableauDeBordRoot {
         }
     }
 
+    public boolean configExist(){
+        File f = new File("res/configuration.csv");
+        if(f.exists()){
+            return true;
+        }
+        return false;
+    }
+
+    private void modification() {
+        try {
+            platform.changeFichierConfig();
+        } catch (Exception e) {
+            System.out.println("Erreur de saisie, veuillez recommencer");
+            modification();
+        }
+    }
+
     private static char gestionEleve() {
         System.out.println("1 - Ajouter un Etudiant manuellement à la liste");
         System.out.println("2 - Ajouter un Enssemble d'étudiant à partir d'un fichier CSV");
@@ -320,7 +333,7 @@ public class TableauDeBordRoot {
 
     //////////////////////////////// Gestion des appariements ////////////////////////////////
 
-    private static void appariement() {
+    /*private static void appariement() {
         Teenager teenager1;
         Teenager teenager2;
         do {
@@ -338,7 +351,7 @@ public class TableauDeBordRoot {
         for(Teenager a: platform.getCompatibleTeenagers().keySet()){
             System.out.println(a.teenagerToString()+";"+platform.getCompatibleTeenagers().get(a).teenagerToString()+"\n");
         }
-    }
+    }*/
 
     //////////////////////////////// PARAMETTRE ////////////////////////////////
     private static void parametre() {
@@ -461,9 +474,23 @@ public class TableauDeBordRoot {
 
             //////////////////////////// Option ////////////////////////////
             if (saisie.equals("4")){
-                option();
-                System.out.println("Retour au menu principal");
+                System.out.println("Vous avez choisi les options");
+                saisie = "op" + option();
             }
+
+            ////// Modifier le fichier //////
+            if (saisie.equals("op1")) {
+                System.out.println("Vous avez choisi de modifier le fichier");
+                System.out.println("→ Retour au menu principal");
+                modification();
+            }
+
+            ////// Supprimer le fichier //////
+            if (saisie.equals("op2")) {
+                System.out.println("Vous avez choisi de supprimer le fichier");
+                System.out.println("→ Retour au menu principal");
+            }
+
             //////////////////////////// Retour au Menu principal ////////////////////////////
             if (saisie.equals("b")) {
                 System.out.println("Vous avez choisi de retourner au menu principal");
@@ -476,113 +503,12 @@ public class TableauDeBordRoot {
         } 
     }
 
-    
-
-
-
-
     public static void main(String[] args) throws IOException {
         TableauDeBordRoot main = new TableauDeBordRoot();
         System.out.println("Bienvenue dans le programme de gestion des appariements");
         main.runRoot();
     }
 
-    public static boolean idPresent(int id , Collection<Teenager> list){
-        for (Teenager teenager : list) {
-            if(teenager.getId() == id){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    ////// Permet de créer un appariement manuellement avec les ID //////
-    public static void créerAppariement(Affectation affectation , Platform platform){
-        Set<Teenager> hote = affectation.getAssociations().keySet();
-        Collection<Teenager> visiteur = affectation.getAssociations().values();
-        int idHost = -1;
-        int idVisitor = -1; ////// pas a 0 car l'id peut etre de 0 ;
-
-        System.out.println("Bienvenue dans le menu de création d'appariement");
-
-        System.out.println("Voici la liste des hôtes : ");
-        for (Teenager teenager : hote) {
-            System.out.println(teenager);
-
-        }
-
-        System.out.println("Voici la liste des visiteurs : ");
-        for (Teenager teenager : visiteur) {
-            System.out.println(teenager);
-        }
-
-        while (!idPresent(idVisitor, visiteur)) {
-            System.out.println("Veuillez saisir l'id du visiteur : ");
-            try {
-                idVisitor = SaisieClavier.saisieClavierInt(); 
-            } catch (Exception e) {
-                System.out.println("Erreur de saisie, veuillez recommencer");
-            }
-        }
-            
-        while (!idPresent(idHost, hote)) {
-            System.out.println("Veuillez saisir l'id de l'hôte : ");
-            try {
-                idHost = SaisieClavier.saisieClavierInt(); 
-            } catch (Exception e) {
-                System.out.println("Erreur de saisie, veuillez recommencer");
-            }
-
-        }
-        ///// Les affectations sont faites ici /////
-        affectation.clear();
-        affectation.affectations(platform.getTeenagerFromID(idHost), platform.getTeenagerFromID(idVisitor));
-
-        ////// On supprime les étudiants de la liste des étudiants comme il sont affecter //////
-        platform.removeTeenager(platform.getTeenagerFromID(idHost));
-        platform.removeTeenager(platform.getTeenagerFromID(idVisitor));
-
-        affectation.add(AffectationUtil.affectation(platform.getTeenagerArrayList(), affectation.getVisitor(), affectation.getHost()));
-    }
-
-    ////// Permet de créer un appariement automatique//////
-
-    public static void gestionDesAppariement(Country host , Country visitor){
-        Platform platform = new Platform();
-        boolean isRunning = true;
-
-        try {
-            platform.importListTeenagers(new File("res/Teenagers.csv"));   
-        } catch (Exception e) {
-            System.out.println("Erreur lors de l'importation du fichier");
-        }
-
-
-        if(platform.getNbCountry(host) > 1 && platform.getNbCountry(visitor) >1 ){
-            System.out.println("Il y a plus d'un étudiant de chaque pays");
-
-            while (isRunning) {
-            Affectation affectation = new Affectation(AffectationUtil.affectation(platform.getTeenagerList(), visitor, host),  host , visitor);
-            System.out.println("La touche <a> vous permet de generer les appariements");
-            System.out.println("La touche <z> vous permet de créer un appariement manuellement");
-            System.out.println("La touche <q> vous permet de quitter");
-            char c = SaisieClavier.saisieClavierChar();
-
-            if(c == 'a'){
-                try {
-                    platform.exporterAffectationAutomatique("res/Appariement.csv" , host , visitor);
-                } catch (FileNotFoundException e) {
-                    System.err.println("Erreur lors de l'exportation du fichier");
-                }
-            }else if(c == 'z'){
-                créerAppariement(affectation, platform);
-            }else if(c == 'q'){
-                isRunning = false;
-            } 
-            }
-
-        }
-    }
 
     public static void supprimerTeenagerFromCSV(Teenager teen) throws IOException{
         Platform platform = new Platform();
@@ -608,14 +534,25 @@ public class TableauDeBordRoot {
         supprimerTeenagerFromCSV(teen);
     }
 
-    public void option() throws IOException{
-        String saisie;
-        if(configExist()){
+    public char option() throws IOException{
+        System.out.println("il existe un fichier de configuration, voulez vous :");
+        System.out.println("1 - modifier le fichier");
+        System.out.println("2 - supprimer le fichier");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
+        char c = SaisieClavier.saisieClavierStr().charAt(0);
+        return c;
+    }
+
+
+    /*if(configExist()){
             do{
-                System.out.println("il existe un fichier de configuration, voulez vous :");
-                System.out.println("1 - modifier le fichier");
-                System.out.println("2 - supprimer le fichier");
-                System.out.println("3 - retour");
+                        System.out.println("1 - Erreur d'entré de critère");
+        System.out.println("2 - Erreur d'entré pour les animaux");
+        System.out.println("3 - Erreur d'entré pour la nourriture");
+        System.out.println("4 - Changer de fichier d'adolescent");
+        System.out.println("5 - Changer de fichier d'appariemment");
+                S
                 saisie = sc.next();
             }while(!saisie.equals("1") && !saisie.equals("2") && !saisie.equals("3"));
             if (saisie.equals("1")){
@@ -633,14 +570,5 @@ public class TableauDeBordRoot {
                 Platform.createFichierConfig();
             }
         }
-    }
-
-    public boolean configExist(){
-        File f = new File("res/configuration.csv");
-        if(f.exists()){
-            return true;
-        }
-        return false;
-    }
-
+    }*/
 }
