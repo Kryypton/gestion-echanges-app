@@ -500,8 +500,10 @@ public class Platform {
                 }
             }
 
-            sc.close();
+            
         }while(run);
+        
+        sc.close();
 
         f = new File("res/configuration.csv");
         f.delete();
@@ -516,19 +518,22 @@ public class Platform {
         File f = new File("res/configuration.csv");
         System.out.println(f.exists());
         try {
-            System.out.println(f.delete());
+            while(f.exists()){
+                System.out.println(f.delete());
+            }
         } catch (Exception e) {
             System.out.println("Le fichier n'as pas pu être supprimer.");
         }
     }
 
     public static void createFichierConfig() throws IOException{
-        File f = new File("res/configuration.csv");
-        f.delete();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        // File f = new File("res/configuration.csv");
+        // f.delete();
+        BufferedWriter bw = new BufferedWriter(new FileWriter("res/configuration.csv"));
         bw.write("CRITERION_TYPE;ANIMAL_ALLERGY;FOOD_ALLERGY;TEENAGER_LIST;COMPATIBLE_TEENAGER_LIST");
         bw.newLine();
         bw.write("false;false;false;false;false");
+        bw.close();
     }
 
     public ArrayList<Teenager> cleanByCountry(Country country1, Country country2){
