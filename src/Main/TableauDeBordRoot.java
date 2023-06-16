@@ -571,4 +571,34 @@ public class TableauDeBordRoot {
             }
         }
     }*/
+
+
+
+    public static void gestionPonderation(){
+        System.out.println("Vous etes dans le menu de changement de ponderation");
+
+        System.out.println("La pondération des critères redibitoire est de : " + AffectationUtil.poid_redibitoire);
+        System.out.println("La pondération des critères de préférence est de : " + AffectationUtil.multiplicateur_pref);
+
+        System.out.println("Veuillez choisir la pondération des critère redibitoire");
+        try {
+            AffectationUtil.poid_redibitoire = SaisieClavier.saisieClavierInt();
+
+        } catch (Exception e) {
+            System.out.println("Erreur de saisie, veuillez recommencer");
+        }
+
+        System.out.println("Veuillez choisir la pondération des critères de préférence");
+
+        try {
+            AffectationUtil.multiplicateur_pref = SaisieClavier.saisieClavierInt();
+
+        } catch (Exception e) {
+            System.out.println("Erreur de saisie, veuillez recommencer");
+        }
+
+        System.out.println("Les pondération ont été fixer");
+    }
+
+    
 }
