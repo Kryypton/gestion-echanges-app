@@ -1,6 +1,8 @@
 package Main;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -183,6 +185,8 @@ public class TableauDeBordRoot {
         System.out.println("3 - Erreur d'entrée pour la nourriture");
         System.out.println("4 - Changer de fichier d'adolescent");
         System.out.println("5 - Changer de fichier d'appariemment");
+        System.out.println("\t (b) - Retour au menu principal");
+        System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierChar();
         return c;
     }
@@ -483,6 +487,23 @@ public class TableauDeBordRoot {
                 }
             }
 
+            if (saisie.equals("so1")) {
+                System.out.println("Vous avez choisi de créer le fichier de configuration");
+                try (FileInputStream fis = new FileInputStream("res/defaultconfig.csv");
+                    FileOutputStream fos = new FileOutputStream("res/configuration.csv")) {
+
+                    byte[] buffer = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = fis.read(buffer)) != -1) {
+                        fos.write(buffer, 0, bytesRead);
+                    }
+                    System.out.println("La copie du fichier a été créée avec succès.");
+                    } catch (IOException e) {
+                        System.out.println("Une erreur s'est produite lors de la copie du fichier : " + e.getMessage());
+                    }
+                saisie = saisie + modification();
+            }
+
             ////// Modifier le fichier //////
             if (saisie.equals("op1")) {
                 System.out.println("Vous avez choisi de modifier le fichier");
@@ -598,7 +619,6 @@ public class TableauDeBordRoot {
     public char sansFichier() throws IOException{
         System.out.println("Il n'existe pas de fichier de configuration. Voulez-vous crée un fichier de configuration par défault ?");
         System.out.println("1 - crée le fichier");
-        System.out.println("2 - retour");
         System.out.println("\t (b) - Retour au menu principal");
         System.out.println("\t (q) - Quitter l'application");
         char c = SaisieClavier.saisieClavierStr().charAt(0);
