@@ -588,16 +588,16 @@ public class Teenager implements Serializable{
         return true;
     }
 
-    public String toString1() {
+    public String toString() {
         return this.getForname() + " " +  this.getName();
     }
 
-    @Override
-    public String toString() {
-        return "Teenager [id=" + id + ", name=" + name + ", forname=" + forname + ", countryName=" + countryName
-                + ", birthDate=" + birthDate + ", requirements=" + requirements + ", lastAffectation=" + lastAffectation
-                + "]";
-    }
+    // @Override
+    // public String toString() {
+    //     return "Teenager [id=" + id + ", name=" + name + ", forname=" + forname + ", countryName=" + countryName
+    //             + ", birthDate=" + birthDate + ", requirements=" + requirements + ", lastAffectation=" + lastAffectation
+    //             + "]";
+    // }
 
     /**
      * Méthode qui permet de retrouver l'enumération du pays grace à un String du pays. Utiliser lors de l'importation

@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 
 import Criterion.Country;
+
+import Criterion.Country;
 import Criterion.Criterion;
 import Tennager.Teenager;
 
@@ -37,10 +39,9 @@ public class Eleve{
     }
 
 
-    public Eleve(){
-        super();
-        
-    }
+    // public Eleve(){
+    //     super();
+    // }
 
     public String getName() {
         return name;
