@@ -1,5 +1,8 @@
 package graph;
 import fr.ulille.but.sae2_02.graphes.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
@@ -24,11 +27,13 @@ public class AffectationUtil implements Serializable {
      * @param host l'adolescent hôte
      * @param visitor l'adolescent invité
      * @return Le poids de leur compatibilité, plus ils est faible, plus ils sont compatible
+     * @throws FileNotFoundException
      */
     
-     public static int weight (Teenager host, Teenager guest , Affectation history) {
+     public static int weight (Teenager host, Teenager guest , Affectation history) throws FileNotFoundException {
         int poid = 0;
         //int poids = 0;
+        if(fichierInterdit(host,guest)) poid += 10000;
         poid -= host.nbLoisirCommun(guest);
         if(!host.compatibleWithGuest(guest)) poid += poid_redibitoire;
         //Age différent ?
@@ -84,8 +89,9 @@ public class AffectationUtil implements Serializable {
      * @param guest La liste des étudiants invités a ajouter
      * @param host La liste des étudiants hôtes a ajouter
      * @param graph Le graph dans lequel on ajoute les aretes
+     * @throws FileNotFoundException
      */
-    public static void addArete(List<Teenager> guest,List<Teenager> host, GrapheNonOrienteValue<Teenager> graph){
+    public static void addArete(List<Teenager> guest,List<Teenager> host, GrapheNonOrienteValue<Teenager> graph) throws FileNotFoundException{
         for (Teenager teenager1 : host) {
             for (Teenager teenager2 : guest){
                 graph.ajouterArete(teenager1,teenager2,weight(teenager1,teenager2 , new Affectation() ));
@@ -141,8 +147,9 @@ public class AffectationUtil implements Serializable {
      * @param guest La liste des étudiants invités a ajouter
      * @param host La liste des étudiants hôtes a ajouter
      * @param graph Le graph dans lequel on ajoute les aretes
+     * @throws FileNotFoundException
      */
-    public static List<Arete<Teenager>> affectation(List<Teenager> groupe , Country guest , Country host){
+    public static List<Arete<Teenager>> affectation(List<Teenager> groupe , Country guest , Country host) throws FileNotFoundException{
         List<Teenager> hostList = AffectationUtil.selectPays(groupe, host);    
         List<Teenager> guestList = AffectationUtil.selectPays(groupe, guest);
         GrapheNonOrienteValue<Teenager> graph = new GrapheNonOrienteValue<Teenager>();
@@ -211,6 +218,33 @@ public class AffectationUtil implements Serializable {
             newMap.put(teenager.getExtremite1(),teenager.getExtremite2());
         }
         return newMap;
+    }
+
+    public static boolean fichierInterdit(Teenager host, Teenager visitor) throws FileNotFoundException{
+        File f = new File("res/ban.csv");
+        Scanner sc;
+        boolean trouve = false;
+        String name;
+        if(f.exists()){
+            sc = new Scanner(f);
+            while(sc.hasNext() && !trouve){
+                sc.useDelimiter(";");
+                name = sc.next();
+                if(name.equals(host.getName())){
+                    if(name.equals(visitor.getName())){
+                        trouve = true;
+                    }
+                }else if(name.equals(visitor.getName())){
+                    if(name.equals(host.getName())){
+                        trouve = true;
+                    }
+                }
+                sc.useDelimiter("\n");
+                sc.next();
+            }
+            sc.close();
+        }
+        return trouve;
     }
 
 
