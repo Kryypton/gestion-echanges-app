@@ -90,6 +90,33 @@ public class ChangePlan {
     @FXML
     TableColumn<Eleve, Criterion> userHistory;
 
+    @FXML
+    TableView<Eleve> infoHote;
+    @FXML
+    TableColumn<Eleve, String> hostName;
+    @FXML
+    TableColumn<Eleve, String> hostForname;
+    @FXML
+    TableColumn<Eleve, Country> hostCountry;
+    @FXML
+    TableColumn<Eleve, Criterion> hostHobbies;
+    @FXML
+    TableColumn<Eleve, Criterion> hostGender;
+    
+
+    @FXML
+    TableView<Eleve> infoVisiteur;
+    @FXML
+    TableColumn<Eleve, String> visitorName;
+    @FXML
+    TableColumn<Eleve, String> visitorForname;
+    @FXML
+    TableColumn<Eleve, Country> visitorCountry;
+    @FXML
+    TableColumn<Eleve, Criterion> visitorHobbies;
+    @FXML
+    TableColumn<Eleve, Criterion> visitorGender;
+
 
     @FXML
     ListView<Teenager> listeTeenager = new ListView<>(); // Liste des Teenager
@@ -650,29 +677,34 @@ public class ChangePlan {
 
     public void afficherEleveCase(MouseEvent event) throws IOException{
         //crée une ObservableList (on en a besoin)
-        // ObservableList<Eleve> list = infoTeen.getItems();
+        ObservableList<Eleve> data = FXCollections.observableArrayList();
 
         //permet de récuperer le teeneger selectionner dans la listeView
-        System.out.println(selecTeenager);
+        selecTeenager = listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
 
         //creation de eleve a partir de teenager (servent juste a contourne le requirement)
-        //Eleve t1 = new Eleve(selecTeenager);
+        Eleve t1 = new Eleve(selecTeenager);
+        data.add(t1);
 
 
-        ////////////// je sais pas si c'est utile /////////////////////
-        // userNameCol.setCellValueFactory(c-> new SimpleStringProperty(t1, "name"));
-        // userFornameCol.setCellValueFactory(new PropertyValueFactory<Teenager, String>("prenom"));
-        // userCountry.setCellValueFactory(new PropertyValueFactory<Teenager, String>("country"));
-        // userDate.setCellValueFactory(new PropertyValueFactory<Teenager, String>("birth_date"));
+        ////////////// affecte les colonne /////////////////////
+        userNameCol.setCellValueFactory(new PropertyValueFactory<Eleve, String>("name"));
+        userFornameCol.setCellValueFactory(new PropertyValueFactory<Eleve, String>("forname"));
+        userCountry.setCellValueFactory(new PropertyValueFactory<Eleve, Country>("countryName"));
+        userDate.setCellValueFactory(new PropertyValueFactory<Eleve, LocalDate>("birthDate"));
 
-        //mettre toutes les valeurs dans list
-        //list.add(t1);
+        userGAnimal.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("GuestHanimal"));
+        userHAnimal.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("HostAnimal"));
+        userGFood.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("GuestFood"));
+        userHFood.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("HostFood"));
+
+        userHobbies.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("Hobbies"));
+        userGender.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("Gender"));
+        userPairGender.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("PairGender"));
+        userHistory.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("History"));
 
         // mettre les valeur dans le tableView (prend en param ObservableList)
-        // infoTeen.setItems(list);
-
-
-        //infoTeen.getItems().set(0, t1);
+        infoTeen.setItems(data);
     }
 
     /* public void afficherAppariement(ActionEvent event) throws IOException{
@@ -732,6 +764,36 @@ public class ChangePlan {
 
     public void afficherAppariementCase(MouseEvent event) throws IOException{
         selectAppariement = listeAppariement.getItems().get(listeAppariement.getSelectionModel().getSelectedIndex());
+
+        ObservableList<Eleve> Hostdata = FXCollections.observableArrayList();
+        ObservableList<Eleve> Visitordata = FXCollections.observableArrayList();
+
+        Eleve hote;
+        Eleve visitor;
+
+        for(Teenager teen: selectAppariement.keySet()){
+            hote = new Eleve(teen);
+            visitor = new Eleve(selectAppariement.get(teen));
+            Hostdata.add(hote);
+            Visitordata.add(visitor);
+        }
+
+        
+
+        hostName.setCellValueFactory(new PropertyValueFactory<Eleve, String>("name"));
+        hostForname.setCellValueFactory(new PropertyValueFactory<Eleve, String>("forname"));
+        hostCountry.setCellValueFactory(new PropertyValueFactory<Eleve, Country>("countryName"));
+        hostHobbies.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("Hobbies"));
+        hostGender.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("Gender"));
+
+        visitorName.setCellValueFactory(new PropertyValueFactory<Eleve, String>("name"));
+        visitorForname.setCellValueFactory(new PropertyValueFactory<Eleve, String>("forname"));
+        visitorCountry.setCellValueFactory(new PropertyValueFactory<Eleve, Country>("countryName"));
+        visitorHobbies.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("Hobbies"));
+        visitorGender.setCellValueFactory(new PropertyValueFactory<Eleve, Criterion>("Gender"));
+
+        infoHote.setItems(Hostdata);
+        infoVisiteur.setItems(Visitordata);
     }
 
 }
