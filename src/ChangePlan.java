@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import javax.swing.JFileChooser;
 
@@ -20,6 +21,7 @@ import Platform.Platform;
 import Tennager.Teenager;
 import graph.AffectationUtil;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,9 +96,10 @@ public class ChangePlan {
     Teenager selecTeenager;
 
 
-    @FXML
+    //@FXML
     //ListView<Map<Teenager,Teenager>> listeAppariement = new ListView<>(); // Liste des Appariement
-    ListView<String> listeAppariement = new ListView<>();
+    @FXML
+    ListView<Map<Teenager, Teenager>> listeAppariement = new ListView<>();
     Map<Teenager,Teenager> selectAppariement;
 
     /*
@@ -585,10 +588,10 @@ public class ChangePlan {
        platform.exportTeenagers((ArrayList) platform.getTeenagerList() , "res/teenagerList.csv");
     }
 
-    // public void supprimerAppariment(ActionEvent event) throws IOException {
-    //     platform.removeCompatibleTeenager();
-    //     afficherappariement(event);
-    // }
+    public void supprimerAppariment(ActionEvent event) throws IOException {
+        platform.removeCompatibleTeenager();
+        afficherappariement(event);
+    }
 
     // public void modifierEleve(ActionEvent event) throws IOException {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
@@ -666,26 +669,59 @@ public class ChangePlan {
         infoTeen.getItems().set(0, t1);
     }*/
 
+    // public void afficherAppariement(ActionEvent event) throws IOException{
+    //     Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
+
+    //     listeAppariement.getItems().clear();
+
+    //     String s;
+
+    //     for(Teenager teen: t.keySet()){
+    //         s = "";
+    //         s += teen +";"+platform.getCompatibleTeenagers().get(teen);
+    //         listeAppariement.getItems().add(listeAppariement.getItems().size(),s);
+    //         listeAppariement.scrollTo(s);
+    //         listeAppariement.edit(listeAppariement.getItems().size() - 1);
+    //     }
+    // }
+
+    // public void afficherAppariement(ActionEvent event) throws IOException{
+    //     Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
+    //     Map<Teenager, Teenager> nt;
+    //     ObservableList<String> obl = FXCollections.observableArrayList();
+
+    //     listeAppariement.getItems().clear();
+
+    //     String s;
+    //     for(Teenager teen: t.keySet()){
+    //         // System.out.println(teen);
+    //         // nt = new HashMap<Teenager, Teenager>();
+    //         // nt.put(teen,t.get(teen));
+    //         s = "";
+    //         s += teen +";"+platform.getCompatibleTeenagers().get(teen);
+    //         obl.add(s);
+    //         //nt.clear();
+    //     }
+    //     listeAppariement.setItems(obl);
+    //     System.out.println(listeAppariement.getItems());
+    // }
+
     public void afficherAppariement(ActionEvent event) throws IOException{
         Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
         Map<Teenager, Teenager> nt;
+        ObservableList<Map<Teenager, Teenager>> obl = FXCollections.observableArrayList();
 
         listeAppariement.getItems().clear();
 
-        System.out.println("1");
         String s;
         for(Teenager teen: t.keySet()){
             // System.out.println(teen);
-            // nt = new HashMap<Teenager, Teenager>();
-            // nt.put(teen,t.get(teen));
-            s = "";
-            s += teen +";"+platform.getCompatibleTeenagers().get(teen);
-            listeAppariement.getItems().add(listeAppariement.getItems().size(),s);
-            listeAppariement.scrollTo(s);
-            listeAppariement.edit(listeAppariement.getItems().size() - 1);
-            //nt.clear();
-            System.out.println(listeAppariement.getItems());
+            nt = new HashMap<Teenager, Teenager>();
+            nt.put(teen,t.get(teen));
+            obl.add(nt);
         }
+        listeAppariement.setItems(obl);
+        System.out.println(listeAppariement.getItems());
     }
 
 
