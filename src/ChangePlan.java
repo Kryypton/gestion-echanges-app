@@ -48,8 +48,8 @@ public class ChangePlan {
     public static Platform platform = new Platform();
     RadioButton gender, pairGender, history;
     SplitMenuButton country ;
-    SplitMenuButton hostCountrySelected;
-    SplitMenuButton visitorCountrySelected;
+    static SplitMenuButton hostCountrySelected;
+    static SplitMenuButton visitorCountrySelected;
     TextField name , forename , hobbies;
     CheckBox hostVegetarian , guestNuts  , hostNuts, guestVegetarian;
     DatePicker birthDate;
@@ -109,7 +109,7 @@ public class ChangePlan {
     @FXML
     TableColumn<Eleve, String> hostForname;
     @FXML
-    SplitMenuButton hostCountry;
+    TableColumn<Eleve, Country> hostCountry;
     @FXML
     TableColumn<Eleve, Criterion> hostHobbies;
     @FXML
@@ -123,7 +123,7 @@ public class ChangePlan {
     @FXML
     TableColumn<Eleve, String> visitorForname;
     @FXML
-    SplitMenuButton visitorCountry;
+    TableColumn<Eleve, Country> visitorCountry;
     @FXML
     TableColumn<Eleve, Criterion> visitorHobbies;
     @FXML
@@ -410,14 +410,19 @@ public class ChangePlan {
         MenuItem menuItem = (MenuItem) event.getSource();
         String countryName = menuItem.getText();
         hoteMenu.setText(countryName);
-        this.hostCountry = hoteMenu;
+        this.hostCountrySelected = hoteMenu;
+        System.out.println(menuItem);
+        System.out.println(countryName);
+        System.out.println(hoteMenu.getText());
+        System.out.println(hostCountrySelected.getText());
     }
 
     public void visitorSelect(ActionEvent event) {
         MenuItem menuItem = (MenuItem) event.getSource();
         String countryName = menuItem.getText();
         visitorMenu.setText(countryName);
-        this.visitorCountry = visitorMenu;
+        this.visitorCountrySelected = visitorMenu;
+        System.out.println(visitorCountrySelected.getText());
     }
 
     public void nameEntryAction(ActionEvent event) {
@@ -666,7 +671,9 @@ public class ChangePlan {
     // }
 
     public void genererAppariement(ActionEvent event) throws IOException {
-        platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(),Country.FRANCE,Country.GERMANY)));
+        Country hc = Teenager.isCountry(hostCountrySelected.getText());
+        Country vc = Teenager.isCountry(visitorCountrySelected.getText());
+        platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(),vc,hc)));
     }
 
     public void importationEleve(ActionEvent event) throws IOException {
