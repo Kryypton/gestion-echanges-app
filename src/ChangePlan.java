@@ -584,13 +584,19 @@ public class ChangePlan {
         afficherEleve(event);
     }
 
-    public void sauvegardePlateforme() throws IOException{ //// Cette doit permettre de sauvgarder la plateforme dans un fichier mais je sais pas le faire mdrrrrrrr signer Adham
-       platform.exportTeenagers((ArrayList) platform.getTeenagerList() , "res/teenagerList.csv");
+    public void sauvegardePlateforme() throws IOException{
+       Platform.exportTeenagers(platform.getTeenagerArrayList() , "res/teenagerList.csv");
+       Platform.exportCompatibleTeenager(selectAppariement, "res/compatibleTeenagerList.csv");
     }
 
     public void supprimerAppariment(ActionEvent event) throws IOException {
-        platform.removeCompatibleTeenager();
-        afficherappariement(event);
+        if(selectAppariement != null){
+            for(Teenager k: selectAppariement.keySet()){
+                platform.removeCompatibleTeenager(k,platform.getCompatibleTeenagers().get(k));
+            }
+            afficherAppariement(event);
+        }
+        
     }
 
     // public void modifierEleve(ActionEvent event) throws IOException {
@@ -642,15 +648,15 @@ public class ChangePlan {
         }
     }
 
-    /*public void afficherCase(MouseEvent event) throws IOException{
+    public void afficherEleveCase(MouseEvent event) throws IOException{
         //crée une ObservableList (on en a besoin)
-        ObservableList<Eleve> list = infoTeen.getItems();
+        // ObservableList<Eleve> list = infoTeen.getItems();
 
         //permet de récuperer le teeneger selectionner dans la listeView
-        selecTeenager = listeTeenager.getItems().get(listeTeenager.getSelectionModel().getSelectedIndex());
+        System.out.println(selecTeenager);
 
         //creation de eleve a partir de teenager (servent juste a contourne le requirement)
-        Eleve t1 = new Eleve(selecTeenager);
+        //Eleve t1 = new Eleve(selecTeenager);
 
 
         ////////////// je sais pas si c'est utile /////////////////////
@@ -660,51 +666,51 @@ public class ChangePlan {
         // userDate.setCellValueFactory(new PropertyValueFactory<Teenager, String>("birth_date"));
 
         //mettre toutes les valeurs dans list
-        list.add(t1);
+        //list.add(t1);
 
         // mettre les valeur dans le tableView (prend en param ObservableList)
         // infoTeen.setItems(list);
 
 
-        infoTeen.getItems().set(0, t1);
+        //infoTeen.getItems().set(0, t1);
+    }
+
+    /* public void afficherAppariement(ActionEvent event) throws IOException{
+        Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
+
+        listeAppariement.getItems().clear();
+
+        String s;
+
+        for(Teenager teen: t.keySet()){
+            s = "";
+            s += teen +";"+platform.getCompatibleTeenagers().get(teen);
+            listeAppariement.getItems().add(listeAppariement.getItems().size(),s);
+            listeAppariement.scrollTo(s);
+            listeAppariement.edit(listeAppariement.getItems().size() - 1);
+        }
     }*/
 
-    // public void afficherAppariement(ActionEvent event) throws IOException{
-    //     Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
+    /*public void afficherAppariement(ActionEvent event) throws IOException{
+        Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
+        Map<Teenager, Teenager> nt;
+        ObservableList<String> obl = FXCollections.observableArrayList();
 
-    //     listeAppariement.getItems().clear();
+        listeAppariement.getItems().clear();
 
-    //     String s;
-
-    //     for(Teenager teen: t.keySet()){
-    //         s = "";
-    //         s += teen +";"+platform.getCompatibleTeenagers().get(teen);
-    //         listeAppariement.getItems().add(listeAppariement.getItems().size(),s);
-    //         listeAppariement.scrollTo(s);
-    //         listeAppariement.edit(listeAppariement.getItems().size() - 1);
-    //     }
-    // }
-
-    // public void afficherAppariement(ActionEvent event) throws IOException{
-    //     Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
-    //     Map<Teenager, Teenager> nt;
-    //     ObservableList<String> obl = FXCollections.observableArrayList();
-
-    //     listeAppariement.getItems().clear();
-
-    //     String s;
-    //     for(Teenager teen: t.keySet()){
-    //         // System.out.println(teen);
-    //         // nt = new HashMap<Teenager, Teenager>();
-    //         // nt.put(teen,t.get(teen));
-    //         s = "";
-    //         s += teen +";"+platform.getCompatibleTeenagers().get(teen);
-    //         obl.add(s);
-    //         //nt.clear();
-    //     }
-    //     listeAppariement.setItems(obl);
-    //     System.out.println(listeAppariement.getItems());
-    // }
+        String s;
+        for(Teenager teen: t.keySet()){
+            // System.out.println(teen);
+            // nt = new HashMap<Teenager, Teenager>();
+            // nt.put(teen,t.get(teen));
+            s = "";
+            s += teen +";"+platform.getCompatibleTeenagers().get(teen);
+            obl.add(s);
+            //nt.clear();
+        }
+        listeAppariement.setItems(obl);
+        System.out.println(listeAppariement.getItems());
+    }*/
 
     public void afficherAppariement(ActionEvent event) throws IOException{
         Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
@@ -724,6 +730,8 @@ public class ChangePlan {
         System.out.println(listeAppariement.getItems());
     }
 
-
+    public void afficherAppariementCase(MouseEvent event) throws IOException{
+        selectAppariement = listeAppariement.getItems().get(listeAppariement.getSelectionModel().getSelectedIndex());
+    }
 
 }

@@ -41,7 +41,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="1280.0">
                            <children>
-                              <ListView fx:id="listeAppariement" layoutX="31.0" layoutY="21.0" prefHeight="418.0" prefWidth="292.0" />
+                              <ListView fx:id="listeAppariement" layoutX="31.0" layoutY="21.0" onKeyPressed="#afficherAppariementCase" onMouseClicked="#afficherAppariementCase" prefHeight="418.0" prefWidth="292.0" />
                               <Label alignment="CENTER" contentDisplay="TOP" layoutX="51.0" layoutY="31.0" prefHeight="24.0" prefWidth="252.0" text="Appariements" textFill="#071835">
                                  <font>
                                     <Font name="Arial Black" size="16.0" />
