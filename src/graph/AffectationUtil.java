@@ -146,6 +146,18 @@ public class AffectationUtil implements Serializable {
         List<Teenager> hostList = AffectationUtil.selectPays(groupe, host);    
         List<Teenager> guestList = AffectationUtil.selectPays(groupe, guest);
         GrapheNonOrienteValue<Teenager> graph = new GrapheNonOrienteValue<Teenager>();
+
+        if(hostList.size() > guestList.size()){
+            while(hostList.size() > guestList.size()){
+                hostList.remove(0);
+            }
+
+        }else if (hostList.size() < guestList.size()){
+            while(hostList.size() < guestList.size()){
+                guestList.remove(0);
+            }
+        }
+
         for (Teenager teenager1 : hostList) {
             graph.ajouterSommet(teenager1);
         }

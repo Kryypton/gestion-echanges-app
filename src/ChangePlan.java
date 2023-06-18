@@ -18,6 +18,7 @@ import Criterion.Criterion;
 import Criterion.CriterionName;
 import Platform.Platform;
 import Tennager.Teenager;
+import graph.AffectationUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,7 +95,8 @@ public class ChangePlan {
 
 
     @FXML
-    ListView<Map<Teenager,Teenager>> listeAppariement; // Liste des Appariement
+    //ListView<Map<Teenager,Teenager>> listeAppariement = new ListView<>(); // Liste des Appariement
+    ListView<String> listeAppariement = new ListView<>();
     Map<Teenager,Teenager> selectAppariement;
 
     /*
@@ -583,20 +585,20 @@ public class ChangePlan {
        platform.exportTeenagers((ArrayList) platform.getTeenagerList() , "res/teenagerList.csv");
     }
 
-    // public void SupprimerAppariment(ActionEvent event) throws IOException {
+    // public void supprimerAppariment(ActionEvent event) throws IOException {
     //     platform.removeCompatibleTeenager();
     //     afficherappariement(event);
     // }
 
-    // public void ModifierEleve(ActionEvent event) throws IOException {
+    // public void modifierEleve(ActionEvent event) throws IOException {
     //     Charge(Start.stage,"ReappariementEleve.fxml","ReappariementEleve");
     // }
 
-    // public void CreeAppariement(ActionEvent event) throws IOException {
-    //     weigth
-    // }
+    public void genererAppariement(ActionEvent event) throws IOException {
+        platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(),Country.FRANCE,Country.GERMANY)));
+    }
 
-    public void ImportationEleve(ActionEvent event) throws IOException {
+    public void importationEleve(ActionEvent event) throws IOException {
         JFileChooser dialogue = new JFileChooser(".");
 		PrintWriter sortie;
 		File fichier;
@@ -664,18 +666,27 @@ public class ChangePlan {
         infoTeen.getItems().set(0, t1);
     }*/
 
-    // public void afficherAppariement(ActionEvent event) throws IOException{
-    //     Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
-    //     Map<Teenager, Teenager> nt = new HashMap<Teenager, Teenager>();
+    public void afficherAppariement(ActionEvent event) throws IOException{
+        Map<Teenager, Teenager> t = platform.getCompatibleTeenagers();
+        Map<Teenager, Teenager> nt;
 
-    //     listeAppariement.getItems().clear();
+        listeAppariement.getItems().clear();
 
-    //     for(Teenager teen: t.keySet()){
-    //         listeAppariement.getItems().add(listeAppariement.getItems().size(),t.get(t));
-    //         listeAppariement.scrollTo(teen);
-    //         listeAppariement.edit(listeAppariement.getItems().size() - 1);
-    //     }
-    // }
+        System.out.println("1");
+        String s;
+        for(Teenager teen: t.keySet()){
+            // System.out.println(teen);
+            // nt = new HashMap<Teenager, Teenager>();
+            // nt.put(teen,t.get(teen));
+            s = "";
+            s += teen +";"+platform.getCompatibleTeenagers().get(teen);
+            listeAppariement.getItems().add(listeAppariement.getItems().size(),s);
+            listeAppariement.scrollTo(s);
+            listeAppariement.edit(listeAppariement.getItems().size() - 1);
+            //nt.clear();
+            System.out.println(listeAppariement.getItems());
+        }
+    }
 
 
 
