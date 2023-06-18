@@ -29,6 +29,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -47,6 +48,8 @@ public class ChangePlan {
     public static Platform platform = new Platform();
     RadioButton gender, pairGender, history;
     SplitMenuButton country ;
+    SplitMenuButton hostCountrySelected;
+    SplitMenuButton visitorCountrySelected;
     TextField name , forename , hobbies;
     CheckBox hostVegetarian , guestNuts  , hostNuts, guestVegetarian;
     DatePicker birthDate;
@@ -60,6 +63,15 @@ public class ChangePlan {
     @FXML
     TextField password;
 
+
+    @FXML
+    TextField preferenceArea;
+    @FXML
+    TextField redibitoireArea;
+    @FXML
+    SplitMenuButton hoteMenu;
+    @FXML
+    SplitMenuButton visitorMenu;
     /*
      * Pour les pages gestion élèves et appariement
      */
@@ -97,7 +109,7 @@ public class ChangePlan {
     @FXML
     TableColumn<Eleve, String> hostForname;
     @FXML
-    TableColumn<Eleve, Country> hostCountry;
+    SplitMenuButton hostCountry;
     @FXML
     TableColumn<Eleve, Criterion> hostHobbies;
     @FXML
@@ -111,7 +123,7 @@ public class ChangePlan {
     @FXML
     TableColumn<Eleve, String> visitorForname;
     @FXML
-    TableColumn<Eleve, Country> visitorCountry;
+    SplitMenuButton visitorCountry;
     @FXML
     TableColumn<Eleve, Criterion> visitorHobbies;
     @FXML
@@ -219,6 +231,8 @@ public class ChangePlan {
         Parent root = loader.load();
 
         formCountryList = (SplitMenuButton) loader.getNamespace().get("formCountryList");
+        visitorMenu = (SplitMenuButton) loader.getNamespace().get("visitorMenu");
+        hoteMenu = (SplitMenuButton) loader.getNamespace().get("hoteMenu");
         // Platform plateform = new Platform();
         // File file = new File("res/TeenagerList.csv");
         // plateform.importListTeenagers(file);
@@ -241,6 +255,13 @@ public class ChangePlan {
         }else if(login.getCharacters().toString().equals("eleve") && password.getCharacters().toString().equals("eleve")){
             Charge(Start.stage,"ihm/PrototypageHD/Formulaire.fxml","Formulaire");
         }
+    
+    }
+
+    public void preferenceSelect(ActionEvent event) {
+    }
+
+    public void redibitoireSelect(ActionEvent event) {
     }
 
     public void SelectConnexion(ActionEvent event) throws IOException {
@@ -383,6 +404,20 @@ public class ChangePlan {
         String countryName = menuItem.getText();
         formCountryList.setText(countryName);
         this.country = formCountryList;
+    }
+
+    public void hoteSelect(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String countryName = menuItem.getText();
+        hoteMenu.setText(countryName);
+        this.hostCountry = hoteMenu;
+    }
+
+    public void visitorSelect(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String countryName = menuItem.getText();
+        visitorMenu.setText(countryName);
+        this.visitorCountry = visitorMenu;
     }
 
     public void nameEntryAction(ActionEvent event) {
