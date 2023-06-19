@@ -48,8 +48,8 @@ public class ChangePlan {
     public static Platform platform = new Platform();
     RadioButton gender, pairGender, history;
     SplitMenuButton country ;
-    static SplitMenuButton hostCountrySelected;
-    static SplitMenuButton visitorCountrySelected;
+    public static SplitMenuButton hostCountrySelected;
+    public static SplitMenuButton visitorCountrySelected;
     TextField name , forename , hobbies;
     CheckBox hostVegetarian , guestNuts  , hostNuts, guestVegetarian;
     DatePicker birthDate;
@@ -411,10 +411,6 @@ public class ChangePlan {
         String countryName = menuItem.getText();
         hoteMenu.setText(countryName);
         this.hostCountrySelected = hoteMenu;
-        System.out.println(menuItem);
-        System.out.println(countryName);
-        System.out.println(hoteMenu.getText());
-        System.out.println(hostCountrySelected.getText());
     }
 
     public void visitorSelect(ActionEvent event) {
@@ -422,7 +418,6 @@ public class ChangePlan {
         String countryName = menuItem.getText();
         visitorMenu.setText(countryName);
         this.visitorCountrySelected = visitorMenu;
-        System.out.println(visitorCountrySelected.getText());
     }
 
     public void nameEntryAction(ActionEvent event) {
@@ -671,9 +666,15 @@ public class ChangePlan {
     // }
 
     public void genererAppariement(ActionEvent event) throws IOException {
-        Country hc = Teenager.isCountry(hostCountrySelected.getText());
-        Country vc = Teenager.isCountry(visitorCountrySelected.getText());
-        platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(),vc,hc)));
+         Country hc;
+         Country vc;
+        if(hostCountrySelected != null && visitorCountrySelected != null){
+            hc = Teenager.isCountry(hostCountrySelected.getText());
+            vc = Teenager.isCountry(visitorCountrySelected.getText());
+            platform.setCompatibleTeenagers(AffectationUtil.listAreteToListTeen(AffectationUtil.affectation(platform.getTeenagerList(),vc,hc)));
+        }
+        // Country.FRANCE
+        // Country.SPAIN
     }
 
     public void importationEleve(ActionEvent event) throws IOException {

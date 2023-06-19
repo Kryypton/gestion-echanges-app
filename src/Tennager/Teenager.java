@@ -620,6 +620,21 @@ public class Teenager implements Serializable{
         //}
     }
 
+    // public static String upperCase(String s){
+    //     String finale = "";
+    //     char c = 'a';
+    //     c=c+32;
+    //     for(int i=0; i<s.length(); i++){
+    //         c=s.charAt(i);
+    //         if(c>='a' && c<='z'){
+    //            c = c + 32;
+    //         }
+    //         finale += c;
+            
+    //     }
+    //     return finale;
+    // }
+
     /**
      * Méthode qui permet d'avoir un adolescent en chaine de caractére, pour un format en CSV
      * @return un String avec les informations de l'adolescent
